@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    // Essential
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+
+    // Highly Recommended
+    "eamodio.gitlens",
+    "formulahendry.auto-rename-tag",
+    "dsznajder.es7-react-js-snippets",
+    "pkief.material-icon-theme", // Or "vscode-icons-team.vscode-icons"
+
+    // Optional
+    "christian-kohler.npm-intellisense",
+    "heybourn.headwind",
+    "ritwickdey.LiveServer",
+    "formulahendry.code-runner"
+  ]
+}
