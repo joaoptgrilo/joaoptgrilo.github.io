@@ -1,26 +1,33 @@
-@import "tailwindcss";
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Add any global base styles or layer customizations below */
+
+/* Ensure smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Apply base background and text color globally */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* These class names should align with your tailwind.config.ts theme */
+  @apply bg-primary-bg text-primary-text;
+  /* Ensure fonts are anti-aliased for better readability */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Example of adding custom base styles or components in v3 */
+/* @layer base { */
+/*   h1 { */
+/*     @apply text-2xl; */
+/*   } */
+/* } */
+
+/* @layer components { */
+/*   .btn-primary { */
+/*     @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75; */
+/*   } */
+/* } */
