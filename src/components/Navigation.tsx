@@ -1,65 +1,75 @@
 // src/components/Navigation.tsx
-import React from "react";
-import Link from "next/link"; // For client-side navigation to sections
+"use client";
 
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
-];
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const SCROLL_THRESHOLD = 10; // Was 50, then 10. Keep 10 for quick feedback.
+
+  const navLinks = [
+    { href: "#about", label: "About" },
+    { href: "#skills", label: "Skills" },
+    { href: "#projects", label: "Projects" },
+    { href: "#contact", label: "Contact" },
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > SCROLL_THRESHOLD) setIsScrolled(true);
+      else setIsScrolled(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const baseNavClasses =
+    "fixed top-0 left-0 right-0 z-50 w-full px-6 sm:px-10 py-3 transition-colors duration-300 ease-in-out border-b border-solid";
+
+  // Scrolled state: opaque primary-bg, shadow, and primary (white) border
+  const scrolledNavClasses = "bg-primary-bg shadow-lg border-primary";
+  const topNavClasses = "bg-transparent border-transparent"; // Transparent bg and border
+
+  // Pill background: using code-bg as per one of the iterations for "pop"
+  const pillBackgroundClass = "bg-code-bg";
+
   return (
-    <header // Changed from <nav> to <header> for better semantics of a site header
-      id="navigation"
-      className="w-full fixed top-0 left-0 z-50 bg-primary-bg/80 backdrop-blur-md border-b border-border-divider shadow-md"
-      // Using bg-primary-bg/80 for opacity, backdrop-blur-md for the glass effect
-    >
-      <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        {" "}
-        {/* Fixed height for nav, e.g., h-16 */}
-        {/* Logo/Name */}
-        <Link href="#hero" legacyBehavior>
-          <a className="text-xl font-mono font-bold text-accent hover:text-accent-hover transition-colors">
+    <nav
+      className={`${baseNavClasses} ${
+        isScrolled ? scrolledNavClasses : topNavClasses
+      }`}>
+      <div className="container mx-auto flex justify-between items-center h-10">
+        <Link
+          href="#hero"
+          className={`transition-opacity duration-300 ease-in-out
+                      ${
+                        isScrolled
+                          ? "opacity-100 hover:opacity-90"
+                          : "opacity-0 pointer-events-none"
+                      }`}
+          aria-hidden={!isScrolled}
+          tabIndex={isScrolled ? 0 : -1}>
+          <span
+            className={`flex items-center px-3 py-1.5 rounded-full text-sm font-fira-code font-semibold ${pillBackgroundClass} text-accent shadow-md`}>
+            {/* Ensure animate-pulse-dot uses the keyframe 'pulseDotAnimation' */}
+            <span className="mr-2 h-2.5 w-2.5 bg-accent rounded-full animate-pulse-dot shadow-accent/50 shadow-[0_0_8px_2px]"></span>
             João Grilo
-          </a>
+          </span>
         </Link>
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex space-x-6">
+        <div className="space-x-6 md:space-x-8">
           {navLinks.map((link) => (
-            <Link href={link.href} key={link.label} legacyBehavior>
-              <a className="font-sans text-primary-text hover:text-accent transition-colors">
-                {link.label}
-              </a>
+            <Link
+              key={link.label}
+              href={link.href}
+              className="font-poppins text-primary hover:text-accent transition-colors text-sm sm:text-base">
+              {link.label}
             </Link>
           ))}
-        </nav>
-        {/* Mobile Navigation (Hamburger Menu - Placeholder for now) */}
-        <div className="md:hidden">
-          <button
-            type="button"
-            className="text-primary-text hover:text-accent focus:outline-none focus:text-accent"
-            aria-label="Toggle menu">
-            {/* Hamburger Icon (can be SVG or text) */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          </button>
-          {/* Mobile menu content would go here, conditionally rendered */}
         </div>
       </div>
-    </header>
+    </nav>
   );
 };
 

@@ -1,21 +1,18 @@
 // src/components/Footer.tsx
 import React from "react";
 
-const Footer = () => {
+const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+  const websiteVersion = "v0.1.0";
   return (
-    <footer
-      id="footer"
-      className="w-full border-t border-border-divider bg-primary-bg py-8 text-center">
+    <footer className="w-full py-6 md:py-8 text-center text-secondary bg-secondary-bg border-t border-gray-700">
       <div className="container mx-auto px-6">
-        {" "}
-        {/* Standard container padding */}
-        <p className="text-sm font-sans text-secondary-text">
-          © {new Date().getFullYear()} João Grilo. All Rights Reserved.
+        <p className="text-sm">
+          © {currentYear} João Grilo. All Rights Reserved.
         </p>
-        {/* Future: Add social media icons or quick links if desired */}
+        <p className="text-xs mt-1">Version: {websiteVersion}</p>
       </div>
     </footer>
   );
 };
-
 export default Footer;

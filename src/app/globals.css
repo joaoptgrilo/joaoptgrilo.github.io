@@ -3,31 +3,68 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Add any global base styles or layer customizations below */
-
-/* Ensure smooth scrolling */
 html {
+  height: 100%;
   scroll-behavior: smooth;
 }
 
-/* Apply base background and text color globally */
 body {
-  /* These class names should align with your tailwind.config.ts theme */
-  @apply bg-primary-bg text-primary-text;
-  /* Ensure fonts are anti-aliased for better readability */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply bg-primary-bg text-primary antialiased;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Example of adding custom base styles or components in v3 */
-/* @layer base { */
-/*   h1 { */
-/*     @apply text-2xl; */
-/*   } */
-/* } */
+/* Styles for Next.js wrapper divs to ensure full height flex layout */
+#__next {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+#__next > div {
+  /* If Next.js adds another wrapper */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 
-/* @layer components { */
-/*   .btn-primary { */
-/*     @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75; */
-/*   } */
-/* } */
+/* main tag's flex-grow is handled by its className in page.tsx */
+
+@layer utilities {
+  .animate-blinking-cursor {
+    animation: blink 1s step-end infinite;
+  }
+  /* Keyframes are in tailwind.config.ts, referenced by animation utility */
+
+  .animate-fadeInUp {
+    animation: fadeInUpAnimation 0.7s ease-out forwards;
+    will-change: opacity, transform;
+  }
+  /* Keyframes are in tailwind.config.ts */
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+  .animation-delay-800 {
+    animation-delay: 0.8s;
+  }
+
+  .hero-custom-background {
+    background-image: linear-gradient(
+        rgba(7, 11, 31, 0.75),
+        rgba(7, 11, 31, 0.9)
+      ),
+      url("/images/background.avif");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  /* No .nav-animated-pattern in this reverted state */
+}

@@ -3,38 +3,53 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}", // Include if using pages router
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}", // Standard for App Router
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      // --- Add Design System Colors ---
       colors: {
-        "primary-bg": "#070B1F", // Deep Blue/Black
-        "secondary-bg": "#0D102D", // Slight Navy/Dark Blue
-        "primary-text": "#F2F2F2", // Near White / Very Light Grey
-        "secondary-text": "#D1D5DB", // Light Grey
-        accent: "#00C8FF", // Bright Cyan
-        "accent-hover": "#4DD6FF", // Lighter Cyan
-        "border-divider": "#1F2937", // Dark Grey-Blue
-        "code-bg": "#111827", // Very Dark Grey
-        // Optional Status Colors
-        "status-success": "#34D399",
-        "status-warning": "#FBBF24",
-        "status-danger": "#F87171",
+        "primary-bg": "#070B1F",
+        "secondary-bg": "#0D102D",
+        primary: "#F2F2F2",
+        secondary: "#D1D5DB",
+        accent: { DEFAULT: "#00C8FF", hover: "#4DD6FF" },
+        "code-bg": "#111827",
       },
-      // --- Add Design System Fonts ---
       fontFamily: {
-        // Default sans-serif font
-        sans: ["Poppins", "sans-serif"],
-        // Monospace font for headings, code
-        mono: ["Fira Code", "monospace"],
+        "fira-code": ['"Fira Code"', "monospace"],
+        poppins: ['"Poppins"', "sans-serif"],
       },
-      // --- Optional: Add Font Sizes if needed beyond Tailwind defaults ---
-      // fontSize: {
-      //   // Example: 'h1': ['3.75rem', { lineHeight: '1.2' }], // 60px
-      // }
+      letterSpacing: {
+        tightest: "-.075em",
+        tighter: "-.05em",
+        tight: "-.025em",
+        normal: "0",
+        wide: ".025em",
+        wider: ".05em",
+        widest: ".1em",
+      },
+      animation: {
+        "blinking-cursor": "blink 1s step-end infinite",
+        fadeInUp: "fadeInUpAnimation 0.7s ease-out forwards",
+        "pulse-dot":
+          "pulseDotAnimation 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        // 'gradient-bg': 'gradient-bg 15s ease infinite', // This was for an earlier Hero bg, not active
+      },
+      keyframes: {
+        blink: { "from, to": { opacity: "0" }, "50%": { opacity: "1" } },
+        fadeInUpAnimation: {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        pulseDotAnimation: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: ".5" },
+        },
+        // 'gradient-bg': { /* ... */ },
+      },
+      // No custom boxShadow like 'nav-scroll' in this reverted state
     },
   },
   plugins: [],
