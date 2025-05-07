@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 
 const About = () => {
-  const photoPath = "/images/joao-grilo-photo.jpg";
+  const photoPath = "/images/joao-grilo-photo.webp";
 
   return (
     <section
