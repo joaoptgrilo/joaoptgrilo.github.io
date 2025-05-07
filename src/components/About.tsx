@@ -1,9 +1,10 @@
-// src/components/About.tsx
 import React from "react";
 import Image from "next/image";
+import AnimatedText from "./AnimatedText"; // Import the new component
 
 const About = () => {
   const photoPath = "/images/joao-grilo-photo.webp";
+  const titleText = "About Me";
 
   return (
     <section
@@ -11,9 +12,12 @@ const About = () => {
       aria-label="About Me"
       className="py-20 md:py-32 bg-secondary-bg scroll-mt-16">
       <div className="container mx-auto px-6 max-w-7xl">
-        <h2 className="text-3xl md:text-4xl font-bold font-fira-code text-primary text-center mb-12 md:mb-16 with-blinking-cursor">
-          About Me
-        </h2>
+        {/* Use AnimatedText for the title */}
+        <AnimatedText
+          text={titleText}
+          elementType="h2"
+          className="text-3xl md:text-4xl font-bold font-fira-code text-primary text-center mb-12 md:mb-16"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 items-center">
           <div className="md:col-span-1 flex justify-center md:justify-start order-first md:order-none">

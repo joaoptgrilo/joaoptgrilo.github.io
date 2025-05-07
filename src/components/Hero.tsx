@@ -1,6 +1,7 @@
 // src/components/Hero.tsx
 import React from "react";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import AnimatedText from "./AnimatedText"; // Import the new component
 
 interface SocialLink {
   href: string;
@@ -27,6 +28,9 @@ const Hero: React.FC = () => {
     },
   ];
 
+  const taglineText =
+    "Crafting High-Performance Web Solutions & Seamless User Experiences";
+
   return (
     <section
       id="hero"
@@ -38,11 +42,14 @@ const Hero: React.FC = () => {
         <p className="font-fira-code font-semibold text-xl xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary leading-snug animate-fadeInUp animation-delay-200 tracking-tight sm:tracking-normal">
           Results-Driven Full-Stack Developer
         </p>
-        <p // Apply the new utility class here
-          className="font-fira-code font-medium text-base xs:text-base sm:text-lg md:text-xl lg:text-2xl text-accent animate-fadeInUp animation-delay-400 tracking-wide with-blinking-cursor">
-          Crafting High-Performance Web Solutions & Seamless User Experiences
-          {/* The span with the cursor is no longer needed here, it's handled by ::after */}
-        </p>
+
+        {/* Use AnimatedText for the tagline */}
+        <AnimatedText
+          text={taglineText}
+          elementType="p"
+          className="font-fira-code font-medium text-base xs:text-base sm:text-lg md:text-xl lg:text-2xl text-accent animate-fadeInUp animation-delay-400 tracking-wide"
+        />
+
         <div className="pt-3 sm:pt-4 animate-fadeInUp animation-delay-600 text-left">
           <a
             href="#projects"
