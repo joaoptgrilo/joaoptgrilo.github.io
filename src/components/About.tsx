@@ -11,7 +11,7 @@ const About = () => {
       aria-label="About Me"
       className="py-20 md:py-32 bg-secondary-bg scroll-mt-16">
       <div className="container mx-auto px-6 max-w-7xl">
-        <h2 className="text-3xl md:text-4xl font-bold font-mono text-primary-text text-center mb-12 md:mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold font-fira-code text-primary text-center mb-12 md:mb-16 with-blinking-cursor">
           About Me
         </h2>
 
@@ -30,16 +30,16 @@ const About = () => {
           </div>
 
           <div className="md:col-span-2 text-left">
-            <p className="font-sans text-secondary-text text-lg mb-6 leading-relaxed">
+            <p className="font-poppins text-secondary text-lg mb-6 leading-relaxed">
               As a Full-Stack Developer with over 4.5 years of dedicated
               experience, I bring a passion for architecting, building, and
               fine-tuning high-performance web applications. My core expertise
-              lies in PHP, JavaScript, and .NET Core, through which I&#39;ve
+              lies in PHP, JavaScript, and .NET Core, through which I&apos;ve
               consistently transformed intricate requirements into robust,
               scalable solutions that not only engage users but also fuel
               tangible business growth.
             </p>
-            <p className="font-sans text-secondary-text text-lg mb-6 leading-relaxed">
+            <p className="font-poppins text-secondary text-lg mb-6 leading-relaxed">
               I am driven by the pursuit of exceptional application performance
               and user experience. This dedication is reflected in my work,
               frequently achieving Google Lighthouse scores above 90 and
@@ -48,7 +48,7 @@ const About = () => {
               development is results-oriented; every line of code serves a clear
               business purpose.
             </p>
-            <p className="font-sans text-secondary-text text-lg leading-relaxed">
+            <p className="font-poppins text-secondary text-lg leading-relaxed">
               A firm believer in Agile principles and the power of continuous
               learning, I excel in collaborative environments where ideas
               flourish and teamwork leads to outstanding results. My development
