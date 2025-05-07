@@ -18,17 +18,9 @@ body {
 
   /* Applying the tileable SVG background */
   background-color: #03050a; /* This specific dark background color is kept as it might be intended to show through transparent parts of the SVG */
-  background-image: url("/images/coding-symbols.svg"); /* CORRECTED to use the SVG from project context */
-  /* background-size property is removed to allow tileable-circuit-v2.svg to use its natural dimensions for tiling. 
-     If a specific tile size is required for tileable-circuit-v2.svg, add a 'background-size' property here. 
-     For example: background-size: 300px 300px; 
-  */
+  background-image: url("/images/coding-symbols.svg");
   background-repeat: repeat;
 }
-
-/* Comments about body::before and simpler SVG test are related to previous experiments; 
-   this version aims to restore the intended tileable-circuit-v2.svg background. 
-*/
 
 #__next {
   display: flex;
@@ -86,5 +78,21 @@ main {
     background-repeat: no-repeat;
   }
 
-  /* .nav-glassmorphic-bg utilities are applied directly in Navigation.tsx */
+  /* Blinking Cursor Utility */
+  /* The .with-blinking-cursor class itself doesn't need styles; 
+     its ::after pseudo-element carries the implementation.
+     The empty ruleset for .with-blinking-cursor has been removed.
+  */
+  .with-blinking-cursor::after {
+    content: "|"; /* The cursor character */
+    @apply animate-blink text-inherit ml-1; /* Use margin-left for spacing */
+  }
+
+  /* Handle prefers-reduced-motion for the blinking cursor */
+  @media (prefers-reduced-motion: reduce) {
+    .with-blinking-cursor::after {
+      animation: none; /* Disable blinking animation */
+      opacity: 1; /* Ensure cursor is always visible */
+    }
+  }
 }
