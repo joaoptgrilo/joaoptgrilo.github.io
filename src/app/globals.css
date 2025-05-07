@@ -3,31 +3,88 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Add any global base styles or layer customizations below */
-
-/* Ensure smooth scrolling */
 html {
+  height: 100%;
   scroll-behavior: smooth;
 }
 
-/* Apply base background and text color globally */
 body {
-  /* These class names should align with your tailwind.config.ts theme */
-  @apply bg-primary-bg text-primary-text;
-  /* Ensure fonts are anti-aliased for better readability */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply bg-primary-bg text-primary antialiased; /* Initial base background and text color */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+
+  /* Applying the tileable SVG background */
+  background-color: #03050a; /* This specific dark background color is kept as it might be intended to show through transparent parts of the SVG */
+  background-image: url("/images/coding-symbols.svg"); /* CORRECTED to use the SVG from project context */
+  /* background-size property is removed to allow tileable-circuit-v2.svg to use its natural dimensions for tiling. 
+     If a specific tile size is required for tileable-circuit-v2.svg, add a 'background-size' property here. 
+     For example: background-size: 300px 300px; 
+  */
+  background-repeat: repeat;
 }
 
-/* Example of adding custom base styles or components in v3 */
-/* @layer base { */
-/*   h1 { */
-/*     @apply text-2xl; */
-/*   } */
-/* } */
+/* Comments about body::before and simpler SVG test are related to previous experiments; 
+   this version aims to restore the intended tileable-circuit-v2.svg background. 
+*/
 
-/* @layer components { */
-/*   .btn-primary { */
-/*     @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75; */
-/*   } */
-/* } */
+#__next {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  overflow-x: clip;
+}
+#__next > div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100vh;
+  width: 100%;
+}
+
+main {
+  flex-grow: 1;
+  width: 100%;
+}
+
+@layer utilities {
+  .animate-fadeInUp {
+    opacity: 0;
+    animation: fadeInUpKeyframes 0.7s ease-out forwards;
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+  .animation-delay-600 {
+    animation-delay: 0.6s;
+  }
+  .animation-delay-800 {
+    animation-delay: 0.8s;
+  }
+
+  .hero-custom-background {
+    /* This is for the Hero section's specific static image background */
+    background-image: linear-gradient(
+        rgba(7, 11, 31, 0.75),
+        rgba(7, 11, 31, 0.9)
+      ),
+      url("/images/background.avif");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  /* .nav-glassmorphic-bg utilities are applied directly in Navigation.tsx */
+}

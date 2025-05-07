@@ -1,24 +1,19 @@
 // src/app/page.tsx
-import Navigation from "@/components/Navigation"; // Adjust path if alias isn't setup: '../components/Navigation'
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
-import Certifications from "@/components/Certifications";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import Navigation from '@/components/Navigation';
+import Hero from '@/components/Hero';
+import About from '@/components/About';
+import Skills from '@/components/Skills';
+import Experience from '@/components/Experience';
+import Projects from '@/components/Projects';
+import Certifications from '@/components/Certifications';
+import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <>
-      {/* Navigation might be moved to layout.tsx later for stickiness */}
+    <div className="flex flex-col min-h-screen"> 
       <Navigation />
-
-      {/* Using <main> for semantic content area */}
-      {/* Consider adding container/padding classes here or within sections */}
-      <main className="flex flex-col">
-        {/* Sections rendered in the order defined by the layout sketch */}
+      <main className="flex flex-col items-center w-full flex-grow"> 
         <Hero />
         <About />
         <Skills />
@@ -27,8 +22,7 @@ export default function Home() {
         <Certifications />
         <Contact />
       </main>
-
       <Footer />
-    </>
+    </div>
   );
 }
