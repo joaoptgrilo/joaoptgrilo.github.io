@@ -1,4 +1,3 @@
-/* src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,15 +8,13 @@ html {
 }
 
 body {
-  @apply bg-primary-bg text-primary antialiased; /* Initial base background and text color */
+  @apply bg-primary-bg text-primary antialiased;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
   overflow-x: hidden;
-
-  /* Applying the tileable SVG background */
-  background-color: #03050a; /* This specific dark background color is kept as it might be intended to show through transparent parts of the SVG */
+  background-color: #03050a;
   background-image: url("/images/coding-symbols.svg");
   background-repeat: repeat;
 }
@@ -31,6 +28,7 @@ body {
   width: 100%;
   overflow-x: clip;
 }
+
 #__next > div {
   display: flex;
   flex-direction: column;
@@ -43,6 +41,9 @@ main {
   flex-grow: 1;
   width: 100%;
 }
+
+/* REMOVED explicit hiding rule for .Typewriter__cursor */
+/* Let's style it instead */
 
 @layer utilities {
   .animate-fadeInUp {
@@ -67,7 +68,6 @@ main {
   }
 
   .hero-custom-background {
-    /* This is for the Hero section's specific static image background */
     background-image: linear-gradient(
         rgba(7, 11, 31, 0.75),
         rgba(7, 11, 31, 0.9)
@@ -78,21 +78,29 @@ main {
     background-repeat: no-repeat;
   }
 
-  /* Blinking Cursor Utility */
-  /* The .with-blinking-cursor class itself doesn't need styles; 
-     its ::after pseudo-element carries the implementation.
-     The empty ruleset for .with-blinking-cursor has been removed.
-  */
-  .with-blinking-cursor::after {
-    content: "|"; /* The cursor character */
-    @apply animate-blink text-inherit ml-1; /* Use margin-left for spacing */
+  /* REMOVED .with-blinking-cursor utility rules */
+
+  /* Styles for the typewriter library's cursor */
+  .Typewriter__cursor--style {
+    @apply animate-blink text-inherit ml-1; /* Apply blink, inherit color, add margin */
   }
 
-  /* Handle prefers-reduced-motion for the blinking cursor */
+  /* Handle prefers-reduced-motion for the typewriter cursor */
+  /* Also handle it for our fallback cursor in reduced motion */
   @media (prefers-reduced-motion: reduce) {
+    .Typewriter__cursor--style,
     .with-blinking-cursor::after {
-      animation: none; /* Disable blinking animation */
-      opacity: 1; /* Ensure cursor is always visible */
+      /* Target both possible cursors */
+      animation: none !important; /* Disable blinking animation */
+      opacity: 1 !important; /* Ensure cursor is always visible */
     }
   }
+}
+
+/* Fallback CSS for .with-blinking-cursor needed ONLY for reduced motion case */
+/* Needs to be outside @layer utilities if ::after is used */
+.with-blinking-cursor::after {
+  content: "|";
+  margin-left: 0.25rem;
+  opacity: 1;
 }

@@ -1,19 +1,20 @@
 // src/components/Contact.tsx
 import React from "react";
+import AnimatedText from "./AnimatedText"; // Import the new component
 
 const Contact: React.FC = () => {
+  const titleText = "Contact";
   return (
     <section
       id="contact"
-      className="w-full py-20 md:py-32 bg-secondary-bg text-center min-h-[300px] md:min-h-[400px] flex flex-col justify-center items-center scroll-mt-16" /* Added scroll-mt-16 */
-    >
-      {/* Consistent container, padding, and max-width */}
+      className="w-full py-20 md:py-32 bg-secondary-bg text-center min-h-[300px] md:min-h-[400px] flex flex-col justify-center items-center scroll-mt-16">
       <div className="container mx-auto px-6 max-w-7xl">
-        <h2 className="font-fira-code text-3xl md:text-4xl font-bold text-primary mb-10 md:mb-12 with-blinking-cursor">
-          {" "}
-          {/* Added with-blinking-cursor. Kept existing margins as layout is different here */}
-          Contact
-        </h2>
+        {/* Use AnimatedText for the title */}
+        <AnimatedText
+          text={titleText}
+          elementType="h2"
+          className="font-fira-code text-3xl md:text-4xl font-bold text-primary mb-10 md:mb-12" /* Keep specific margins */
+        />
         <p className="text-center text-secondary max-w-lg mx-auto mb-8">
           Have a project in mind or just want to say hi? Feel free to reach out!
         </p>
