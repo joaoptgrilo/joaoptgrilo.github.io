@@ -1,3 +1,4 @@
+/* src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,7 +29,6 @@ body {
   width: 100%;
   overflow-x: clip;
 }
-
 #__next > div {
   display: flex;
   flex-direction: column;
@@ -42,8 +42,22 @@ main {
   width: 100%;
 }
 
-/* REMOVED explicit hiding rule for .Typewriter__cursor */
-/* Let's style it instead */
+.Typewriter__cursor--style {
+  @apply animate-blink text-inherit ml-1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .Typewriter__cursor--style,
+  .with-blinking-cursor::after {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+.with-blinking-cursor::after {
+  content: "|";
+  @apply text-inherit ml-1 opacity-100;
+}
 
 @layer utilities {
   .animate-fadeInUp {
@@ -78,29 +92,30 @@ main {
     background-repeat: no-repeat;
   }
 
-  /* REMOVED .with-blinking-cursor utility rules */
-
-  /* Styles for the typewriter library's cursor */
-  .Typewriter__cursor--style {
-    @apply animate-blink text-inherit ml-1; /* Apply blink, inherit color, add margin */
+  /* --- Panel Corner Brackets Utility --- */
+  .panel-with-corners {
+    @apply relative;
   }
 
-  /* Handle prefers-reduced-motion for the typewriter cursor */
-  /* Also handle it for our fallback cursor in reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .Typewriter__cursor--style,
-    .with-blinking-cursor::after {
-      /* Target both possible cursors */
-      animation: none !important; /* Disable blinking animation */
-      opacity: 1 !important; /* Ensure cursor is always visible */
-    }
+  .panel-with-corners::before,
+  .panel-with-corners::after {
+    content: "";
+    /* Make corners slightly more prominent */
+    @apply absolute w-4 h-4 sm:w-5 sm:h-5 border-accent border-opacity-80; /* Increased opacity */
+    /* Ensure z-index if needed, though usually not for pseudo on same element */
+    /* z-index: 1; */
   }
-}
 
-/* Fallback CSS for .with-blinking-cursor needed ONLY for reduced motion case */
-/* Needs to be outside @layer utilities if ::after is used */
-.with-blinking-cursor::after {
-  content: "|";
-  margin-left: 0.25rem;
-  opacity: 1;
+  /* Top-left corner */
+  .panel-with-corners::before {
+    /* Position to align with the outside of a 1px border or be just on it */
+    /* If panelCommonClasses has border (1px), -1px aligns them outside */
+    @apply top-[-1px] left-[-1px] border-t border-l;
+  }
+
+  /* Bottom-right corner */
+  .panel-with-corners::after {
+    @apply bottom-[-1px] right-[-1px] border-b border-r;
+  }
+  /* --- End Panel Corner Brackets Utility --- */
 }

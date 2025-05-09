@@ -1,7 +1,7 @@
 // src/components/Hero.tsx
 import React from "react";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
-import AnimatedText from "./AnimatedText"; // Import the new component
+import AnimatedText from "./AnimatedText"; // Import the AnimatedText component
 
 interface SocialLink {
   href: string;
@@ -43,11 +43,11 @@ const Hero: React.FC = () => {
           Results-Driven Full-Stack Developer
         </p>
 
-        {/* Use AnimatedText for the tagline */}
         <AnimatedText
           text={taglineText}
-          elementType="p"
+          elementType="div"
           className="font-fira-code font-medium text-base xs:text-base sm:text-lg md:text-xl lg:text-2xl text-accent animate-fadeInUp animation-delay-400 tracking-wide"
+          // Ensure no trailing commas or syntax errors here
         />
 
         <div className="pt-3 sm:pt-4 animate-fadeInUp animation-delay-600 text-left">
