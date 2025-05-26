@@ -3,20 +3,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* --- CSS Custom Properties for Theme Colors --- */
+:root {
+  --color-primary-bg: #070b1f;
+  --color-secondary-bg: #0d102d;
+  --color-primary: #f2f2f2;
+  --color-secondary: #d1d5db;
+  --color-accent-DEFAULT: #00c8ff;
+  --color-accent-DEFAULT-rgb: 0, 200, 255; 
+  --color-accent-hover: #4dd6ff;
+  --color-accent-opacity-20: rgba(0, 200, 255, 0.2);
+  --color-accent-opacity-30: rgba(0, 200, 255, 0.3);
+  --color-accent-opacity-50: rgba(0, 200, 255, 0.5);
+  --color-primary-opacity-80: rgba(242, 242, 242, 0.8);
+}
+/* ---------------------------------------------------- */
+
 html {
   height: 100%;
   scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-primary-bg text-primary antialiased;
+  @apply bg-primary-bg text-primary antialiased; 
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
   overflow-x: hidden;
-  background-color: #03050a;
-  background-image: url("/images/coding-symbols.svg");
+  background-color: #03050a; 
+  background-image: url("/images/coding-symbols.svg"); 
   background-repeat: repeat;
 }
 
@@ -43,21 +59,30 @@ main {
 }
 
 .Typewriter__cursor--style {
-  @apply animate-blink text-inherit ml-1;
+  @apply animate-blink text-inherit ml-1; 
+}
+
+.with-blinking-cursor::after {
+   content: '|'; 
+   @apply text-inherit ml-1 opacity-100; 
 }
 
 @media (prefers-reduced-motion: reduce) {
   .Typewriter__cursor--style,
-  .with-blinking-cursor::after {
-    animation: none !important;
-    opacity: 1 !important;
+  .with-blinking-cursor::after { 
+    animation: none !important; 
+    opacity: 1 !important; 
   }
 }
 
-.with-blinking-cursor::after {
-  content: "|";
-  @apply text-inherit ml-1 opacity-100;
+/* --- clearfix utility for float containment --- */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
+/* --------------------------------------------- */
+
 
 @layer utilities {
   .animate-fadeInUp {
@@ -68,54 +93,35 @@ main {
     transform: translate3d(0, 0, 0);
   }
 
-  .animation-delay-200 {
-    animation-delay: 0.2s;
-  }
-  .animation-delay-400 {
-    animation-delay: 0.4s;
-  }
-  .animation-delay-600 {
-    animation-delay: 0.6s;
-  }
-  .animation-delay-800 {
-    animation-delay: 0.8s;
-  }
+  .animation-delay-200 { animation-delay: 0.2s; }
+  .animation-delay-400 { animation-delay: 0.4s; }
+  .animation-delay-600 { animation-delay: 0.6s; }
+  .animation-delay-800 { animation-delay: 0.8s; }
 
   .hero-custom-background {
-    background-image: linear-gradient(
-        rgba(7, 11, 31, 0.75),
-        rgba(7, 11, 31, 0.9)
-      ),
-      url("/images/background.avif");
+    background-image: linear-gradient( rgba(7, 11, 31, 0.75), rgba(7, 11, 31, 0.9) ), url("/images/background.avif");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
   }
 
-  /* --- Panel Corner Brackets Utility --- */
+  /* --- Panel Corner Brackets Utility - Prominent Version --- */
   .panel-with-corners {
-    @apply relative;
+    @apply relative; 
   }
 
   .panel-with-corners::before,
   .panel-with-corners::after {
-    content: "";
-    /* Make corners slightly more prominent */
-    @apply absolute w-4 h-4 sm:w-5 sm:h-5 border-accent border-opacity-80; /* Increased opacity */
-    /* Ensure z-index if needed, though usually not for pseudo on same element */
-    /* z-index: 1; */
+    content: '';
+    @apply absolute w-5 h-5 sm:w-6 sm:h-6 border-accent border-2 border-opacity-90 z-10; 
   }
 
-  /* Top-left corner */
   .panel-with-corners::before {
-    /* Position to align with the outside of a 1px border or be just on it */
-    /* If panelCommonClasses has border (1px), -1px aligns them outside */
-    @apply top-[-1px] left-[-1px] border-t border-l;
+    @apply top-[-2px] left-[-2px] border-t-2 border-l-2; 
   }
 
-  /* Bottom-right corner */
   .panel-with-corners::after {
-    @apply bottom-[-1px] right-[-1px] border-b border-r;
+    @apply bottom-[-2px] right-[-2px] border-b-2 border-r-2;
   }
   /* --- End Panel Corner Brackets Utility --- */
 }
