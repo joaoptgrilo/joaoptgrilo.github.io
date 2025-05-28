@@ -75,13 +75,12 @@ main {
   }
 }
 
-/* --- clearfix utility for float containment --- */
+/* .clearfix might not be needed if using Grid/Flexbox exclusively for layout now */
 .clearfix::after {
   content: "";
   clear: both;
   display: table;
 }
-/* --------------------------------------------- */
 
 
 @layer utilities {
@@ -105,23 +104,23 @@ main {
     background-repeat: no-repeat;
   }
 
-  /* --- Panel Corner Brackets Utility - Prominent Version --- */
+  /* Panel Corner Brackets Utility - L-Shapes Only */
   .panel-with-corners {
     @apply relative; 
   }
-
   .panel-with-corners::before,
   .panel-with-corners::after {
     content: '';
     @apply absolute w-5 h-5 sm:w-6 sm:h-6 border-accent border-2 border-opacity-90 z-10; 
   }
-
-  .panel-with-corners::before {
-    @apply top-[-2px] left-[-2px] border-t-2 border-l-2; 
+  .panel-with-corners::before { /* Top-left L */
+    @apply top-[-2px] left-[-2px] border-t-2 border-l-2 rounded-tl-sm; 
+    border-right-width: 0;
+    border-bottom-width: 0;
   }
-
-  .panel-with-corners::after {
-    @apply bottom-[-2px] right-[-2px] border-b-2 border-r-2;
+  .panel-with-corners::after { /* Bottom-right L */
+    @apply bottom-[-2px] right-[-2px] border-b-2 border-r-2 rounded-br-sm;
+    border-top-width: 0;
+    border-left-width: 0;
   }
-  /* --- End Panel Corner Brackets Utility --- */
 }
