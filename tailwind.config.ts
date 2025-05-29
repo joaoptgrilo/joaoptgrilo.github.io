@@ -7,10 +7,7 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // ADDED SAFELIST HERE
-  safelist: [
-    "animate-blink", // Ensure this animation class is always generated
-  ],
+  safelist: ["animate-blink"],
   theme: {
     extend: {
       colors: {
@@ -21,6 +18,7 @@ const config: Config = {
         accent: { DEFAULT: "#00C8FF", hover: "#4DD6FF" },
         "code-bg": "#111827",
         "nav-pill-bg": "rgba(10, 50, 70, 0.75)",
+        "light-panel-bg": "rgba(59, 130, 230, 0.07)",
       },
       fontFamily: {
         "fira-code": ["var(--font-fira-code)", "monospace"],
@@ -41,7 +39,7 @@ const config: Config = {
         "pulse-dot":
           "pulseDotKeyframes 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "glow-shadow":
-          "glowShadowKeyframes 2.5s ease-in-out infinite alternate",
+          "diffuseGlowShadowKeyframes 3s ease-in-out infinite alternate", // Using diffuse glow
       },
       keyframes: {
         blinkKeyframes: {
@@ -56,12 +54,14 @@ const config: Config = {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: ".5" },
         },
-        glowShadowKeyframes: {
+        diffuseGlowShadowKeyframes: {
           "0%": {
-            boxShadow: `0 0 5px 0px ${"#00C8FF"}33, 0 0 10px 0px ${"#00C8FF"}22, 0 0 15px 0px ${"#00C8FF"}11`,
+            boxShadow: `0 0 20px 5px var(--color-accent-opacity-20), 
+                        0 0 30px 10px var(--color-accent-opacity-20)`,
           },
           "100%": {
-            boxShadow: `0 0 10px 2px ${"#00C8FF"}66, 0 0 20px 5px ${"#00C8FF"}44, 0 0 30px 10px ${"#00C8FF"}22`,
+            boxShadow: `0 0 30px 8px var(--color-accent-opacity-30), 
+                        0 0 50px 15px var(--color-accent-opacity-20)`,
           },
         },
       },
