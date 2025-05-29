@@ -1,19 +1,28 @@
 // src/app/page.tsx
-import Navigation from '@/components/Navigation';
-import Hero from '@/components/Hero';
-import About from '@/components/About';
-import Skills from '@/components/Skills';
-import Experience from '@/components/Experience';
-import Projects from '@/components/Projects';
-import Certifications from '@/components/Certifications';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
+import Navigation from "@/components/Navigation";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Skills from "@/components/Skills";
+import Experience from "@/components/Experience";
+import Projects from "@/components/Projects";
+import Certifications from "@/components/Certifications";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen"> 
+    <>
       <Navigation />
-      <main className="flex flex-col items-center w-full flex-grow"> 
+      {/* 
+        TEMPORARY CHANGE FOR TESTING HERO DIMENSIONS: 
+        Simplified <main> tag. 
+        Original was: <main className="flex flex-col items-center justify-between overflow-x-hidden">
+        If Hero is now full viewport, then classes on <main> were constraining it.
+        We'll need to decide how to structure <main> if its children (like About, Skills)
+        should be centered while Hero remains full-width/height.
+      */}
+      <main className="w-full">
         <Hero />
         <About />
         <Skills />
@@ -23,6 +32,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </div>
+      <ScrollToTopButton />
+    </>
   );
 }
