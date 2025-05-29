@@ -1,136 +1,100 @@
+/* globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* --- CSS Custom Properties for Theme Colors --- */
 :root {
   --color-primary-bg: #070b1f;
   --color-secondary-bg: #0d102d;
-  --color-primary: #f2f2f2;
-  --color-secondary: #d1d5db;
-  --color-accent-DEFAULT: #00c8ff;
-  --color-accent-DEFAULT-rgb: 0, 200, 255;
+  --color-light-panel-bg: #1e293b; /* EXAMPLE VALUE - CHECK THIS! (e.g., slate-800) */
+  --color-primary-text: #f2f2f2;
+  --color-secondary-text: #d1d5db;
+  --color-accent: #00c8ff;
   --color-accent-hover: #4dd6ff;
-  --color-accent-opacity-20: rgba(0, 200, 255, 0.2);
-  --color-accent-opacity-30: rgba(0, 200, 255, 0.3);
-  --color-accent-opacity-50: rgba(0, 200, 255, 0.5);
-  --color-primary-opacity-80: rgba(242, 242, 242, 0.8);
-}
-/* ---------------------------------------------------- */
 
-html {
-  height: 100%;
-  scroll-behavior: smooth;
+  --color-accent-shadow-start: rgba(0, 200, 255, 0.3);
+  --color-accent-shadow-end: rgba(0, 200, 255, 0.1);
+  --color-accent-shadow-strong: rgba(0, 200, 255, 0.35);
 }
 
 body {
-  @apply bg-primary-bg text-primary antialiased;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow-x: hidden;
-  background-color: #03050a;
-  background-image: url("/images/coding-symbols.svg");
+  color: var(--color-primary-text);
+  font-family: "Poppins", sans-serif;
+  background-color: #03050a; /* Dark base for SVG background */
+  background-image: url("/images/coding-symbols.svg"); /* CHECK PATH! */
   background-repeat: repeat;
+  background-size: 500px;
+  background-attachment: fixed;
+  animation: subtlePan 120s linear infinite alternate;
 }
 
-#__next {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  min-height: 100vh;
+@keyframes subtlePan {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.panel-with-corners {
   position: relative;
-  width: 100%;
-  overflow-x: clip;
-}
-#__next > div {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  min-height: 100vh;
-  width: 100%;
 }
 
-main {
-  flex-grow: 1;
-  width: 100%;
+.panel-with-corners::before,
+.panel-with-corners::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--color-accent);
+  opacity: 0.6;
+}
+
+.panel-with-corners::before {
+  top: -5px;
+  left: -5px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+  border-top-style: solid;
+  border-left-style: solid;
+  border-top-left-radius: 0.375rem;
+}
+
+.panel-with-corners::after {
+  bottom: -5px;
+  right: -5px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-bottom-right-radius: 0.375rem;
 }
 
 .Typewriter__cursor--style {
-  @apply animate-blink text-inherit ml-1;
+  color: var(--color-accent);
+  animation: blinkKeyframes 1s step-end infinite;
+  margin-left: 2px;
+  font-weight: 300;
 }
 
-.with-blinking-cursor::after {
-  content: "|";
-  @apply text-inherit ml-1 opacity-100;
+/* Standard Tailwind animation for animate-fadeInUp */
+.animate-fadeInUp {
+  animation-name: fadeInUpKeyframes;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .Typewriter__cursor--style,
-  .with-blinking-cursor::after {
-    animation: none !important;
-    opacity: 1 !important;
-  }
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }
 
-@layer utilities {
-  .animate-fadeInUp {
-    opacity: 0;
-    animation: fadeInUpKeyframes 0.7s ease-out forwards;
-    will-change: opacity, transform;
-    backface-visibility: hidden;
-    transform: translate3d(0, 0, 0);
-  }
+/* Glow effect on hover and focus only */
+.skill-glow {
+  transition: box-shadow 0.3s ease-in-out;
+}
 
-  .animation-delay-200 {
-    animation-delay: 0.2s;
-  }
-  .animation-delay-400 {
-    animation-delay: 0.4s;
-  }
-  .animation-delay-600 {
-    animation-delay: 0.6s;
-  }
-  .animation-delay-800 {
-    animation-delay: 0.8s;
-  }
-
-  .hero-custom-background {
-    background-image: linear-gradient(
-        rgba(7, 11, 31, 0.75),
-        rgba(7, 11, 31, 0.9)
-      ),
-      url("/images/background.avif");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-  }
-
-  /* Panel Corner Brackets Utility - L-Shapes Only */
-  .panel-with-corners {
-    @apply relative;
-  }
-  .panel-with-corners::before,
-  .panel-with-corners::after {
-    content: "";
-    @apply absolute w-5 h-5 sm:w-6 sm:h-6 border-accent border-2 border-opacity-90 z-10;
-  }
-  .panel-with-corners::before {
-    /* Top-left L */
-    @apply top-[-2px] left-[-2px] border-t-2 border-l-2 rounded-tl-sm;
-    border-right-width: 0;
-    border-bottom-width: 0;
-  }
-  .panel-with-corners::after {
-    /* Bottom-right L */
-    @apply bottom-[-2px] right-[-2px] border-b-2 border-r-2 rounded-br-sm;
-    border-top-width: 0;
-    border-left-width: 0;
-  }
-
-  /* ---- Scroll offset fix for anchor links ---- */
-  [id] {
-    scroll-margin-top: 70px; /* Adjust this value to your fixed navbar height */
-  }
+.skill-glow:hover,
+.skill-glow:focus {
+  box-shadow: 0 0 15px 3px rgba(0, 200, 255, 0.75);
+  outline: none; /* Remove default focus outline if you want (optional) */
 }

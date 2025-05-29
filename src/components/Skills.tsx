@@ -1,21 +1,239 @@
 // src/components/Skills.tsx
-import React from "react";
-import AnimatedText from "./AnimatedText"; // Import the new component
+"use client";
 
-const Skills = () => {
-  const titleText = "Skills";
+import React from "react";
+import AnimatedText from "./AnimatedText";
+import AnimatedPanel from "./AnimatedPanel";
+
+interface SkillItem {
+  name: string;
+  description?: string; // Tooltip text
+}
+
+interface SkillCategory {
+  id: string;
+  title: string;
+  skills: SkillItem[];
+}
+
+const SKILL_CATEGORIES: SkillCategory[] = [
+  {
+    id: "languages",
+    title: "Languages",
+    skills: [
+      {
+        name: "TypeScript",
+        description: "Typed superset of JavaScript for scalable apps",
+      },
+      {
+        name: "JavaScript (ES6+)",
+        description: "Modern JavaScript with ES6+ features",
+      },
+      {
+        name: "HTML5",
+        description: "Markup language for structuring web content",
+      },
+      {
+        name: "CSS3 / SASS / SCSS",
+        description: "Styling languages and preprocessors for web design",
+      },
+      { name: "SQL", description: "Structured Query Language for databases" },
+      {
+        name: "C#",
+        description: "Object-oriented programming language from Microsoft",
+      },
+      {
+        name: "PHP",
+        description: "Server-side scripting language for web development",
+      },
+      {
+        name: "Python",
+        description: "High-level, versatile programming language",
+      },
+    ],
+  },
+  {
+    id: "frontend",
+    title: "Frontend Development",
+    skills: [
+      {
+        name: "React",
+        description: "JavaScript library for building user interfaces",
+      },
+      {
+        name: "Next.js (App Router)",
+        description: "React framework for server-side rendering & routing",
+      },
+      {
+        name: "Tailwind CSS",
+        description: "Utility-first CSS framework for rapid UI development",
+      },
+      {
+        name: "Responsive Web Design",
+        description: "Designing web layouts that adapt to different devices",
+      },
+      {
+        name: "Frontend Performance Optimization (Lighthouse >90)",
+        description: "Improving website speed & efficiency",
+      },
+      {
+        name: "Web Accessibility (WCAG Basics)",
+        description: "Ensuring websites are usable by everyone",
+      },
+      {
+        name: "Redux (Conceptual)",
+        description: "State management library for JavaScript apps",
+      },
+      {
+        name: "Context API / Zustand (Planned)",
+        description: "State management tools in React ecosystem",
+      },
+    ],
+  },
+  {
+    id: "backend",
+    title: "Backend Development",
+    skills: [
+      {
+        name: ".NET Core",
+        description: "Cross-platform framework for building backend apps",
+      },
+      {
+        name: "Node.js",
+        description: "JavaScript runtime for server-side development",
+      },
+      {
+        name: "REST API Development",
+        description: "Creating web APIs following REST principles",
+      },
+      {
+        name: "MVC Architecture",
+        description: "Model-View-Controller design pattern",
+      },
+      {
+        name: "Socket Programming",
+        description: "Real-time communication via network sockets",
+      },
+    ],
+  },
+  {
+    id: "databases",
+    title: "Databases",
+    skills: [
+      { name: "MySQL", description: "Popular open-source relational database" },
+      {
+        name: "Redis (Basic)",
+        description: "In-memory data structure store, used as database/cache",
+      },
+      {
+        name: "Elasticsearch (Basic)",
+        description: "Search engine based on Lucene library",
+      },
+    ],
+  },
+  {
+    id: "devops",
+    title: "DevOps, Tools & Methodologies",
+    skills: [
+      { name: "Git", description: "Version control system" },
+      {
+        name: "GitHub / GitLab",
+        description: "Online platforms for Git repositories and collaboration",
+      },
+      {
+        name: "Docker (Basic / Learning)",
+        description: "Containerization platform for software",
+      },
+      {
+        name: "Agile (Scrum/Kanban)",
+        description: "Project management and development methodologies",
+      },
+      { name: "npm", description: "Node.js package manager" },
+      { name: "VS Code", description: "Popular source-code editor" },
+    ],
+  },
+  {
+    id: "cms",
+    title: "CMS",
+    skills: [
+      {
+        name: "WordPress (Theme/Plugin Dev, API Integration, Optimization)",
+        description: "Content management system with extensive customization",
+      },
+    ],
+  },
+  {
+    id: "performance",
+    title: "Performance & Optimization",
+    skills: [
+      {
+        name: "Performance Tuning (Frontend/Backend)",
+        description: "Optimizing application performance",
+      },
+      {
+        name: "SEO Implementation & Analysis",
+        description: "Search Engine Optimization techniques",
+      },
+      {
+        name: "Google Lighthouse (>90 Scores)",
+        description: "Tool for auditing website quality",
+      },
+      {
+        name: "Google Analytics",
+        description: "Web analytics service to track traffic and user behavior",
+      },
+    ],
+  },
+  {
+    id: "concepts",
+    title: "Concepts & Other",
+    skills: [
+      {
+        name: "Web Security Fundamentals (OWASP)",
+        description: "Understanding common web security vulnerabilities",
+      },
+      {
+        name: "Operating Systems (Linux, Windows, WSL)",
+        description: "Familiarity with multiple OS environments",
+      },
+      {
+        name: "AI Tools Familiarity (ChatGPT, Claude, etc.)",
+        description: "Experience with AI language models and tools",
+      },
+    ],
+  },
+];
+
+const Skills: React.FC = () => {
   return (
-    <section id="skills" className="py-16 md:py-24 bg-primary-bg scroll-mt-16">
-      <div className="container mx-auto px-6 max-w-7xl">
-        {/* Use AnimatedText for the title */}
+    <section id="skills" className="py-16 md:py-24 relative">
+      <div className="container mx-auto px-4">
         <AnimatedText
-          text={titleText}
-          elementType="h2"
-          className="text-3xl md:text-4xl font-bold font-fira-code text-primary text-center mb-12 md:mb-16"
+          text="Skills"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 md:mb-16 text-center"
         />
-        <p className="text-center text-secondary">
-          Skills section content will go here...
-        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {SKILL_CATEGORIES.map((category, index) => (
+            <AnimatedPanel
+              key={category.id}
+              className="bg-light-panel-bg/5 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative"
+              staggerDelay={index * 0.1}>
+              <h3 className="font-fira_code text-xl md:text-2xl text-accent mb-4">
+                {category.title}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <span
+                    key={skill.name}
+                    title={skill.description}
+                    className="inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-600/70 hover:border-accent/70 hover:text-primary-text transition-colors duration-300 cursor-default hover:skill-glow">
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
+            </AnimatedPanel>
+          ))}
+        </div>
       </div>
     </section>
   );

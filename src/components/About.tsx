@@ -1,320 +1,180 @@
+// src/components/About.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import AnimatedText from "./AnimatedText";
+import React from "react";
 import {
-  FaBriefcase,
-  FaRegLightbulb,
-  FaChartLine,
-  FaGlobeAmericas,
-} from "react-icons/fa";
-import { useInView } from "react-intersection-observer";
+  FiBriefcase,
+  FiTarget,
+  FiCpu,
+  FiZap,
+  FiMessageSquare,
+  FiGlobe,
+} from "react-icons/fi";
+import AnimatedText from "./AnimatedText";
+import AnimatedPanel from "./AnimatedPanel";
+import Highlight from "./Highlight";
 
-interface AnimatedPanelProps {
-  children: React.ReactNode;
+interface InfoPanelProps {
+  icon: React.ElementType;
+  title: string;
+  value: string | React.ReactNode;
   className?: string;
-  delay?: string;
-  threshold?: number;
+  tooltip?: string;
 }
 
-const AnimatedPanel: React.FC<AnimatedPanelProps> = ({
-  children,
-  className = "",
-  delay = "",
-  threshold = 0.2,
-}) => {
-  const [startAnimation, setStartAnimation] = useState(false);
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: threshold,
-  });
-
-  useEffect(() => {
-    if (inView) {
-      setStartAnimation(true);
-    }
-  }, [inView]);
-
-  return (
-    <div
-      ref={ref}
-      className={`${className} ${
-        startAnimation ? `animate-fadeInUp ${delay}` : "opacity-0"
-      }`}>
-      {children}
-    </div>
-  );
-};
-
-interface HighlightProps {
-  children: React.ReactNode;
-}
-
-const Highlight: React.FC<HighlightProps> = ({ children }) => (
-  <span className="text-[var(--color-accent-DEFAULT)] font-fira-code font-semibold bg-[var(--color-accent-opacity-20)] px-1 rounded-sm">
-    {children}
-  </span>
+const InfoPanel: React.FC<InfoPanelProps> = ({
+  icon: Icon,
+  title,
+  value,
+  className,
+  tooltip,
+}) => (
+  <div
+    title={tooltip}
+    className={`flex flex-col items-center text-center p-4 rounded-lg border border-neutral-700/50 transition-transform transform hover:scale-105 cursor-default w-full
+      hover:border-blue-400 hover:shadow-[0_0_12px_3px_rgba(59,130,246,0.75)] ${className}`}>
+    <Icon className="w-8 h-8 text-blue-400 mb-2" />
+    <h4 className="font-fira_code text-sm text-secondary-text mb-1">{title}</h4>
+    <p className="text-primary-text text-base md:text-lg font-semibold">
+      {value}
+    </p>
+  </div>
 );
 
-interface StatItem {
-  id: string;
-  label: string;
-  value: string;
-  description?: string;
-  icon: JSX.Element;
-}
-
-const CountUp: React.FC<{ end: number; suffix?: string }> = ({
-  end,
-  suffix = "",
-}) => {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    let start = 0;
-    if (end === 0) return;
-    const duration = 1500;
-    const stepTime = Math.abs(Math.floor(duration / end));
-    const timer = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start === end) clearInterval(timer);
-    }, stepTime);
-    return () => clearInterval(timer);
-  }, [end]);
-
+const About: React.FC = () => {
   return (
-    <span>
-      {count}
-      {suffix}
-    </span>
-  );
-};
+    <section id="about" className="py-16 md:py-24 relative overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-center">
+          <AnimatedText
+            text="About"
+            elementType="h2"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-10 md:mb-16 text-center"
+          />
+        </div>
 
-const About = () => {
-  const photoPath = "/images/joao-grilo-photo.webp";
-  const titleText = "About Me";
-
-  const panelShellClasses = "panel-with-corners animate-glow-shadow rounded-md";
-  const panelContentClasses =
-    "bg-light-panel-bg p-4 md:p-6 h-full flex flex-col text-[var(--color-text-on-light)]";
-
-  const bioSnippets = [
-    {
-      id: "bs1",
-      content: (
-        <>
-          A <Highlight>dedicated Full-Stack Developer</Highlight> with over{" "}
-          <Highlight>4.5 years</Highlight> of experience crafting{" "}
-          <Highlight>high-performance, scalable web applications</Highlight>.
-          Skilled at transforming complex needs into clean, robust solutions
-          that reliably serve high traffic.
-        </>
-      ),
-    },
-    {
-      id: "bs2",
-      content: (
-        <>
-          Expertise in{" "}
-          <Highlight>PHP, JavaScript (React), and .NET Core</Highlight>. Known
-          for delivering projects that achieve{" "}
-          <Highlight>Google Lighthouse scores &gt; 90</Highlight> and driving
-          organic traffic growth of approximately{" "}
-          <Highlight>15% through SEO and performance optimization</Highlight>.
-        </>
-      ),
-    },
-    {
-      id: "bs3",
-      content: (
-        <>
-          Passionate about <Highlight>Agile methodologies</Highlight> and
-          continuous learning. Embraces a{" "}
-          <Highlight>user-centric approach</Highlight> to build scalable,
-          secure, and intuitive software. Fluent in English (C2 level).
-        </>
-      ),
-    },
-    {
-      id: "bs4",
-      content: (
-        <>
-          In a <Highlight>remote work</Highlight> setting, values a{" "}
-          <Highlight>healthy work-life balance</Highlight>, dedicating time to{" "}
-          <Highlight>continuous learning</Highlight> through{" "}
-          <Highlight>certifications</Highlight>, exploring{" "}
-          <Highlight>new technologies</Highlight>, and enjoying meaningful
-          moments with <Highlight>family and pets</Highlight>.
-        </>
-      ),
-    },
-  ];
-
-  const stats: StatItem[] = [
-    {
-      id: "exp",
-      label: "Experience",
-      value: "4.5",
-      description: "Years Full-Stack Dev",
-      icon: <FaBriefcase />,
-    },
-    {
-      id: "lighthouse",
-      label: "Lighthouse",
-      value: "90",
-      description: "Average Score",
-      icon: <FaRegLightbulb />,
-    },
-    {
-      id: "traffic",
-      label: "Traffic Growth",
-      value: "15",
-      description: "SEO/Perf Optimization (%)",
-      icon: <FaChartLine />,
-    },
-    {
-      id: "lang",
-      label: "Languages",
-      value: "C2",
-      description: "English Fluent",
-      icon: <FaGlobeAmericas />,
-    },
-  ];
-
-  return (
-    <section
-      id="about"
-      aria-label="About Me"
-      className="pt-16 md:pt-20 lg:pt-24 scroll-mt-40 md:scroll-mt-44 lg:scroll-mt-48 overflow-hidden">
-      <div className="container mx-auto px-6 max-w-6xl pt-8 md:pt-10 lg:pt-12 pb-12 bg-primary-bg/40 backdrop-blur-md">
-        <AnimatedText
-          text={titleText}
-          elementType="h2"
-          className="text-3xl md:text-4xl font-bold font-fira-code text-primary text-center mb-12"
-          threshold={0.1}
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 items-stretch">
-          {/* Photo + Name panel */}
+        {/* ROW 1: Photo | Professional Summary */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start mb-8 lg:mb-12">
+          {/* Column 1: Photo Panel */}
           <AnimatedPanel
-            className={`md:col-span-1 lg:col-span-1 md:row-span-2 ${panelShellClasses}`}
-            delay="animation-delay-200"
-            threshold={0.3}>
-            <div
-              className={`${panelContentClasses} items-center text-center justify-between`}>
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-[var(--color-text-on-light)] shadow-xl shrink-0">
+            className="lg:col-span-1 bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow"
+            staggerDelay={0}>
+            <div className="flex flex-col items-center">
+              <div className="relative w-40 h-40 md:w-48 md:h-48 mb-6">
                 <Image
-                  src={photoPath}
-                  alt="Portrait of João Grilo"
-                  fill
-                  style={{ objectFit: "cover" }}
-                  sizes="(max-width: 767px) 224px, 256px"
-                  className="transform transition-transform duration-300 ease-in-out hover:scale-105"
-                  priority
+                  src="/images/joao-grilo-photo.webp"
+                  alt="João Grilo"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-full border-2 border-blue-400 shadow-lg"
                 />
+                <div className="absolute bottom-0 right-0 w-10 h-10 bg-primary-bg border-2 border-blue-400 rounded-full flex items-center justify-center">
+                  <FiCpu className="w-5 h-5 text-blue-400" />
+                </div>
               </div>
-              <div className="mt-auto pt-4">
-                <p className="font-fira-code text-xl text-[var(--color-accent-DEFAULT)] uppercase tracking-wider">
-                  JOÃO GRILO
-                </p>
-                <p className="font-fira-code text-sm text-[var(--color-text-on-light)]/80 uppercase tracking-wide mt-0.5">
-                  Full-Stack Developer
-                </p>
-              </div>
-            </div>
-          </AnimatedPanel>
-
-          {/* Bio snippet 1 */}
-          <AnimatedPanel
-            className={`md:col-span-2 lg:col-span-3 ${panelShellClasses}`}
-            delay="animation-delay-300"
-            threshold={0.3}>
-            <div className={`${panelContentClasses}`}>
-              <p className="font-poppins md:text-lg leading-relaxed flex-grow">
-                {bioSnippets[0].content}
-              </p>
-            </div>
-          </AnimatedPanel>
-
-          {/* Bio snippet 2 */}
-          <AnimatedPanel
-            className={`md:col-start-2 md:col-span-2 lg:col-start-2 lg:col-span-3 ${panelShellClasses}`}
-            delay="animation-delay-400"
-            threshold={0.3}>
-            <div className={`${panelContentClasses}`}>
-              <p className="font-poppins md:text-lg leading-relaxed flex-grow">
-                {bioSnippets[1].content}
-              </p>
-            </div>
-          </AnimatedPanel>
-
-          {/* Stats */}
-          <AnimatedPanel
-            className={`md:col-span-3 lg:col-span-4 ${panelShellClasses}`}
-            delay="animation-delay-500"
-            threshold={0.2}>
-            <div className={`${panelContentClasses}`}>
-              <h3 className="font-fira-code text-xl text-[var(--color-accent-DEFAULT)] mb-6 text-center sm:text-left">
-                Key Metrics & Info:
+              <h3 className="text-2xl font-bold text-primary-text mb-1">
+                João Grilo
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-                {stats.map((stat) => (
-                  <div
-                    key={stat.id}
-                    className="bg-[var(--color-primary-bg)]/20 border border-[var(--color-accent-opacity-50)] rounded-md p-4 flex flex-col items-center justify-between text-center space-y-2 transition-all duration-300 hover:bg-[var(--color-primary-bg)]/30 hover:border-accent">
-                    <div className="text-[var(--color-accent-DEFAULT)] text-3xl">
-                      {stat.icon}
-                    </div>
-                    <p className="font-fira-code text-[var(--color-text-on-light)] text-base font-semibold leading-tight">
-                      {/* For numeric stats use CountUp */}
-                      {isNaN(Number(stat.value)) ? (
-                        stat.value
-                      ) : (
-                        <CountUp
-                          end={Number(stat.value)}
-                          suffix={stat.label === "Traffic Growth" ? "% ↑" : ""}
-                        />
-                      )}
-                    </p>
-                    <p className="font-fira-code text-[var(--color-text-on-light)]/80 text-xs leading-tight">
-                      {stat.label}
-                    </p>
-                    {stat.description && (
-                      <p className="font-poppins text-[var(--color-text-on-light)]/70 text-[11px] leading-tight pt-0.5">
-                        {stat.description}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </AnimatedPanel>
-
-          {/* Bio snippet 3 */}
-          <AnimatedPanel
-            className={`md:col-span-3 lg:col-span-4 ${panelShellClasses}`}
-            delay="animation-delay-600"
-            threshold={0.3}>
-            <div className={`${panelContentClasses}`}>
-              <p className="font-poppins md:text-lg leading-relaxed">
-                {bioSnippets[2].content}
+              <p className="font-fira_code text-blue-400 text-sm mb-4">
+                Full-Stack Developer
+              </p>
+              <p className="text-secondary-text text-center text-sm leading-relaxed">
+                Based in Portimão, Portugal{" "}
+                <FiGlobe className="inline-block ml-1" />
               </p>
             </div>
           </AnimatedPanel>
 
-          {/* Bio snippet 4 - new personal snippet */}
+          {/* Column 2 & 3 Combined: Professional Summary */}
           <AnimatedPanel
-            className={`md:col-span-3 lg:col-span-4 ${panelShellClasses}`}
-            delay="animation-delay-700"
-            threshold={0.3}>
-            <div className={`${panelContentClasses}`}>
-              <p className="font-poppins md:text-lg leading-relaxed">
-                {bioSnippets[3].content}
+            className="lg:col-span-2 w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
+            staggerDelay={0.1}>
+            <h3 className="font-fira_code text-xl md:text-2xl text-blue-400 mb-4 text-center sm:text-left">
+              Professional Summary
+            </h3>
+            <div className="space-y-4 text-secondary-text leading-relaxed">
+              <p>
+                A dedicated Full-Stack Developer with over{" "}
+                <Highlight>4.5 years</Highlight> of experience crafting{" "}
+                <Highlight>high-performance</Highlight>, scalable web
+                applications. Skilled at transforming complex requirements into
+                clean, robust solutions that reliably serve high traffic.
+              </p>
+              <p>
+                Expertise in <Highlight>PHP</Highlight>,{" "}
+                <Highlight>JavaScript (React)</Highlight>, and{" "}
+                <Highlight>.NET Core</Highlight>. Known for enhancing user
+                experience, achieving significant performance gains (e.g.,{" "}
+                <Highlight>&gt;90 Lighthouse</Highlight> scores), and driving
+                organic traffic growth of approximately{" "}
+                <Highlight>~15%</Highlight> through SEO and performance
+                optimization.
+              </p>
+              <p>
+                Passionate about <Highlight>Agile methodologies</Highlight> and
+                continuous learning, I embrace a{" "}
+                <Highlight>user-centric approach</Highlight> to build scalable,
+                secure, and intuitive software. Fluent in English (C2 level).
+              </p>
+              <p>
+                In a <Highlight>remote work</Highlight> setting, values a{" "}
+                <Highlight>healthy work-life balance</Highlight>, dedicating
+                time to <Highlight>continuous learning</Highlight> through{" "}
+                <Highlight>certifications</Highlight>, exploring{" "}
+                <Highlight>new technologies</Highlight>, and enjoying meaningful
+                moments with <Highlight>family and pets</Highlight>.
               </p>
             </div>
           </AnimatedPanel>
         </div>
+
+        {/* ROW 2: Key Metrics */}
+        <AnimatedPanel
+          className="w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
+          staggerDelay={0.2}>
+          <h3 className="font-fira_code text-xl md:text-2xl text-blue-400 mb-8 text-center">
+            Key Metrics & Info
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-items-stretch w-full max-w-4xl mx-auto">
+            <InfoPanel
+              icon={FiBriefcase}
+              title="Experience"
+              value="4.5+ Years"
+              tooltip="Years of professional software development experience"
+            />
+            <InfoPanel
+              icon={FiTarget}
+              title="Lighthouse Avg."
+              value=">90"
+              tooltip="Average performance/accessibility score using Google Lighthouse"
+            />
+            <InfoPanel
+              icon={FiZap}
+              title="Traffic Growth (SEO)"
+              value="~15%"
+              tooltip="Estimated organic traffic increase through SEO & optimization"
+            />
+            <InfoPanel
+              icon={FiCpu}
+              title="Core Stacks"
+              value="PHP, JS, .NET"
+              tooltip="Main backend and frontend technologies used professionally"
+            />
+            <InfoPanel
+              icon={FiMessageSquare}
+              title="English Level"
+              value="C2 Fluent"
+              tooltip="Proficient in professional English communication (C2 level)"
+            />
+            <InfoPanel
+              icon={FiGlobe}
+              title="Work Preference"
+              value="Remote"
+              tooltip="Available and experienced in remote, asynchronous collaboration"
+            />
+          </div>
+        </AnimatedPanel>
       </div>
     </section>
   );

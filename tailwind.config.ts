@@ -1,72 +1,68 @@
 // tailwind.config.ts
-import type { Config } from "tailwindcss";
+/** @type {import('tailwindcss').Config} */
+import type { PluginAPI } from "tailwindcss/types/config"; // IMPORT THIS FOR TYPES
 
-const config: Config = {
+module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: ["animate-blink"],
   theme: {
     extend: {
       colors: {
-        "primary-bg": "#070B1F",
-        "secondary-bg": "#0D102D",
-        primary: "#F2F2F2",
-        secondary: "#D1D5DB",
-        accent: { DEFAULT: "#00C8FF", hover: "#4DD6FF" },
-        "code-bg": "#111827",
-        "nav-pill-bg": "rgba(10, 50, 70, 0.75)",
-        "light-panel-bg": "rgba(59, 130, 230, 0.07)",
+        "primary-bg": "var(--color-primary-bg)",
+        "secondary-bg": "var(--color-secondary-bg)",
+        "light-panel-bg": "var(--color-light-panel-bg)",
+        "primary-text": "var(--color-primary-text)",
+        "secondary-text": "var(--color-secondary-text)",
+        accent: "var(--color-accent)",
+        "accent-hover": "var(--color-accent-hover)",
       },
       fontFamily: {
-        "fira-code": ["var(--font-fira-code)", "monospace"],
-        poppins: ["var(--font-poppins)", "sans-serif"],
-      },
-      letterSpacing: {
-        tightest: "-.075em",
-        tighter: "-.05em",
-        tight: "-.025em",
-        normal: "0",
-        wide: ".025em",
-        wider: ".05em",
-        widest: ".1em",
+        poppins: ["Poppins", "sans-serif"],
+        fira_code: ["Fira Code", "monospace"],
       },
       animation: {
-        blink: "blinkKeyframes 1s step-end infinite",
-        fadeInUp: "fadeInUpKeyframes 0.7s ease-out forwards",
-        "pulse-dot":
-          "pulseDotKeyframes 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "glow-shadow":
-          "diffuseGlowShadowKeyframes 3s ease-in-out infinite alternate", // Using diffuse glow
+          "diffuseGlowShadowKeyframes 4s ease-in-out infinite alternate",
+        fadeInUp: "fadeInUpKeyframes 0.5s ease-out forwards",
+        "blink-cursor": "blinkKeyframes 1s step-end infinite",
       },
       keyframes: {
-        blinkKeyframes: {
-          "from, to": { opacity: "0" },
-          "50%": { opacity: "1" },
-        },
-        fadeInUpKeyframes: {
-          from: { opacity: "0", transform: "translate3d(0, 20px, 0)" },
-          to: { opacity: "1", transform: "translate3d(0, 0, 0)" },
-        },
-        pulseDotKeyframes: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: ".5" },
-        },
         diffuseGlowShadowKeyframes: {
           "0%": {
-            boxShadow: `0 0 20px 5px var(--color-accent-opacity-20), 
-                        0 0 30px 10px var(--color-accent-opacity-20)`,
+            boxShadow:
+              "0 0 5px 0px var(--color-accent-shadow-start), 0 0 5px 0px var(--color-accent-shadow-start) inset",
           },
           "100%": {
-            boxShadow: `0 0 30px 8px var(--color-accent-opacity-30), 
-                        0 0 50px 15px var(--color-accent-opacity-20)`,
+            boxShadow:
+              "0 0 20px 5px var(--color-accent-shadow-end), 0 0 20px 5px var(--color-accent-shadow-end) inset",
           },
         },
+        fadeInUpKeyframes: {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        blinkKeyframes: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
+        },
+      },
+      boxShadow: {
+        "accent-glow": "0 0 12px 2px var(--color-accent-shadow-strong)",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // MODIFIED: Added types for plugin function arguments and removed unused newUtilities
+    function ({ addUtilities }: PluginAPI) {
+      addUtilities({
+        ".animation-delay-200": { "animation-delay": "0.2s" },
+        ".animation-delay-400": { "animation-delay": "0.4s" },
+        ".animation-delay-600": { "animation-delay": "0.6s" },
+        ".animation-delay-800": { "animation-delay": "0.8s" },
+      });
+    },
+  ],
 };
-export default config;
