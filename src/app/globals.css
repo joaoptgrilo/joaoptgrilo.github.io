@@ -6,22 +6,41 @@
 :root {
   --color-primary-bg: #070b1f;
   --color-secondary-bg: #0d102d;
-  --color-light-panel-bg: #1e293b; /* EXAMPLE VALUE - CHECK THIS! (e.g., slate-800) */
+  --color-light-panel-bg: #1e293b; /* slate-800 or similar, used for panel backgrounds */
   --color-primary-text: #f2f2f2;
   --color-secondary-text: #d1d5db;
-  --color-accent: #00c8ff;
+
+  --color-accent: #00c8ff; /* Main Cyan Accent */
   --color-accent-hover: #4dd6ff;
 
-  --color-accent-shadow-start: rgba(0, 200, 255, 0.3);
-  --color-accent-shadow-end: rgba(0, 200, 255, 0.1);
-  --color-accent-shadow-strong: rgba(0, 200, 255, 0.35);
+  --color-info-accent: #60a5fa; /* Secondary Blue Accent (Tailwind blue-400) */
+
+  /* Shadow Colors */
+  --color-accent-shadow-start: rgba(
+    0,
+    200,
+    255,
+    0.3
+  ); /* Cyan based for main panel glow */
+  --color-accent-shadow-end: rgba(
+    0,
+    200,
+    255,
+    0.1
+  ); /* Cyan based for main panel glow */
+  --color-accent-shadow-strong: rgba(
+    0,
+    200,
+    255,
+    0.35
+  ); /* Cyan based for interactive elements like buttons */
 }
 
 body {
   color: var(--color-primary-text);
   font-family: "Poppins", sans-serif;
   background-color: #03050a; /* Dark base for SVG background */
-  background-image: url("/images/coding-symbols.svg"); /* CHECK PATH! */
+  background-image: url("/images/coding-symbols.svg");
   background-repeat: repeat;
   background-size: 500px;
   background-attachment: fixed;
@@ -47,7 +66,7 @@ body {
   position: absolute;
   width: 20px;
   height: 20px;
-  border-color: var(--color-accent);
+  border-color: var(--color-accent); /* L-corners use MAIN cyan accent */
   opacity: 0.6;
 }
 
@@ -58,7 +77,7 @@ body {
   border-left-width: 2px;
   border-top-style: solid;
   border-left-style: solid;
-  border-top-left-radius: 0.375rem;
+  border-top-left-radius: 0.5rem; /* Corresponds to rounded-lg for panels */
 }
 
 .panel-with-corners::after {
@@ -68,33 +87,31 @@ body {
   border-right-width: 2px;
   border-bottom-style: solid;
   border-right-style: solid;
-  border-bottom-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.5rem; /* Corresponds to rounded-lg for panels */
 }
 
 .Typewriter__cursor--style {
-  color: var(--color-accent);
+  color: var(--color-accent); /* Cyan cursor */
   animation: blinkKeyframes 1s step-end infinite;
   margin-left: 2px;
   font-weight: 300;
 }
 
-/* Standard Tailwind animation for animate-fadeInUp */
 .animate-fadeInUp {
   animation-name: fadeInUpKeyframes;
 }
 
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
 
-/* Glow effect on hover and focus only */
-.skill-glow {
-  transition: box-shadow 0.3s ease-in-out;
+.interactive-glow {
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
-
-.skill-glow:hover,
-.skill-glow:focus {
-  box-shadow: 0 0 15px 3px rgba(0, 200, 255, 0.75);
-  outline: none; /* Remove default focus outline if you want (optional) */
+.interactive-glow:hover,
+.interactive-glow:focus,
+.interactive-glow:focus-visible {
+  border-color: var(--color-info-accent);
+  box-shadow: 0 0 12px 3px rgba(59, 130, 246, 0.75);
+  outline: none;
 }

@@ -16,17 +16,13 @@ const ScrollToTopButton = () => {
   };
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
     window.addEventListener("scroll", toggleVisibility);
-    return () => {
-      window.removeEventListener("scroll", toggleVisibility);
-    };
+    toggleVisibility(); // Initial check for visibility on mount
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   return (
@@ -35,24 +31,23 @@ const ScrollToTopButton = () => {
       onClick={scrollToTop}
       className={`
         fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50
-        w-11 h-11 rounded-full 
+        w-11 h-11 
         flex items-center justify-center
         
-        bg-secondary-bg
-        text-accent
-        border border-neutral-700/80 
-
+        rounded-full 
+        text-accent 
+        bg-primary-bg/70 backdrop-blur-sm 
+        border-[1px] border-accent /* UPDATED: Explicit 1px width and accent color */
+        shadow-accent-glow 
+        
         transition-all duration-300 ease-in-out
+        hover:opacity-90
         
-        hover:border-accent
-        hover:shadow-accent-glow 
-        
-        focus-visible:outline-none
-        focus-visible:border-accent
+        focus-visible:outline-none 
         focus-visible:ring-2 
-        focus-visible:ring-accent
+        focus-visible:ring-accent 
         focus-visible:ring-opacity-50
-        focus-visible:ring-offset-2
+        focus-visible:ring-offset-2 
         focus-visible:ring-offset-primary-bg
         
         ${

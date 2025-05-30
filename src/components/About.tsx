@@ -13,7 +13,7 @@ import {
 } from "react-icons/fi";
 import AnimatedText from "./AnimatedText";
 import AnimatedPanel from "./AnimatedPanel";
-import Highlight from "./Highlight";
+import Highlight from "./Highlight"; // Uses main --color-accent (cyan)
 
 interface InfoPanelProps {
   icon: React.ElementType;
@@ -32,9 +32,9 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
 }) => (
   <div
     title={tooltip}
-    className={`flex flex-col items-center text-center p-4 rounded-lg border border-neutral-700/50 transition-transform transform hover:scale-105 cursor-default w-full
-      hover:border-blue-400 hover:shadow-[0_0_12px_3px_rgba(59,130,246,0.75)] ${className}`}>
-    <Icon className="w-8 h-8 text-blue-400 mb-2" />
+    className={`flex flex-col items-center text-center p-4 rounded-lg border border-neutral-700/50 
+                transform transition-transform hover:scale-105 cursor-default w-full interactive-glow ${className}`}>
+    <Icon className="w-8 h-8 text-info-accent mb-2" />
     <h4 className="font-fira_code text-sm text-secondary-text mb-1">{title}</h4>
     <p className="text-primary-text text-base md:text-lg font-semibold">
       {value}
@@ -54,7 +54,7 @@ const About: React.FC = () => {
           />
         </div>
 
-        {/* ROW 1: Photo | Professional Summary */}
+        {/* ROW 1: Photo | Professional Summary (as per your last provided About.tsx) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start mb-8 lg:mb-12">
           {/* Column 1: Photo Panel */}
           <AnimatedPanel
@@ -67,16 +67,16 @@ const About: React.FC = () => {
                   alt="João Grilo"
                   layout="fill"
                   objectFit="cover"
-                  className="rounded-full border-2 border-blue-400 shadow-lg"
+                  className="rounded-full border-2 border-info-accent shadow-lg"
                 />
-                <div className="absolute bottom-0 right-0 w-10 h-10 bg-primary-bg border-2 border-blue-400 rounded-full flex items-center justify-center">
-                  <FiCpu className="w-5 h-5 text-blue-400" />
+                <div className="absolute bottom-0 right-0 w-10 h-10 bg-primary-bg border-2 border-info-accent rounded-full flex items-center justify-center">
+                  <FiCpu className="w-5 h-5 text-info-accent" />
                 </div>
               </div>
               <h3 className="text-2xl font-bold text-primary-text mb-1">
                 João Grilo
               </h3>
-              <p className="font-fira_code text-blue-400 text-sm mb-4">
+              <p className="font-fira_code text-info-accent text-sm mb-4">
                 Full-Stack Developer
               </p>
               <p className="text-secondary-text text-center text-sm leading-relaxed">
@@ -90,7 +90,7 @@ const About: React.FC = () => {
           <AnimatedPanel
             className="lg:col-span-2 w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
             staggerDelay={0.1}>
-            <h3 className="font-fira_code text-xl md:text-2xl text-blue-400 mb-4 text-center sm:text-left">
+            <h3 className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 text-center sm:text-left">
               Professional Summary
             </h3>
             <div className="space-y-4 text-secondary-text leading-relaxed">
@@ -129,11 +129,11 @@ const About: React.FC = () => {
           </AnimatedPanel>
         </div>
 
-        {/* ROW 2: Key Metrics */}
+        {/* ROW 2: Key Metrics (Full width below the two-column row) */}
         <AnimatedPanel
           className="w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
           staggerDelay={0.2}>
-          <h3 className="font-fira_code text-xl md:text-2xl text-blue-400 mb-8 text-center">
+          <h3 className="font-fira_code text-xl md:text-2xl text-info-accent mb-8 text-center">
             Key Metrics & Info
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-items-stretch w-full max-w-4xl mx-auto">
@@ -179,5 +179,4 @@ const About: React.FC = () => {
     </section>
   );
 };
-
 export default About;
