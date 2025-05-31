@@ -3,6 +3,7 @@
 
 import Image from "next/image";
 import React from "react";
+import { IconType } from "react-icons"; // Import IconType for clarity
 import {
   FiBriefcase,
   FiTarget,
@@ -13,10 +14,10 @@ import {
 } from "react-icons/fi";
 import AnimatedText from "./AnimatedText";
 import AnimatedPanel from "./AnimatedPanel";
-import Highlight from "./Highlight"; // Uses main --color-accent (cyan)
+import Highlight from "./Highlight";
 
 interface InfoPanelProps {
-  icon: React.ElementType;
+  icon: IconType; // Using specific IconType from react-icons
   title: string;
   value: string | React.ReactNode;
   className?: string;
@@ -24,17 +25,17 @@ interface InfoPanelProps {
 }
 
 const InfoPanel: React.FC<InfoPanelProps> = ({
-  icon: Icon,
+  icon: IconComponent, // Renamed destructured prop to avoid conflict with potential Icon var
   title,
   value,
-  className,
+  className = "", // Ensure className has a default value to avoid issues with template literal
   tooltip,
 }) => (
   <div
     title={tooltip}
-    className={`flex flex-col items-center text-center p-4 rounded-lg border border-neutral-700/50 
-                transform transition-transform hover:scale-105 cursor-default w-full interactive-glow ${className}`}>
-    <Icon className="w-8 h-8 text-info-accent mb-2" />
+    // Ensured template literal for className is robust
+    className={`flex flex-col items-center text-center p-4 rounded-lg border border-neutral-700/50 transform transition-transform hover:scale-105 cursor-default w-full interactive-glow ${className.trim()}`}>
+    <IconComponent className="w-8 h-8 text-info-accent mb-2" />
     <h4 className="font-fira_code text-sm text-secondary-text mb-1">{title}</h4>
     <p className="text-primary-text text-base md:text-lg font-semibold">
       {value}
@@ -44,7 +45,9 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-16 md:py-24 relative overflow-hidden">
+    <section
+      id="about"
+      className="py-16 md:py-24 pt-32 md:pt-40 relative overflow-hidden section-scroll-margin">
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
           <AnimatedText
@@ -53,10 +56,7 @@ const About: React.FC = () => {
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-10 md:mb-16 text-center"
           />
         </div>
-
-        {/* ROW 1: Photo | Professional Summary (as per your last provided About.tsx) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start mb-8 lg:mb-12">
-          {/* Column 1: Photo Panel */}
           <AnimatedPanel
             className="lg:col-span-1 bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow"
             staggerDelay={0}>
@@ -85,8 +85,6 @@ const About: React.FC = () => {
               </p>
             </div>
           </AnimatedPanel>
-
-          {/* Column 2 & 3 Combined: Professional Summary */}
           <AnimatedPanel
             className="lg:col-span-2 w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
             staggerDelay={0.1}>
@@ -102,11 +100,14 @@ const About: React.FC = () => {
                 clean, robust solutions that reliably serve high traffic.
               </p>
               <p>
+                {" "}
+                {/* Line 86 from error is likely here */}
                 Expertise in <Highlight>PHP</Highlight>,{" "}
                 <Highlight>JavaScript (React)</Highlight>, and{" "}
                 <Highlight>.NET Core</Highlight>. Known for enhancing user
                 experience, achieving significant performance gains (e.g.,{" "}
-                <Highlight>&gt;90 Lighthouse</Highlight> scores), and driving
+                <Highlight>&gt;90 Lighthouse</Highlight> scores), and driving{" "}
+                {/* FIXED > to > */}
                 organic traffic growth of approximately{" "}
                 <Highlight>~15%</Highlight> through SEO and performance
                 optimization.
@@ -128,8 +129,7 @@ const About: React.FC = () => {
             </div>
           </AnimatedPanel>
         </div>
-
-        {/* ROW 2: Key Metrics (Full width below the two-column row) */}
+        {/* Lines 117-122 from errors are these InfoPanel calls */}
         <AnimatedPanel
           className="w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
           staggerDelay={0.2}>

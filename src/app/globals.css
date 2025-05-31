@@ -4,42 +4,25 @@
 @tailwind utilities;
 
 :root {
+  /* ... all your existing color variables ... */
   --color-primary-bg: #070b1f;
   --color-secondary-bg: #0d102d;
-  --color-light-panel-bg: #1e293b; /* slate-800 or similar, used for panel backgrounds */
+  --color-light-panel-bg: #1e293b;
   --color-primary-text: #f2f2f2;
   --color-secondary-text: #d1d5db;
-
-  --color-accent: #00c8ff; /* Main Cyan Accent */
+  --color-accent: #00c8ff;
   --color-accent-hover: #4dd6ff;
-
-  --color-info-accent: #60a5fa; /* Secondary Blue Accent (Tailwind blue-400) */
-
-  /* Shadow Colors */
-  --color-accent-shadow-start: rgba(
-    0,
-    200,
-    255,
-    0.3
-  ); /* Cyan based for main panel glow */
-  --color-accent-shadow-end: rgba(
-    0,
-    200,
-    255,
-    0.1
-  ); /* Cyan based for main panel glow */
-  --color-accent-shadow-strong: rgba(
-    0,
-    200,
-    255,
-    0.35
-  ); /* Cyan based for interactive elements like buttons */
+  --color-info-accent: #60a5fa;
+  --color-accent-shadow-start: rgba(0, 200, 255, 0.3);
+  --color-accent-shadow-end: rgba(0, 200, 255, 0.1);
+  --color-accent-shadow-strong: rgba(0, 200, 255, 0.35);
 }
 
 body {
+  /* ... existing body styles ... */
   color: var(--color-primary-text);
   font-family: "Poppins", sans-serif;
-  background-color: #03050a; /* Dark base for SVG background */
+  background-color: #03050a;
   background-image: url("/images/coding-symbols.svg");
   background-repeat: repeat;
   background-size: 500px;
@@ -56,20 +39,19 @@ body {
   }
 }
 
+/* ... .panel-with-corners, .Typewriter__cursor--style, .animate-fadeInUp, .interactive-glow ... */
 .panel-with-corners {
   position: relative;
 }
-
 .panel-with-corners::before,
 .panel-with-corners::after {
   content: "";
   position: absolute;
   width: 20px;
   height: 20px;
-  border-color: var(--color-accent); /* L-corners use MAIN cyan accent */
+  border-color: var(--color-accent);
   opacity: 0.6;
 }
-
 .panel-with-corners::before {
   top: -5px;
   left: -5px;
@@ -77,9 +59,8 @@ body {
   border-left-width: 2px;
   border-top-style: solid;
   border-left-style: solid;
-  border-top-left-radius: 0.5rem; /* Corresponds to rounded-lg for panels */
+  border-top-left-radius: 0.5rem;
 }
-
 .panel-with-corners::after {
   bottom: -5px;
   right: -5px;
@@ -87,24 +68,17 @@ body {
   border-right-width: 2px;
   border-bottom-style: solid;
   border-right-style: solid;
-  border-bottom-right-radius: 0.5rem; /* Corresponds to rounded-lg for panels */
+  border-bottom-right-radius: 0.5rem;
 }
-
 .Typewriter__cursor--style {
-  color: var(--color-accent); /* Cyan cursor */
+  color: var(--color-accent);
   animation: blinkKeyframes 1s step-end infinite;
   margin-left: 2px;
   font-weight: 300;
 }
-
 .animate-fadeInUp {
   animation-name: fadeInUpKeyframes;
 }
-
-html {
-  scroll-behavior: smooth;
-}
-
 .interactive-glow {
   transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
@@ -114,4 +88,13 @@ html {
   border-color: var(--color-info-accent);
   box-shadow: 0 0 12px 3px rgba(59, 130, 246, 0.75);
   outline: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* UPDATED: Utility for scroll margin */
+.section-scroll-margin {
+  scroll-margin-top: 4.5rem; /* MODIFIED: Shrinked to 72px offset */
 }

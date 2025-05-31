@@ -24,8 +24,9 @@ module.exports = {
         "info-accent": "var(--color-info-accent)",
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        fira_code: ["Fira Code", "monospace"],
+        // UPDATED TO USE CSS VARIABLES FROM NEXT/FONT
+        poppins: ["var(--font-poppins)", "sans-serif"],
+        fira_code: ["var(--font-fira-code)", "monospace"],
       },
       animation: {
         "glow-shadow":

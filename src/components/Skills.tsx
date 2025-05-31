@@ -9,7 +9,6 @@ interface SkillItem {
   name: string;
   description?: string;
 }
-
 interface SkillCategory {
   id: string;
   title: string;
@@ -206,7 +205,10 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 
 const Skills: React.FC = () => {
   return (
-    <section id="skills" className="py-16 md:py-24 relative">
+    <section
+      id="skills"
+      className="py-16 md:py-24 relative section-scroll-margin" // ADDED class
+    >
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
           <AnimatedText
@@ -230,8 +232,7 @@ const Skills: React.FC = () => {
                     key={skill.name}
                     title={skill.description}
                     className="inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm 
-                               border border-neutral-700/50
-                               cursor-default interactive-glow">
+                               border border-neutral-700/50 cursor-default interactive-glow">
                     {skill.name}
                   </span>
                 ))}
