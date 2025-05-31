@@ -1,67 +1,49 @@
 // src/app/layout.tsx
-import type { Metadata, Viewport } from 'next'; // Added Viewport
-import { Fira_Code, Poppins } from 'next/font/google';
-import './globals.css';
-import ScrollToTopButton from '@/components/ScrollToTopButton'; 
-// Assuming Navigation is also used globally in layout
-// import Navigation from '@/components/Navigation'; 
-// import Footer from '@/components/Footer';
+import type { Metadata } from "next";
+import { Poppins, Fira_Code } from "next/font/google"; // Import from next/font/google
+import "./globals.css"; // Your global styles
+import Navigation from "@/components/Navigation"; // Assuming Navigation is part of every page
+import Footer from "@/components/Footer"; // Assuming Footer is part of every page
+import ScrollToTopButton from "@/components/ScrollToTopButton"; // Assuming this is global
 
-
-const firaCode = Fira_Code({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-fira-code',
-  weight: ['300', '400', '500', '600', '700'],
-});
-
+// Configure Poppins font
 const poppins = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['300', '400', '500', '600', '700'],
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"], // Specify all weights you use
+  variable: "--font-poppins", // CSS variable for Tailwind
+  display: "swap", // Recommended for performance
 });
 
-// --- UPDATED METADATA WITH EXPLICIT ICON DEFINITIONS ---
+// Configure Fira Code font
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"], // Specify all weights you use
+  variable: "--font-fira-code", // CSS variable for Tailwind
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: 'João Grilo - Full-Stack Developer',
-  description: "João Grilo's professional portfolio showcasing skills, projects, and experience.",
-  // Explicitly define icons. Next.js will look for these in /public or /app.
-  // If favicon.ico is in app/, it should be picked up. 
-  // If you also have public/android-chrome-192x192.png etc., list them too.
-  icons: {
-    icon: [ // Array for multiple sizes/types
-      { url: '/favicon.ico', type: 'image/x-icon', sizes: 'any' }, // Standard .ico
-      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
-      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
-    ],
-    apple: '/apple-touch-icon.png', // For apple-touch-icon
-    // You can also add other icons like 'shortcut' if needed
-  },
-  // Add manifest if you have one in /app or /public
-  // manifest: '/site.webmanifest', 
+  title: "João Grilo | Full-Stack Developer",
+  description:
+    "The professional portfolio of João Grilo, a results-driven Full-Stack Developer crafting high-performance web solutions and seamless user experiences.",
+  // You can add more metadata here: openGraph, icons, etc.
 };
-
-// Optional: Define viewport settings, e.g., theme color for browser UI
-export const viewport: Viewport = {
-  themeColor: '#070B1F', // Match your primary background
-};
-// -----------------------------------------------------
-
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className={`${firaCode.variable} ${poppins.variable}`}>
-      <body className={`${poppins.className} antialiased`}> 
-        {/* If Navigation and Footer are global, they go here */}
-        {/* <Navigation /> */} 
-        {children}
-        {/* <Footer /> */}
-        <ScrollToTopButton /> 
+    // Apply font variables to the <html> tag for global availability
+    <html
+      lang="en"
+      className={`${poppins.variable} ${firaCode.variable} antialiased`}>
+      <body>
+        <Navigation /> {/* Global Navigation */}
+        {children} {/* This will be your page.tsx content */}
+        <ScrollToTopButton /> {/* Global ScrollToTopButton */}
+        <Footer /> {/* Global Footer */}
       </body>
     </html>
   );

@@ -7,9 +7,8 @@ import AnimatedPanel from "./AnimatedPanel";
 
 interface SkillItem {
   name: string;
-  description?: string; // Tooltip text
+  description?: string;
 }
-
 interface SkillCategory {
   id: string;
   title: string;
@@ -206,19 +205,25 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 
 const Skills: React.FC = () => {
   return (
-    <section id="skills" className="py-16 md:py-24 relative">
+    <section
+      id="skills"
+      className="py-16 md:py-24 relative section-scroll-margin" // ADDED class
+    >
       <div className="container mx-auto px-4">
-        <AnimatedText
-          text="Skills"
-          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 md:mb-16 text-center"
-        />
+        <div className="flex justify-center">
+          <AnimatedText
+            text="Skills"
+            elementType="h2"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 md:mb-16 text-center"
+          />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {SKILL_CATEGORIES.map((category, index) => (
             <AnimatedPanel
               key={category.id}
-              className="bg-light-panel-bg/5 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative"
+              className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow"
               staggerDelay={index * 0.1}>
-              <h3 className="font-fira_code text-xl md:text-2xl text-accent mb-4">
+              <h3 className="font-fira_code text-xl md:text-2xl text-info-accent mb-4">
                 {category.title}
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -226,7 +231,8 @@ const Skills: React.FC = () => {
                   <span
                     key={skill.name}
                     title={skill.description}
-                    className="inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-600/70 hover:border-accent/70 hover:text-primary-text transition-colors duration-300 cursor-default hover:skill-glow">
+                    className="inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm 
+                               border border-neutral-700/50 cursor-default interactive-glow">
                     {skill.name}
                   </span>
                 ))}
@@ -238,5 +244,4 @@ const Skills: React.FC = () => {
     </section>
   );
 };
-
 export default Skills;

@@ -1,6 +1,6 @@
 // tailwind.config.ts
 /** @type {import('tailwindcss').Config} */
-import type { PluginAPI } from "tailwindcss/types/config"; // IMPORT THIS FOR TYPES
+import type { PluginAPI } from "tailwindcss/types/config";
 
 module.exports = {
   content: [
@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        lg: "0.5rem",
+      },
       colors: {
         "primary-bg": "var(--color-primary-bg)",
         "secondary-bg": "var(--color-secondary-bg)",
@@ -18,16 +21,20 @@ module.exports = {
         "secondary-text": "var(--color-secondary-text)",
         accent: "var(--color-accent)",
         "accent-hover": "var(--color-accent-hover)",
+        "info-accent": "var(--color-info-accent)",
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        fira_code: ["Fira Code", "monospace"],
+        // UPDATED TO USE CSS VARIABLES FROM NEXT/FONT
+        poppins: ["var(--font-poppins)", "sans-serif"],
+        fira_code: ["var(--font-fira-code)", "monospace"],
       },
       animation: {
         "glow-shadow":
           "diffuseGlowShadowKeyframes 4s ease-in-out infinite alternate",
         fadeInUp: "fadeInUpKeyframes 0.5s ease-out forwards",
         "blink-cursor": "blinkKeyframes 1s step-end infinite",
+        "pulse-dot":
+          "pulseDotKeyframes 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       keyframes: {
         diffuseGlowShadowKeyframes: {
@@ -48,14 +55,18 @@ module.exports = {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0" },
         },
+        pulseDotKeyframes: {
+          "0%, 100%": { opacity: "1", transform: "scale(1)" },
+          "50%": { opacity: "0.5", transform: "scale(0.75)" },
+        },
       },
       boxShadow: {
         "accent-glow": "0 0 12px 2px var(--color-accent-shadow-strong)",
+        "info-accent-glow": "0 0 12px 3px rgba(59,130,246,0.75)",
       },
     },
   },
   plugins: [
-    // MODIFIED: Added types for plugin function arguments and removed unused newUtilities
     function ({ addUtilities }: PluginAPI) {
       addUtilities({
         ".animation-delay-200": { "animation-delay": "0.2s" },

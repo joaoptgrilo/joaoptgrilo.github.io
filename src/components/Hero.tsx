@@ -29,46 +29,29 @@ const Hero: React.FC = () => {
       ariaLabel: "Email João Grilo",
     },
   ];
-
   const taglineText =
     "Crafting High-Performance Web Solutions & Seamless User Experiences";
 
   return (
     <section
       id="hero"
-      className="
-        relative
-        w-full
-        h-screen
-        flex flex-col items-center justify-center
-        text-primary-text
-        hero-custom-background
-        overflow-x-hidden
-      ">
-      {/* Frosted Glass Panel */}
+      className="relative w-full h-screen flex flex-col items-center justify-center text-primary-text hero-custom-background overflow-x-hidden">
       <div
-        className="
-          relative z-10
-          w-full h-full
-          flex flex-col items-center justify-center text-center
-          p-6 sm:p-8 md:p-12 lg:p-16
-          bg-secondary-bg/20 backdrop-blur-lg
-        ">
-        {/* Added pt-16 here to push content down */}
-        <div className="space-y-4 sm:space-y-5 md:space-y-6 max-w-3xl w-full pt-16">
+        className=" relative z-10 w-full h-full flex flex-col items-center justify-center text-center
+                    p-6 sm:p-8 md:p-12 lg:p-16 bg-light-panel-bg/15 backdrop-blur-lg ">
+        <div className="space-y-4 sm:space-y-5 md:space-y-6 max-w-3xl w-full pt-16 md:pt-0">
           <h1 className="font-fira_code font-bold text-4xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-text leading-tight animate-fadeInUp tracking-tight sm:tracking-normal">
             João Grilo
           </h1>
           <p className="font-fira_code font-semibold text-xl xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary-text leading-snug animate-fadeInUp animation-delay-200 tracking-tight sm:tracking-normal">
             Results-Driven Full-Stack Developer
           </p>
-
           <AnimatedText
-            text={taglineText}
+            text={taglineText} // AnimatedText will add its own cursor
             elementType="div"
-            className="font-fira_code font-medium text-base xs:text-base sm:text-lg md:text-xl lg:text-2xl text-accent animate-fadeInUp animation-delay-400 tracking-wide"
+            className="font-fira_code font-medium text-base xs:text-base sm:text-lg md:text-xl lg:text-2xl text-accent tracking-wide"
+            // REMOVED: animate-fadeInUp animation-delay-400 (let typewriter be the entrance)
           />
-
           <div className="pt-3 sm:pt-4 md:pt-5 animate-fadeInUp animation-delay-600">
             <a
               href="#projects"
@@ -94,5 +77,4 @@ const Hero: React.FC = () => {
     </section>
   );
 };
-
 export default Hero;
