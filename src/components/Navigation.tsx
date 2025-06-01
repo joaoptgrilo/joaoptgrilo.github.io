@@ -17,7 +17,7 @@ const Navigation: React.FC = () => {
   const navLinks: NavLinkItem[] = [
     { href: "#about", label: "About" },
     { href: "#skills", label: "Skills" },
-    { href: "#experience", label: "Prof. Experience" }, // UPDATED LABEL
+    { href: "#experience", label: "Experience" },
     { href: "#projects", label: "Projects" },
     { href: "#certifications", label: "Certifications" },
     { href: "#contact", label: "Contact" },

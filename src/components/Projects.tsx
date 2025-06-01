@@ -5,62 +5,76 @@ import React from "react";
 import Image from "next/image";
 import AnimatedText from "./AnimatedText";
 import AnimatedPanel from "./AnimatedPanel";
-import { mockProjectsData, Project } from "@/data/projectsData";
-import { FiExternalLink, FiGithub, FiMoreHorizontal } from "react-icons/fi";
+import { projectsData, Project, ProjectTechItem } from "@/data/projectsData";
+import {
+  FiExternalLink,
+  FiGithub,
+  FiMoreHorizontal,
+  FiEye,
+  FiClock,
+} from "react-icons/fi"; // Added FiClock
+import { FaCodepen } from "react-icons/fa";
 
 const ProjectCard: React.FC<{ project: Project; index: number }> = ({
   project,
   index,
 }) => {
+  const isCodePenProject = project.codeLink?.includes("codepen.io");
+
   return (
     <AnimatedPanel
-      className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow flex flex-col h-full"
-      staggerDelay={index * 0.1}>
-      {project.imageUrl && (
-        <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden mb-4 border border-neutral-700/30">
+      className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow flex flex-col h-full group"
+      staggerDelay={index * 0.12}>
+      {/* Image Container */}
+      <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden mb-4 border border-neutral-700/30 transition-transform duration-300 ease-out group-hover:scale-105">
+        {project.imageUrl ? (
           <Image
             src={project.imageUrl}
             alt={project.imageAlt || project.title}
             layout="fill"
             objectFit="cover"
+            className="transition-opacity duration-300 group-hover:opacity-90"
           />
-        </div>
-      )}
-      {!project.imageUrl && (
-        <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden mb-4 border border-neutral-700/30 bg-secondary-bg/30 flex items-center justify-center">
-          <FiMoreHorizontal className="w-12 h-12 text-neutral-600" />
-        </div>
-      )}
+        ) : (
+          <div className="w-full h-full bg-secondary-bg/40 flex items-center justify-center">
+            <FiMoreHorizontal className="w-12 h-12 text-neutral-500" />
+          </div>
+        )}
+      </div>
+
       <div className="flex flex-col flex-grow">
-        <h3 className="font-fira_code text-xl text-info-accent mb-2">
+        <h3 className="font-fira_code text-xl text-info-accent mb-2 group-hover:text-accent transition-colors duration-300">
           {project.title}
         </h3>
         <p className="text-secondary-text text-sm leading-relaxed mb-4 flex-grow">
           {project.description}
         </p>
         <div className="mb-4">
-          <h4 className="font-fira_code text-xs text-neutral-400 mb-1 uppercase tracking-wider">
+          <h4 className="font-fira_code text-xs text-neutral-400 mb-1.5 uppercase tracking-wider">
             Tech Stack:
           </h4>
           <div className="flex flex-wrap gap-2">
-            {project.techStack.map((tech) => (
+            {project.techStack.map((tech: ProjectTechItem) => (
               <span
-                key={tech}
-                className="inline-block bg-primary-bg/70 text-secondary-text px-2.5 py-1 rounded text-xs border border-neutral-700/50 interactive-glow">
-                {tech}
+                key={tech.name}
+                title={tech.description || tech.name}
+                className="inline-block bg-primary-bg/70 text-secondary-text px-2.5 py-1 rounded text-xs border border-neutral-700/50 interactive-glow cursor-default">
+                {tech.name}
               </span>
             ))}
           </div>
         </div>
       </div>
+
       <div className="mt-auto pt-4 border-t border-neutral-700/30 flex items-center justify-start space-x-3">
         {project.liveLink && (
           <a
             href={project.liveLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center text-sm text-accent hover:text-accent-hover font-medium transition-colors interactive-glow px-3 py-1.5 rounded-md border border-accent/0 hover:border-accent">
-            <FiExternalLink className="mr-1.5 h-4 w-4" /> Live Demo
+            aria-label={`View Visit Website for ${project.title}`}
+            className="inline-flex items-center text-sm text-accent hover:text-accent-hover font-medium transition-colors interactive-glow px-3 py-1.5 rounded-md border border-transparent hover:border-accent/50">
+            <FiExternalLink className="mr-1.5 h-4 w-4" /> Visit Website
           </a>
         )}
         {project.codeLink && (
@@ -68,15 +82,30 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({
             href={project.codeLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center text-sm text-accent hover:text-accent-hover font-medium transition-colors interactive-glow px-3 py-1.5 rounded-md border border-accent/0 hover:border-accent">
-            <FiGithub className="mr-1.5 h-4 w-4" /> View Code
+            aria-label={`View source code for ${project.title}`}
+            className="inline-flex items-center text-sm text-accent hover:text-accent-hover font-medium transition-colors interactive-glow px-3 py-1.5 rounded-md border border-transparent hover:border-accent/50">
+            {isCodePenProject ? (
+              <FaCodepen className="mr-1.5 h-4 w-4" />
+            ) : (
+              <FiGithub className="mr-1.5 h-4 w-4" />
+            )}
+            View Code
           </a>
         )}
-        {project.learnMoreLink && (
+        {(project.type === "private" || project.type === "description-focus") &&
+          !project.liveLink &&
+          !project.codeLink &&
+          !project.learnMoreLink && (
+            <span className="text-xs text-neutral-500 font-fira_code italic">
+              Private Project
+            </span>
+          )}
+        {project.learnMoreLink && !(project.liveLink || project.codeLink) && (
           <a
             href={project.learnMoreLink}
-            className="inline-flex items-center text-sm text-accent hover:text-accent-hover font-medium transition-colors interactive-glow px-3 py-1.5 rounded-md border border-accent/0 hover:border-accent">
-            <FiMoreHorizontal className="mr-1.5 h-4 w-4" /> Learn More
+            aria-label={`Learn more about ${project.title}`}
+            className="inline-flex items-center text-sm text-accent hover:text-accent-hover font-medium transition-colors interactive-glow px-3 py-1.5 rounded-md border border-transparent hover:border-accent/50">
+            <FiEye className="mr-1.5 h-4 w-4" /> Learn More
           </a>
         )}
       </div>
@@ -85,29 +114,48 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({
 };
 
 const Projects: React.FC = () => {
+  const nextProjectIndex = projectsData.length; // For staggerDelay of the "Coming Soon" card
+
   return (
     <section
       id="projects"
-      className="py-16 md:py-24 relative section-scroll-margin" // ADDED class
-    >
+      className="py-16 md:py-24 relative section-scroll-margin">
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
           <AnimatedText
-            text="Projects"
+            text="My Projects"
             elementType="h2"
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 md:mb-16 text-center"
           />
         </div>
-        {mockProjectsData.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {mockProjectsData.map((project, index) => (
+        {projectsData.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {projectsData.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
+            {/* ADDED: "More Coming Soon" Card */}
+            <AnimatedPanel
+              className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-neutral-700/50 
+                         p-6 rounded-lg panel-with-corners relative 
+                         flex flex-col h-full items-center justify-center text-center
+                         group hover:border-accent/50 hover:animate-glow-shadow transition-all duration-300"
+              staggerDelay={nextProjectIndex * 0.12}>
+              <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4" />
+              <h3 className="font-fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300">
+                More Projects
+              </h3>
+              <p className="text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">
+                Coming Soon...
+              </p>
+            </AnimatedPanel>
           </div>
         ) : (
-          <p className="text-center text-secondary-text">
-            Projects coming soon...
-          </p>
+          // ... (existing placeholder if no projects)
+          <AnimatedPanel className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow text-center">
+            <p className="text-center text-secondary-text text-lg">
+              Showcasing a selection of my work soon. Stay tuned!
+            </p>
+          </AnimatedPanel>
         )}
       </div>
     </section>
