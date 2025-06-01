@@ -1,14 +1,16 @@
 // src/data/certificationsData.tsx
-import React from "react"; // Needed if we ever embed JSX directly, good practice
+import React from "react";
+import Highlight from "@/components/Highlight"; // Assuming Highlight component path
 
 export interface CertificationItem {
   id: string;
   name: string;
   issuer: string;
-  issueDate?: string; // Optional, e.g., "March 2023" or specific date
+  issueDate?: string;
   credentialUrl: string;
-  icon?: React.ElementType; // Optional: For an icon like freeCodeCamp's logo if we had it
-  description?: string; // Optional: Brief description if needed
+  icon?: React.ElementType;
+  description?: React.ReactNode; // UPDATED to React.ReactNode
+  isInProgress?: boolean; // For styling "In Progress" items if needed
 }
 
 export const certificationsData: CertificationItem[] = [
@@ -16,40 +18,71 @@ export const certificationsData: CertificationItem[] = [
     id: "fcc-responsive-web-design",
     name: "Responsive Web Design",
     issuer: "freeCodeCamp",
-    // issueDate: 'Specify Date if known/desired',
     credentialUrl:
       "https://www.freecodecamp.org/certification/JoaoGrilo/responsive-web-design",
-    description:
-      "Covers HTML, CSS, Visual Design, Accessibility, Responsive Design principles, and CSS Flexbox & Grid.",
+    // UPDATED with Highlights
+    description: (
+      <>
+        Covers <Highlight>HTML</Highlight>, <Highlight>CSS</Highlight>, Visual
+        Design, <Highlight>Accessibility</Highlight>, Responsive Design
+        principles, and CSS <Highlight>Flexbox</Highlight> &{" "}
+        <Highlight>Grid</Highlight>.
+      </>
+    ),
   },
   {
     id: "fcc-js-algorithms-data-structures",
     name: "JavaScript Algorithms and Data Structures",
     issuer: "freeCodeCamp",
-    // issueDate: 'Specify Date if known/desired',
     credentialUrl:
       "https://www.freecodecamp.org/certification/JoaoGrilo/javascript-algorithms-and-data-structures-v8",
-    description:
-      "Focuses on JavaScript fundamentals, ES6, Regular Expressions, Debugging, Data Structures, and Algorithm Scripting.",
+    // UPDATED with Highlights
+    description: (
+      <>
+        Focuses on JavaScript fundamentals, <Highlight>ES6</Highlight>, Regular
+        Expressions, Debugging,
+        <Highlight>Data Structures</Highlight>, and{" "}
+        <Highlight>Algorithm Scripting</Highlight>.
+      </>
+    ),
   },
   {
     id: "fcc-frontend-dev-libraries",
     name: "Front End Development Libraries",
     issuer: "freeCodeCamp",
-    // issueDate: 'Specify Date if known/desired',
     credentialUrl:
       "https://www.freecodecamp.org/certification/JoaoGrilo/front-end-development-libraries",
-    description:
-      "Teaches modern frontend libraries including Bootstrap, jQuery, SASS, React, and Redux.",
+    // UPDATED with Highlights
+    description: (
+      <>
+        Teaches modern frontend libraries including{" "}
+        <Highlight>Bootstrap</Highlight>, jQuery, <Highlight>SASS</Highlight>,
+        <Highlight>React</Highlight>, and <Highlight>Redux</Highlight>.
+      </>
+    ),
   },
-  // Future certifications can be added here
+  {
+    id: "fcc-data-visualization",
+    name: "Data Visualization",
+    issuer: "freeCodeCamp",
+    credentialUrl:
+      "https://www.freecodecamp.org/certification/JoaoGrilo/data-visualization",
+    // UPDATED with Highlights
+    description: (
+      <>
+        Focuses on <Highlight>D3.js</Highlight> fundamentals, creating bar
+        charts, scatterplots, heat maps, and other{" "}
+        <Highlight>data-driven visualizations</Highlight>.
+      </>
+    ),
+  },
   // Example for an "In Progress" item (we can style it differently later):
   // {
   //   id: 'aws-cloud-quest',
-  //   name: 'AWS Cloud Quest: Cloud Practitioner (In Progress)',
+  //   name: 'AWS Cloud Quest: Cloud Practitioner',
   //   issuer: 'Amazon Web Services',
-  //   credentialUrl: '#', // Placeholder or link to Cloud Quest profile
-  //   description: 'Hands-on learning for AWS Cloud fundamentals and core services.',
-  //   isInProgress: true, // Custom flag
+  //   credentialUrl: '#',
+  //   description: <>Hands-on learning for <Highlight>AWS Cloud fundamentals</Highlight> and core services.</>,
+  //   isInProgress: true,
   // },
 ];
