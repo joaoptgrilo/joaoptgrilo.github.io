@@ -1,7 +1,5 @@
 // tailwind.config.ts
 /** @type {import('tailwindcss').Config} */
-import type { PluginAPI } from "tailwindcss/types/config";
-
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,9 +8,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      borderRadius: {
-        lg: "0.5rem",
-      },
       colors: {
         "primary-bg": "var(--color-primary-bg)",
         "secondary-bg": "var(--color-secondary-bg)",
@@ -24,56 +19,44 @@ module.exports = {
         "info-accent": "var(--color-info-accent)",
       },
       fontFamily: {
-        // UPDATED TO USE CSS VARIABLES FROM NEXT/FONT
         poppins: ["var(--font-poppins)", "sans-serif"],
         fira_code: ["var(--font-fira-code)", "monospace"],
       },
       animation: {
-        "glow-shadow":
-          "diffuseGlowShadowKeyframes 4s ease-in-out infinite alternate",
-        fadeInUp: "fadeInUpKeyframes 0.5s ease-out forwards",
-        "blink-cursor": "blinkKeyframes 1s step-end infinite",
-        "pulse-dot":
-          "pulseDotKeyframes 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "subtle-pan": "subtlePan 120s linear infinite alternate",
+        "glow-shadow": "glowShadow 2s ease-in-out infinite alternate", // For panel-with-corners
+        // Add pulse-dot if not already present globally or locally for nav pill
+        "pulse-dot": "pulseDot 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       keyframes: {
-        diffuseGlowShadowKeyframes: {
+        subtlePan: {
+          "0%": { backgroundPosition: "0% 0%" },
+          "100%": { backgroundPosition: "100% 100%" },
+        },
+        glowShadow: {
+          // For panel-with-corners
           "0%": {
             boxShadow:
-              "0 0 5px 0px var(--color-accent-shadow-start), 0 0 5px 0px var(--color-accent-shadow-start) inset",
+              "0 0 5px -2px var(--color-accent-shadow-start), 0 0 10px -3px var(--color-accent-shadow-end)",
           },
           "100%": {
             boxShadow:
-              "0 0 20px 5px var(--color-accent-shadow-end), 0 0 20px 5px var(--color-accent-shadow-end) inset",
+              "0 0 15px 0px var(--color-accent-shadow-start), 0 0 25px -2px var(--color-accent-shadow-end)",
           },
         },
-        fadeInUpKeyframes: {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        blinkKeyframes: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0" },
-        },
-        pulseDotKeyframes: {
+        pulseDot: {
+          // For nav pill dot
           "0%, 100%": { opacity: "1", transform: "scale(1)" },
           "50%": { opacity: "0.5", transform: "scale(0.75)" },
         },
       },
       boxShadow: {
-        "accent-glow": "0 0 12px 2px var(--color-accent-shadow-strong)",
-        "info-accent-glow": "0 0 12px 3px rgba(59,130,246,0.75)",
+        "accent-glow":
+          "0 0 15px 2px var(--color-accent-shadow-start), 0 0 25px 5px var(--color-accent-shadow-end)",
+        "info-accent-glow":
+          "0 0 15px 2px rgba(96, 165, 250, 0.3), 0 0 25px 5px rgba(96, 165, 250, 0.1)",
       },
     },
   },
-  plugins: [
-    function ({ addUtilities }: PluginAPI) {
-      addUtilities({
-        ".animation-delay-200": { "animation-delay": "0.2s" },
-        ".animation-delay-400": { "animation-delay": "0.4s" },
-        ".animation-delay-600": { "animation-delay": "0.6s" },
-        ".animation-delay-800": { "animation-delay": "0.8s" },
-      });
-    },
-  ],
+  plugins: [],
 };
