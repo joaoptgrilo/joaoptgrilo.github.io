@@ -17,7 +17,7 @@ const Navigation: React.FC = () => {
   const navLinks: NavLinkItem[] = [
     { href: "#about", label: "About" },
     { href: "#skills", label: "Skills" },
-    { href: "#experience", label: "Experience" },
+    { href: "#experience", label: "Prof. Experience" }, // UPDATED LABEL
     { href: "#projects", label: "Projects" },
     { href: "#certifications", label: "Certifications" },
     { href: "#contact", label: "Contact" },
@@ -61,13 +61,12 @@ const Navigation: React.FC = () => {
   const mobileMenuContainerClasses =
     "bg-secondary-bg/90 backdrop-blur-lg animate-glow-shadow";
 
-  // MODIFIED: pillClasses for thinner solid accent border and outer glow
   const pillClasses = `
     flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font-fira_code font-semibold 
     text-accent 
     bg-primary-bg/70 backdrop-blur-sm 
-    border border-accent /* Thinner 1px solid border with accent color */
-    shadow-accent-glow /* Outer cyan glow */
+    border border-accent 
+    shadow-accent-glow 
     transition-all duration-300 ease-in-out 
     hover:opacity-90 
   `;
@@ -99,7 +98,6 @@ const Navigation: React.FC = () => {
               João Grilo
             </span>
           </Link>
-          {/* ... rest of nav ... */}
           <div className="hidden md:flex items-center space-x-5">
             {navLinks.map((link) => (
               <Link
