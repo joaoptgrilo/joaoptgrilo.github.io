@@ -53,6 +53,7 @@ const Hero: React.FC = () => {
             text={taglineText}
             elementType="div"
             className="font-fira_code font-medium text-base xs:text-base sm:text-lg md:text-xl lg:text-2xl text-accent tracking-wide"
+            noAnimation={true}
           />
           {/* MODIFIED: CTA Buttons container */}
           <div className="pt-3 sm:pt-4 md:pt-5 animate-fadeInUp animation-delay-600 flex flex-col sm:flex-row sm:justify-center items-center gap-4 sm:gap-6">

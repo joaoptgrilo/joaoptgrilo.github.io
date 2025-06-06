@@ -33,6 +33,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({
             alt={project.imageAlt || project.title}
             layout="fill"
             objectFit="cover"
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
             className="transition-opacity duration-300 group-hover:opacity-90"
           />
         ) : (

@@ -17,10 +17,8 @@ const panelVariants: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: "spring",
-      stiffness: 50,
-      damping: 20,
-      duration: 0.5,
+      ease: "easeOut", // MODIFIED: Changed from 'spring' to a simpler 'easeOut'
+      duration: 0.6, // Adjusted duration for a smooth feel
     },
   },
 };

@@ -1,17 +1,25 @@
 // src/app/page.tsx
-// Removed imports for Navigation, Footer, ScrollToTopButton if they are in RootLayout
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Experience from "@/components/Experience"; // Placeholder
-import Projects from "@/components/Projects"; // Using actual component
-import Certifications from "@/components/Certifications"; // Placeholder
-import Contact from "@/components/Contact"; // Placeholder
+
+// Dynamically import all sections below the fold
+// We set ssr: false because these components use client-side hooks like
+// useInView, and this prevents potential hydration mismatches while still
+// getting the code-splitting benefits.
+const About = dynamic(() => import("@/components/About"), { ssr: false });
+const Skills = dynamic(() => import("@/components/Skills"), { ssr: false });
+const Experience = dynamic(() => import("@/components/Experience"), {
+  ssr: false,
+});
+const Projects = dynamic(() => import("@/components/Projects"), { ssr: false });
+const Certifications = dynamic(() => import("@/components/Certifications"), {
+  ssr: false,
+});
+const Contact = dynamic(() => import("@/components/Contact"), { ssr: false });
 
 export default function Home() {
   return (
     <>
-      {/* Navigation is now likely in RootLayout */}
       <main className="w-full">
         <Hero />
         <About />
@@ -21,7 +29,6 @@ export default function Home() {
         <Certifications />
         <Contact />
       </main>
-      {/* Footer and ScrollToTopButton are now likely in RootLayout */}
     </>
   );
 }

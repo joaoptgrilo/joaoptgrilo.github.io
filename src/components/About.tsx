@@ -68,6 +68,8 @@ const About: React.FC = () => {
                   layout="fill"
                   objectFit="cover"
                   className="rounded-full border-2 border-info-accent shadow-lg"
+                  sizes="(max-width: 767px) 10rem, 12rem"
+                  priority
                 />
                 <div className="absolute bottom-0 right-0 w-10 h-10 bg-primary-bg border-2 border-info-accent rounded-full flex items-center justify-center">
                   <FiCpu className="w-5 h-5 text-info-accent" />

@@ -6,20 +6,24 @@ import Navigation from "@/components/Navigation"; // Assuming Navigation is part
 import Footer from "@/components/Footer"; // Assuming Footer is part of every page
 import ScrollToTopButton from "@/components/ScrollToTopButton"; // Assuming this is global
 
-// Configure Poppins font
+// Configure Poppins font with advanced fallback
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"], // Specify all weights you use
   variable: "--font-poppins", // CSS variable for Tailwind
   display: "swap", // Recommended for performance
+  adjustFontFallback: false, // Use custom fallback
+  fallback: ["system-ui", "arial", "sans-serif"], // Provide specific fallbacks
 });
 
-// Configure Fira Code font
+// Configure Fira Code font with advanced fallback
 const firaCode = Fira_Code({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"], // Specify all weights you use
   variable: "--font-fira-code", // CSS variable for Tailwind
   display: "swap",
+  adjustFontFallback: false, // Use custom fallback
+  fallback: ["ui-monospace", "monospace"], // Provide specific fallbacks
 });
 
 export const metadata: Metadata = {
