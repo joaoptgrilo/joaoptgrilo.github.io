@@ -2,20 +2,15 @@
 import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 
-// Dynamically import all sections below the fold
-// We set ssr: false because these components use client-side hooks like
-// useInView, and this prevents potential hydration mismatches while still
-// getting the code-splitting benefits.
-const About = dynamic(() => import("@/components/About"), { ssr: false });
-const Skills = dynamic(() => import("@/components/Skills"), { ssr: false });
-const Experience = dynamic(() => import("@/components/Experience"), {
-  ssr: false,
-});
-const Projects = dynamic(() => import("@/components/Projects"), { ssr: false });
-const Certifications = dynamic(() => import("@/components/Certifications"), {
-  ssr: false,
-});
-const Contact = dynamic(() => import("@/components/Contact"), { ssr: false });
+// Dynamically import all sections below the fold.
+// The `{ ssr: false }` option is removed to comply with Server Component rules.
+// The code-splitting and lazy loading benefits are maintained by default.
+const About = dynamic(() => import("@/components/About"));
+const Skills = dynamic(() => import("@/components/Skills"));
+const Experience = dynamic(() => import("@/components/Experience"));
+const Projects = dynamic(() => import("@/components/Projects"));
+const Certifications = dynamic(() => import("@/components/Certifications"));
+const Contact = dynamic(() => import("@/components/Contact"));
 
 export default function Home() {
   return (
