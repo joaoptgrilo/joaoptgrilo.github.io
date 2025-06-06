@@ -16,6 +16,7 @@ interface SkillCategory {
 }
 
 const SKILL_CATEGORIES: SkillCategory[] = [
+  // ... (SKILL_CATEGORIES array remains unchanged)
   {
     id: "languages",
     title: "Languages",
@@ -203,11 +204,12 @@ const SKILL_CATEGORIES: SkillCategory[] = [
   },
 ];
 
+
 const Skills: React.FC = () => {
   return (
     <section
       id="skills"
-      className="py-16 md:py-24 relative section-scroll-margin" // ADDED class
+      className="py-16 md:py-24 relative section-scroll-margin"
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
@@ -217,29 +219,31 @@ const Skills: React.FC = () => {
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 md:mb-16 text-center"
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* MODIFIED: Changed div to ul */}
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {SKILL_CATEGORIES.map((category, index) => (
-            <AnimatedPanel
-              key={category.id}
-              className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow"
-              staggerDelay={index * 0.1}>
-              <h3 className="font-fira_code text-xl md:text-2xl text-info-accent mb-4">
-                {category.title}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span
-                    key={skill.name}
-                    title={skill.description}
-                    className="inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm 
-                               border border-neutral-700/50 cursor-default interactive-glow">
-                    {skill.name}
-                  </span>
-                ))}
-              </div>
-            </AnimatedPanel>
+            // MODIFIED: Wrapped panel in li
+            <li key={category.id}>
+              <AnimatedPanel
+                className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow h-full"
+                staggerDelay={index * 0.1}>
+                <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
+                  {category.title}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <span
+                      key={skill.name}
+                      title={skill.description}
+                      className="inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-700/50 cursor-default interactive-glow">
+                      {skill.name}
+                    </span>
+                  ))}
+                </div>
+              </AnimatedPanel>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

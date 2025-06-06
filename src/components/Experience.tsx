@@ -34,22 +34,17 @@ const Experience = () => {
                 key={item.id}
                 className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
                 staggerDelay={index * 0.15}>
-                <div className="lg:grid lg:grid-cols-12 lg:gap-x-0">
+                <article className="lg:grid lg:grid-cols-12 lg:gap-x-0">
                   <div className="lg:col-span-5 lg:pr-6 mb-6 lg:mb-0">
-                    <h3 className="text-xl md:text-2xl font-bold text-accent mb-4 leading-tight">
+                    {/* MODIFIED: Changed h3 to a styled p tag to fix heading order. */}
+                    <p className="text-xl md:text-2xl font-bold text-accent mb-4 leading-tight">
                       {item.role}
-                    </h3>
+                    </p>
 
-                    {/* MODIFIED: Overall container for company/location/period info */}
                     <div className="space-y-2.5 mb-6 text-sm">
-                      {" "}
-                      {/* Adjusted space-y */}
                       <div className="flex items-center">
                         {item.companyLogoUrl ? (
-                          <div
-                            // MODIFIED: Logo border color changed
-                            className="mr-4 flex-shrink-0 w-20 h-20 relative filter brightness-0 invert
-                                       border border-neutral-700/50 rounded-md shadow-info-accent-glow overflow-hidden p-3">
+                          <div className="mr-4 flex-shrink-0 w-20 h-20 relative filter brightness-0 invert border border-neutral-700/50 rounded-md shadow-info-accent-glow overflow-hidden p-3">
                             <div className="relative w-full h-full">
                               <Image
                                 src={item.companyLogoUrl}
@@ -78,20 +73,15 @@ const Experience = () => {
                               item.company
                             )}
                           </span>
-                          {/* Location directly under company name, will align left */}
                           <div className="flex items-start mt-1">
-                            <FaMapMarkerAlt className="w-4 h-4 mr-1.5 mt-0.5 text-info-accent flex-shrink-0" />{" "}
-                            {/* Always show location icon */}
+                            <FaMapMarkerAlt className="w-4 h-4 mr-1.5 mt-0.5 text-info-accent flex-shrink-0" />
                             <span className="font-fira_code text-secondary-text text-xs">
                               {item.location}
                             </span>
                           </div>
                         </div>
                       </div>
-                      {/* Period - now aligns left with the block */}
                       <div className="flex items-start">
-                        {" "}
-                        {/* Removed conditional padding */}
                         <FaCalendarAlt className="w-4 h-4 mr-1.5 mt-0.5 text-info-accent flex-shrink-0" />
                         <span className="font-fira_code text-secondary-text">
                           {item.period}
@@ -100,35 +90,30 @@ const Experience = () => {
                     </div>
 
                     {item.keyTech && item.keyTech.length > 0 && (
-                      // ... (Key Technologies section remains the same)
                       <div>
-                        <h4 className="font-fira_code text-xs text-secondary-text mb-2 uppercase tracking-wider flex items-center">
+                        <p className="font-fira_code text-xs text-secondary-text mb-2 uppercase tracking-wider flex items-center">
                           <FaCogs className="w-3.5 h-3.5 mr-1.5 text-info-accent" />
                           Key Technologies
-                        </h4>
-                        <div className="flex flex-wrap gap-x-2 gap-y-1.5">
+                        </p>
+                        <ul className="flex flex-wrap gap-x-2 gap-y-1.5">
                           {item.keyTech.map((tech: ExperienceTechItem) => (
-                            <span
-                              key={tech.name}
-                              title={tech.description || tech.name}
-                              className="inline-block bg-primary-bg/70 text-primary-text/90 px-2.5 py-1 rounded text-xs border border-neutral-700/40 interactive-glow cursor-default">
-                              {tech.name}
-                            </span>
+                            <li key={tech.name}>
+                              <span
+                                title={tech.description || tech.name}
+                                className="inline-block bg-primary-bg/70 text-primary-text/90 px-2.5 py-1 rounded text-xs border border-neutral-700/40 interactive-glow cursor-default">
+                                {tech.name}
+                              </span>
+                            </li>
                           ))}
-                        </div>
+                        </ul>
                       </div>
                     )}
                   </div>
 
-                  {/* MODIFIED: Achievements left border color and pseudo-element bg color */}
-                  <div
-                    className="lg:col-span-7 lg:pl-6 pt-6 lg:pt-0 
-                                relative border-l-transparent lg:border-l-2 lg:border-neutral-700/30 
-                                lg:before:content-[''] lg:before:absolute lg:before:-left-px lg:before:top-0 lg:before:bottom-0 lg:before:w-px 
-                                lg:before:bg-neutral-700/50 lg:before:shadow-info-accent-glow lg:before:opacity-50">
-                    <h4 className="font-fira_code text-sm text-secondary-text mb-3 uppercase tracking-wider">
+                  <div className="lg:col-span-7 lg:pl-6 pt-6 lg:pt-0 relative border-l-transparent lg:border-l-2 lg:border-neutral-700/30 lg:before:content-[''] lg:before:absolute lg:before:-left-px lg:before:top-0 lg:before:bottom-0 lg:before:w-px lg:before:bg-neutral-700/50 lg:before:shadow-info-accent-glow lg:before:opacity-50">
+                    <p className="font-fira_code text-sm text-secondary-text mb-3 uppercase tracking-wider">
                       Achievements & Responsibilities
-                    </h4>
+                    </p>
                     <ul className="space-y-2.5 text-secondary-text leading-relaxed text-[0.95rem]">
                       {item.descriptionItems.map(
                         (descItem: React.ReactNode, descIndex: number) => (
@@ -142,12 +127,11 @@ const Experience = () => {
                       )}
                     </ul>
                   </div>
-                </div>
+                </article>
               </AnimatedPanel>
             ))}
           </div>
         ) : (
-          // ... (Placeholder panel)
           <AnimatedPanel className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow text-center">
             <p className="text-lg text-secondary-text">
               Professional Experience details are currently being updated.

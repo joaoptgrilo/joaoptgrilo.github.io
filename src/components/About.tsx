@@ -36,7 +36,8 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
     // Ensured template literal for className is robust
     className={`flex flex-col items-center text-center p-4 rounded-lg border border-neutral-700/50 transform transition-transform hover:scale-105 cursor-default w-full interactive-glow ${className.trim()}`}>
     <IconComponent className="w-8 h-8 text-info-accent mb-2" />
-    <h4 className="font-fira_code text-sm text-secondary-text mb-1">{title}</h4>
+    {/* MODIFIED: Changed h4 to a styled p tag to fix heading order */}
+    <p className="font-fira_code text-sm text-secondary-text mb-1">{title}</p>
     <p className="text-primary-text text-base md:text-lg font-semibold">
       {value}
     </p>
@@ -75,9 +76,9 @@ const About: React.FC = () => {
                   <FiCpu className="w-5 h-5 text-info-accent" />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-primary-text mb-1">
+              <p className="text-2xl font-bold text-primary-text mb-1">
                 João Grilo
-              </h3>
+              </p>
               <p className="font-fira_code text-info-accent text-sm mb-4">
                 Full-Stack Developer
               </p>
@@ -90,9 +91,9 @@ const About: React.FC = () => {
           <AnimatedPanel
             className="lg:col-span-2 w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
             staggerDelay={0.1}>
-            <h3 className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 text-center sm:text-left">
+            <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 text-center sm:text-left font-semibold">
               Professional Summary
-            </h3>
+            </p>
             <div className="space-y-4 text-secondary-text leading-relaxed">
               <p>
                 A dedicated Full-Stack Developer with over{" "}
@@ -103,13 +104,11 @@ const About: React.FC = () => {
               </p>
               <p>
                 {" "}
-                {/* Line 86 from error is likely here */}
                 Expertise in <Highlight>PHP</Highlight>,{" "}
                 <Highlight>JavaScript (React)</Highlight>, and{" "}
                 <Highlight>.NET Core</Highlight>. Known for enhancing user
                 experience, achieving significant performance gains (e.g.,{" "}
                 <Highlight>&gt;90 Lighthouse</Highlight> scores), and driving{" "}
-                {/* FIXED > to > */}
                 organic traffic growth of approximately{" "}
                 <Highlight>~15%</Highlight> through SEO and performance
                 optimization.
@@ -131,13 +130,12 @@ const About: React.FC = () => {
             </div>
           </AnimatedPanel>
         </div>
-        {/* Lines 117-122 from errors are these InfoPanel calls */}
         <AnimatedPanel
           className="w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
           staggerDelay={0.2}>
-          <h3 className="font-fira_code text-xl md:text-2xl text-info-accent mb-8 text-center">
+          <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-8 text-center font-semibold">
             Key Metrics & Info
-          </h3>
+          </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-items-stretch w-full max-w-4xl mx-auto">
             <InfoPanel
               icon={FiBriefcase}
