@@ -83,11 +83,20 @@ const Hero: React.FC = () => {
           <motion.div
             variants={itemVariants}
             className="h-24 sm:h-20 md:h-16 lg:h-8 flex items-center justify-center">
-            <AnimatedText
-              text={taglineText}
-              elementType="div"
-              className="font-fira_code font-medium text-base xs:text-base sm:text-lg md:text-xl lg:text-2xl text-accent tracking-wide"
-            />
+            {/* Desktop view: CSS typewriter for performance */}
+            <div className="hidden lg:block">
+              <AnimatedText
+                text={taglineText}
+                elementType="div"
+                className="font-fira_code font-medium text-xl text-accent tracking-wide"
+                useCssAnimation={true}
+              />
+            </div>
+            {/* Mobile/Tablet view: Simple static text for responsiveness and CLS prevention */}
+            <p className="block lg:hidden font-fira_code font-medium text-base sm:text-lg text-accent tracking-wide">
+              Crafting High-Performance Web Solutions
+              <br />& Seamless User Experiences
+            </p>
           </motion.div>
 
           <motion.div

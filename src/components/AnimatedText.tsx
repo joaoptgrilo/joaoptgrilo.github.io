@@ -9,12 +9,14 @@ interface AnimatedTextProps {
   text: string;
   elementType?: keyof JSX.IntrinsicElements;
   className?: string;
+  useCssAnimation?: boolean;
 }
 
 const AnimatedText: React.FC<AnimatedTextProps> = ({
   text = "",
   elementType = "span",
   className = "",
+  useCssAnimation = false,
 }) => {
   const [startTyping, setStartTyping] = useState(false);
   const { ref, inView } = useInView({
@@ -30,9 +32,20 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
 
   const Tag = elementType as React.ElementType;
 
+  if (useCssAnimation) {
+    return (
+      <div ref={ref} className={className}>
+        {startTyping ? (
+          <Tag className="typewriter-css">{text}</Tag>
+        ) : (
+          <Tag> </Tag>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div ref={ref} className={`relative ${className}`}>
-      {/* This invisible placeholder prevents layout shift by reserving space */}
       <Tag className="invisible" aria-hidden="true">
         {text || " "}
       </Tag>
@@ -47,7 +60,6 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
               loop: false,
               cursor: "|",
               cursorClassName: "Typewriter__cursor--style",
-              wrapperClassName: "Typewriter__wrapper--inline",
             }}
           />
         </Tag>
