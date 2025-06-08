@@ -24,7 +24,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({
   return (
     <AnimatedPanel
       className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow flex flex-col h-full group"
-      staggerDelay={index * 0.04}>
+      staggerDelay={index * 0.08}>
       <article className="flex flex-col flex-grow h-full">
         <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden mb-4 border border-neutral-700/30 transition-transform duration-300 ease-out group-hover:scale-105">
           {project.imageUrl ? (
@@ -142,7 +142,7 @@ const Projects: React.FC = () => {
             <li className="flex">
               <AnimatedPanel
                 className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-neutral-700/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 hover:animate-glow-shadow transition-all duration-300 w-full"
-                staggerDelay={nextProjectIndex * 0.04}>
+                staggerDelay={nextProjectIndex * 0.08}>
                 <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4" />
                 <p className="font-fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
                   More Projects

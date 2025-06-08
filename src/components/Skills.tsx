@@ -221,7 +221,7 @@ const Skills: React.FC = () => {
             <li key={category.id}>
               <AnimatedPanel
                 className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow h-full"
-                staggerDelay={index * 0.04}>
+                staggerDelay={index * 0.08}>
                 <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
                   {category.title}
                 </p>

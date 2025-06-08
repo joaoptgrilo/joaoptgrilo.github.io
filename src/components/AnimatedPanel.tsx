@@ -12,13 +12,13 @@ interface AnimatedPanelProps {
 }
 
 const panelVariants: Variants = {
-  hidden: { opacity: 0, y: 70 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      ease: "easeInOut",
-      duration: 1.0,
+      ease: "easeOut",
+      duration: 0.6,
     },
   },
 };
