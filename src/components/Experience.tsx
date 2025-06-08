@@ -29,14 +29,12 @@ const Experience = () => {
 
         {experienceData.length > 0 ? (
           <div className="space-y-12 md:space-y-16">
-            {experienceData.map((item: ExperienceItem, index: number) => (
+            {experienceData.map((item: ExperienceItem) => (
               <AnimatedPanel
                 key={item.id}
-                className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
-                staggerDelay={index * 0.15}>
+                className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow">
                 <article className="lg:grid lg:grid-cols-12 lg:gap-x-0">
                   <div className="lg:col-span-5 lg:pr-6 mb-6 lg:mb-0">
-                    {/* MODIFIED: Changed h3 to a styled p tag to fix heading order. */}
                     <p className="text-xl md:text-2xl font-bold text-accent mb-4 leading-tight">
                       {item.role}
                     </p>

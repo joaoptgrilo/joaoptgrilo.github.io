@@ -39,7 +39,6 @@ body {
   }
 }
 
-/* ADDED: Keyframes for cursor blink effect */
 @keyframes blinkKeyframes {
   from,
   to {
@@ -50,7 +49,7 @@ body {
   }
 }
 
-/* ... .panel-with-corners, .Typewriter__cursor--style, .animate-fadeInUp, .interactive-glow ... */
+/* ... .panel-with-corners ... */
 .panel-with-corners {
   position: relative;
 }
@@ -81,17 +80,9 @@ body {
   border-right-style: solid;
   border-bottom-right-radius: 0.5rem;
 }
-.Typewriter__cursor--style {
-  color: var(--color-accent);
-  animation: blinkKeyframes 1s step-end infinite;
-  margin-left: 2px;
-  font-weight: 300;
-}
 
-/* ADDED: New class for static text with a blinking cursor for LCP hero element */
-.static-with-cursor::after {
-  content: "|";
-  display: inline-block;
+/* This is used by the JS typewriter-effect library */
+.Typewriter__cursor--style {
   color: var(--color-accent);
   animation: blinkKeyframes 1s step-end infinite;
   margin-left: 2px;
@@ -116,7 +107,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* UPDATED: Utility for scroll margin */
 .section-scroll-margin {
-  scroll-margin-top: 4.5rem; /* MODIFIED: Shrinked to 72px offset */
+  scroll-margin-top: 4.5rem;
 }

@@ -16,7 +16,6 @@ interface SkillCategory {
 }
 
 const SKILL_CATEGORIES: SkillCategory[] = [
-  // ... (SKILL_CATEGORIES array remains unchanged)
   {
     id: "languages",
     title: "Languages",
@@ -204,13 +203,11 @@ const SKILL_CATEGORIES: SkillCategory[] = [
   },
 ];
 
-
 const Skills: React.FC = () => {
   return (
     <section
       id="skills"
-      className="py-16 md:py-24 relative section-scroll-margin"
-    >
+      className="py-16 md:py-24 relative section-scroll-margin">
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
           <AnimatedText
@@ -219,19 +216,17 @@ const Skills: React.FC = () => {
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 md:mb-16 text-center"
           />
         </div>
-        {/* MODIFIED: Changed div to ul */}
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {SKILL_CATEGORIES.map((category, index) => (
-            // MODIFIED: Wrapped panel in li
+          {SKILL_CATEGORIES.map((category: SkillCategory, index: number) => (
             <li key={category.id}>
               <AnimatedPanel
                 className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow h-full"
-                staggerDelay={index * 0.1}>
+                staggerDelay={index * 0.04}>
                 <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
                   {category.title}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
+                  {category.skills.map((skill: SkillItem) => (
                     <span
                       key={skill.name}
                       title={skill.description}

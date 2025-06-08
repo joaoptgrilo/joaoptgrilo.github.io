@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import React from "react";
-import { IconType } from "react-icons"; // Import IconType for clarity
+import { IconType } from "react-icons";
 import {
   FiBriefcase,
   FiTarget,
@@ -17,7 +17,7 @@ import AnimatedPanel from "./AnimatedPanel";
 import Highlight from "./Highlight";
 
 interface InfoPanelProps {
-  icon: IconType; // Using specific IconType from react-icons
+  icon: IconType;
   title: string;
   value: string | React.ReactNode;
   className?: string;
@@ -25,18 +25,16 @@ interface InfoPanelProps {
 }
 
 const InfoPanel: React.FC<InfoPanelProps> = ({
-  icon: IconComponent, // Renamed destructured prop to avoid conflict with potential Icon var
+  icon: IconComponent,
   title,
   value,
-  className = "", // Ensure className has a default value to avoid issues with template literal
+  className = "",
   tooltip,
 }) => (
   <div
     title={tooltip}
-    // Ensured template literal for className is robust
     className={`flex flex-col items-center text-center p-4 rounded-lg border border-neutral-700/50 transform transition-transform hover:scale-105 cursor-default w-full interactive-glow ${className.trim()}`}>
     <IconComponent className="w-8 h-8 text-info-accent mb-2" />
-    {/* MODIFIED: Changed h4 to a styled p tag to fix heading order */}
     <p className="font-fira_code text-sm text-secondary-text mb-1">{title}</p>
     <p className="text-primary-text text-base md:text-lg font-semibold">
       {value}
@@ -58,9 +56,7 @@ const About: React.FC = () => {
           />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start mb-8 lg:mb-12">
-          <AnimatedPanel
-            className="lg:col-span-1 bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow"
-            staggerDelay={0}>
+          <AnimatedPanel className="lg:col-span-1 bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow">
             <div className="flex flex-col items-center">
               <div className="relative w-40 h-40 md:w-48 md:h-48 mb-6">
                 <Image
@@ -103,7 +99,6 @@ const About: React.FC = () => {
                 clean, robust solutions that reliably serve high traffic.
               </p>
               <p>
-                {" "}
                 Expertise in <Highlight>PHP</Highlight>,{" "}
                 <Highlight>JavaScript (React)</Highlight>, and{" "}
                 <Highlight>.NET Core</Highlight>. Known for enhancing user
