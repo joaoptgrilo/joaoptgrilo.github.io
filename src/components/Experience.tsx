@@ -1,7 +1,7 @@
 // src/components/Experience.tsx
 import React from "react";
 import Image from "next/image";
-import AnimatedText from "./AnimatedText";
+import AnimatedText from "./JsAnimatedText";
 import AnimatedPanel from "./AnimatedPanel";
 import {
   experienceData,

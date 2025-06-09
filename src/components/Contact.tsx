@@ -1,6 +1,6 @@
 // src/components/Contact.tsx
 import React from "react";
-import AnimatedText from "./AnimatedText";
+import AnimatedText from "./JsAnimatedText";
 import AnimatedPanel from "./AnimatedPanel";
 import Highlight from "./Highlight";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";

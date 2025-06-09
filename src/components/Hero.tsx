@@ -3,7 +3,7 @@
 
 import React from "react";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
-import AnimatedText from "./AnimatedText";
+import CssAnimatedText from "./CssAnimatedText";
 
 interface SocialLink {
   href: string;
@@ -52,11 +52,10 @@ const Hero: React.FC = () => {
           <div className="h-24 sm:h-20 md:h-16 lg:h-8 flex items-center justify-center animate-fade-in-up animation-delay-200">
             {/* Desktop view: CSS typewriter for performance */}
             <div className="hidden lg:block">
-              <AnimatedText
+              <CssAnimatedText
                 text={taglineText}
                 elementType="div"
                 className="font-fira_code font-medium text-xl text-accent tracking-wide"
-                useCssAnimation={true}
               />
             </div>
             {/* Mobile/Tablet view: Simple static text for responsiveness and CLS prevention */}

@@ -12,7 +12,7 @@ import {
   FiMessageSquare,
   FiGlobe,
 } from "react-icons/fi";
-import AnimatedText from "./AnimatedText";
+import AnimatedText from "./JsAnimatedText";
 import AnimatedPanel from "./AnimatedPanel";
 import Highlight from "./Highlight";
 

@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import AnimatedText from "./AnimatedText";
+import AnimatedText from "./JsAnimatedText";
 import AnimatedPanel from "./AnimatedPanel";
 
 interface SkillItem {

@@ -86,7 +86,7 @@ body {
   font-weight: 300;
 }
 
-/* --- RE-ADDED: CSS-Only Typewriter Animation --- */
+/* --- CSS-Only Typewriter Animation --- */
 @keyframes typewriter-reveal {
   from {
     width: 0;
@@ -116,7 +116,7 @@ body {
 }
 /* --- END: CSS-Only Typewriter Animation --- */
 
-/* --- ADDED: CSS Animations for Hero --- */
+/* --- CSS Animations for Hero --- */
 @keyframes fadeInUp {
   from {
     opacity: 0;
