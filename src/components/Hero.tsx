@@ -41,7 +41,6 @@ const Hero: React.FC = () => {
         className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center
                     p-6 sm:p-8 md:p-12 lg:p-16 bg-light-panel-bg/15 backdrop-blur-lg ">
         <div className="space-y-4 sm:space-y-5 md:space-y-6 max-w-3xl w-full pt-16 md:pt-0">
-          {/* MODIFIED: Animation removed from H1 for instant LCP */}
           <h1 className="font-fira_code font-bold text-4xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-text leading-tight tracking-tight sm:tracking-normal">
             João Grilo
           </h1>
@@ -51,11 +50,20 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="h-24 sm:h-20 md:h-16 lg:h-8 flex items-center justify-center animate-fade-in-up animation-delay-200">
-            <AnimatedText
-              text={taglineText}
-              elementType="div"
-              className="font-fira_code font-medium text-base sm:text-lg md:text-xl lg:text-2xl text-accent tracking-wide"
-            />
+            {/* Desktop view: CSS typewriter for performance */}
+            <div className="hidden lg:block">
+              <AnimatedText
+                text={taglineText}
+                elementType="div"
+                className="font-fira_code font-medium text-xl text-accent tracking-wide"
+                useCssAnimation={true}
+              />
+            </div>
+            {/* Mobile/Tablet view: Simple static text for responsiveness and CLS prevention */}
+            <p className="block lg:hidden font-fira_code font-medium text-base sm:text-lg text-accent tracking-wide">
+              Crafting High-Performance Web Solutions
+              <br />& Seamless User Experiences
+            </p>
           </div>
 
           <div className="pt-3 sm:pt-4 md:pt-5 flex flex-col sm:flex-row sm:justify-center items-center gap-4 sm:gap-6 animate-fade-in-up animation-delay-300">

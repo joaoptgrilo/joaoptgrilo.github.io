@@ -80,12 +80,43 @@ body {
   border-bottom-right-radius: 0.5rem;
 }
 
+/* Kept for JS typewriter on non-hero elements if needed */
 .Typewriter__cursor--style {
   color: var(--color-accent);
   animation: blinkKeyframes 1s step-end infinite;
   margin-left: 2px;
   font-weight: 300;
 }
+
+/* --- RE-ADDED: CSS-Only Typewriter Animation --- */
+@keyframes typewriter-reveal {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-cursor-css {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--color-accent);
+  }
+}
+
+.typewriter-css {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--color-accent);
+  animation: typewriter-reveal 4s steps(80, end),
+    blink-cursor-css 0.75s step-end infinite;
+}
+/* --- END: CSS-Only Typewriter Animation --- */
 
 /* --- ADDED: CSS Animations for Hero --- */
 @keyframes fadeInUp {
