@@ -9,14 +9,12 @@ interface AnimatedTextProps {
   text: string;
   elementType?: keyof JSX.IntrinsicElements;
   className?: string;
-  useCssAnimation?: boolean;
 }
 
 const AnimatedText: React.FC<AnimatedTextProps> = ({
   text = "",
   elementType = "span",
   className = "",
-  useCssAnimation = false,
 }) => {
   const [startTyping, setStartTyping] = useState(false);
   const { ref, inView } = useInView({
@@ -31,18 +29,6 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
   }, [inView]);
 
   const Tag = elementType as React.ElementType;
-
-  if (useCssAnimation) {
-    return (
-      <div ref={ref} className={className}>
-        {startTyping ? (
-          <Tag className="typewriter-css">{text}</Tag>
-        ) : (
-          <Tag> </Tag>
-        )}
-      </div>
-    );
-  }
 
   return (
     <div ref={ref} className={`relative ${className}`}>

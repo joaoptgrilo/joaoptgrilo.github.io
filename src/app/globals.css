@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 :root {
-  /* ... all your existing color variables ... */
+  /* ... existing color variables ... */
   --color-primary-bg: #070b1f;
   --color-secondary-bg: #0d102d;
   --color-light-panel-bg: #1e293b;
@@ -49,7 +49,6 @@ body {
   }
 }
 
-/* ... .panel-with-corners ... */
 .panel-with-corners {
   position: relative;
 }
@@ -81,7 +80,6 @@ body {
   border-bottom-right-radius: 0.5rem;
 }
 
-/* This is used by the JS typewriter-effect library */
 .Typewriter__cursor--style {
   color: var(--color-accent);
   animation: blinkKeyframes 1s step-end infinite;
@@ -89,9 +87,38 @@ body {
   font-weight: 300;
 }
 
-.animate-fadeInUp {
-  animation-name: fadeInUpKeyframes;
+/* --- ADDED: CSS Animations for Hero --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Staggered delay utilities */
+.animation-delay-100 {
+  animation-delay: 0.1s;
+}
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+/* --- END: CSS Animations for Hero --- */
+
 .interactive-glow {
   transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
