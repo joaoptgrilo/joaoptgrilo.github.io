@@ -19,7 +19,6 @@
 }
 
 body {
-  /* ... existing body styles ... */
   color: var(--color-primary-text);
   font-family: "Poppins", sans-serif;
   background-color: #03050a;
@@ -80,7 +79,6 @@ body {
   border-bottom-right-radius: 0.5rem;
 }
 
-/* Kept for JS typewriter if used elsewhere */
 .Typewriter__cursor--style {
   color: var(--color-accent);
   animation: blinkKeyframes 1s step-end infinite;
