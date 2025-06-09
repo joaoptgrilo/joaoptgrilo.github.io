@@ -18,7 +18,7 @@ const panelVariants: Variants = {
     y: 0,
     transition: {
       ease: "easeOut",
-      duration: 0.5,    // MODIFIED: A very fast duration
+      duration: 0.5, // MODIFIED: A very fast duration
     },
   },
 };
