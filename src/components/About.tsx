@@ -12,8 +12,6 @@ import {
   FiMessageSquare,
   FiGlobe,
 } from "react-icons/fi";
-import AnimatedText from "./JsAnimatedText";
-import AnimatedPanel from "./AnimatedPanel";
 import Highlight from "./Highlight";
 
 interface InfoPanelProps {
@@ -49,14 +47,12 @@ const About: React.FC = () => {
       className="py-16 md:py-24 pt-32 md:pt-40 relative overflow-hidden section-scroll-margin">
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
-          <AnimatedText
-            text="About"
-            elementType="h2"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-10 md:mb-16 text-center"
-          />
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-10 md:mb-16 text-center">
+            About
+          </h2>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start mb-8 lg:mb-12">
-          <AnimatedPanel className="lg:col-span-1 bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow">
+          <div className="lg:col-span-1 bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow">
             <div className="flex flex-col items-center">
               <div className="relative w-40 h-40 md:w-48 md:h-48 mb-6">
                 <Image
@@ -83,10 +79,8 @@ const About: React.FC = () => {
                 <FiGlobe className="inline-block ml-1" />
               </p>
             </div>
-          </AnimatedPanel>
-          <AnimatedPanel
-            className="lg:col-span-2 w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
-            staggerDelay={0.1}>
+          </div>
+          <div className="lg:col-span-2 w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow">
             <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 text-center sm:text-left font-semibold">
               Professional Summary
             </p>
@@ -123,11 +117,9 @@ const About: React.FC = () => {
                 moments with <Highlight>family and pets</Highlight>.
               </p>
             </div>
-          </AnimatedPanel>
+          </div>
         </div>
-        <AnimatedPanel
-          className="w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow"
-          staggerDelay={0.2}>
+        <div className="w-full bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow">
           <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-8 text-center font-semibold">
             Key Metrics & Info
           </p>
@@ -169,7 +161,7 @@ const About: React.FC = () => {
               tooltip="Available and experienced in remote, asynchronous collaboration"
             />
           </div>
-        </AnimatedPanel>
+        </div>
       </div>
     </section>
   );

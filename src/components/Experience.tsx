@@ -1,8 +1,6 @@
 // src/components/Experience.tsx
 import React from "react";
 import Image from "next/image";
-import AnimatedText from "./JsAnimatedText";
-import AnimatedPanel from "./AnimatedPanel";
 import {
   experienceData,
   ExperienceItem,
@@ -21,16 +19,14 @@ const Experience = () => {
       id="experience"
       className="section-scroll-margin py-16 md:py-24 min-h-screen flex flex-col items-center justify-center">
       <div className="container mx-auto px-4">
-        <AnimatedText
-          text="Professional Experience"
-          elementType="h2"
-          className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center text-primary-text"
-        />
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-12 md:mb-16 text-center text-primary-text">
+          Professional Experience
+        </h2>
 
         {experienceData.length > 0 ? (
           <div className="space-y-12 md:space-y-16">
             {experienceData.map((item: ExperienceItem) => (
-              <AnimatedPanel
+              <div
                 key={item.id}
                 className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow">
                 <article className="lg:grid lg:grid-cols-12 lg:gap-x-0">
@@ -126,16 +122,16 @@ const Experience = () => {
                     </ul>
                   </div>
                 </article>
-              </AnimatedPanel>
+              </div>
             ))}
           </div>
         ) : (
-          <AnimatedPanel className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow text-center">
+          <div className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 md:p-8 rounded-lg panel-with-corners relative animate-glow-shadow text-center">
             <p className="text-lg text-secondary-text">
               Professional Experience details are currently being updated.
               Please check back soon!
             </p>
-          </AnimatedPanel>
+          </div>
         )}
       </div>
     </section>

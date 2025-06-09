@@ -1,6 +1,5 @@
 // src/components/Footer.tsx
 import React from "react";
-import AnimatedPanel from "./AnimatedPanel";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -9,7 +8,7 @@ const Footer: React.FC = () => {
   return (
     <footer id="footer" className="w-full py-10 md:py-16">
       <div className="container mx-auto px-4">
-        <AnimatedPanel
+        <div
           className="w-full bg-light-panel-bg/10 backdrop-blur-md 
                      border border-neutral-700/50 p-6 md:p-8 
                      rounded-lg panel-with-corners relative animate-glow-shadow text-center">
@@ -19,7 +18,7 @@ const Footer: React.FC = () => {
           <p className="text-xs mt-2 text-neutral-500 font-fira_code">
             Version: {websiteVersion}
           </p>
-        </AnimatedPanel>
+        </div>
       </div>
     </footer>
   );

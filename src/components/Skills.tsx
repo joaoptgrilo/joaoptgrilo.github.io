@@ -2,8 +2,6 @@
 "use client";
 
 import React from "react";
-import AnimatedText from "./JsAnimatedText";
-import AnimatedPanel from "./AnimatedPanel";
 
 interface SkillItem {
   name: string;
@@ -210,32 +208,28 @@ const Skills: React.FC = () => {
       className="py-16 md:py-24 relative section-scroll-margin">
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
-          <AnimatedText
-            text="Skills"
-            elementType="h2"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 md:mb-16 text-center"
-          />
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 md:mb-16 text-center">
+            Skills
+          </h2>
         </div>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {SKILL_CATEGORIES.map((category: SkillCategory, index: number) => (
-            <li key={category.id}>
-              <AnimatedPanel
-                className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative animate-glow-shadow h-full"
-                staggerDelay={index * 0.08}>
-                <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
-                  {category.title}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill: SkillItem) => (
-                    <span
-                      key={skill.name}
-                      title={skill.description}
-                      className="inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-700/50 cursor-default interactive-glow">
-                      {skill.name}
-                    </span>
-                  ))}
-                </div>
-              </AnimatedPanel>
+          {SKILL_CATEGORIES.map((category) => (
+            <li
+              key={category.id}
+              className="bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 p-6 rounded-lg panel-with-corners relative h-full">
+              <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
+                {category.title}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <span
+                    key={skill.name}
+                    title={skill.description}
+                    className="inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-700/50 cursor-default interactive-glow">
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
             </li>
           ))}
         </ul>

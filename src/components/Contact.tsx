@@ -1,7 +1,5 @@
 // src/components/Contact.tsx
 import React from "react";
-import AnimatedText from "./JsAnimatedText";
-import AnimatedPanel from "./AnimatedPanel";
 import Highlight from "./Highlight";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
 
@@ -50,23 +48,21 @@ const Contact: React.FC = () => {
       id="contact"
       className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center section-scroll-margin">
       <div className="container mx-auto px-4 flex flex-col items-center">
-        <AnimatedText
-          text={titleText}
-          elementType="h2"
-          className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap"
-        />
-        <AnimatedPanel
+        <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap">
+          {titleText}
+        </h2>
+        <div
           className="w-full max-w-2xl bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 
                      p-6 md:p-10 rounded-lg panel-with-corners relative animate-glow-shadow text-center">
           <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
             Have a <Highlight>project in mind</Highlight>, an{" "}
             <Highlight>opportunity</Highlight> to discuss, or just want to{" "}
-            <Highlight>say hi</Highlight>? I&apos;m always open to{" "}
+            <Highlight>say hi</Highlight>? I'm always open to{" "}
             <Highlight>connecting</Highlight>!
           </p>
 
           <p className="font-fira_code text-info-accent mb-6 text-sm">
-            Let&apos;s connect:
+            Let's connect:
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
@@ -89,7 +85,7 @@ const Contact: React.FC = () => {
               newTab={true}
             />
           </div>
-        </AnimatedPanel>
+        </div>
       </div>
     </section>
   );
