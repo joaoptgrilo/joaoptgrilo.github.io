@@ -12,13 +12,13 @@ interface AnimatedPanelProps {
 }
 
 const panelVariants: Variants = {
-  hidden: { opacity: 0, y: 20 }, // MODIFIED: A very short travel distance
+  hidden: { opacity: 0, y: 20 }, // MODIFIED: A short, subtle travel distance.
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      ease: "easeOut",
-      duration: 0.5, // MODIFIED: A very fast duration
+      ease: "easeOut", // A simple, non-demanding easing function.
+      duration: 0.5, // MODIFIED: A much faster duration to reduce CPU time.
     },
   },
 };
