@@ -69,15 +69,45 @@ body {
   border-bottom-right-radius: 0.5rem;
 }
 
+/* --- NEW: High-performance composited glow animation --- */
 .interactive-glow {
-  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  position: relative; /* Needed for the pseudo-element */
+  z-index: 1; /* Ensure content is above the glow */
+  transition: border-color 0.3s ease-in-out; /* Only transition border-color now */
 }
+
+/* The new pseudo-element that creates the glow */
+.interactive-glow::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  z-index: -1;
+  border-radius: inherit; /* Match the parent's border-radius */
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.6) 0%,
+    rgba(59, 130, 246, 0) 70%
+  );
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
 .interactive-glow:hover,
 .interactive-glow:focus,
 .interactive-glow:focus-visible {
   border-color: var(--color-info-accent);
-  box-shadow: 0 0 12px 3px rgba(59, 130, 246, 0.75);
   outline: none;
+}
+
+.interactive-glow:hover::after,
+.interactive-glow:focus::after,
+.interactive-glow:focus-visible::after {
+  opacity: 1;
+  transform: scale(1);
 }
 
 html {
@@ -88,7 +118,7 @@ html {
   scroll-margin-top: 4.5rem;
 }
 
-/* --- NEW, SIMPLIFIED ANIMATION LOGIC --- */
+/* --- VIEW-TIMELINE-BASED SCROLL ANIMATION --- */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -100,16 +130,11 @@ html {
   }
 }
 
-/* This class applies the animation which is triggered by CSS 'view()' */
 .animate-on-scroll {
-  /* Apply animation only on desktop screens for performance */
   @media (min-width: 1024px) {
-    /* Set initial state for elements outside the viewport */
     opacity: 0;
-    /* Define the animation and link it to the scroll timeline */
     animation: fadeInUp 0.8s ease-out both;
     animation-timeline: view();
-    /* Fine-tune when the animation starts and ends relative to viewport entry */
     animation-range-start: entry 10%;
     animation-range-end: entry 40%;
   }
@@ -136,11 +161,11 @@ html {
 }
 
 .typewriter-css {
-  overflow: hidden; /* Ensures the text is not visible until the animation reveals it */
-  border-right: 0.15em solid var(--color-accent); /* The typewriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  overflow: hidden;
+  border-right: 0.15em solid var(--color-accent);
+  white-space: nowrap;
+  margin: 0 auto;
   animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-  animation-delay: 1s; /* Start animation after a delay */
-  animation-fill-mode: both; /* Retain the state of the animation when it is finished */
+  animation-delay: 1s;
+  animation-fill-mode: both;
 }
