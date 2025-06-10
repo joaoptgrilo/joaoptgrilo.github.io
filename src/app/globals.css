@@ -17,37 +17,19 @@
   --color-accent-shadow-strong: rgba(0, 200, 255, 0.35);
 }
 
-/* UPDATED: Removed animation properties from body */
+/* UPDATED: Body now directly uses the performant animation utility from Tailwind */
 body {
   color: var(--color-primary-text);
   font-family: "Poppins", sans-serif;
   background-color: #03050a;
-}
-
-/* NEW: High-performance background animation using a pseudo-element */
-body::before {
-  content: "";
-  position: fixed;
-  top: -50px; /* Start off-screen to allow for pan */
-  left: -50px;
-  width: calc(100% + 100px); /* Make it larger than the viewport */
-  height: calc(100% + 100px);
-  z-index: -1;
   background-image: url("/images/coding-symbols.svg");
   background-repeat: repeat;
   background-size: 500px;
-  animation: subtlePan 120s linear infinite alternate;
+  background-attachment: fixed;
+  animation: subtle-pan 120s linear infinite alternate; /* This now uses the performant transform-based animation */
 }
 
-/* UPDATED: Keyframes now use transform, which is GPU-accelerated */
-@keyframes subtlePan {
-  0% {
-    transform: translateX(0) translateY(0);
-  }
-  100% {
-    transform: translateX(50px) translateY(50px);
-  }
-}
+/* The old body::before pseudo-element and keyframes have been removed. */
 
 .panel-with-corners {
   position: relative;
@@ -124,88 +106,5 @@ html {
   scroll-margin-top: 4.5rem;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-on-scroll {
-  @media (min-width: 1024px) {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out both;
-    animation-timeline: view();
-    animation-range-start: entry 10%;
-    animation-range-end: entry 40%;
-  }
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: var(--color-accent);
-  }
-}
-
-.typewriter-css {
-  overflow: hidden;
-  border-right: 0.15em solid var(--color-accent);
-  white-space: nowrap;
-  margin: 0 auto;
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-  animation-delay: 1s;
-  animation-fill-mode: both;
-}
-
-/* --- NEW: High-performance glow animation to replace the old box-shadow one --- */
-@keyframes glowPulse {
-  0%,
-  100% {
-    opacity: 0.15;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.3;
-    transform: scale(1.02);
-  }
-}
-
-.animate-glow-shadow {
-  position: relative; /* Ensure it's a stacking context */
-}
-
-/* The performant glow is now a pseudo-element on the class itself */
-.animate-glow-shadow::after {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  z-index: -1;
-  border-radius: inherit; /* Match the parent panel's radius */
-  background: radial-gradient(
-    ellipse at center,
-    var(--color-accent-shadow-start) 0%,
-    transparent 70%
-  );
-  animation: glowPulse 5s ease-in-out infinite alternate;
-  pointer-events: none; /* Make sure it doesn't interfere with clicks */
-}
+/* Note: The old glowPulse keyframes and animate-glow-shadow::after have been removed. */
+/* The animate-glow-shadow utility from Tailwind now correctly applies the performant animation. */
