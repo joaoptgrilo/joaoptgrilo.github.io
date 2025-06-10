@@ -1,10 +1,11 @@
 // src/components/Navigation.tsx
-"use-client";
+"use client"; // CORRECTED: "use client" with a space
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 
+// ... The rest of the file remains exactly the same
 interface NavLinkItem {
   href: string;
   label: string;
@@ -53,7 +54,6 @@ const Navigation: React.FC = () => {
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const isActiveNavStyle = isScrolled || isMobileMenuOpen;
 
-  // UPDATED: Replaced 'transition-all' with specific, performant properties
   const baseNavClasses =
     "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-[background-color,backdrop-filter] duration-300 ease-in-out";
 
