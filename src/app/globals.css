@@ -4,7 +4,6 @@
 @tailwind utilities;
 
 :root {
-  /* ... existing color variables ... */
   --color-primary-bg: #070b1f;
   --color-secondary-bg: #0d102d;
   --color-light-panel-bg: #1e293b;
@@ -18,23 +17,35 @@
   --color-accent-shadow-strong: rgba(0, 200, 255, 0.35);
 }
 
+/* UPDATED: Removed animation properties from body */
 body {
   color: var(--color-primary-text);
   font-family: "Poppins", sans-serif;
   background-color: #03050a;
+}
+
+/* NEW: High-performance background animation using a pseudo-element */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50px; /* Start off-screen to allow for pan */
+  left: -50px;
+  width: calc(100% + 100px); /* Make it larger than the viewport */
+  height: calc(100% + 100px);
+  z-index: -1;
   background-image: url("/images/coding-symbols.svg");
   background-repeat: repeat;
   background-size: 500px;
-  background-attachment: fixed;
   animation: subtlePan 120s linear infinite alternate;
 }
 
+/* UPDATED: Keyframes now use transform, which is GPU-accelerated */
 @keyframes subtlePan {
   0% {
-    background-position: 0% 0%;
+    transform: translateX(0) translateY(0);
   }
   100% {
-    background-position: 100% 100%;
+    transform: translateX(50px) translateY(50px);
   }
 }
 
@@ -69,14 +80,11 @@ body {
   border-bottom-right-radius: 0.5rem;
 }
 
-/* --- NEW: High-performance composited glow animation --- */
 .interactive-glow {
-  position: relative; /* Needed for the pseudo-element */
-  z-index: 1; /* Ensure content is above the glow */
-  transition: border-color 0.3s ease-in-out; /* Only transition border-color now */
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.3s ease-in-out;
 }
-
-/* The new pseudo-element that creates the glow */
 .interactive-glow::after {
   content: "";
   position: absolute;
@@ -85,7 +93,7 @@ body {
   right: -4px;
   bottom: -4px;
   z-index: -1;
-  border-radius: inherit; /* Match the parent's border-radius */
+  border-radius: inherit;
   background: radial-gradient(
     circle,
     rgba(59, 130, 246, 0.6) 0%,
@@ -95,14 +103,12 @@ body {
   transform: scale(0.9);
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
-
 .interactive-glow:hover,
 .interactive-glow:focus,
 .interactive-glow:focus-visible {
   border-color: var(--color-info-accent);
   outline: none;
 }
-
 .interactive-glow:hover::after,
 .interactive-glow:focus::after,
 .interactive-glow:focus-visible::after {
@@ -118,7 +124,6 @@ html {
   scroll-margin-top: 4.5rem;
 }
 
-/* --- VIEW-TIMELINE-BASED SCROLL ANIMATION --- */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -140,7 +145,6 @@ html {
   }
 }
 
-/* --- HERO TYPEWRITER ANIMATION (Pure CSS) --- */
 @keyframes typing {
   from {
     width: 0;
@@ -168,4 +172,40 @@ html {
   animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
   animation-delay: 1s;
   animation-fill-mode: both;
+}
+
+/* --- NEW: High-performance glow animation to replace the old box-shadow one --- */
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.02);
+  }
+}
+
+.animate-glow-shadow {
+  position: relative; /* Ensure it's a stacking context */
+}
+
+/* The performant glow is now a pseudo-element on the class itself */
+.animate-glow-shadow::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+  border-radius: inherit; /* Match the parent panel's radius */
+  background: radial-gradient(
+    ellipse at center,
+    var(--color-accent-shadow-start) 0%,
+    transparent 70%
+  );
+  animation: glowPulse 5s ease-in-out infinite alternate;
+  pointer-events: none; /* Make sure it doesn't interfere with clicks */
 }
