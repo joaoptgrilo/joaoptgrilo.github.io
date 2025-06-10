@@ -20,11 +20,12 @@ const Experience = () => {
     <Section
       id="experience"
       title="Professional Experience"
-      className="py-16 md:py-24 min-h-screen flex flex-col items-center justify-center">
+      // UPDATED: Padding reduced to the new standard `py-10 md:py-16`
+      className="py-10 md:py-16 min-h-screen flex flex-col items-center justify-center">
       {experienceData.length > 0 ? (
         <div className="space-y-12 md:space-y-16">
           {experienceData.map((item: ExperienceItem) => (
-            <Panel key={item.id} className="p-6 md:p-8">
+            <Panel key={item.id}>
               <article className="lg:grid lg:grid-cols-12 lg:gap-x-0">
                 <div className="lg:col-span-5 lg:pr-6 mb-6 lg:mb-0">
                   <p className="text-xl md:text-2xl font-bold text-accent mb-4 leading-tight">
