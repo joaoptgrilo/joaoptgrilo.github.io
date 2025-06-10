@@ -14,7 +14,6 @@ const Certifications = () => {
     <Section
       id="certifications"
       title="Certifications & Continued Learning"
-      // UPDATED: Padding reduced to the new standard `py-10 md:py-16`
       className="py-10 md:py-16 min-h-screen flex flex-col items-center justify-center">
       {certificationsData.length > 0 ? (
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -61,13 +60,14 @@ const Certifications = () => {
           ))}
 
           <li className="flex">
-            <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-neutral-700/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 hover:animate-glow-shadow transition-all duration-300 w-full">
+            <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-neutral-700/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 animate-glow-shadow transition-all duration-300 w-full">
               <div className="animate-on-scroll p-6">
                 <FiClock className="w-10 h-10 md:w-12 md:h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4" />
                 <p className="font-fira_code text-base md:text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
                   More Certifications
                 </p>
-                <p className="text-xs md:text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">
+                {/* UPDATED: text-neutral-500 changed to text-neutral-400 for better contrast */}
+                <p className="text-xs md:text-sm text-neutral-400 group-hover:text-secondary-text transition-colors duration-300">
                   And learning milestones coming soon...
                 </p>
               </div>
