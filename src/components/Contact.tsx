@@ -4,7 +4,6 @@ import Highlight from "./Highlight";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
 import Panel from "./Panel";
 
-// ContactLink component remains the same
 const ContactLink: React.FC<{
   href: string;
   icon: React.ReactNode;
@@ -46,17 +45,17 @@ const Contact: React.FC = () => {
   const GITHUB_PROFILE_URL = "https://github.com/joaoptgrilo";
 
   return (
-    // The animation class is REMOVED from here
     <section
       id="contact"
       className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center section-scroll-margin">
-      {/* The animation class is ADDED here */}
-      <div className="container mx-auto px-4 flex flex-col items-center animate-on-scroll">
-        <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap">
+      <div className="container mx-auto px-4 flex flex-col items-center">
+        {/* The title is animated directly */}
+        <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap animate-on-scroll">
           {titleText}
         </h2>
 
-        <Panel className="w-full max-w-2xl text-center p-6 md:p-10">
+        {/* The Panel component will handle animating its own children */}
+        <Panel className="w-full max-w-2xl text-center">
           <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
             Have a <Highlight>project in mind</Highlight>, an{" "}
             <Highlight>opportunity</Highlight> to discuss, or just want to{" "}

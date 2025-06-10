@@ -1,6 +1,6 @@
 // src/components/Section.tsx
 import React from "react";
-import { clsx } from "clsx"; // Use clsx to cleanly merge classes
+import { clsx } from "clsx";
 
 interface SectionProps {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface SectionProps {
   title: string;
   className?: string;
   titleClassName?: string;
-  containerClassName?: string; // Add a prop for container classes
+  containerClassName?: string;
 }
 
 const Section: React.FC<SectionProps> = ({
@@ -20,15 +20,10 @@ const Section: React.FC<SectionProps> = ({
   containerClassName = "",
 }) => {
   return (
-    // The animation class is REMOVED from here
     <section id={id} className={`section-scroll-margin ${className}`}>
-      {/* The animation class is ADDED here */}
-      <div
-        className={clsx(
-          "container mx-auto px-4 animate-on-scroll",
-          containerClassName
-        )}>
-        <div className="flex justify-center">
+      <div className={clsx("container mx-auto px-4", containerClassName)}>
+        {/* The title itself is now animated */}
+        <div className="flex justify-center animate-on-scroll">
           <h2
             className={`text-3xl sm:text-4xl md:text-5xl font-bold text-center ${titleClassName}`}>
             {title}
