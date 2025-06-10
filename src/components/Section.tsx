@@ -15,14 +15,14 @@ const Section: React.FC<SectionProps> = ({
   children,
   id,
   title,
-  className = "py-16 md:py-24",
+  // UPDATED: Default padding is now smaller for a tighter layout
+  className = "py-10 md:py-16",
   titleClassName = "mb-12 md:mb-16",
   containerClassName = "",
 }) => {
   return (
     <section id={id} className={`section-scroll-margin ${className}`}>
       <div className={clsx("container mx-auto px-4", containerClassName)}>
-        {/* The title itself is now animated */}
         <div className="flex justify-center animate-on-scroll">
           <h2
             className={`text-3xl sm:text-4xl md:text-5xl font-bold text-center ${titleClassName}`}>

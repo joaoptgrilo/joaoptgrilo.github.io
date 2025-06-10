@@ -16,7 +16,6 @@ import Highlight from "./Highlight";
 import Section from "./Section";
 import Panel from "./Panel";
 
-// InfoPanel component remains the same
 interface InfoPanelProps {
   icon: IconType;
   title: string;
@@ -45,10 +44,11 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
 
 const About: React.FC = () => {
   return (
+    // UPDATED: Kept large top padding, but reduced bottom padding to the new standard.
     <Section
       id="about"
       title="About"
-      className="py-16 md:py-24 pt-32 md:pt-40 relative overflow-hidden">
+      className="pt-32 md:pt-40 pb-10 md:pb-16 relative overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start mb-8 lg:mb-12">
         <Panel className="lg:col-span-1">
           <div className="flex flex-col items-center">
@@ -78,12 +78,11 @@ const About: React.FC = () => {
             </p>
           </div>
         </Panel>
-        <Panel className="lg:col-span-2 p-6 md:p-8">
+        <Panel className="lg:col-span-2">
           <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 text-center sm:text-left font-semibold">
             Professional Summary
           </p>
           <div className="space-y-4 text-secondary-text leading-relaxed">
-            {/* Paragraphs with Highlights remain the same */}
             <p>
               A dedicated Full-Stack Developer with over{" "}
               <Highlight>4.5 years</Highlight> of experience crafting{" "}
@@ -96,7 +95,7 @@ const About: React.FC = () => {
               <Highlight>JavaScript (React)</Highlight>, and{" "}
               <Highlight>.NET Core</Highlight>. Known for enhancing user
               experience, achieving significant performance gains (e.g.,{" "}
-              <Highlight>&gt;90 Lighthouse</Highlight> scores), and driving
+              <Highlight>&gt;90 Lighthouse</Highlight> scores), and driving{" "}
               organic traffic growth of approximately{" "}
               <Highlight>~15%</Highlight> through SEO and performance
               optimization.
@@ -118,12 +117,11 @@ const About: React.FC = () => {
           </div>
         </Panel>
       </div>
-      <Panel className="p-6 md:p-8">
+      <Panel>
         <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-8 text-center font-semibold">
           Key Metrics & Info
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-items-stretch w-full max-w-4xl mx-auto">
-          {/* InfoPanel components remain the same */}
           <InfoPanel
             icon={FiBriefcase}
             title="Experience"
@@ -165,5 +163,4 @@ const About: React.FC = () => {
     </Section>
   );
 };
-
 export default About;

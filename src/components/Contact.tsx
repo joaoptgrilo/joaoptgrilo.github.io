@@ -45,16 +45,15 @@ const Contact: React.FC = () => {
   const GITHUB_PROFILE_URL = "https://github.com/joaoptgrilo";
 
   return (
+    // UPDATED: Using the new, smaller padding values.
     <section
       id="contact"
-      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center section-scroll-margin">
+      className="w-full py-10 md:py-16 min-h-[70vh] flex flex-col items-center justify-center section-scroll-margin">
       <div className="container mx-auto px-4 flex flex-col items-center">
-        {/* The title is animated directly */}
         <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap animate-on-scroll">
           {titleText}
         </h2>
 
-        {/* The Panel component will handle animating its own children */}
         <Panel className="w-full max-w-2xl text-center">
           <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
             Have a <Highlight>project in mind</Highlight>, an{" "}
