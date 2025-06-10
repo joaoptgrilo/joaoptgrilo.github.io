@@ -1,7 +1,6 @@
 // src/app/page.tsx
 import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import AnimatedSection from "@/components/AnimatedSection";
 
 const About = dynamic(() => import("@/components/About"));
 const Skills = dynamic(() => import("@/components/Skills"));
@@ -14,24 +13,12 @@ export default function Home() {
   return (
     <main className="w-full">
       <Hero />
-      <AnimatedSection>
-        <About />
-      </AnimatedSection>
-      <AnimatedSection>
-        <Skills />
-      </AnimatedSection>
-      <AnimatedSection>
-        <Experience />
-      </AnimatedSection>
-      <AnimatedSection>
-        <Projects />
-      </AnimatedSection>
-      <AnimatedSection>
-        <Certifications />
-      </AnimatedSection>
-      <AnimatedSection>
-        <Contact />
-      </AnimatedSection>
+      <About />
+      <Skills />
+      <Experience />
+      <Projects />
+      <Certifications />
+      <Contact />
     </main>
   );
 }

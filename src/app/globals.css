@@ -88,7 +88,7 @@ html {
   scroll-margin-top: 4.5rem;
 }
 
-/* --- FINAL ANIMATION LOGIC --- */
+/* --- NEW, SIMPLIFIED ANIMATION LOGIC --- */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -100,16 +100,47 @@ html {
   }
 }
 
-/* This class sets the initial state (invisible) */
-.section-animate {
-  opacity: 0;
+/* This class applies the animation which is triggered by CSS 'view()' */
+.animate-on-scroll {
+  /* Apply animation only on desktop screens for performance */
+  @media (min-width: 1024px) {
+    /* Set initial state for elements outside the viewport */
+    opacity: 0;
+    /* Define the animation and link it to the scroll timeline */
+    animation: fadeInUp 0.8s ease-out both;
+    animation-timeline: view();
+    /* Fine-tune when the animation starts and ends relative to viewport entry */
+    animation-range-start: entry 10%;
+    animation-range-end: entry 40%;
+  }
 }
 
-/* This class triggers the animation only when it's added */
-.section-animate.is-visible {
-  opacity: 1;
-  /* Apply animation only on desktop screens */
-  @media (min-width: 1024px) {
-    animation: fadeInUp 0.8s ease-out forwards;
+/* --- HERO TYPEWRITER ANIMATION (Pure CSS) --- */
+@keyframes typing {
+  from {
+    width: 0;
   }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--color-accent);
+  }
+}
+
+.typewriter-css {
+  overflow: hidden; /* Ensures the text is not visible until the animation reveals it */
+  border-right: 0.15em solid var(--color-accent); /* The typewriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  animation-delay: 1s; /* Start animation after a delay */
+  animation-fill-mode: both; /* Retain the state of the animation when it is finished */
 }

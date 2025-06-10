@@ -3,7 +3,6 @@
 
 import React from "react";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
-import CssAnimatedText from "./CssAnimatedText";
 
 interface SocialLink {
   href: string;
@@ -49,14 +48,12 @@ const Hero: React.FC = () => {
             Results-Driven Full-Stack Developer
           </p>
 
-          <div className="h-24 sm:h-20 md:h-16 lg:h-8 flex items-center justify-center animate-fade-in-up animation-delay-200">
-            {/* Desktop view: CSS typewriter for performance */}
+          <div className="h-24 sm:h-20 md:h-16 lg:h-12 flex items-center justify-center animate-fade-in-up animation-delay-200">
+            {/* Desktop view: Pure CSS typewriter for maximum performance */}
             <div className="hidden lg:block">
-              <CssAnimatedText
-                text={taglineText}
-                elementType="div"
-                className="font-fira_code font-medium text-xl text-accent tracking-wide"
-              />
+              <div className="font-fira_code font-medium text-xl text-accent tracking-wide typewriter-css">
+                {taglineText}
+              </div>
             </div>
             {/* Mobile/Tablet view: Simple static text for responsiveness and CLS prevention */}
             <p className="block lg:hidden font-fira_code font-medium text-base sm:text-lg text-accent tracking-wide">

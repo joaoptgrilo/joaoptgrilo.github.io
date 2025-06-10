@@ -2,6 +2,7 @@
 import React from "react";
 import Highlight from "./Highlight";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+import Panel from "./Panel";
 
 const ContactLink: React.FC<{
   href: string;
@@ -46,14 +47,13 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center section-scroll-margin">
+      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center section-scroll-margin animate-on-scroll">
       <div className="container mx-auto px-4 flex flex-col items-center">
         <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap">
           {titleText}
         </h2>
-        <div
-          className="w-full max-w-2xl bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 
-                     p-6 md:p-10 rounded-lg panel-with-corners relative animate-glow-shadow text-center">
+
+        <Panel className="w-full max-w-2xl text-center p-6 md:p-10">
           <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
             Have a <Highlight>project in mind</Highlight>, an{" "}
             <Highlight>opportunity</Highlight> to discuss, or just want to{" "}
@@ -85,7 +85,7 @@ const Contact: React.FC = () => {
               newTab={true}
             />
           </div>
-        </div>
+        </Panel>
       </div>
     </section>
   );
