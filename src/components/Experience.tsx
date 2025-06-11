@@ -20,8 +20,7 @@ const Experience = () => {
     <Section
       id="experience"
       title="Professional Experience"
-      // UPDATED: Padding reduced to the new standard `py-10 md:py-16`
-      className="py-10 md:py-16 min-h-screen flex flex-col items-center justify-center">
+      className="py-16 md:py-24 min-h-screen flex flex-col items-center justify-center">
       {experienceData.length > 0 ? (
         <div className="space-y-12 md:space-y-16">
           {experienceData.map((item: ExperienceItem) => (

@@ -205,7 +205,6 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 
 const Skills: React.FC = () => {
   return (
-    // No className override is needed here; it correctly uses the new default padding from Section.tsx.
     <Section id="skills" title="Skills">
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {SKILL_CATEGORIES.map((category) => (
@@ -229,5 +228,4 @@ const Skills: React.FC = () => {
     </Section>
   );
 };
-
 export default Skills;

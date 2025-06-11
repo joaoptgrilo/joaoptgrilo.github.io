@@ -17,7 +17,6 @@
   --color-accent-shadow-strong: rgba(0, 200, 255, 0.35);
 }
 
-/* UPDATED: Body now directly uses the performant animation utility from Tailwind */
 body {
   color: var(--color-primary-text);
   font-family: "Poppins", sans-serif;
@@ -26,10 +25,17 @@ body {
   background-repeat: repeat;
   background-size: 500px;
   background-attachment: fixed;
-  animation: subtle-pan 120s linear infinite alternate; /* This now uses the performant transform-based animation */
+  animation: subtlePan 120s linear infinite alternate;
 }
 
-/* The old body::before pseudo-element and keyframes have been removed. */
+@keyframes subtlePan {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
 
 .panel-with-corners {
   position: relative;
@@ -106,5 +112,50 @@ html {
   scroll-margin-top: 4.5rem;
 }
 
-/* Note: The old glowPulse keyframes and animate-glow-shadow::after have been removed. */
-/* The animate-glow-shadow utility from Tailwind now correctly applies the performant animation. */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-on-scroll {
+  @media (min-width: 1024px) {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out both;
+    animation-timeline: view();
+    animation-range-start: entry 10%;
+    animation-range-end: entry 40%;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--color-accent);
+  }
+}
+.typewriter-css {
+  overflow: hidden;
+  border-right: 0.15em solid var(--color-accent);
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+}

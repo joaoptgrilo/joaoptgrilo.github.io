@@ -17,7 +17,6 @@ import Panel from "./Panel";
 
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
   const isCodePenProject = project.codeLink?.includes("codepen.io");
-
   return (
     <Panel className="flex flex-col h-full group">
       <article className="flex flex-col flex-grow h-full">
@@ -37,7 +36,6 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             </div>
           )}
         </div>
-
         <div className="flex flex-col flex-grow">
           <p className="font-fira_code text-xl text-info-accent mb-2 group-hover:text-accent transition-colors duration-300 font-semibold">
             {project.title}
@@ -62,7 +60,6 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             </ul>
           </div>
         </div>
-
         <div className="mt-auto pt-4 border-t border-neutral-700/30 flex items-center justify-start space-x-3">
           {project.liveLink && (
             <a
@@ -94,8 +91,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             !project.liveLink &&
             !project.codeLink &&
             !project.learnMoreLink && (
-              // UPDATED: text-neutral-500 changed to text-neutral-400 for better contrast
-              <span className="text-xs text-neutral-400 font-fira_code italic">
+              <span className="text-xs text-neutral-500 font-fira_code italic">
                 Private Project
               </span>
             )}
@@ -130,8 +126,7 @@ const Projects: React.FC = () => {
                 <p className="font-fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
                   More Projects
                 </p>
-                {/* UPDATED: text-neutral-500 changed to text-neutral-400 for better contrast */}
-                <p className="text-sm text-neutral-400 group-hover:text-secondary-text transition-colors duration-300">
+                <p className="text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">
                   Coming Soon...
                 </p>
               </div>

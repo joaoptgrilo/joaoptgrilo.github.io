@@ -14,7 +14,7 @@ const Certifications = () => {
     <Section
       id="certifications"
       title="Certifications & Continued Learning"
-      className="py-10 md:py-16 min-h-screen flex flex-col items-center justify-center">
+      className="py-16 md:py-24 min-h-screen flex flex-col items-center justify-center">
       {certificationsData.length > 0 ? (
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {certificationsData.map((cert: CertificationItem) => (
@@ -44,7 +44,6 @@ const Certifications = () => {
                   </p>
                 )}
               </div>
-
               <div className="mt-auto pt-4 border-t border-neutral-700/30">
                 <a
                   href={cert.credentialUrl}
@@ -58,7 +57,6 @@ const Certifications = () => {
               </div>
             </Panel>
           ))}
-
           <li className="flex">
             <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-neutral-700/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 animate-glow-shadow transition-all duration-300 w-full">
               <div className="animate-on-scroll p-6">
@@ -66,8 +64,7 @@ const Certifications = () => {
                 <p className="font-fira_code text-base md:text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
                   More Certifications
                 </p>
-                {/* UPDATED: text-neutral-500 changed to text-neutral-400 for better contrast */}
-                <p className="text-xs md:text-sm text-neutral-400 group-hover:text-secondary-text transition-colors duration-300">
+                <p className="text-xs md:text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">
                   And learning milestones coming soon...
                 </p>
               </div>

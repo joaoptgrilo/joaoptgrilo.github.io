@@ -44,11 +44,10 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
 
 const About: React.FC = () => {
   return (
-    // UPDATED: Kept large top padding, but reduced bottom padding to the new standard.
     <Section
       id="about"
       title="About"
-      className="pt-32 md:pt-40 pb-10 md:pb-16 relative overflow-hidden">
+      className="py-16 md:py-24 pt-32 md:pt-40 relative overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start mb-8 lg:mb-12">
         <Panel className="lg:col-span-1">
           <div className="flex flex-col items-center">
