@@ -4,7 +4,7 @@ import Panel from "./Panel";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const websiteVersion = "v1.0.0-perf-baseline"; // Signifies this specific state
+  const websiteVersion = "v1.0.0-perf-baseline";
 
   return (
     <footer id="footer" className="w-full py-10 md:py-16">

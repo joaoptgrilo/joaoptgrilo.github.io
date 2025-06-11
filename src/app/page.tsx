@@ -1,27 +1,11 @@
 // src/app/page.tsx
 import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import SectionSkeleton from "@/components/SectionSkeleton";
+import DeferredSections from "@/components/DeferredSections"; // Import the client component
 
+// Load the components that are visible above the fold
 const About = dynamic(() => import("@/components/About"));
 const Skills = dynamic(() => import("@/components/Skills"));
-
-const Experience = dynamic(() => import("@/components/Experience"), {
-  ssr: false,
-  loading: () => <SectionSkeleton />,
-});
-const Projects = dynamic(() => import("@/components/Projects"), {
-  ssr: false,
-  loading: () => <SectionSkeleton />,
-});
-const Certifications = dynamic(() => import("@/components/Certifications"), {
-  ssr: false,
-  loading: () => <SectionSkeleton />,
-});
-const Contact = dynamic(() => import("@/components/Contact"), {
-  ssr: false,
-  loading: () => <SectionSkeleton />,
-});
 
 export default function Home() {
   return (
@@ -29,10 +13,8 @@ export default function Home() {
       <Hero />
       <About />
       <Skills />
-      <Experience />
-      <Projects />
-      <Certifications />
-      <Contact />
+      {/* Render the client component that will handle all deferred loading */}
+      <DeferredSections />
     </main>
   );
 }
