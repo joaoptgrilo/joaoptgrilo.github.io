@@ -82,7 +82,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                 <FaCodepen className="mr-1.5 h-4 w-4" />
               ) : (
                 <FiGithub className="mr-1.5 h-4 w-4" />
-              )}
+              )}{" "}
               View Code
             </a>
           )}
@@ -120,9 +120,9 @@ const Projects: React.FC = () => {
             </li>
           ))}
           <li className="flex">
-            <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-neutral-700/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 animate-glow-shadow transition-all duration-300 w-full">
+            <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-neutral-700/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 transition-all duration-300 w-full">
               <div className="animate-on-scroll p-6">
-                <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4" />
+                <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4 mx-auto" />
                 <p className="font-fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
                   More Projects
                 </p>

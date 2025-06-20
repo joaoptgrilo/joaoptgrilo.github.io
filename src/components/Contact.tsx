@@ -13,7 +13,7 @@ const ContactLink: React.FC<{
 }> = ({ href, icon, label, newTab = false, isPrimary = false }) => {
   const baseClasses = `
     inline-flex items-center justify-center text-center 
-    font-medium rounded-lg transition-all duration-300 ease-in-out 
+    font-fira_code font-semibold rounded-lg transition-all duration-300 ease-in-out 
     w-full sm:w-auto px-6 py-3 text-sm md:text-base
     border-2 interactive-glow group
   `;
@@ -50,9 +50,9 @@ const Contact: React.FC = () => {
       className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center section-scroll-margin">
       <div className="container mx-auto px-4 flex flex-col items-center">
         <div className="flex justify-center animate-on-scroll w-full">
-            <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap">
+          <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap">
             {titleText}
-            </h2>
+          </h2>
         </div>
         <Panel className="w-full max-w-2xl text-center animate-on-scroll">
           <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
