@@ -88,7 +88,7 @@ body::before {
   z-index: 1;
   transition: border-color 0.3s ease-in-out;
 }
-.interactive-glow::after {
+/*.interactive-glow::after {
   content: "";
   position: absolute;
   top: -4px;
@@ -105,7 +105,7 @@ body::before {
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
+}*/
 .interactive-glow:hover,
 .interactive-glow:focus,
 .interactive-glow:focus-visible {

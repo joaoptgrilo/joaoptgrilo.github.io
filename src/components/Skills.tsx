@@ -126,10 +126,11 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     id: "problem-solving",
     title: "Problem Solving & DSA",
     skills: [
+      // UPDATED "LeetCode" text and description
       {
-        name: "LeetCode (150+)",
+        name: "LeetCode (In Progress)",
         description:
-          "Solved over 150 challenges, focusing on Medium/Hard difficulties across various DSA topics.",
+          "Actively solving challenges to sharpen data structure and algorithm skills.",
       },
       {
         name: "Data Structures",
@@ -242,7 +243,7 @@ const Skills: React.FC = () => {
     <Section id="skills" title="Skills">
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
         {SKILL_CATEGORIES.map((category) => (
-          <Panel as="li" key={category.id} className="h-full">
+          <Panel as="li" key={category.id} className="h-full" variant="simple">
             {category.id === "problem-solving" ? (
               <a
                 href="https://leetcode.com/u/joaoptgrilo/"
@@ -263,10 +264,8 @@ const Skills: React.FC = () => {
                   key={skill.name}
                   title={skill.description}
                   className={clsx(
-                    "inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-700/50 cursor-default interactive-glow",
-                    {
-                      "w-full text-center": skill.isWide,
-                    }
+                    "text-center bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-700/50 cursor-pointer interactive-glow",
+                    { "col-span-2": skill.isWide }
                   )}>
                   {skill.name}
                 </span>
