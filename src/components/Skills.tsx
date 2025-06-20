@@ -5,11 +5,12 @@ import React from "react";
 import Section from "./Section";
 import Panel from "./Panel";
 import { FiExternalLink } from "react-icons/fi";
+import { clsx } from "clsx";
 
-// ... (SkillItem, SkillCategory interfaces and SKILL_CATEGORIES data remain unchanged)
 interface SkillItem {
   name: string;
   description?: string;
+  isWide?: boolean;
 }
 interface SkillCategory {
   id: string;
@@ -18,7 +19,6 @@ interface SkillCategory {
 }
 
 const SKILL_CATEGORIES: SkillCategory[] = [
-  // ... (All categories here, no changes)
   {
     id: "languages",
     title: "Languages",
@@ -38,6 +38,7 @@ const SKILL_CATEGORIES: SkillCategory[] = [
       {
         name: "CSS3 / SASS / SCSS",
         description: "Styling languages and preprocessors for web design",
+        isWide: true,
       },
       { name: "SQL", description: "Structured Query Language for databases" },
       {
@@ -73,14 +74,17 @@ const SKILL_CATEGORIES: SkillCategory[] = [
       {
         name: "Responsive Web Design",
         description: "Designing web layouts that adapt to different devices",
+        isWide: true,
       },
       {
         name: "Frontend Performance Optimization (Lighthouse >90)",
         description: "Improving website speed & efficiency",
+        isWide: true,
       },
       {
         name: "Web Accessibility (WCAG Basics)",
         description: "Ensuring websites are usable by everyone",
+        isWide: true,
       },
       {
         name: "Redux (Conceptual)",
@@ -182,6 +186,7 @@ const SKILL_CATEGORIES: SkillCategory[] = [
       {
         name: "WordPress (Theme/Plugin Dev, API Integration, Optimization)",
         description: "Content management system with extensive customization",
+        isWide: true,
       },
     ],
   },
@@ -192,10 +197,12 @@ const SKILL_CATEGORIES: SkillCategory[] = [
       {
         name: "Performance Tuning (Frontend/Backend)",
         description: "Optimizing application performance",
+        isWide: true,
       },
       {
         name: "SEO Implementation & Analysis",
         description: "Search Engine Optimization techniques",
+        isWide: true,
       },
       {
         name: "Google Lighthouse (>90 Scores)",
@@ -214,14 +221,17 @@ const SKILL_CATEGORIES: SkillCategory[] = [
       {
         name: "Web Security Fundamentals (OWASP)",
         description: "Understanding common web security vulnerabilities",
+        isWide: true,
       },
       {
         name: "Operating Systems (Linux, Windows, WSL)",
         description: "Familiarity with multiple OS environments",
+        isWide: true,
       },
       {
         name: "AI Tools Familiarity (ChatGPT, Claude, etc.)",
         description: "Experience with AI language models and tools",
+        isWide: true,
       },
     ],
   },
@@ -230,7 +240,6 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 const Skills: React.FC = () => {
   return (
     <Section id="skills" title="Skills">
-      {/* ADDED 'items-start' TO THE GRID CONTAINER */}
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
         {SKILL_CATEGORIES.map((category) => (
           <Panel as="li" key={category.id} className="h-full">
@@ -253,7 +262,12 @@ const Skills: React.FC = () => {
                 <span
                   key={skill.name}
                   title={skill.description}
-                  className="inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-700/50 cursor-default interactive-glow">
+                  className={clsx(
+                    "inline-block bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-700/50 cursor-default interactive-glow",
+                    {
+                      "w-full text-center": skill.isWide,
+                    }
+                  )}>
                   {skill.name}
                 </span>
               ))}
