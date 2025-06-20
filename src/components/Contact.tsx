@@ -12,10 +12,7 @@ const ContactLink: React.FC<{
   isPrimary?: boolean;
 }> = ({ href, icon, label, newTab = false, isPrimary = false }) => {
   const baseClasses = `
-    inline-flex items-center justify-center text-center 
-    font-medium rounded-lg transition-all duration-300 ease-in-out 
-    w-full sm:w-auto px-6 py-3 text-sm md:text-base
-    border-2 interactive-glow group
+    bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-neutral-700/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 animate-glow-shadow transition-all duration-300 w-full
   `;
   const primaryClasses = isPrimary
     ? "bg-accent text-primary-bg border-accent hover:bg-accent-hover shadow-lg hover:shadow-accent-glow"
