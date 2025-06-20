@@ -1,9 +1,8 @@
 // src/components/Contact.tsx
 import React from "react";
-import AnimatedText from "./AnimatedText";
-import AnimatedPanel from "./AnimatedPanel";
-import Highlight from "./Highlight"; // IMPORT HIGHLIGHT
+import Highlight from "./Highlight";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+import Panel from "./Panel";
 
 const ContactLink: React.FC<{
   href: string;
@@ -50,30 +49,21 @@ const Contact: React.FC = () => {
       id="contact"
       className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center section-scroll-margin">
       <div className="container mx-auto px-4 flex flex-col items-center">
-        {" "}
-        {/* Ensures title and panel are centered */}
-        <AnimatedText
-          text={titleText}
-          elementType="h2"
-          // text-center on the parent div and this className should keep it on one line if space allows
-          className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap"
-          // Added whitespace-nowrap to encourage single line, but be mindful of very small screens.
-        />
-        <AnimatedPanel
-          className="w-full max-w-2xl bg-light-panel-bg/10 backdrop-blur-md border border-neutral-700/50 
-                     p-6 md:p-10 rounded-lg panel-with-corners relative animate-glow-shadow text-center">
-          {/* MODIFIED: Added Highlights to introductory text */}
+        <div className="flex justify-center animate-on-scroll w-full">
+            <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap">
+            {titleText}
+            </h2>
+        </div>
+        <Panel className="w-full max-w-2xl text-center animate-on-scroll">
           <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
             Have a <Highlight>project in mind</Highlight>, an{" "}
             <Highlight>opportunity</Highlight> to discuss, or just want to{" "}
-            <Highlight>say hi</Highlight>? I&apos;m always open to{" "}
+            <Highlight>say hi</Highlight>? I'm always open to{" "}
             <Highlight>connecting</Highlight>!
           </p>
-
           <p className="font-fira_code text-info-accent mb-6 text-sm">
-            Let&apos;s connect:
+            Let's connect:
           </p>
-
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
             <ContactLink
               href="mailto:joao.grilo.dev@gmail.com"
@@ -94,7 +84,7 @@ const Contact: React.FC = () => {
               newTab={true}
             />
           </div>
-        </AnimatedPanel>
+        </Panel>
       </div>
     </section>
   );

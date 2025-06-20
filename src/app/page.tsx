@@ -1,27 +1,20 @@
 // src/app/page.tsx
-// Removed imports for Navigation, Footer, ScrollToTopButton if they are in RootLayout
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Experience from "@/components/Experience"; // Placeholder
-import Projects from "@/components/Projects"; // Using actual component
-import Certifications from "@/components/Certifications"; // Placeholder
-import Contact from "@/components/Contact"; // Placeholder
+import DeferredSections from "@/components/DeferredSections"; // Import the client component
+
+// Load the components that are visible above the fold
+const About = dynamic(() => import("@/components/About"));
+const Skills = dynamic(() => import("@/components/Skills"));
 
 export default function Home() {
   return (
-    <>
-      {/* Navigation is now likely in RootLayout */}
-      <main className="w-full">
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Certifications />
-        <Contact />
-      </main>
-      {/* Footer and ScrollToTopButton are now likely in RootLayout */}
-    </>
+    <main className="w-full">
+      <Hero />
+      <About />
+      <Skills />
+      {/* Render the client component that will handle all deferred loading */}
+      <DeferredSections />
+    </main>
   );
 }
