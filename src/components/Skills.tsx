@@ -4,8 +4,9 @@
 import React from "react";
 import Section from "./Section";
 import Panel from "./Panel";
-import { FiExternalLink } from "react-icons/fi"; // ADDED
+import { FiExternalLink } from "react-icons/fi";
 
+// ... (SkillItem, SkillCategory interfaces and SKILL_CATEGORIES data remain unchanged)
 interface SkillItem {
   name: string;
   description?: string;
@@ -17,6 +18,7 @@ interface SkillCategory {
 }
 
 const SKILL_CATEGORIES: SkillCategory[] = [
+  // ... (All categories here, no changes)
   {
     id: "languages",
     title: "Languages",
@@ -228,7 +230,8 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 const Skills: React.FC = () => {
   return (
     <Section id="skills" title="Skills">
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {/* ADDED 'items-start' TO THE GRID CONTAINER */}
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
         {SKILL_CATEGORIES.map((category) => (
           <Panel as="li" key={category.id} className="h-full">
             {category.id === "problem-solving" ? (
