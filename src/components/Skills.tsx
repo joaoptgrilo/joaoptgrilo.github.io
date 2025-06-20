@@ -4,6 +4,7 @@
 import React from "react";
 import Section from "./Section";
 import Panel from "./Panel";
+import { FiExternalLink } from "react-icons/fi"; // ADDED
 
 interface SkillItem {
   name: string;
@@ -116,6 +117,27 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     ],
   },
   {
+    id: "problem-solving",
+    title: "Problem Solving & DSA",
+    skills: [
+      {
+        name: "LeetCode (150+)",
+        description:
+          "Solved over 150 challenges, focusing on Medium/Hard difficulties across various DSA topics.",
+      },
+      {
+        name: "Data Structures",
+        description:
+          "Practical application of Arrays, Strings, Hash Tables, Trees, Graphs, etc.",
+      },
+      {
+        name: "Algorithms",
+        description:
+          "Expertise in Sorting, Searching, Dynamic Programming, and other algorithmic paradigms.",
+      },
+    ],
+  },
+  {
     id: "databases",
     title: "Databases",
     skills: [
@@ -209,9 +231,20 @@ const Skills: React.FC = () => {
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {SKILL_CATEGORIES.map((category) => (
           <Panel as="li" key={category.id} className="h-full">
-            <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
-              {category.title}
-            </p>
+            {category.id === "problem-solving" ? (
+              <a
+                href="https://leetcode.com/u/joaoptgrilo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold group hover:text-accent transition-colors duration-300">
+                {category.title}
+                <FiExternalLink className="inline-block w-4 h-4 ml-2 mb-1 opacity-70 group-hover:opacity-100 transition-opacity" />
+              </a>
+            ) : (
+              <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
+                {category.title}
+              </p>
+            )}
             <div className="flex flex-wrap gap-2">
               {category.skills.map((skill) => (
                 <span
