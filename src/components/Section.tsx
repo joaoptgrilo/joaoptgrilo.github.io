@@ -22,9 +22,13 @@ const Section: React.FC<SectionProps> = ({
   return (
     <section id={id} className={`section-scroll-margin ${className}`}>
       <div className={clsx("container mx-auto px-4", containerClassName)}>
-        <div className="flex justify-center animate-on-scroll">
+        <div className="flex justify-center">
           <h2
-            className={`text-3xl sm:text-4xl md:text-5xl font-bold text-center ${titleClassName}`}>
+            className={clsx(
+                "text-3xl sm:text-4xl md:text-5xl font-bold text-center",
+                "animate-on-scroll", // Apply animation directly to the title
+                titleClassName
+            )}>
             {title}
           </h2>
         </div>

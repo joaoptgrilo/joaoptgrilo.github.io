@@ -8,8 +8,8 @@ const Footer: React.FC = () => {
 
   return (
     <footer id="footer" className="w-full py-10 md:py-16">
-      <div className="container mx-auto px-4 animate-on-scroll">
-        <Panel className="text-center">
+      <div className="container mx-auto px-4">
+        <Panel className="text-center animate-on-scroll">
           <p className="text-sm text-secondary-text font-fira_code">
             © {currentYear} João Grilo. All Rights Reserved.
           </p>

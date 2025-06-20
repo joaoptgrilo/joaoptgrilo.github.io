@@ -48,11 +48,13 @@ const Contact: React.FC = () => {
     <section
       id="contact"
       className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center section-scroll-margin">
-      <div className="container mx-auto px-4 flex flex-col items-center animate-on-scroll">
-        <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap">
-          {titleText}
-        </h2>
-        <Panel className="w-full max-w-2xl text-center">
+      <div className="container mx-auto px-4 flex flex-col items-center">
+        <div className="flex justify-center animate-on-scroll w-full">
+            <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap">
+            {titleText}
+            </h2>
+        </div>
+        <Panel className="w-full max-w-2xl text-center animate-on-scroll">
           <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
             Have a <Highlight>project in mind</Highlight>, an{" "}
             <Highlight>opportunity</Highlight> to discuss, or just want to{" "}
