@@ -14,7 +14,13 @@ const Panel: React.FC<PanelProps> = ({
   as: Component = "div",
 }) => {
   const baseClasses = `
-    bg-light-panel-bg/10 backdrop-blur-lg border-2 border-dashed border-neutral-700/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 animate-glow-shadow transition-all duration-300 w-full
+    bg-light-panel-bg/10 backdrop-blur-md 
+    border border-neutral-700/50 p-6 md:p-8 
+    rounded-lg panel-with-corners relative 
+    transition-shadow duration-300 ease-out 
+    shadow-lg shadow-black/20 
+    hover:shadow-accent/10
+    transform-gpu /* This is the key fix for backdrop-filter */
   `;
 
   return (
