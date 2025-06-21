@@ -4,7 +4,6 @@
 import React from "react";
 import Section from "./Section";
 import Panel from "./Panel";
-import { FiExternalLink } from "react-icons/fi";
 import { clsx } from "clsx";
 
 interface SkillItem {
@@ -18,6 +17,7 @@ interface SkillCategory {
   skills: SkillItem[];
 }
 
+// UPDATED: LeetCode item removed from the list.
 const SKILL_CATEGORIES: SkillCategory[] = [
   {
     id: "languages",
@@ -126,12 +126,6 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     id: "problem-solving",
     title: "Problem Solving & DSA",
     skills: [
-      // UPDATED "LeetCode" text and description
-      {
-        name: "LeetCode (In Progress)",
-        description:
-          "Actively solving challenges to sharpen data structure and algorithm skills.",
-      },
       {
         name: "Data Structures",
         description:
@@ -244,20 +238,10 @@ const Skills: React.FC = () => {
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
         {SKILL_CATEGORIES.map((category) => (
           <Panel as="li" key={category.id} className="h-full" variant="simple">
-            {category.id === "problem-solving" ? (
-              <a
-                href="https://leetcode.com/u/joaoptgrilo/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold group hover:text-accent transition-colors duration-300">
-                {category.title}
-                <FiExternalLink className="inline-block w-4 h-4 ml-2 mb-1 opacity-70 group-hover:opacity-100 transition-opacity" />
-              </a>
-            ) : (
-              <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
-                {category.title}
-              </p>
-            )}
+            {/* UPDATED: Removed conditional link logic. All titles are now plain text. */}
+            <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
+              {category.title}
+            </p>
             <div className="flex flex-wrap gap-2">
               {category.skills.map((skill) => (
                 <span

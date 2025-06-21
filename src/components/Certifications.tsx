@@ -5,7 +5,7 @@ import {
   CertificationItem,
 } from "@/data/certificationsData";
 import { FaCertificate, FaExternalLinkAlt, FaUniversity } from "react-icons/fa";
-import { FiClock } from "react-icons/fi";
+import { FiClock, FiActivity } from "react-icons/fi";
 import Section from "./Section";
 import Panel from "./Panel";
 
@@ -24,7 +24,11 @@ const Certifications = () => {
               className="flex flex-col h-full group w-full">
               <div className="flex-grow mb-4">
                 <div className="flex items-start mb-3">
-                  <FaCertificate className="w-5 h-5 md:w-6 md:h-6 mr-3 mt-1 text-info-accent flex-shrink-0 group-hover:text-accent transition-colors" />
+                  {cert.isInProgress ? (
+                    <FiActivity className="w-5 h-5 md:w-6 md:h-6 mr-3 mt-1 text-info-accent flex-shrink-0 group-hover:text-accent transition-colors" />
+                  ) : (
+                    <FaCertificate className="w-5 h-5 md:w-6 md:h-6 mr-3 mt-1 text-info-accent flex-shrink-0 group-hover:text-accent transition-colors" />
+                  )}
                   <p className="text-base md:text-lg font-semibold text-accent group-hover:text-accent-hover transition-colors leading-tight">
                     {cert.name}
                   </p>
@@ -45,15 +49,27 @@ const Certifications = () => {
                 )}
               </div>
               <div className="mt-auto pt-4 border-t border-neutral-700/30">
-                <a
-                  href={cert.credentialUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Verify ${cert.name} certificate`}
-                  className="inline-flex items-center justify-center w-full text-sm text-info-accent hover:text-accent font-medium transition-colors duration-300 bg-primary-bg/70 hover:bg-primary-bg px-4 py-2.5 rounded-md border border-info-accent/50 hover:border-accent interactive-glow">
-                  <FaExternalLinkAlt className="mr-2 h-3.5 w-3.5" />
-                  Verify Certificate
-                </a>
+                {cert.isInProgress ? (
+                  <a
+                    href={cert.credentialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View progress for ${cert.name}`}
+                    className="inline-flex items-center justify-center w-full text-sm text-info-accent hover:text-accent font-medium transition-colors duration-300 bg-primary-bg/70 hover:bg-primary-bg px-4 py-2.5 rounded-md border border-info-accent/50 hover:border-accent interactive-glow">
+                    <FiActivity className="mr-2 h-3.5 w-3.5" />
+                    View Progress
+                  </a>
+                ) : (
+                  <a
+                    href={cert.credentialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Verify ${cert.name} certificate`}
+                    className="inline-flex items-center justify-center w-full text-sm text-info-accent hover:text-accent font-medium transition-colors duration-300 bg-primary-bg/70 hover:bg-primary-bg px-4 py-2.5 rounded-md border border-info-accent/50 hover:border-accent interactive-glow">
+                    <FaExternalLinkAlt className="mr-2 h-3.5 w-3.5" />
+                    Verify Certificate
+                  </a>
+                )}
               </div>
             </Panel>
           ))}

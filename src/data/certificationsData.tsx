@@ -1,6 +1,6 @@
 // src/data/certificationsData.tsx
 import React from "react";
-import Highlight from "@/components/Highlight"; // Assuming Highlight component path
+import Highlight from "@/components/Highlight";
 
 export interface CertificationItem {
   id: string;
@@ -9,8 +9,8 @@ export interface CertificationItem {
   issueDate?: string;
   credentialUrl: string;
   icon?: React.ElementType;
-  description?: React.ReactNode; // UPDATED to React.ReactNode
-  isInProgress?: boolean; // For styling "In Progress" items if needed
+  description?: React.ReactNode;
+  isInProgress?: boolean;
 }
 
 export const certificationsData: CertificationItem[] = [
@@ -20,7 +20,6 @@ export const certificationsData: CertificationItem[] = [
     issuer: "freeCodeCamp",
     credentialUrl:
       "https://www.freecodecamp.org/certification/JoaoGrilo/responsive-web-design",
-    // UPDATED with Highlights
     description: (
       <>
         Covers <Highlight>HTML</Highlight>, <Highlight>CSS</Highlight>, Visual
@@ -36,7 +35,6 @@ export const certificationsData: CertificationItem[] = [
     issuer: "freeCodeCamp",
     credentialUrl:
       "https://www.freecodecamp.org/certification/JoaoGrilo/javascript-algorithms-and-data-structures-v8",
-    // UPDATED with Highlights
     description: (
       <>
         Focuses on JavaScript fundamentals, <Highlight>ES6</Highlight>, Regular
@@ -52,7 +50,6 @@ export const certificationsData: CertificationItem[] = [
     issuer: "freeCodeCamp",
     credentialUrl:
       "https://www.freecodecamp.org/certification/JoaoGrilo/front-end-development-libraries",
-    // UPDATED with Highlights
     description: (
       <>
         Teaches modern frontend libraries including{" "}
@@ -67,7 +64,6 @@ export const certificationsData: CertificationItem[] = [
     issuer: "freeCodeCamp",
     credentialUrl:
       "https://www.freecodecamp.org/certification/JoaoGrilo/data-visualization",
-    // UPDATED with Highlights
     description: (
       <>
         Focuses on <Highlight>D3.js</Highlight> fundamentals, creating bar
@@ -76,13 +72,49 @@ export const certificationsData: CertificationItem[] = [
       </>
     ),
   },
-  // Example for an "In Progress" item (we can style it differently later):
-  // {
-  //   id: 'aws-cloud-quest',
-  //   name: 'AWS Cloud Quest: Cloud Practitioner',
-  //   issuer: 'Amazon Web Services',
-  //   credentialUrl: '#',
-  //   description: <>Hands-on learning for <Highlight>AWS Cloud fundamentals</Highlight> and core services.</>,
-  //   isInProgress: true,
-  // },
+  // START: NEW/UPDATED "CONTINUED LEARNING" ITEMS
+  {
+    id: "leetcode-problem-solving",
+    name: "LeetCode Problem Solving",
+    issuer: "LeetCode",
+    credentialUrl: "https://leetcode.com/u/joaoptgrilo/",
+    description: (
+      <>
+        Actively solving challenges to sharpen{" "}
+        <Highlight>algorithmic thinking</Highlight> and master{" "}
+        <Highlight>data structures</Highlight> for optimal, efficient code.
+      </>
+    ),
+    isInProgress: true,
+  },
+  {
+    id: "aws-cloud-quest",
+    name: "AWS Cloud Quest",
+    issuer: "Amazon Web Services",
+    credentialUrl: "https://www.credly.com/users/joao.grilo.dev",
+    description: (
+      <>
+        Hands-on learning for <Highlight>AWS Cloud fundamentals</Highlight> and
+        core services, pursuing the <Highlight>Cloud Practitioner</Highlight>{" "}
+        role and other badges.
+      </>
+    ),
+    isInProgress: true,
+  },
+  {
+    id: "tryhackme-learning-paths",
+    name: "TryHackMe Learning Paths",
+    issuer: "TryHackMe",
+    credentialUrl: "https://tryhackme.com/p/joao.grilo.dev",
+    description: (
+      <>
+        Progressing through cybersecurity paths, including{" "}
+        <Highlight>Web Hacking</Highlight> and{" "}
+        <Highlight>Offensive Pentesting</Highlight>, to build a defensive
+        mindset.
+      </>
+    ),
+    isInProgress: true,
+  },
+  // END: NEW/UPDATED "CONTINUED LEARNING" ITEMS
 ];
