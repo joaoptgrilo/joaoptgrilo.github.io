@@ -88,24 +88,6 @@ body::before {
   z-index: 1;
   transition: border-color 0.3s ease-in-out;
 }
-/*.interactive-glow::after {
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  z-index: -1;
-  border-radius: inherit;
-  background: radial-gradient(
-    circle,
-    rgba(59, 130, 246, 0.6) 0%,
-    rgba(59, 130, 246, 0) 70%
-  );
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}*/
 .interactive-glow:hover,
 .interactive-glow:focus,
 .interactive-glow:focus-visible {
@@ -174,3 +156,32 @@ html {
   animation-delay: 1s;
   animation-fill-mode: both;
 }
+
+/* --- START: NEW ACCESSIBILITY FOCUS STYLES --- */
+/*
+  Define a highly visible, theme-consistent focus state for keyboard navigation.
+  This uses the :focus-visible pseudo-class to apply styles only when an element
+  is focused via keyboard, not on mouse click.
+*/
+*:focus-visible {
+  /* Disable the default browser outline so we can use our own style */
+  outline: none !important;
+
+  /* 
+    Create a custom, high-contrast "double ring" effect using box-shadow.
+    The inner ring (3px) uses the background color to create separation.
+    The outer ring (2px) uses the bright accent color for high visibility.
+  */
+  box-shadow: 0 0 0 3px var(--color-primary-bg), 0 0 0 5px var(--color-accent) !important;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+/* 
+  For elements that already have a glow or complex styles, we can use a slightly
+  different accent color for better visual harmony.
+*/
+.interactive-glow:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-primary-bg),
+    0 0 0 5px var(--color-info-accent) !important;
+}
+/* --- END: NEW ACCESSIBILITY FOCUS STYLES --- */

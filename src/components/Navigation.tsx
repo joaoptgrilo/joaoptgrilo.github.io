@@ -1,11 +1,10 @@
 // src/components/Navigation.tsx
-"use client"; // CORRECTED: "use client" with a space
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-// ... The rest of the file remains exactly the same
 interface NavLinkItem {
   href: string;
   label: string;
@@ -64,13 +63,13 @@ const Navigation: React.FC = () => {
     "bg-secondary-bg/90 backdrop-blur-lg animate-glow-shadow";
 
   const pillClasses = `
-    flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font-fira_code font-semibold 
-    text-accent 
-    bg-primary-bg/70 backdrop-blur-sm 
-    border border-accent 
-    shadow-accent-glow 
-    transition-opacity duration-300 ease-in-out 
-    hover:opacity-90 
+    flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font-fira_code font-semibold
+    text-accent
+    bg-primary-bg/70 backdrop-blur-sm
+    border border-accent
+    shadow-accent-glow
+    transition-opacity duration-300 ease-in-out
+    hover:opacity-90
   `;
 
   const desktopNavLinkClasses =
@@ -89,12 +88,16 @@ const Navigation: React.FC = () => {
             href="#hero"
             onClick={closeMobileMenu}
             className={`${
-              isActiveNavStyle ? "opacity-100" : "opacity-0 pointer-events-none"
+              isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
             } 
                        transition-opacity duration-300 ease-in-out`}
-            aria-hidden={!isActiveNavStyle}
-            tabIndex={isActiveNavStyle ? 0 : -1}
-            style={{ transitionDelay: isActiveNavStyle ? "0.1s" : "0s" }}>
+            style={{ transitionDelay: isScrolled ? "0.1s" : "0s" }}
+            // --- START: ACCESSIBILITY FIX ---
+            // When not scrolled, remove from tab order and hide from screen readers
+            tabIndex={isScrolled ? 0 : -1}
+            aria-hidden={!isScrolled}
+            // --- END: ACCESSIBILITY FIX ---
+          >
             <span className={pillClasses}>
               <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse-dot"></span>
               João Grilo
