@@ -12,7 +12,7 @@
   --color-accent: #00c8ff;
   --color-accent-hover: #4dd6ff;
   --color-info-accent: #60a5fa;
-  --color-accent-shadow-start: rgba(0, 200, 255, 0.3);
+  --color-accent-shadow-start: rgba(0, 200, 255, 0.5);
   --color-accent-shadow-end: rgba(0, 200, 255, 0.1);
   --color-accent-shadow-strong: rgba(0, 200, 255, 0.35);
 }
@@ -23,14 +23,13 @@ body {
   background-color: #03050a;
   background-image: url("/images/coding-symbols.svg");
   background-attachment: fixed;
-  position: relative; /* Needed for the pseudo-element */
+  position: relative;
   z-index: 0;
 }
 
-/* Performant background pan animation using a pseudo-element */
 body::before {
   content: "";
-  position: fixed; /* Use fixed to cover the viewport */
+  position: fixed;
   top: -50%;
   left: -50%;
   width: 200%;
@@ -51,6 +50,42 @@ body::before {
     transform: translate(25%, 25%);
   }
 }
+
+/* --- START: ALL GLOW EFFECTS (ENHANCED) --- */
+
+/* Enhanced shadow glow for the sticky navbar */
+.animate-glow-shadow {
+  animation: glow-shadow-keyframes 4s ease-in-out infinite alternate;
+  will-change: box-shadow;
+}
+
+@keyframes glow-shadow-keyframes {
+  from {
+    box-shadow: 0 4px 20px -10px rgba(0, 0, 0, 0);
+  }
+  to {
+    /* Use the main accent color for a brighter glow */
+    box-shadow: 0 6px 25px -5px var(--color-accent-shadow-start);
+  }
+}
+
+/* Enhanced border glow for the panels */
+.panel-glow-anim {
+  animation: panelGlow 4s ease-in-out infinite alternate;
+  will-change: box-shadow;
+}
+
+@keyframes panelGlow {
+  from {
+    box-shadow: 0 0 15px -10px var(--color-accent);
+  }
+  to {
+    /* Larger spread and more prominent color */
+    box-shadow: 0 0 35px -8px var(--color-accent);
+  }
+}
+
+/* --- END: ALL GLOW EFFECTS (ENHANCED) --- */
 
 .panel-with-corners {
   position: relative;
@@ -94,17 +129,10 @@ body::before {
   border-color: var(--color-info-accent);
   outline: none;
 }
-.interactive-glow:hover::after,
-.interactive-glow:focus::after,
-.interactive-glow:focus-visible::after {
-  opacity: 1;
-  transform: scale(1);
-}
 
 html {
   scroll-behavior: smooth;
 }
-
 .section-scroll-margin {
   scroll-margin-top: 4.5rem;
 }
@@ -117,16 +145,6 @@ html {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-.animate-on-scroll {
-  @media (min-width: 1024px) {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out both;
-    animation-timeline: view();
-    animation-range-start: entry 10%;
-    animation-range-end: entry 40%;
   }
 }
 
@@ -157,31 +175,13 @@ html {
   animation-fill-mode: both;
 }
 
-/* --- START: NEW ACCESSIBILITY FOCUS STYLES --- */
-/*
-  Define a highly visible, theme-consistent focus state for keyboard navigation.
-  This uses the :focus-visible pseudo-class to apply styles only when an element
-  is focused via keyboard, not on mouse click.
-*/
 *:focus-visible {
-  /* Disable the default browser outline so we can use our own style */
   outline: none !important;
-
-  /* 
-    Create a custom, high-contrast "double ring" effect using box-shadow.
-    The inner ring (3px) uses the background color to create separation.
-    The outer ring (2px) uses the bright accent color for high visibility.
-  */
   box-shadow: 0 0 0 3px var(--color-primary-bg), 0 0 0 5px var(--color-accent) !important;
   transition: box-shadow 0.2s ease-in-out;
 }
 
-/* 
-  For elements that already have a glow or complex styles, we can use a slightly
-  different accent color for better visual harmony.
-*/
 .interactive-glow:focus-visible {
   box-shadow: 0 0 0 3px var(--color-primary-bg),
     0 0 0 5px var(--color-info-accent) !important;
 }
-/* --- END: NEW ACCESSIBILITY FOCUS STYLES --- */

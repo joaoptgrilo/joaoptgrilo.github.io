@@ -5,227 +5,128 @@ import React from "react";
 import Section from "./Section";
 import Panel from "./Panel";
 import { clsx } from "clsx";
+import { useTranslations } from "next-intl";
 
 interface SkillItem {
+  key: string;
   name: string;
-  description?: string;
   isWide?: boolean;
 }
 interface SkillCategory {
   id: string;
-  title: string;
   skills: SkillItem[];
 }
 
-// UPDATED: LeetCode item removed from the list.
 const SKILL_CATEGORIES: SkillCategory[] = [
   {
     id: "languages",
-    title: "Languages",
     skills: [
-      {
-        name: "TypeScript",
-        description: "Typed superset of JavaScript for scalable apps",
-      },
-      {
-        name: "JavaScript (ES6+)",
-        description: "Modern JavaScript with ES6+ features",
-      },
-      {
-        name: "HTML5",
-        description: "Markup language for structuring web content",
-      },
-      {
-        name: "CSS3 / SASS / SCSS",
-        description: "Styling languages and preprocessors for web design",
-        isWide: true,
-      },
-      { name: "SQL", description: "Structured Query Language for databases" },
-      {
-        name: "C#",
-        description: "Object-oriented programming language from Microsoft",
-      },
-      {
-        name: "PHP",
-        description: "Server-side scripting language for web development",
-      },
-      {
-        name: "Python",
-        description: "High-level, versatile programming language",
-      },
+      { key: "typescript", name: "TypeScript" },
+      { key: "javascript", name: "JavaScript (ES6+)" },
+      { key: "html5", name: "HTML5" },
+      { key: "css", name: "CSS3 / SASS / SCSS", isWide: true },
+      { key: "sql", name: "SQL" },
+      { key: "csharp", name: "C#" },
+      { key: "php", name: "PHP" },
+      { key: "python", name: "Python" },
     ],
   },
   {
     id: "frontend",
-    title: "Frontend Development",
     skills: [
+      { key: "react", name: "React" },
+      { key: "nextjs", name: "Next.js (App Router)" },
+      { key: "tailwind", name: "Tailwind CSS" },
+      { key: "responsive", name: "Responsive Web Design", isWide: true },
       {
-        name: "React",
-        description: "JavaScript library for building user interfaces",
-      },
-      {
-        name: "Next.js (App Router)",
-        description: "React framework for server-side rendering & routing",
-      },
-      {
-        name: "Tailwind CSS",
-        description: "Utility-first CSS framework for rapid UI development",
-      },
-      {
-        name: "Responsive Web Design",
-        description: "Designing web layouts that adapt to different devices",
-        isWide: true,
-      },
-      {
+        key: "frontend_perf",
         name: "Frontend Performance Optimization (Lighthouse >90)",
-        description: "Improving website speed & efficiency",
         isWide: true,
       },
       {
+        key: "accessibility",
         name: "Web Accessibility (WCAG Basics)",
-        description: "Ensuring websites are usable by everyone",
         isWide: true,
       },
-      {
-        name: "Redux (Conceptual)",
-        description: "State management library for JavaScript apps",
-      },
-      {
-        name: "Context API / Zustand (Planned)",
-        description: "State management tools in React ecosystem",
-      },
+      { key: "redux", name: "Redux (Conceptual)" },
+      { key: "zustand", name: "Context API / Zustand (Planned)" },
     ],
   },
   {
     id: "backend",
-    title: "Backend Development",
     skills: [
-      {
-        name: ".NET Core",
-        description: "Cross-platform framework for building backend apps",
-      },
-      {
-        name: "Node.js",
-        description: "JavaScript runtime for server-side development",
-      },
-      {
-        name: "REST API Development",
-        description: "Creating web APIs following REST principles",
-      },
-      {
-        name: "MVC Architecture",
-        description: "Model-View-Controller design pattern",
-      },
-      {
-        name: "Socket Programming",
-        description: "Real-time communication via network sockets",
-      },
+      { key: "dotnet", name: ".NET Core" },
+      { key: "nodejs", name: "Node.js" },
+      { key: "rest_api", name: "REST API Development" },
+      { key: "mvc", name: "MVC Architecture" },
+      { key: "sockets", name: "Socket Programming" },
     ],
   },
   {
     id: "problem-solving",
-    title: "Problem Solving & DSA",
     skills: [
-      {
-        name: "Data Structures",
-        description:
-          "Practical application of Arrays, Strings, Hash Tables, Trees, Graphs, etc.",
-      },
-      {
-        name: "Algorithms",
-        description:
-          "Expertise in Sorting, Searching, Dynamic Programming, and other algorithmic paradigms.",
-      },
+      { key: "data_structures", name: "Data Structures" },
+      { key: "algorithms", name: "Algorithms" },
     ],
   },
   {
     id: "databases",
-    title: "Databases",
     skills: [
-      { name: "MySQL", description: "Popular open-source relational database" },
-      {
-        name: "Redis (Basic)",
-        description: "In-memory data structure store, used as database/cache",
-      },
-      {
-        name: "Elasticsearch (Basic)",
-        description: "Search engine based on Lucene library",
-      },
+      { key: "mysql", name: "MySQL" },
+      { key: "redis", name: "Redis (Basic)" },
+      { key: "elasticsearch", name: "Elasticsearch (Basic)" },
     ],
   },
   {
     id: "devops",
-    title: "DevOps, Tools & Methodologies",
     skills: [
-      { name: "Git", description: "Version control system" },
-      {
-        name: "GitHub / GitLab",
-        description: "Online platforms for Git repositories and collaboration",
-      },
-      {
-        name: "Docker (Basic / Learning)",
-        description: "Containerization platform for software",
-      },
-      {
-        name: "Agile (Scrum/Kanban)",
-        description: "Project management and development methodologies",
-      },
-      { name: "npm", description: "Node.js package manager" },
-      { name: "VS Code", description: "Popular source-code editor" },
+      { key: "git", name: "Git" },
+      { key: "github_gitlab", name: "GitHub / GitLab" },
+      { key: "docker", name: "Docker (Basic / Learning)" },
+      { key: "agile", name: "Agile (Scrum/Kanban)" },
+      { key: "npm", name: "npm" },
+      { key: "vscode", name: "VS Code" },
     ],
   },
   {
     id: "cms",
-    title: "CMS",
     skills: [
       {
+        key: "wordpress",
         name: "WordPress (Theme/Plugin Dev, API Integration, Optimization)",
-        description: "Content management system with extensive customization",
         isWide: true,
       },
     ],
   },
   {
     id: "performance",
-    title: "Performance & Optimization",
     skills: [
       {
+        key: "perf_tuning",
         name: "Performance Tuning (Frontend/Backend)",
-        description: "Optimizing application performance",
         isWide: true,
       },
-      {
-        name: "SEO Implementation & Analysis",
-        description: "Search Engine Optimization techniques",
-        isWide: true,
-      },
-      {
-        name: "Google Lighthouse (>90 Scores)",
-        description: "Tool for auditing website quality",
-      },
-      {
-        name: "Google Analytics",
-        description: "Web analytics service to track traffic and user behavior",
-      },
+      { key: "seo", name: "SEO Implementation & Analysis", isWide: true },
+      { key: "lighthouse", name: "Google Lighthouse (>90 Scores)" },
+      { key: "analytics", name: "Google Analytics" },
     ],
   },
   {
     id: "concepts",
-    title: "Concepts & Other",
     skills: [
       {
+        key: "web_security",
         name: "Web Security Fundamentals (OWASP)",
-        description: "Understanding common web security vulnerabilities",
         isWide: true,
       },
       {
+        key: "os",
         name: "Operating Systems (Linux, Windows, WSL)",
-        description: "Familiarity with multiple OS environments",
         isWide: true,
       },
       {
+        key: "ai_tools",
         name: "AI Tools Familiarity (ChatGPT, Claude, etc.)",
-        description: "Experience with AI language models and tools",
         isWide: true,
       },
     ],
@@ -233,20 +134,22 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 ];
 
 const Skills: React.FC = () => {
+  const t = useTranslations("Skills");
+  const tTooltips = useTranslations("skillTags");
+
   return (
-    <Section id="skills" title="Skills">
+    <Section id="skills" title="skills">
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
         {SKILL_CATEGORIES.map((category) => (
-          <Panel as="li" key={category.id} className="h-full" variant="simple">
-            {/* UPDATED: Removed conditional link logic. All titles are now plain text. */}
-            <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
-              {category.title}
+          <Panel as="li" key={category.id} className="h-full" variant="default">
+            <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
+              {t(category.id)}
             </p>
             <div className="flex flex-wrap gap-2">
               {category.skills.map((skill) => (
                 <span
-                  key={skill.name}
-                  title={skill.description}
+                  key={skill.key}
+                  title={tTooltips(skill.key)}
                   className={clsx(
                     "text-center bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-700/50 cursor-pointer interactive-glow",
                     { "col-span-2": skill.isWide }

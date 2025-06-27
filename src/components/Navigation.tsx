@@ -4,6 +4,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface NavLinkItem {
   href: string;
@@ -11,16 +13,18 @@ interface NavLinkItem {
 }
 
 const Navigation: React.FC = () => {
+  const t = useTranslations("Navigation");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const SCROLL_THRESHOLD = 10;
+
   const navLinks: NavLinkItem[] = [
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#experience", label: "Experience" },
-    { href: "#projects", label: "Projects" },
-    { href: "#certifications", label: "Certifications" },
-    { href: "#contact", label: "Contact" },
+    { href: "#about", label: t("about") },
+    { href: "#skills", label: t("skills") },
+    { href: "#experience", label: t("experience") },
+    { href: "#projects", label: t("projects") },
+    { href: "#certifications", label: t("certifications") },
+    { href: "#contact", label: t("contact") },
   ];
 
   useEffect(() => {
@@ -34,7 +38,7 @@ const Navigation: React.FC = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 1024) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -55,23 +59,11 @@ const Navigation: React.FC = () => {
 
   const baseNavClasses =
     "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-[background-color,backdrop-filter] duration-300 ease-in-out";
-
   const activeNavLookClasses =
     "bg-secondary-bg/80 backdrop-blur-lg backdrop-saturate-150 animate-glow-shadow";
   const topTransparentNavLookClasses = "bg-transparent shadow-none";
-  const mobileMenuContainerClasses =
-    "bg-secondary-bg/90 backdrop-blur-lg animate-glow-shadow";
-
-  const pillClasses = `
-    flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font-fira_code font-semibold
-    text-accent
-    bg-primary-bg/70 backdrop-blur-sm
-    border border-accent
-    shadow-accent-glow
-    transition-opacity duration-300 ease-in-out
-    hover:opacity-90
-  `;
-
+  const mobileMenuContainerClasses = "bg-secondary-bg/90 backdrop-blur-lg";
+  const pillClasses = `flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font_fira_code font-semibold text-accent bg-primary-bg/70 backdrop-blur-sm border border-accent shadow-accent-glow transition-opacity duration-300 ease-in-out hover:opacity-90`;
   const desktopNavLinkClasses =
     "font-poppins text-primary-text hover:text-accent transition-colors text-sm";
   const mobileMenuLinkClasses =
@@ -89,21 +81,16 @@ const Navigation: React.FC = () => {
             onClick={closeMobileMenu}
             className={`${
               isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
-            } 
-                       transition-opacity duration-300 ease-in-out`}
+            } transition-opacity duration-300 ease-in-out`}
             style={{ transitionDelay: isScrolled ? "0.1s" : "0s" }}
-            // --- START: ACCESSIBILITY FIX ---
-            // When not scrolled, remove from tab order and hide from screen readers
             tabIndex={isScrolled ? 0 : -1}
-            aria-hidden={!isScrolled}
-            // --- END: ACCESSIBILITY FIX ---
-          >
+            aria-hidden={!isScrolled}>
             <span className={pillClasses}>
               <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse-dot"></span>
-              João Grilo
+              {t("namePill")}
             </span>
           </Link>
-          <div className="hidden md:flex items-center space-x-5">
+          <div className="hidden lg:flex items-center space-x-5">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
@@ -112,8 +99,9 @@ const Navigation: React.FC = () => {
                 {link.label}
               </Link>
             ))}
+            <LanguageSwitcher />
           </div>
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={toggleMobileMenu}
               aria-label="Toggle mobile menu"
@@ -124,7 +112,7 @@ const Navigation: React.FC = () => {
         </div>
         {isMobileMenuOpen && (
           <div
-            className={`md:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}>
+            className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}>
             <div className="container mx-auto flex flex-col items-center space-y-3 px-4">
               {navLinks.map((link) => (
                 <Link
@@ -135,13 +123,16 @@ const Navigation: React.FC = () => {
                   {link.label}
                 </Link>
               ))}
+              <div className="mt-4">
+                <LanguageSwitcher />
+              </div>
             </div>
           </div>
         )}
       </nav>
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm transition-opacity duration-300 ease-in-out md:hidden"
+          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm transition-opacity duration-300 ease-in-out lg:hidden"
           onClick={closeMobileMenu}
           aria-hidden="true"
         />
@@ -149,4 +140,5 @@ const Navigation: React.FC = () => {
     </>
   );
 };
+
 export default Navigation;
