@@ -6,26 +6,28 @@ interface PanelProps {
   children: React.ReactNode;
   className?: string;
   as?: React.ElementType;
-  variant?: "default" | "simple"; // New 'variant' prop
+  variant?: "default" | "simple";
 }
 
 const Panel: React.FC<PanelProps> = ({
   children,
   className,
   as: Component = "div",
-  variant = "default", // Default to the version with all effects
+  variant = "default",
 }) => {
   const baseClasses = `
     bg-light-panel-bg/10 backdrop-blur-lg
     border border-neutral-700/50 p-6 md:p-8 
-    rounded-lg hover:border-accent/50 animate-glow-shadow transition-all duration-300
+    rounded-lg hover:border-accent/50 transition-all duration-300
   `;
 
-  // Conditionally add effects based on the variant prop
+  // The 'animate-glow-shadow' class is the key to the subtle glow.
+  // We ensure it's applied correctly to the default variant.
   const combinedClasses = clsx(
     baseClasses,
+    "animate-on-scroll",
     {
-      "panel-glow-anim panel-with-corners": variant === "default",
+      "panel-with-corners animate-glow-shadow": variant === "default",
     },
     className
   );

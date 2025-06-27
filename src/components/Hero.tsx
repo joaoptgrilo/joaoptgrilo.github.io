@@ -3,6 +3,7 @@
 
 import React from "react";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
+import { useTranslations, useLocale } from "next-intl";
 
 interface SocialLink {
   href: string;
@@ -11,26 +12,34 @@ interface SocialLink {
 }
 
 const Hero: React.FC = () => {
+  const t = useTranslations("Hero");
+  const locale = useLocale(); // Get the current locale ('en' or 'pt')
+
   const socialLinks: SocialLink[] = [
     {
       href: "https://github.com/joaoptgrilo",
       icon: <FaGithub />,
-      ariaLabel: "João Grilo on GitHub",
+      ariaLabel: t("githubAria"),
     },
     {
       href: "https://www.linkedin.com/in/joaoptgrilo/",
       icon: <FaLinkedin />,
-      ariaLabel: "João Grilo on LinkedIn",
+      ariaLabel: t("linkedinAria"),
     },
     {
       href: "mailto:joao.grilo.dev@gmail.com",
       icon: <FaEnvelope />,
-      ariaLabel: "Email João Grilo",
+      ariaLabel: t("emailAria"),
     },
   ];
-  const taglineText =
-    "Crafting High-Performance Web Solutions & Seamless User Experiences";
-  const CV_FILENAME = "JoaoGrilo-CV.pdf";
+
+  const taglineText = t("tagline");
+
+  // Define filenames for both CV versions
+  const cvFileEN = "JoaoGrilo-CV.pdf";
+  const cvFilePT = "JoaoGrilo-CV-PT.pdf";
+  // Determine which file to use based on the current locale
+  const cvToDownload = locale === "pt" ? cvFilePT : cvFileEN;
 
   return (
     <section
@@ -40,35 +49,38 @@ const Hero: React.FC = () => {
         className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center
                     p-6 sm:p-8 md:p-12 lg:p-16 bg-light-panel-bg/15 backdrop-blur-lg ">
         <div className="space-y-4 sm:space-y-5 md:space-y-6 max-w-3xl w-full pt-16 md:pt-0">
-          <h1 className="font-fira_code font-bold text-4xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-text leading-tight tracking-tight sm:tracking-normal">
-            João Grilo
+          <h1 className="font_fira_code font-bold text-4xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-text leading-tight tracking-tight sm:tracking-normal">
+            {t("name")}
           </h1>
-          <p className="font-fira_code font-semibold text-xl xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary-text leading-snug tracking-tight sm:tracking-normal animate-fade-in-up animation-delay-100">
-            Results-Driven Full-Stack Developer
+          <p className="font_fira_code font-semibold text-xl xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary-text leading-snug tracking-tight sm:tracking-normal animate-fade-in-up animation-delay-100">
+            {t("title")}
           </p>
           <div className="h-24 sm:h-20 md:h-16 lg:h-12 flex items-center justify-center animate-fade-in-up animation-delay-200">
             <div className="hidden lg:block">
-              <div className="font-fira_code font-medium text-xl text-accent tracking-wide typewriter-css">
+              <div className="font_fira_code font-medium text-xl text-accent tracking-wide typewriter-css">
                 {taglineText}
               </div>
             </div>
-            <p className="block lg:hidden font-fira_code font-medium text-base sm:text-lg text-accent tracking-wide">
-              Crafting High-Performance Web Solutions
-              <br />& Seamless User Experiences
-            </p>
+            <p
+              className="block lg:hidden font_fira_code font-medium text-base sm:text-lg text-accent tracking-wide"
+              dangerouslySetInnerHTML={{
+                __html: taglineText.replace(" & ", "<br />& "),
+              }}
+            />
           </div>
           <div className="pt-3 sm:pt-4 md:pt-5 flex flex-col sm:flex-row sm:justify-center items-center gap-4 sm:gap-6 animate-fade-in-up animation-delay-300">
             <a
               href="#projects"
-              className="inline-block bg-accent text-primary-bg font-fira_code font-semibold text-sm sm:text-base md:text-lg py-3 px-8 sm:py-3.5 sm:px-10 rounded-lg shadow-lg hover:bg-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-colors duration-300 w-full sm:w-auto">
-              View My Projects
+              className="inline-block bg-accent text-primary-bg font_fira_code font-semibold text-sm sm:text-base md:text-lg py-3 px-8 sm:py-3.5 sm:px-10 rounded-lg shadow-lg hover:bg-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-colors duration-300 w-full sm:w-auto">
+              {t("projectsButton")}
             </a>
+            {/* The href now dynamically points to the correct CV file */}
             <a
-              href={`/${CV_FILENAME}`}
+              href={`/${cvToDownload}`}
               download
-              className="inline-flex items-center justify-center bg-transparent text-accent font-fira_code font-semibold text-sm sm:text-base md:text-lg py-3 px-8 sm:py-3.5 sm:px-10 rounded-lg border-2 border-accent hover:bg-accent/10 hover:text-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto interactive-glow">
+              className="inline-flex items-center justify-center bg-transparent text-accent font_fira_code font-semibold text-sm sm:text-base md:text-lg py-3 px-8 sm:py-3.5 sm:px-10 rounded-lg border-2 border-accent hover:bg-accent/10 hover:text-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto interactive-glow">
               <FaDownload className="mr-2.5 h-4 w-4 sm:h-5 sm:w-5" />
-              Download CV
+              {t("cvButton")}
             </a>
           </div>
           <div className="flex justify-center space-x-5 xs:space-x-6 sm:space-x-7 pt-3 sm:pt-4 md:pt-5 animate-fade-in-up animation-delay-400">

@@ -1,27 +1,23 @@
-// src/app/layout.tsx
+// src/app/[locale]/layout.tsx
 import type { Metadata } from "next";
 import { Poppins, Fira_Code } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import NextIntlProvider from "@/components/NextIntlProvider";
+import ScrollSpy from "@/components/ScrollSpy"; // THIS IS THE MISSING IMPORT
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-poppins",
-  display: "swap",
-  adjustFontFallback: false,
-  fallback: ["system-ui", "arial", "sans-serif"],
 });
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-fira-code",
-  display: "swap",
-  adjustFontFallback: false,
-  fallback: ["ui-monospace", "monospace"],
 });
 
 export const metadata: Metadata = {
@@ -32,15 +28,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params: { locale },
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`${poppins.variable} ${firaCode.variable} antialiased`}>
       <head>
-        {/* ADDED: Preload the background SVG to prevent it from render-blocking */}
         <link
           rel="preload"
           href="/images/coding-symbols.svg"
@@ -49,10 +46,12 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Navigation />
-        {children}
-        <ScrollToTopButton />
-        <Footer />
+        <NextIntlProvider>
+          <Navigation />
+          {children}
+          <ScrollToTopButton />
+          <ScrollSpy />
+        </NextIntlProvider>
       </body>
     </html>
   );

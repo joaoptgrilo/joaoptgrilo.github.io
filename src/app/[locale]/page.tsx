@@ -1,11 +1,13 @@
-// src/app/page.tsx
+// src/app/[locale]/page.tsx
 import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import DeferredSections from "@/components/DeferredSections"; // Import the client component
 
-// Load the components that are visible above the fold
+// Carrega os componentes que são visíveis "above the fold"
 const About = dynamic(() => import("@/components/About"));
 const Skills = dynamic(() => import("@/components/Skills"));
+
+// Carrega o componente que gere todas as secções "below the fold"
+const DeferredSections = dynamic(() => import("@/components/DeferredSections"));
 
 export default function Home() {
   return (
@@ -13,7 +15,7 @@ export default function Home() {
       <Hero />
       <About />
       <Skills />
-      {/* Render the client component that will handle all deferred loading */}
+      {/* Renderiza o componente cliente que vai gerir todo o carregamento diferido */}
       <DeferredSections />
     </main>
   );

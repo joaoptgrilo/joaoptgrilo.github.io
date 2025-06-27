@@ -1,4 +1,3 @@
-// src/components/About.tsx
 "use client";
 
 import Image from "next/image";
@@ -15,6 +14,7 @@ import {
 import Highlight from "./Highlight";
 import Section from "./Section";
 import Panel from "./Panel";
+import { useTranslations } from "next-intl";
 
 interface InfoPanelProps {
   icon: IconType;
@@ -35,7 +35,7 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
     title={tooltip}
     className={`flex flex-col items-center text-center p-4 rounded-lg border border-neutral-700/50 transform transition-transform hover:scale-105 cursor-default w-full interactive-glow ${className.trim()}`}>
     <IconComponent className="w-8 h-8 text-info-accent mb-2" />
-    <p className="font-fira_code text-sm text-secondary-text mb-1">{title}</p>
+    <p className="font_fira_code text-sm text-secondary-text mb-1">{title}</p>
     <p className="text-primary-text text-base md:text-lg font-semibold">
       {value}
     </p>
@@ -43,10 +43,13 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
 );
 
 const About: React.FC = () => {
+  const t = useTranslations("About");
+  const h = useTranslations("Hero");
+
   return (
     <Section
       id="about"
-      title="About"
+      title="about"
       className="py-16 md:py-24 pt-32 md:pt-40 relative overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start mb-8 lg:mb-12">
         <Panel className="lg:col-span-1">
@@ -54,9 +57,9 @@ const About: React.FC = () => {
             <div className="relative w-40 h-40 md:w-48 md:h-48 mb-6">
               <Image
                 src="/images/joao-grilo-photo.webp"
-                alt="João Grilo"
-                layout="fill"
-                objectFit="cover"
+                alt={h("name")}
+                fill
+                style={{ objectFit: "cover" }}
                 className="rounded-full border-2 border-info-accent shadow-lg"
                 sizes="(max-width: 767px) 10rem, 12rem"
                 priority
@@ -66,96 +69,84 @@ const About: React.FC = () => {
               </div>
             </div>
             <p className="text-2xl font-bold text-primary-text mb-1">
-              João Grilo
+              {h("name")}
             </p>
-            <p className="font-fira_code text-info-accent text-sm mb-4">
-              Full-Stack Developer
+            <p className="font_fira_code text-info-accent text-sm mb-4">
+              {t("jobTitle")}
             </p>
             <p className="text-secondary-text text-center text-sm leading-relaxed">
-              Based in Portimão, Portugal{" "}
-              <FiGlobe className="inline-block ml-1" />
+              {t("location")} <FiGlobe className="inline-block ml-1" />
             </p>
           </div>
         </Panel>
         <Panel className="lg:col-span-2">
-          <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-4 text-center sm:text-left font-semibold">
-            Professional Summary
+          <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-4 text-center sm:text-left font-semibold">
+            {t("summaryTitle")}
           </p>
           <div className="space-y-4 text-secondary-text leading-relaxed">
             <p>
-              A dedicated Full-Stack Developer with over{" "}
-              <Highlight>4.5 years</Highlight> of experience crafting{" "}
-              <Highlight>high-performance</Highlight>, scalable web
-              applications. Skilled at transforming complex requirements into
-              clean, robust solutions that reliably serve high traffic.
+              {t.rich("summaryP1", {
+                highlight: (chunks) => <Highlight>{chunks}</Highlight>,
+              })}
             </p>
             <p>
-              Expertise in <Highlight>PHP</Highlight>,{" "}
-              <Highlight>JavaScript (React)</Highlight>, and{" "}
-              <Highlight>.NET Core</Highlight>. Known for enhancing user
-              experience, achieving significant performance gains (e.g.,{" "}
-              <Highlight>&gt;90 Lighthouse</Highlight> scores), and driving{" "}
-              organic traffic growth of approximately{" "}
-              <Highlight>~15%</Highlight> through SEO and performance
-              optimization.
+              {t.rich("summaryP2", {
+                highlight: (chunks) => <Highlight>{chunks}</Highlight>,
+              })}
             </p>
             <p>
-              Passionate about <Highlight>Agile methodologies</Highlight> and
-              continuous learning, I embrace a{" "}
-              <Highlight>user-centric approach</Highlight> to build scalable,
-              secure, and intuitive software. Fluent in English (C2 level).
+              {t.rich("summaryP3", {
+                highlight: (chunks) => <Highlight>{chunks}</Highlight>,
+              })}
             </p>
             <p>
-              In a <Highlight>remote work</Highlight> setting, values a{" "}
-              <Highlight>healthy work-life balance</Highlight>, dedicating time
-              to <Highlight>continuous learning</Highlight> through{" "}
-              <Highlight>certifications</Highlight>, exploring{" "}
-              <Highlight>new technologies</Highlight>, and enjoying meaningful
-              moments with <Highlight>family and pets</Highlight>.
+              {t.rich("summaryP4", {
+                highlight: (chunks) => <Highlight>{chunks}</Highlight>,
+              })}
             </p>
           </div>
         </Panel>
       </div>
       <Panel>
-        <p className="font-fira_code text-xl md:text-2xl text-info-accent mb-8 text-center font-semibold">
-          Key Metrics & Info
+        <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-8 text-center font-semibold">
+          {t("metricsTitle")}
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-items-stretch w-full max-w-4xl mx-auto">
           <InfoPanel
             icon={FiBriefcase}
-            title="Experience"
-            value="4.5+ Years"
-            tooltip="Years of professional software development experience"
+            title={t("experienceTitle")}
+            value={t("experienceValue")}
+            tooltip={t("experienceTooltip")}
           />
           <InfoPanel
             icon={FiTarget}
-            title="Lighthouse Avg."
-            value=">90"
-            tooltip="Average performance/accessibility score using Google Lighthouse"
+            title={t("lighthouseTitle")}
+            value={t("lighthouseValue")}
+            tooltip={t("lighthouseTooltip")}
           />
           <InfoPanel
             icon={FiZap}
-            title="Traffic Growth (SEO)"
-            value="~15%"
-            tooltip="Estimated organic traffic increase through SEO & optimization"
+            title={t("trafficTitle")}
+            value={t("trafficValue")}
+            tooltip={t("trafficTooltip")}
           />
           <InfoPanel
             icon={FiCpu}
-            title="Core Stacks"
-            value="PHP, JS, .NET"
-            tooltip="Main backend and frontend technologies used professionally"
+            title={t("stacksTitle")}
+            value={t("stacksValue")}
+            tooltip={t("stacksTooltip")}
           />
           <InfoPanel
             icon={FiMessageSquare}
-            title="English Level"
-            value="C2 Fluent"
-            tooltip="Proficient in professional English communication (C2 level)"
+            title={t("englishTitle")}
+            value={t("englishValue")}
+            tooltip={t("englishTooltip")}
           />
           <InfoPanel
             icon={FiGlobe}
-            title="Work Preference"
-            value="Remote"
-            tooltip="Available and experienced in remote, asynchronous collaboration"
+            title={t("workTitle")}
+            value={t("workValue")}
+            tooltip={t("workTooltip")}
           />
         </div>
       </Panel>

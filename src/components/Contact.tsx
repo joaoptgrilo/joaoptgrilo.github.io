@@ -1,8 +1,12 @@
 // src/components/Contact.tsx
+"use client";
+
 import React from "react";
 import Highlight from "./Highlight";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
 import Panel from "./Panel";
+import { useTranslations } from "next-intl";
+import Section from "./Section";
 
 const ContactLink: React.FC<{
   href: string;
@@ -13,7 +17,7 @@ const ContactLink: React.FC<{
 }> = ({ href, icon, label, newTab = false, isPrimary = false }) => {
   const baseClasses = `
     inline-flex items-center justify-center text-center 
-    font-fira_code font-semibold rounded-lg transition-all duration-300 ease-in-out 
+    font_fira_code font-semibold rounded-lg transition-all duration-300 ease-in-out 
     w-full sm:w-auto px-6 py-3 text-sm md:text-base
     border-2 interactive-glow group
   `;
@@ -41,52 +45,50 @@ const ContactLink: React.FC<{
 };
 
 const Contact: React.FC = () => {
-  const titleText = "Get In Touch";
+  const t = useTranslations("Contact");
   const GITHUB_PROFILE_URL = "https://github.com/joaoptgrilo";
 
   return (
-    <section
+    <Section
       id="contact"
-      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center section-scroll-margin">
+      title="contact"
+      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center">
       <div className="container mx-auto px-4 flex flex-col items-center">
-        <div className="flex justify-center animate-on-scroll w-full">
-          <h2 className="font-fira_code text-3xl md:text-4xl lg:text-5xl font-bold text-primary-text mb-10 md:mb-12 text-center whitespace-nowrap">
-            {titleText}
-          </h2>
-        </div>
-        <Panel className="w-full max-w-2xl text-center animate-on-scroll">
+        {/* THIS IS THE FIX: Explicitly set the variant to "default" */}
+        <Panel
+          variant="default"
+          className="w-full max-w-2xl text-center animate-on-scroll">
           <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
-            Have a <Highlight>project in mind</Highlight>, an{" "}
-            <Highlight>opportunity</Highlight> to discuss, or just want to{" "}
-            <Highlight>say hi</Highlight>? I'm always open to{" "}
-            <Highlight>connecting</Highlight>!
+            {t.rich("description", {
+              highlight: (chunks) => <Highlight>{chunks}</Highlight>,
+            })}
           </p>
-          <p className="font-fira_code text-info-accent mb-6 text-sm">
-            Let's connect:
+          <p className="font_fira_code text-info-accent mb-6 text-sm">
+            {t("prompt")}
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
             <ContactLink
               href="mailto:joao.grilo.dev@gmail.com"
               icon={<FaEnvelope />}
-              label="Email Me"
+              label={t("emailButton")}
               isPrimary={true}
             />
             <ContactLink
               href="https://www.linkedin.com/in/joaoptgrilo/"
               icon={<FaLinkedin />}
-              label="LinkedIn"
+              label={t("linkedinButton")}
               newTab={true}
             />
             <ContactLink
               href={GITHUB_PROFILE_URL}
               icon={<FaGithub />}
-              label="GitHub"
+              label={t("githubButton")}
               newTab={true}
             />
           </div>
         </Panel>
       </div>
-    </section>
+    </Section>
   );
 };
 
