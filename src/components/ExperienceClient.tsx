@@ -1,3 +1,4 @@
+// src/components/ExperienceClient.tsx
 "use client";
 import React from "react";
 import Image from "next/image";
@@ -63,7 +64,7 @@ const ExperienceClient = ({
                         </span>
                         <div className="flex items-start mt-1">
                           <FaMapMarkerAlt className="w-4 h-4 mr-1.5 mt-0.5 text-info-accent flex-shrink-0" />
-                          <span className="font-fira_code text-secondary-text text-xs">
+                          <span className="font_fira_code text-secondary-text text-xs">
                             {item.location}
                           </span>
                         </div>

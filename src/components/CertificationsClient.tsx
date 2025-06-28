@@ -1,3 +1,4 @@
+// src/components/CertificationsClient.tsx
 "use client";
 import React from "react";
 import { CertificationItem } from "@/data";

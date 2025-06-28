@@ -1,3 +1,5 @@
+// src/components/Experience.tsx
+import "server-only";
 import React from "react";
 import { getData } from "@/data";
 import { getLocale } from "next-intl/server";
