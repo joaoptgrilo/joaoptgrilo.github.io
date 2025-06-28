@@ -1,6 +1,7 @@
+// src/data/pt/certificationsData.ts
 import React from "react";
 import Highlight from "@/components/Highlight";
-import { CertificationItem } from "../en/certificationsData";
+import { CertificationItem } from "../types"; // UPDATED IMPORT
 
 export const certificationsData: CertificationItem[] = [
   {
@@ -95,7 +96,7 @@ export const certificationsData: CertificationItem[] = [
     id: "tryhackme-learning-paths",
     name: "Percursos de Aprendizagem no TryHackMe",
     issuer: "TryHackMe",
-    credentialUrl: "https://tryhackme.com/p/joaoptgrilo",
+    credentialUrl: "https://tryhackme.com/p/joao.grilo.dev",
     description: (
       <>
         A progredir em percursos de cibersegurança fundamentais, incluindo{" "}

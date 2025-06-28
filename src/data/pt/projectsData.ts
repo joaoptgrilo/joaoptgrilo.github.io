@@ -1,4 +1,5 @@
-import { Project } from "../en/projectsData";
+// src/data/pt/projectsData.ts
+import { Project } from "../types"; // UPDATED IMPORT
 
 export const projectsData: Project[] = [
   {
