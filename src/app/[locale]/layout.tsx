@@ -51,6 +51,7 @@ export default function RootLayout({
           {children}
           <ScrollToTopButton />
           <ScrollSpy />
+          <Footer />
         </NextIntlProvider>
       </body>
     </html>
