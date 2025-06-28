@@ -1,11 +1,28 @@
-// src/data/en/projectsData.ts
-import { Project } from "../types"; // UPDATED IMPORT
+// src/data/projectsData.tsx
+
+export interface ProjectTechItem {
+  name: string;
+  description?: string;
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  description: string;
+  techStack: ProjectTechItem[];
+  liveLink?: string;
+  codeLink?: string;
+  learnMoreLink?: string;
+  type: "public" | "private" | "description-focus";
+}
 
 export const projectsData: Project[] = [
   {
     id: "fedrax-platforms",
     title: "Fedrax Platforms (Gameblog, CineSeries, etc.)",
-    imageUrl: "/images/projects/fedrax-platforms-showcase.webp",
+    imageUrl: "/images/projects/fedrax-platforms-showcase.webp", // SUGGESTED FILENAME
     imageAlt:
       "Showcase of Fedrax platforms including Gameblog and CineSeries user interfaces",
     description:
@@ -39,7 +56,7 @@ export const projectsData: Project[] = [
   {
     id: "personal-dotnet-server",
     title: "Personal C#/.NET Core Backend Server",
-    imageUrl: "/images/projects/personal-dotnet-server-architecture.webp",
+    imageUrl: "/images/projects/personal-dotnet-server-architecture.webp", // SUGGESTED FILENAME
     imageAlt:
       "Conceptual architecture diagram of the personal C#/.NET Core backend server",
     description:
@@ -67,7 +84,7 @@ export const projectsData: Project[] = [
   {
     id: "personal-vanillajs-framework",
     title: "Custom Vanilla JS Frontend Framework",
-    imageUrl: "/images/projects/personal-vanillajs-framework-concepts.webp",
+    imageUrl: "/images/projects/personal-vanillajs-framework-concepts.webp", // SUGGESTED FILENAME
     imageAlt:
       "Visual representation of concepts in the custom Vanilla JS frontend framework",
     description:
@@ -96,7 +113,7 @@ export const projectsData: Project[] = [
   {
     id: "fcc-markdown-previewer",
     title: "FCC: Real-time Markdown Previewer",
-    imageUrl: "/images/projects/fcc-markdown-previewer.webp",
+    imageUrl: "/images/projects/fcc-markdown-previewer.webp", // SUGGESTED FILENAME
     imageAlt: "Screenshot of the FCC Markdown Previewer application interface",
     description:
       "A React/TypeScript SPA for real-time Markdown editing and previewing, using `marked.js` and `DOMPurify`.",
@@ -121,7 +138,7 @@ export const projectsData: Project[] = [
   {
     id: "fcc-drum-machine",
     title: "FCC: Interactive Drum Machine",
-    imageUrl: "/images/projects/fcc-drum-machine.webp",
+    imageUrl: "/images/projects/fcc-drum-machine.webp", // SUGGESTED FILENAME
     imageAlt:
       "Screenshot of the FCC Drum Machine interface with pads and controls",
     description:
@@ -144,7 +161,7 @@ export const projectsData: Project[] = [
   {
     id: "fcc-random-quote-machine",
     title: "FCC: Random Quote Machine",
-    imageUrl: "/images/projects/fcc-random-quote-machine.webp",
+    imageUrl: "/images/projects/fcc-random-quote-machine.webp", // SUGGESTED FILENAME
     imageAlt: "Screenshot of the FCC Random Quote Machine application",
     description:
       "A React/TypeScript app fetching and displaying random quotes from an API, with 'New Quote' and 'Tweet Quote' features and fade animations.",
@@ -166,7 +183,7 @@ export const projectsData: Project[] = [
   {
     id: "fcc-javascript-calculator",
     title: "FCC: Retro JavaScript Calculator",
-    imageUrl: "/images/projects/fcc-javascript-calculator.webp",
+    imageUrl: "/images/projects/fcc-javascript-calculator.webp", // SUGGESTED FILENAME
     imageAlt: "Screenshot of the FCC retro-themed JavaScript Calculator",
     description:
       "A functional, retro-themed digital calculator in React/TypeScript with custom logic for expression parsing and order of operations.",
@@ -187,7 +204,7 @@ export const projectsData: Project[] = [
   {
     id: "fcc-pomodoro-clock",
     title: "FCC: 25+5 Pomodoro Clock",
-    imageUrl: "/images/projects/fcc-pomodoro-clock.webp",
+    imageUrl: "/images/projects/fcc-pomodoro-clock.webp", // SUGGESTED FILENAME
     imageAlt: "Screenshot of the FCC retro-themed 25+5 Pomodoro Clock",
     description:
       "A retro, wood-themed Pomodoro timer (25+5 Clock) with Vanilla JS/jQuery, featuring adjustable session/break lengths and audio notifications.",

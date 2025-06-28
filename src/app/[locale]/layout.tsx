@@ -5,9 +5,8 @@ import "../globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-import ScrollSpy from "@/components/ScrollSpy";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import NextIntlProvider from "@/components/NextIntlProvider";
+import ScrollSpy from "@/components/ScrollSpy"; // THIS IS THE MISSING IMPORT
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,15 +26,13 @@ export const metadata: Metadata = {
     "The professional portfolio of João Grilo, a results-driven Full-Stack Developer crafting high-performance web solutions and seamless user experiences.",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
   params: { locale },
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const messages = await getMessages();
-
   return (
     <html
       lang={locale}
@@ -49,13 +46,13 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlProvider>
           <Navigation />
           {children}
           <ScrollToTopButton />
           <ScrollSpy />
           <Footer />
-        </NextIntlClientProvider>
+        </NextIntlProvider>
       </body>
     </html>
   );

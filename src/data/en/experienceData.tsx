@@ -1,7 +1,24 @@
-// src/data/en/experienceData.ts
+// src/data/experienceData.tsx
 import React from "react";
-import Highlight from "@/components/Highlight";
-import { ExperienceItem } from "../types"; // UPDATED IMPORT
+import Highlight from "@/components/Highlight"; // Ensure this path is correct
+
+export interface ExperienceTechItem {
+  name: string;
+  description?: string;
+}
+
+export interface ExperienceItem {
+  id: number;
+  role: string;
+  company: string;
+  companyLink?: string;
+  companyLogoUrl?: string;
+  companyLogoAlt?: string;
+  location: string;
+  period: string;
+  descriptionItems: React.ReactNode[]; // Array of React Nodes (strings or JSX)
+  keyTech?: ExperienceTechItem[];
+}
 
 export const experienceData: ExperienceItem[] = [
   {
@@ -103,7 +120,7 @@ export const experienceData: ExperienceItem[] = [
         (payment, shipping, CRM).
       </>,
       <>
-        Improved e-commerce clients'{" "}
+        Improved e-commerce clients&apos;{" "}
         <Highlight>operational efficiency by up to 30%</Highlight> through
         automation of order processing and inventory sync.
       </>,

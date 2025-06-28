@@ -1,10 +1,8 @@
 import "server-only";
-import type {
-  CertificationItem,
-  ExperienceItem,
-  Project,
-  ProjectTechItem,
-} from "./types";
+// Import the types from their original source file
+import type { CertificationItem } from "./en/certificationsData";
+import type { ExperienceItem } from "./en/experienceData";
+import type { Project, ProjectTechItem } from "./en/projectsData"; // Add ProjectTechItem here
 
 type Locale = "en" | "pt";
 
@@ -35,4 +33,5 @@ export const getData = (locale: Locale) => {
   return dataLoaders[locale] || dataLoaders.en;
 };
 
+// THIS IS THE FIX: Re-export ProjectTechItem alongside the others
 export type { CertificationItem, ExperienceItem, Project, ProjectTechItem };

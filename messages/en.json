@@ -37,7 +37,7 @@
     "summaryP1": "A dedicated Full-Stack Developer with over <highlight>4.5 years</highlight> of experience crafting <highlight>high-performance</highlight>, scalable web applications. Skilled at transforming complex requirements into clean, robust solutions that reliably serve high traffic.",
     "summaryP2": "Expertise in <highlight>PHP</highlight>, <highlight>JavaScript (React)</highlight>, and <highlight>.NET Core</highlight>. Known for enhancing user experience, achieving significant performance gains (e.g., <highlight>>90 Lighthouse</highlight> scores), and driving organic traffic growth of approximately <highlight>~15%</highlight> through SEO and performance optimization.",
     "summaryP3": "Passionate about <highlight>Agile methodologies</highlight> and continuous learning, I embrace a <highlight>user-centric approach</highlight> to build scalable, secure, and intuitive software. Fluent in English (C2 level).",
-    "summaryP4": "In a <highlight>remote work</highlight> setting, I value a <highlight>healthy work-life balance</highlight>, dedicating time to <highlight>continuous learning</highlight> through <highlight>certifications</highlight>, exploring <highlight>new technologies</highlight>, and enjoying meaningful moments with <highlight>family and pets</highlight>.",
+    "summaryP4": "In a <highlight>remote work</highlight> setting, values a <highlight>healthy work-life balance</highlight>, dedicating time to <highlight>continuous learning</highlight> through <highlight>certifications</highlight>, exploring <highlight>new technologies</highlight>, and enjoying meaningful moments with <highlight>family and pets</highlight>.",
     "metricsTitle": "Key Metrics & Info",
     "experienceTitle": "Experience",
     "experienceValue": "4.5+ Years",
@@ -84,8 +84,7 @@
   },
   "Experience": {
     "keyTech": "Key Technologies",
-    "achievements": "Achievements & Responsibilities",
-    "noExperience": "Experience details are currently being updated. Please check back soon!"
+    "achievements": "Achievements & Responsibilities"
   },
   "Projects": {
     "techStack": "Tech Stack",
@@ -118,7 +117,7 @@
     "frontend_perf": "Improving website speed & efficiency",
     "accessibility": "Ensuring websites are usable by everyone",
     "redux": "State management library for JavaScript apps",
-    "zustand": "A small, fast, and scalable state-management solution for React",
+    "zustand": "State management tools in React ecosystem",
     "dotnet": ".NET Core - Cross-platform framework for building backend apps",
     "nodejs": "JavaScript runtime for server-side development",
     "rest_api": "Creating web APIs following REST principles",

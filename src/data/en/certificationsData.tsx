@@ -1,7 +1,17 @@
-// src/data/en/certificationsData.ts
+// src/data/certificationsData.tsx
 import React from "react";
 import Highlight from "@/components/Highlight";
-import { CertificationItem } from "../types"; // UPDATED IMPORT
+
+export interface CertificationItem {
+  id: string;
+  name: string;
+  issuer: string;
+  issueDate?: string;
+  credentialUrl: string;
+  icon?: React.ElementType;
+  description?: React.ReactNode;
+  isInProgress?: boolean;
+}
 
 export const certificationsData: CertificationItem[] = [
   {
@@ -62,6 +72,7 @@ export const certificationsData: CertificationItem[] = [
       </>
     ),
   },
+  // START: NEW/UPDATED "CONTINUED LEARNING" ITEMS
   {
     id: "leetcode-problem-solving",
     name: "LeetCode Problem Solving",
@@ -105,4 +116,5 @@ export const certificationsData: CertificationItem[] = [
     ),
     isInProgress: true,
   },
+  // END: NEW/UPDATED "CONTINUED LEARNING" ITEMS
 ];
