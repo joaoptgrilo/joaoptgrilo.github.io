@@ -10,17 +10,22 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "../../../i18n";
 
+// --- START OF OPTIMIZATION ---
+// Load ONLY the weights that are actually used in the project.
+// This reduces the font file size and improves LCP.
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "700"], // PREVIOUSLY: ["300", "400", "500", "600", "700"]
   variable: "--font-poppins",
 });
 
+// Fira Code uses most of its weights, so we keep it as is.
 const firaCode = Fira_Code({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-fira-code",
 });
+// --- END OF OPTIMIZATION ---
 
 export const metadata: Metadata = {
   title: "João Grilo | Full-Stack Developer",
