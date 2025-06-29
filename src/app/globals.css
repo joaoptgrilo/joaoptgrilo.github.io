@@ -13,7 +13,7 @@
   --color-accent-hover: #4dd6ff;
   --color-info-accent: #60a5fa;
   --color-accent-shadow-start: rgba(0, 200, 255, 0.5);
-  --color-accent-shadow-end: rgba(0, 200, 255, 0.1);
+  --color-accent-shadow-end: rgba(0, 200, 255, 0.5);
   --color-accent-shadow-strong: rgba(0, 200, 255, 0.35);
 }
 
@@ -55,13 +55,13 @@ body::before {
 
 /* Enhanced shadow glow for the sticky navbar */
 .animate-glow-shadow {
-  animation: glow-shadow-keyframes 4s ease-in-out infinite alternate;
+  animation: glow-shadow-keyframes 3s ease-in-out infinite alternate;
   will-change: box-shadow;
 }
 
 @keyframes glow-shadow-keyframes {
   from {
-    box-shadow: 0 4px 20px -10px rgba(0, 0, 0, 0);
+    box-shadow: 0 4px 20px -10px var(--color-accent-shadow-end);
   }
   to {
     /* Use the main accent color for a brighter glow */
@@ -71,7 +71,7 @@ body::before {
 
 /* Enhanced border glow for the panels */
 .panel-glow-anim {
-  animation: panelGlow 4s ease-in-out infinite alternate;
+  animation: panelGlow 2s ease-in-out infinite alternate;
   will-change: box-shadow;
 }
 
