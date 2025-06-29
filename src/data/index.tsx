@@ -1,5 +1,11 @@
 // src/data/index.ts
 import "server-only";
+import { certificationsData as certificationsEN } from "./en/certificationsData";
+import { experienceData as experienceEN } from "./en/experienceData";
+import { projectsData as projectsEN } from "./en/projectsData";
+import { certificationsData as certificationsPT } from "./pt/certificationsData";
+import { experienceData as experiencePT } from "./pt/experienceData";
+import { projectsData as projectsPT } from "./pt/projectsData";
 import type {
   CertificationItem,
   ExperienceItem,
@@ -15,25 +21,24 @@ interface DataLoaders {
   getProjects: () => Promise<Project[]>;
 }
 
-const dataLoaders: Record<Locale, DataLoaders> = {
+// Data is now imported statically and resolved immediately.
+// The build process will handle tree-shaking and chunking.
+const allData: Record<Locale, DataLoaders> = {
   en: {
-    getCertifications: () =>
-      import("./en/certificationsData").then((m) => m.certificationsData),
-    getExperience: () =>
-      import("./en/experienceData").then((m) => m.experienceData),
-    getProjects: () => import("./en/projectsData").then((m) => m.projectsData),
+    getCertifications: () => Promise.resolve(certificationsEN),
+    getExperience: () => Promise.resolve(experienceEN),
+    getProjects: () => Promise.resolve(projectsEN),
   },
   pt: {
-    getCertifications: () =>
-      import("./pt/certificationsData").then((m) => m.certificationsData),
-    getExperience: () =>
-      import("./pt/experienceData").then((m) => m.experienceData),
-    getProjects: () => import("./pt/projectsData").then((m) => m.projectsData),
+    getCertifications: () => Promise.resolve(certificationsPT),
+    getExperience: () => Promise.resolve(experiencePT),
+    getProjects: () => Promise.resolve(projectsPT),
   },
 };
 
 export const getData = (locale: Locale) => {
-  return dataLoaders[locale] || dataLoaders.en;
+  return allData[locale] || allData.en;
 };
 
-export type { CertificationItem, ExperienceItem, Project, ProjectTechItem };
+// Re-export types from the central types file
+export * from "./types";

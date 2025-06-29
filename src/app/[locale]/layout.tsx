@@ -9,6 +9,11 @@ import ScrollSpy from "@/components/ScrollSpy";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
+// Define which locales to pre-build during the export process.
+export function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pt" }];
+}
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
