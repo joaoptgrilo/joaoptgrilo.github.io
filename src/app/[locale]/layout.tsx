@@ -9,7 +9,7 @@ import ScrollSpy from "@/components/ScrollSpy";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
-// Define which locales to pre-build during the export process.
+// This is the key: It tells Next.js to pre-build both locales as static pages.
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "pt" }];
 }
