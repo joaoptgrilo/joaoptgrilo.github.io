@@ -7,9 +7,8 @@ import Footer from "@/components/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import ScrollSpy from "@/components/ScrollSpy";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, unstable_setRequestLocale } from "next-intl/server"; // Import the new API
 
-// This is the key: It tells Next.js to pre-build both locales as static pages.
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "pt" }];
 }
@@ -39,6 +38,9 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  // NEW: Enable static rendering
+  unstable_setRequestLocale(locale);
+  
   const messages = await getMessages();
 
   return (
