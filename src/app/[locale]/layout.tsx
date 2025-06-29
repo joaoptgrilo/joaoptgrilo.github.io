@@ -6,12 +6,9 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import ScrollSpy from "@/components/ScrollSpy";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages, unstable_setRequestLocale } from "next-intl/server"; // Import the new API
-
-export function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "pt" }];
-}
+import { NextIntlClientProvider, useMessages } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
+import { locales } from "../../../i18n"; // Import locales for static generation
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -31,17 +28,22 @@ export const metadata: Metadata = {
     "The professional portfolio of João Grilo, a results-driven Full-Stack Developer crafting high-performance web solutions and seamless user experiences.",
 };
 
-export default async function RootLayout({
+// **FIX PART 1: Generate static pages for all locales**
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default function RootLayout({
   children,
   params: { locale },
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // NEW: Enable static rendering
+  // **FIX PART 2: Enable static rendering**
   unstable_setRequestLocale(locale);
-  
-  const messages = await getMessages();
+
+  const messages = useMessages();
 
   return (
     <html
