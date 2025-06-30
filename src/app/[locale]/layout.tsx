@@ -5,20 +5,27 @@ import "../globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-import NextIntlProvider from "@/components/NextIntlProvider";
-import ScrollSpy from "@/components/ScrollSpy"; // THIS IS THE MISSING IMPORT
+import ScrollSpy from "@/components/ScrollSpy";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import { locales } from "../../../i18n";
 
+// --- START OF OPTIMIZATION ---
+// Load ONLY the weights that are actually used in the project.
+// This reduces the font file size and improves LCP.
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "700"], // PREVIOUSLY: ["300", "400", "500", "600", "700"]
   variable: "--font-poppins",
 });
 
+// Fira Code uses most of its weights, so we keep it as is.
 const firaCode = Fira_Code({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-fira-code",
 });
+// --- END OF OPTIMIZATION ---
 
 export const metadata: Metadata = {
   title: "João Grilo | Full-Stack Developer",
@@ -26,13 +33,20 @@ export const metadata: Metadata = {
     "The professional portfolio of João Grilo, a results-driven Full-Stack Developer crafting high-performance web solutions and seamless user experiences.",
 };
 
-export default function RootLayout({
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({
   children,
   params: { locale },
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  unstable_setRequestLocale(locale);
+  const messages = await getMessages();
+
   return (
     <html
       lang={locale}
@@ -46,13 +60,13 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <NextIntlProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <Navigation />
           {children}
           <ScrollToTopButton />
           <ScrollSpy />
           <Footer />
-        </NextIntlProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

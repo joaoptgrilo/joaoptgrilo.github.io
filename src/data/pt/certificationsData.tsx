@@ -1,6 +1,7 @@
+// src/data/pt/certificationsData.ts
 import React from "react";
 import Highlight from "@/components/Highlight";
-import { CertificationItem } from "../en/certificationsData";
+import { CertificationItem } from "../types";
 
 export const certificationsData: CertificationItem[] = [
   {

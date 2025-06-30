@@ -1,3 +1,4 @@
+// src/components/ExperienceClient.tsx
 "use client";
 import React from "react";
 import Image from "next/image";
@@ -26,7 +27,7 @@ const ExperienceClient = ({
             <Panel key={item.id} variant="default">
               <article className="lg:grid lg:grid-cols-12 lg:gap-x-0">
                 <div className="lg:col-span-5 lg:pr-6 mb-6 lg:mb-0">
-                  <p className="text-xl md:text-2xl font-bold text-accent mb-4 leading-tight">
+                  <p className="text-xl md:text-2xl font-bold text-info-accent mb-4 leading-tight">
                     {item.role}
                   </p>
                   <div className="space-y-2.5 mb-6 text-sm">
@@ -63,7 +64,7 @@ const ExperienceClient = ({
                         </span>
                         <div className="flex items-start mt-1">
                           <FaMapMarkerAlt className="w-4 h-4 mr-1.5 mt-0.5 text-info-accent flex-shrink-0" />
-                          <span className="font-fira_code text-secondary-text text-xs">
+                          <span className="font_fira_code text-secondary-text text-xs">
                             {item.location}
                           </span>
                         </div>

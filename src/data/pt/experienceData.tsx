@@ -1,6 +1,7 @@
+// src/data/pt/experienceData.ts
 import React from "react";
 import Highlight from "@/components/Highlight";
-import { ExperienceItem } from "../en/experienceData";
+import { ExperienceItem } from "../types";
 
 export const experienceData: ExperienceItem[] = [
   {
@@ -45,7 +46,6 @@ export const experienceData: ExperienceItem[] = [
         reprodutíveis.
       </>,
     ],
-    // THIS IS THE CORRECTED SECTION WITH DESCRIPTIONS FOR TOOLTIPS
     keyTech: [
       {
         name: "PHP",
@@ -117,7 +117,6 @@ export const experienceData: ExperienceItem[] = [
         <Highlight>reduções médias de ~40% no tempo de carregamento</Highlight>.
       </>,
     ],
-    // THIS IS THE CORRECTED SECTION WITH DESCRIPTIONS FOR TOOLTIPS
     keyTech: [
       {
         name: "PHP",
