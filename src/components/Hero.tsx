@@ -40,16 +40,11 @@ const Hero: React.FC = () => {
   const cvToDownload = locale === "pt" ? cvFilePT : cvFileEN;
 
   return (
-    // The main container remains a section and handles the full-screen height.
     <section
       id="hero"
       className="relative w-full h-screen flex flex-col items-center justify-center text-primary-text overflow-x-hidden">
-      
-      {/* NEW: Background Div - This div is now separate from the content. */}
-      {/* It is positioned absolutely to fill the container without blocking the content's render path. */}
-      <div className="absolute inset-0 z-0 bg-light-panel-bg/15 backdrop-blur-lg"></div>
+      <div className="absolute inset-0 z-0 bg-light-panel-bg/15 backdrop-blur-custom"></div>
 
-      {/* Content container - This is now the primary focus for the browser renderer. */}
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center p-6 sm:p-8 md:p-12 lg:p-16">
         <div className="space-y-4 sm:space-y-5 md:space-y-6 max-w-3xl w-full pt-16 md:pt-0">
           <h1 className="font_fira_code font-bold text-4xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-text leading-tight tracking-tight sm:tracking-normal">

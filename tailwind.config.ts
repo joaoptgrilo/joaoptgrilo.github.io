@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backdropBlur: {
+        // UPDATED: Now points to our dynamic CSS variable
+        custom: "var(--blur-intensity)",
+      },
       colors: {
         "primary-bg": "var(--color-primary-bg)",
         "secondary-bg": "var(--color-secondary-bg)",
@@ -18,12 +22,14 @@ const config: Config = {
         accent: "var(--color-accent)",
         "accent-hover": "var(--color-accent-hover)",
         "info-accent": "var(--color-info-accent)",
+        border: "var(--color-border)",
+        "tag-bg": "var(--color-tag-bg)",
+        shadow: "var(--color-shadow)",
       },
       fontFamily: {
         poppins: ["var(--font-poppins)", "sans-serif"],
         fira_code: ["var(--font-fira-code)", "monospace"],
       },
-      // Original keyframes/animation block
       keyframes: {
         glowShadow: {
           "0%": { boxShadow: "0 0 5px var(--color-accent-shadow-start)" },
@@ -32,7 +38,6 @@ const config: Config = {
           },
           "100%": { boxShadow: "0 0 5px var(--color-accent-shadow-start)" },
         },
-        // Adding other necessary keyframes from the refactor
         fadeInUp: {
           from: { opacity: "0", transform: "translateY(30px)" },
           to: { opacity: "1", transform: "translateY(0)" },

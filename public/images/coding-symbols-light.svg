@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- Vibrant Light Theme Version -->
+  <style>
+    .bg { fill: #FFFFFF; } /* Match the page's primary background */
+    
+    .symbol {
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      fill: #5a6477;  /* Use the secondary text color for better contrast */
+      opacity: 0.5;   /* Increased opacity for more presence */
+    }
+
+    .pop {
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      fill: #00b0f0;  /* Use the vibrant accent color */
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.9; } /* Pulse to a higher opacity to be more visible */
+    }
+  </style>
+
+  <rect width="200" height="200" class="bg"/>
+
+  <!-- Symbols now use distinct classes for better control -->
+  
+  <text x="10" y="20" class="symbol glow">{ }</text>
+  <text x="60" y="20" class="symbol">&lt;/&gt;</text>
+  <text x="120" y="20" class="symbol glow">const</text>
+  <text x="10" y="60" class="symbol">let</text>
+  <text x="70" y="60" class="symbol glow">function</text>
+  <text x="140" y="60" class="symbol">=></text>
+  <text x="30" y="100" class="symbol glow">return</text>
+  <text x="100" y="100" class="symbol">{ }</text>
+  <text x="160" y="100" class="symbol glow">&lt;/&gt;</text>
+  <text x="20" y="150" class="symbol">if</text>
+  <text x="60" y="150" class="symbol glow">( )</text>
+  <text x="100" y="150" class="symbol">else</text>
+  <text x="150" y="150" class="symbol glow">while</text>
+</svg>

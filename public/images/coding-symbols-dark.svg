@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <style>
+    .bg { fill: #0b0c10; }
+    .symbol {
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      fill: #00bfff;
+      opacity: 0.6;
+    }
+    .glow {
+      filter: url(#glow);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+  </style>
+
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="200" height="200" class="bg"/>
+
+  <!-- Concentrated programming symbols -->
+  <text x="10" y="20" class="symbol glow">{ }</text>
+  <text x="60" y="20" class="symbol">&lt;/&gt;</text>
+  <text x="120" y="20" class="symbol glow">const</text>
+  <text x="10" y="60" class="symbol">let</text>
+  <text x="70" y="60" class="symbol glow">function</text>
+  <text x="140" y="60" class="symbol">=></text>
+  <text x="30" y="100" class="symbol glow">return</text>
+  <text x="100" y="100" class="symbol">{ }</text>
+  <text x="160" y="100" class="symbol glow">&lt;/&gt;</text>
+  <text x="20" y="150" class="symbol">if</text>
+  <text x="60" y="150" class="symbol glow">( )</text>
+  <text x="100" y="150" class="symbol">else</text>
+  <text x="150" y="150" class="symbol glow">while</text>
+</svg>
