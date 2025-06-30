@@ -14,9 +14,9 @@
   --color-accent-hover: #4dd6ff;
   --color-info-accent: #60a5fa;
   --color-border: rgba(55, 65, 81, 0.5);
-  --color-tag-bg: rgba(55, 65, 81, 0.3);
+  --color-tag-bg: transparent; /* UPDATED: Removed background from tags */
   --color-shadow: rgba(0, 0, 0, 0);
-  --blur-intensity: 7px; /* UPDATED: Dark mode blur intensity */
+  --blur-intensity: 7px;
 }
 
 /* Light Theme Variables (Sharp Card v3.0) */
@@ -30,9 +30,9 @@ html.light {
   --color-accent-hover: #0090c0;
   --color-info-accent: #1e90ff;
   --color-border: #d1d5db;
-  --color-tag-bg: #f3f4f6;
+  --color-tag-bg: transparent; /* UPDATED: Removed background from tags */
   --color-shadow: rgba(10, 25, 47, 0.1);
-  --blur-intensity: 3px; /* UPDATED: Light mode blur intensity */
+  --blur-intensity: 3px;
 }
 
 body {
