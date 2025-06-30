@@ -151,8 +151,8 @@ const Skills: React.FC = () => {
                   key={skill.key}
                   title={tTooltips(skill.key)}
                   className={clsx(
-                    "text-center bg-primary-bg/70 text-secondary-text px-3 py-1.5 rounded-md text-sm border border-neutral-700/50 cursor-pointer interactive-glow",
-                    { "col-span-2": skill.isWide }
+                    "inline-block bg-tag-bg text-secondary-text px-3 py-1.5 rounded-md text-sm border border-border cursor-pointer interactive-glow",
+                    { "w-full text-center": skill.isWide }
                   )}>
                   {skill.name}
                 </span>

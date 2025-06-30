@@ -21,7 +21,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
   return (
     <Panel className="flex flex-col h-full group" variant="default">
       <article className="flex flex-col flex-grow h-full">
-        <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden mb-4 border border-neutral-700/30 transition-transform duration-300 ease-out group-hover:scale-105">
+        <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden mb-4 border border-border transition-transform duration-300 ease-out group-hover:scale-105">
           {project.imageUrl ? (
             <Image
               src={project.imageUrl}
@@ -53,7 +53,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                 <li key={tech.name}>
                   <span
                     title={tech.description || tech.name}
-                    className="inline-block bg-primary-bg/70 text-secondary-text px-2.5 py-1 rounded text-xs border border-neutral-700/50 interactive-glow cursor-default">
+                    className="inline-block bg-tag-bg text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-default">
                     {tech.name}
                   </span>
                 </li>
@@ -61,7 +61,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             </ul>
           </div>
         </div>
-        <div className="mt-auto pt-4 border-t border-neutral-700/30 flex items-center justify-start space-x-3">
+        <div className="mt-auto pt-4 border-t border-border flex items-center justify-start space-x-3">
           {project.liveLink && (
             <a
               href={project.liveLink}
@@ -124,7 +124,7 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
             </li>
           ))}
           <li className="flex">
-            <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-neutral-700/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 transition-all duration-300 w-full">
+            <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-border/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 transition-all duration-300 w-full">
               <div className="animate-on-scroll p-6">
                 <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4 mx-auto" />
                 <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">

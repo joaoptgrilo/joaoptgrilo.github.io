@@ -9,23 +9,20 @@ import ScrollSpy from "@/components/ScrollSpy";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "../../../i18n";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import ThemeInitializer from "@/components/ThemeInitializer"; // <-- IMPORT THE FIX
 
-// --- START OF OPTIMIZATION ---
-// Load ONLY the weights that are actually used in the project.
-// This reduces the font file size and improves LCP.
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "700"], // PREVIOUSLY: ["300", "400", "500", "600", "700"]
+  weight: ["400", "700"],
   variable: "--font-poppins",
 });
 
-// Fira Code uses most of its weights, so we keep it as is.
 const firaCode = Fira_Code({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-fira-code",
 });
-// --- END OF OPTIMIZATION ---
 
 export const metadata: Metadata = {
   title: "João Grilo | Full-Stack Developer",
@@ -50,7 +47,8 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${poppins.variable} ${firaCode.variable} antialiased`}>
+      className={`${poppins.variable} ${firaCode.variable} antialiased`}
+      suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -60,13 +58,16 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Navigation />
-          {children}
-          <ScrollToTopButton />
-          <ScrollSpy />
-          <Footer />
-        </NextIntlClientProvider>
+        <ThemeInitializer /> {/* <-- ADD THE INITIALIZER SCRIPT HERE */}
+        <ThemeProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <Navigation />
+            {children}
+            <ScrollToTopButton />
+            <ScrollSpy />
+            <Footer />
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

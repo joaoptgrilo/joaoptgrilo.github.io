@@ -33,7 +33,12 @@ const ExperienceClient = ({
                   <div className="space-y-2.5 mb-6 text-sm">
                     <div className="flex items-center">
                       {item.companyLogoUrl ? (
-                        <div className="mr-4 flex-shrink-0 w-20 h-20 relative filter brightness-0 invert border border-neutral-700/50 rounded-md shadow-info-accent-glow overflow-hidden p-3">
+                        <div
+                          className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border ${
+                            item.invertInLightMode
+                              ? "logo-inverts-on-light"
+                              : "logo-inverts-on-dark"
+                          }`}>
                           <div className="relative w-full h-full">
                             <Image
                               src={item.companyLogoUrl}
@@ -88,7 +93,7 @@ const ExperienceClient = ({
                           <li key={tech.name}>
                             <span
                               title={tech.description}
-                              className="inline-block bg-primary-bg/70 text-primary-text/90 px-2.5 py-1 rounded text-xs border border-neutral-700/40 interactive-glow cursor-default">
+                              className="inline-block bg-tag-bg text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-default">
                               {tech.name}
                             </span>
                           </li>
@@ -97,7 +102,7 @@ const ExperienceClient = ({
                     </div>
                   )}
                 </div>
-                <div className="lg:col-span-7 lg:pl-6 pt-6 lg:pt-0 relative border-l-transparent lg:border-l-2 lg:border-neutral-700/30 lg:before:content-[''] lg:before:absolute lg:before:-left-px lg:before:top-0 lg:before:bottom-0 lg:before:w-px lg:before:bg-neutral-700/50 lg:before:shadow-info-accent-glow lg:before:opacity-50">
+                <div className="lg:col-span-7 lg:pl-6 pt-6 lg:pt-0 relative border-l-transparent lg:border-l-2 lg:border-border lg:before:content-[''] lg:before:absolute lg:before:-left-px lg:before:top-0 lg:before:bottom-0 lg:before:w-px lg:before:bg-border">
                   <p className="font_fira_code text-sm text-secondary-text mb-3 uppercase tracking-wider">
                     {t("achievements")}
                   </p>

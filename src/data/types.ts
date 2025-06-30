@@ -33,6 +33,7 @@ export interface ExperienceItem {
   companyLink?: string;
   companyLogoUrl?: string;
   companyLogoAlt?: string;
+  invertInLightMode?: boolean; // Added for theme-specific logo handling
   location: string;
   period: string;
   descriptionItems: React.ReactNode[];

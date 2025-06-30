@@ -27,9 +27,8 @@ const Section: React.FC<SectionProps> = ({
         <div className="flex justify-center">
           <h2
             className={clsx(
-              "text-3xl sm:text-4xl md:text-5xl font-bold text-center",
+              "section-title text-3xl sm:text-4xl md:text-5xl font-bold text-center",
               "animate-on-scroll",
-              "[text-shadow:0_0_10px_rgba(0,0,0,0.8)]",
               titleClassName
             )}>
             {t(title as any)}

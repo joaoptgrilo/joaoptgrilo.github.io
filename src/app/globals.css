@@ -4,6 +4,7 @@
 @tailwind utilities;
 
 :root {
+  /* Dark Theme (Default) */
   --color-primary-bg: #070b1f;
   --color-secondary-bg: #0d102d;
   --color-light-panel-bg: #1e293b;
@@ -12,19 +13,41 @@
   --color-accent: #00c8ff;
   --color-accent-hover: #4dd6ff;
   --color-info-accent: #60a5fa;
-  --color-accent-shadow-start: rgba(0, 200, 255, 0.5);
-  --color-accent-shadow-end: rgba(0, 200, 255, 0.5);
-  --color-accent-shadow-strong: rgba(0, 200, 255, 0.35);
+  --color-border: rgba(55, 65, 81, 0.5);
+  --color-tag-bg: transparent; /* UPDATED: Removed background from tags */
+  --color-shadow: rgba(0, 0, 0, 0);
+  --blur-intensity: 7px;
+}
+
+/* Light Theme Variables (Sharp Card v3.0) */
+html.light {
+  --color-primary-bg: #ffffff;
+  --color-secondary-bg: #ffffff;
+  --color-light-panel-bg: #ffffff;
+  --color-primary-text: #0a192f;
+  --color-secondary-text: #5a6477;
+  --color-accent: #00b0f0;
+  --color-accent-hover: #0090c0;
+  --color-info-accent: #1e90ff;
+  --color-border: #d1d5db;
+  --color-tag-bg: transparent; /* UPDATED: Removed background from tags */
+  --color-shadow: rgba(10, 25, 47, 0.1);
+  --blur-intensity: 3px;
 }
 
 body {
   color: var(--color-primary-text);
   font-family: "Poppins", sans-serif;
-  background-color: #03050a;
-  background-image: url("/images/coding-symbols.svg");
+  background-color: var(--color-primary-bg);
+  background-image: url("/images/coding-symbols-dark.svg");
   background-attachment: fixed;
   position: relative;
   z-index: 0;
+  transition: background-color 0.3s ease-in-out;
+}
+
+html.light body {
+  background-image: url("/images/coding-symbols-light.svg");
 }
 
 body::before {
@@ -40,6 +63,30 @@ body::before {
   z-index: -1;
   animation: performantPan 120s linear infinite alternate;
   will-change: transform;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* --- Section Title Shadow Fix --- */
+.section-title {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+html.light .section-title {
+  text-shadow: none;
+}
+
+/* --- Selective Logo Inversion --- */
+.logo-inverts-on-dark {
+  filter: brightness(0) invert(1);
+}
+html.light .logo-inverts-on-dark {
+  filter: none;
+}
+
+.logo-inverts-on-light {
+  filter: none;
+}
+html.light .logo-inverts-on-light {
+  filter: brightness(0) invert(1);
 }
 
 @keyframes performantPan {
@@ -52,8 +99,6 @@ body::before {
 }
 
 /* --- START: ALL GLOW EFFECTS (ENHANCED) --- */
-
-/* Enhanced shadow glow for the sticky navbar */
 .animate-glow-shadow {
   animation: glow-shadow-keyframes 3s ease-in-out infinite alternate;
   will-change: box-shadow;
@@ -64,12 +109,10 @@ body::before {
     box-shadow: 0 4px 20px -10px var(--color-accent-shadow-end);
   }
   to {
-    /* Use the main accent color for a brighter glow */
     box-shadow: 0 6px 25px -5px var(--color-accent-shadow-start);
   }
 }
 
-/* Enhanced border glow for the panels */
 .panel-glow-anim {
   animation: panelGlow 2s ease-in-out infinite alternate;
   will-change: box-shadow;
@@ -80,11 +123,9 @@ body::before {
     box-shadow: 0 0 15px -10px var(--color-accent);
   }
   to {
-    /* Larger spread and more prominent color */
     box-shadow: 0 0 35px -8px var(--color-accent);
   }
 }
-
 /* --- END: ALL GLOW EFFECTS (ENHANCED) --- */
 
 .panel-with-corners {
