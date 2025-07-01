@@ -76,6 +76,11 @@
     "performance": "Performance e Otimização",
     "concepts": "Conceitos e Outros"
   },
+  "Proficiency": {
+    "expert": "Especialista",
+    "proficient": "Proficiente",
+    "familiar": "Familiar"
+  },
   "MoreComing": {
     "title": "Mais {item}",
     "description": "E mais marcos de aprendizagem em breve...",
