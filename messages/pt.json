@@ -81,6 +81,11 @@
     "proficient": "Proficiente",
     "familiar": "Familiar"
   },
+  "ProficiencyTooltip": {
+    "expert": "Especialista - Experiência profissional profunda, capaz de liderar e arquitetar soluções.",
+    "proficient": "Proficiente - Experiência profissional sólida, capaz de trabalhar autonomamente em tarefas complexas.",
+    "familiar": "Familiar - Conhecimento fundamental e alguma aplicação prática, confortável a contribuir em projetos."
+  },
   "MoreComing": {
     "title": "Mais {item}",
     "description": "E mais marcos de aprendizagem em breve...",
@@ -147,6 +152,20 @@
     "analytics": "Serviço de análise web para rastrear tráfego e comportamento do utilizador",
     "web_security": "Compreensão de vulnerabilidades de segurança web comuns",
     "os": "Familiaridade com múltiplos ambientes de SO",
-    "ai_tools": "Experiência com modelos de linguagem e ferramentas de IA"
+    "ai_tools": "Experiência com modelos de linguagem e ferramentas de IA",
+    "dom_manipulation": "Interagir diretamente com e alterar a estrutura, estilo e conteúdo de elementos HTML.",
+    "state_management": "Gerir e sincronizar o estado da aplicação entre componentes, usando hooks e contexto.",
+    "client_side_routing": "Gerir a navegação numa aplicação de página única sem recarregar a página inteira.",
+    "cross_platform_dev": "Construir aplicações com .NET Core que podem ser executadas em Windows, Linux e macOS.",
+    "custom_theme_dev": "Criar temas WordPress à medida a partir do zero com funcionalidades personalizadas.",
+    "custom_plugin_dev": "Desenvolver plugins WordPress personalizados para estender a funcionalidade principal.",
+    "wp_api_integrations": "Integrar o WordPress com serviços e APIs externos (ex: gateways de pagamento, CRMs).",
+    "ecommerce_platforms": "Experiência na construção e manutenção de lojas online, principalmente com WooCommerce.",
+    "platform_optimization": "Otimização holística de plataformas web, considerando métricas de performance e experiência do utilizador.",
+    "workflow_optimization": "Automatização de tarefas repetitivas em fluxos de trabalho de desenvolvimento e operacionais.",
+    "efficient_querying": "Escrever consultas SQL otimizadas e compreender a indexação em MySQL.",
+    "proactive_monitoring": "Configurar e responder a alertas para garantir a estabilidade da plataforma.",
+    "it_infrastructure": "Manutenção e contribuição para a infraestrutura de TI, incluindo servidores e serviços.",
+    "system_resource_monitoring": "Monitorização básica do uso de CPU, memória e disco em servidores."
   }
 }

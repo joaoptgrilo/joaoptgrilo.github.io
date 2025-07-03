@@ -15,31 +15,35 @@ interface SkillCategory {
 
 const proficiencyOrder: ProficiencyLevel[] = ["expert", "proficient", "familiar"];
 
-// CORRECTED & FINAL: Renders exactly 1, 2, or 3 bars.
+// UPDATED: This is now a purely visual component with NO tooltip attributes.
 const ProficiencyIndicator: React.FC<{ level: ProficiencyLevel }> = ({
   level,
 }) => {
-  const t = useTranslations("Proficiency");
   const levels = {
-    expert: { bars: 3, color: "bg-accent", title: t("expert") },
-    proficient: { bars: 2, color: "bg-info-accent", title: t("proficient") },
-    familiar: { bars: 1, color: "bg-secondary-text/50", title: t("familiar") },
+    expert: {
+      bars: 3,
+      color: "bg-accent",
+    },
+    proficient: {
+      bars: 2,
+      color: "bg-info-accent",
+    },
+    familiar: {
+      bars: 1,
+      color: "bg-[var(--color-prof-familiar)]",
+    },
   };
   const currentLevel = levels[level];
   const barHeights = ["h-1.5", "h-3", "h-4"];
 
   return (
-    <div
-      className="flex h-4 items-end space-x-1"
-      title={currentLevel.title}
-      aria-label={`Proficiency: ${currentLevel.title}`}>
-      {/* Loop based on the number of bars for the current level */}
+    <div className="flex h-4 items-end space-x-1">
       {Array.from({ length: currentLevel.bars }).map((_, i) => (
         <span
           key={i}
           className={clsx(
             "w-1.5 rounded-sm",
-            barHeights[i], // Staggered height
+            barHeights[i],
             currentLevel.color
           )}
         />
@@ -48,46 +52,43 @@ const ProficiencyIndicator: React.FC<{ level: ProficiencyLevel }> = ({
   );
 };
 
-
-// --- DATA REGENERATED: Based 100% on your provided 1-10 scores ---
+// Data structure remains the same as the accurately mapped version.
 const SKILL_CATEGORIES: SkillCategory[] = [
-  {
+    {
     id: "languages",
     skills: [
-        { name: "JavaScript / Vanilla JS", proficiency: "expert", key: "javascript" },
-        { name: "PHP", proficiency: "expert", key: "php" },
-        { name: "HTML5", proficiency: "expert", key: "html5" },
-        { name: "CSS3 / SASS", proficiency: "expert", key: "css" },
-        { name: "SQL", proficiency: "proficient", key: "sql" },
-        { name: "TypeScript", proficiency: "proficient", key: "typescript" },
-        { name: "C#", proficiency: "proficient", key: "csharp" },
-        { name: "Python", proficiency: "familiar", key: "python" },
+      { name: "PHP", proficiency: "expert", key: "php" },
+      { name: "JavaScript (ES6+)", proficiency: "expert", key: "javascript" },
+      { name: "HTML5", proficiency: "expert", key: "html5" },
+      { name: "CSS3 / SASS", proficiency: "expert", key: "css" },
+      { name: "SQL", proficiency: "proficient", key: "sql" },
+      { name: "TypeScript", proficiency: "proficient", key: "typescript" },
+      { name: "C#", proficiency: "proficient", key: "csharp" },
+      { name: "Python", proficiency: "familiar", key: "python" },
     ],
   },
   {
     id: "backend",
     skills: [
-        { name: ".NET Core", proficiency: "expert", key: "dotnet" },
-        { name: "MySQL", proficiency: "expert", key: "mysql" },
-        { name: "REST API Development", proficiency: "proficient", key: "rest_api" },
-        { name: "MVC Architecture", proficiency: "proficient", key: "mvc" },
-        { name: "Redis", proficiency: "proficient", key: "redis" },
-        { name: "Socket Programming", proficiency: "proficient", key: "sockets" },
-        { name: "Node.js", proficiency: "familiar", key: "nodejs" },
-        { name: "Elasticsearch", proficiency: "familiar", key: "elasticsearch" },
+      { name: ".NET Core", proficiency: "expert", key: "dotnet" },
+      { name: "REST API Development", proficiency: "proficient", key: "rest_api" },
+      { name: "MVC Architecture", proficiency: "proficient", key: "mvc" },
+      { name: "Socket Programming", proficiency: "proficient", key: "sockets" },
+      { name: "Cross-Platform Dev (.NET)", proficiency: "proficient", key: "cross_platform_dev" },
+      { name: "Node.js", proficiency: "familiar", key: "nodejs" },
     ],
   },
-    {
+  {
     id: "frontend",
     skills: [
-        { name: "Responsive Web Design", proficiency: "proficient", key: "responsive" },
-        { name: "jQuery", proficiency: "proficient", key: "jquery" },
-        { name: "React", proficiency: "proficient", key: "react" },
-        { name: "State Management", proficiency: "proficient", key: "state_management" },
-        { name: "DOM Manipulation", proficiency: "proficient", key: "dom_manipulation" },
-        { name: "Bootstrap", proficiency: "proficient", key: "bootstrap" },
-        { name: "Client-Side Routing", proficiency: "familiar", key: "client_side_routing" },
-        { name: "Redux", proficiency: "familiar", key: "redux" },
+      { name: "Responsive Web Design", proficiency: "proficient", key: "responsive" },
+      { name: "jQuery", proficiency: "proficient", key: "jquery" },
+      { name: "React", proficiency: "proficient", key: "react" },
+      { name: "State Management", proficiency: "proficient", key: "state_management" },
+      { name: "DOM Manipulation", proficiency: "proficient", key: "dom_manipulation" },
+      { name: "Bootstrap", proficiency: "proficient", key: "bootstrap" },
+      { name: "Client-Side Routing", proficiency: "familiar", key: "client_side_routing" },
+      { name: "Redux", proficiency: "familiar", key: "redux" },
     ],
   },
   {
@@ -116,8 +117,8 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     id: "devops",
     skills: [
       { name: "Git", proficiency: "proficient", key: "git" },
-      { name: "Agile Methodologies", proficiency: "proficient", key: "agile" },
       { name: "GitHub / GitLab", proficiency: "proficient", key: "github_gitlab" },
+      { name: "Agile Methodologies", proficiency: "proficient", key: "agile" },
       { name: "Docker", proficiency: "familiar", key: "docker" },
       { name: "npm / yarn", proficiency: "familiar", key: "npm" },
     ],
@@ -125,14 +126,20 @@ const SKILL_CATEGORIES: SkillCategory[] = [
   {
     id: "concepts",
     skills: [
-      { name: "Continuous Learning", proficiency: "expert", key: "continuous_learning"},
       { name: "Algorithms & Data Structures", proficiency: "proficient", key: "algorithms" },
-      { name: "AI Tool Familiarity", proficiency: "proficient", key: "ai_tools" },
-      { name: "Problem Solving", proficiency: "proficient", key: "problem_solving" },
       { name: "Web Security Fundamentals", proficiency: "proficient", key: "web_security" },
+      { name: "AI Tool Familiarity", proficiency: "proficient", key: "ai_tools" },
       { name: "Proactive Monitoring", proficiency: "proficient", key: "proactive_monitoring" },
       { name: "IT Infrastructure", proficiency: "familiar", key: "it_infrastructure" },
-      { name: "System Resource Monitoring", proficiency: "familiar", key: "system_resource_monitoring"},
+      { name: "System Resource Monitoring", proficiency: "familiar", key: "system_resource_monitoring" },
+    ],
+  },
+  {
+    id: "databases",
+    skills: [
+      { name: "MySQL", proficiency: "expert", key: "mysql" },
+      { name: "Redis", proficiency: "proficient", key: "redis" },
+      { name: "Elasticsearch", proficiency: "familiar", key: "elasticsearch" },
     ],
   },
 ];
@@ -169,18 +176,25 @@ const Skills: React.FC = () => {
             <div className="flex flex-col space-y-2">
               {[...category.skills]
                 .sort((a, b) => proficiencyOrder.indexOf(a.proficiency) - proficiencyOrder.indexOf(b.proficiency))
-                .map((skill) => (
-                  <div
-                    key={skill.key}
-                    title={tTooltips(skill.key as any)}
-                    className="flex items-center justify-between bg-primary-bg/40 px-3 py-2 rounded-md border border-border cursor-default interactive-glow group"
-                  >
-                    <span className="text-sm text-secondary-text group-hover:text-primary-text transition-colors duration-300">
-                      {skill.name}
-                    </span>
-                    <ProficiencyIndicator level={skill.proficiency} />
-                  </div>
-                ))}
+                .map((skill) => {
+                  // UPDATED: Construct the single, combined tooltip string here
+                  const proficiencyLabel = tProficiency(skill.proficiency);
+                  const skillDescription = tTooltips(skill.key as any);
+                  const combinedTooltip = `${proficiencyLabel}: ${skillDescription}`;
+
+                  return (
+                    <div
+                      key={skill.key}
+                      title={combinedTooltip} // Apply the single tooltip to the parent div
+                      className="flex items-center justify-between bg-primary-bg/40 px-3 py-2 rounded-md border border-border cursor-default interactive-glow group"
+                    >
+                      <span className="text-sm text-secondary-text group-hover:text-primary-text transition-colors duration-300">
+                        {skill.name}
+                      </span>
+                      <ProficiencyIndicator level={skill.proficiency} />
+                    </div>
+                  );
+                })}
             </div>
           </Panel>
         ))}

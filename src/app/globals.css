@@ -14,36 +14,38 @@
   --color-accent-hover: #4dd6ff;
   --color-info-accent: #60a5fa;
   --color-border: rgba(55, 65, 81, 0.5);
-  --color-tag-bg: transparent; /* UPDATED: Removed background from tags */
+  --color-tag-bg: transparent;
   --color-shadow: rgba(0, 0, 0, 0);
   --blur-intensity: 7px;
+  --color-prof-familiar: #94a3b8;
 }
 
-/* Light Theme Variables (Sharp Card v3.0) */
+/* --- Light Theme: "Professional Daylight" Palette --- */
 html.light {
-  --color-primary-bg: #ffffff;
+  --color-primary-bg: #f7fafc;
   --color-secondary-bg: #ffffff;
   --color-light-panel-bg: #ffffff;
-  --color-primary-text: #0a192f;
-  --color-secondary-text: #5a6477;
-  --color-accent: #00b0f0;
-  --color-accent-hover: #0090c0;
-  --color-info-accent: #1e90ff;
-  --color-border: #d1d5db;
-  --color-tag-bg: transparent; /* UPDATED: Removed background from tags */
-  --color-shadow: rgba(10, 25, 47, 0.1);
+  --color-primary-text: #2d3748;
+  --color-secondary-text: #718096;
+  --color-accent: #3182ce;
+  --color-accent-hover: #2b6cb0;
+  --color-info-accent: #4299e1;
+  --color-border: #e2e8f0;
+  --color-tag-bg: transparent;
+  --color-shadow: rgba(45, 55, 72, 0.1);
   --blur-intensity: 3px;
+  --color-prof-familiar: #a0aec0;
 }
 
 body {
   color: var(--color-primary-text);
   font-family: "Poppins", sans-serif;
   background-color: var(--color-primary-bg);
-  background-image: url("/images/coding-symbols-dark.svg");
+  background-image: url("/images/coding-symbols-dark.svg"); /* Dark mode default */
   background-attachment: fixed;
   position: relative;
   z-index: 0;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, background-image 0.3s ease-in-out;
 }
 
 html.light body {
