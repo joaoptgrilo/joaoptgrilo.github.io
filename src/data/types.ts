@@ -1,8 +1,8 @@
 // src/data/types.ts
 import React from "react";
 
-// For Skills
-export type ProficiencyLevel = "expert" | "proficient" | "familiar";
+// For Skills (Updated to use numerical levels)
+export type ProficiencyLevel = 3 | 2 | 1; // 3: expert, 2: proficient, 1: familiar
 
 export interface SkillItem {
   key: string;

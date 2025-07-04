@@ -17,7 +17,8 @@
   --color-tag-bg: transparent;
   --color-shadow: rgba(0, 0, 0, 0);
   --blur-intensity: 7px;
-  --text-stroke-color: black; /* Text stroke color for dark mode */
+  --text-stroke-color: black;
+  --color-prof-familiar: #858585; /* <-- NEW */
 }
 
 /* Light Theme Variables */
@@ -34,7 +35,8 @@ html.light {
   --color-tag-bg: transparent;
   --color-shadow: rgba(10, 25, 47, 0.1);
   --blur-intensity: 3px;
-  --text-stroke-color: white; /* Text stroke color for light mode */
+  --text-stroke-color: white;
+  --color-prof-familiar: #a0a0a0; /* <-- NEW */
 }
 
 body {
@@ -46,8 +48,6 @@ body {
   position: relative;
   z-index: 0;
   transition: background-color 0.3s ease-in-out;
-
-  /* --- GLOBAL TEXT STROKE APPLIED HERE --- */
   -webkit-text-stroke: 2px var(--text-stroke-color);
   text-stroke: 2px var(--text-stroke-color);
   paint-order: stroke fill;
@@ -82,7 +82,6 @@ body::before {
   }
 }
 
-/* --- ADDED/UPDATED UTILITIES --- */
 @layer utilities {
   .logo-stroke {
     filter: drop-shadow(1px 1px 0 var(--color-border))
@@ -97,7 +96,6 @@ body::before {
   }
 }
 
-/* --- START: ALL GLOW EFFECTS (ENHANCED) --- */
 .animate-glow-shadow {
   animation: glow-shadow-keyframes 3s ease-in-out infinite alternate;
   will-change: box-shadow;
@@ -125,7 +123,6 @@ body::before {
     box-shadow: 0 0 35px -8px var(--color-accent);
   }
 }
-/* --- END: ALL GLOW EFFECTS (ENHANCED) --- */
 
 .panel-with-corners {
   position: relative;
