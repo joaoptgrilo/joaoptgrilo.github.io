@@ -1,32 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-  <!-- Vibrant Light Theme Version -->
   <style>
-    .bg { fill: #FFFFFF; } /* Match the page's primary background */
-    
+    .bg { fill: #f7fafc; }
     .symbol {
       font-family: 'Fira Code', monospace;
       font-size: 14px;
-      fill: #5a6477;  /* Use the secondary text color for better contrast */
-      opacity: 0.5;   /* Increased opacity for more presence */
+      fill: #3182CE;
+      opacity: 0.3;
     }
-
-    .pop {
-      font-family: 'Fira Code', monospace;
-      font-size: 14px;
-      fill: #00b0f0;  /* Use the vibrant accent color */
+    .glow {
+      filter: url(#glow);
       animation: pulse 4s ease-in-out infinite;
     }
-
     @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.9; } /* Pulse to a higher opacity to be more visible */
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: .3; }
     }
   </style>
 
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
   <rect width="200" height="200" class="bg"/>
 
-  <!-- Symbols now use distinct classes for better control -->
-  
+  <!-- Concentrated programming symbols -->
   <text x="10" y="20" class="symbol glow">{ }</text>
   <text x="60" y="20" class="symbol">&lt;/&gt;</text>
   <text x="120" y="20" class="symbol glow">const</text>

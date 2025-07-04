@@ -1,6 +1,15 @@
 // src/data/types.ts
 import React from "react";
 
+// For Skills (Updated to use numerical levels)
+export type ProficiencyLevel = 3 | 2 | 1; // 3: expert, 2: proficient, 1: familiar
+
+export interface SkillItem {
+  key: string;
+  name: string;
+  proficiency: ProficiencyLevel;
+}
+
 // For Projects
 export interface ProjectTechItem {
   name: string;
@@ -33,7 +42,6 @@ export interface ExperienceItem {
   companyLink?: string;
   companyLogoUrl?: string;
   companyLogoAlt?: string;
-  invertInLightMode?: boolean; // Added for theme-specific logo handling
   location: string;
   period: string;
   descriptionItems: React.ReactNode[];

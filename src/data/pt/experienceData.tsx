@@ -11,7 +11,6 @@ export const experienceData: ExperienceItem[] = [
     companyLink: "https://www.fedrax.com/",
     companyLogoUrl: "/images/logos/fedrax-logo.svg",
     companyLogoAlt: "Logótipo da Fedrax",
-    invertInLightMode: true, // This logo is light and needs to be inverted for light mode
     location: "Portimão, Portugal",
     period: "Fev 2020 – Out 2023",
     descriptionItems: [

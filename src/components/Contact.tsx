@@ -7,6 +7,7 @@ import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
 import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import Section from "./Section";
+import { clsx } from "clsx";
 
 const ContactLink: React.FC<{
   href: string;
@@ -30,13 +31,15 @@ const ContactLink: React.FC<{
       href={href}
       target={newTab ? "_blank" : undefined}
       rel={newTab ? "noopener noreferrer" : undefined}
-      className={`${baseClasses} ${primaryClasses}`}>
+      className={clsx(baseClasses, primaryClasses, {
+        "no-text-stroke": isPrimary, // <-- ADDED
+      })}>
       <span
-        className={`mr-2.5 text-xl ${
-          isPrimary
-            ? "text-primary-bg"
-            : "text-info-accent group-hover:text-accent transition-colors duration-300"
-        }`}>
+        className={clsx("mr-2.5 text-xl", {
+          "text-primary-bg": isPrimary,
+          "text-info-accent group-hover:text-accent transition-colors duration-300":
+            !isPrimary,
+        })}>
         {icon}
       </span>
       {label}
@@ -54,7 +57,6 @@ const Contact: React.FC = () => {
       title="contact"
       className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center">
       <div className="container mx-auto px-4 flex flex-col items-center">
-        {/* THIS IS THE FIX: Explicitly set the variant to "default" */}
         <Panel
           variant="default"
           className="w-full max-w-2xl text-center animate-on-scroll">

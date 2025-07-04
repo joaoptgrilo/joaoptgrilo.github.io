@@ -1,3 +1,4 @@
+// src/components/Section.tsx
 "use client";
 import React from "react";
 import { clsx } from "clsx";

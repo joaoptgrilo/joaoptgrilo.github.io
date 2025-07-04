@@ -6,129 +6,147 @@ import Section from "./Section";
 import Panel from "./Panel";
 import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
+import { SkillItem, ProficiencyLevel } from "@/data/types";
 
-interface SkillItem {
-  key: string;
-  name: string;
-  isWide?: boolean;
-}
 interface SkillCategory {
   id: string;
   skills: SkillItem[];
 }
 
+const proficiencyOrder: ProficiencyLevel[] = [3, 2, 1];
+
+const ProficiencyIndicator: React.FC<{ level: ProficiencyLevel }> = ({
+  level,
+}) => {
+  const levels: Record<ProficiencyLevel, { bars: number; color: string }> = {
+    3: { bars: 3, color: "bg-accent" },
+    2: { bars: 2, color: "bg-info-accent" },
+    1: { bars: 1, color: "bg-[var(--color-prof-familiar)]" },
+  };
+  const currentLevel = levels[level];
+  const barHeights = ["h-1.5", "h-3", "h-4"];
+
+  return (
+    <div className="flex h-4 items-end space-x-1">
+      {Array.from({ length: currentLevel.bars }).map((_, i) => (
+        <span
+          key={i}
+          className={clsx(
+            "w-1.5 rounded-sm",
+            barHeights[i],
+            currentLevel.color
+          )}
+        />
+      ))}
+    </div>
+  );
+};
+
+// DEFINITIVE ORDERING: Categories and skills are now manually ordered for optimal presentation.
 const SKILL_CATEGORIES: SkillCategory[] = [
   {
     id: "languages",
     skills: [
-      { key: "typescript", name: "TypeScript" },
-      { key: "javascript", name: "JavaScript (ES6+)" },
-      { key: "html5", name: "HTML5" },
-      { key: "css", name: "CSS3 / SASS / SCSS", isWide: true },
-      { key: "sql", name: "SQL" },
-      { key: "csharp", name: "C#" },
-      { key: "php", name: "PHP" },
-      { key: "python", name: "Python" },
+      { name: "JavaScript", proficiency: 3, key: "javascript" },
+      { name: "C#", proficiency: 3, key: "csharp" },
+      { name: "PHP", proficiency: 3, key: "php" },
+      { name: "HTML5", proficiency: 3, key: "html5" },
+      { name: "CSS3 / SASS", proficiency: 3, key: "css" },
+      { name: "TypeScript", proficiency: 2, key: "typescript" },
+      { name: "SQL", proficiency: 2, key: "sql" },
+      { name: "Python", proficiency: 1, key: "python" },
     ],
   },
   {
     id: "frontend",
     skills: [
-      { key: "react", name: "React" },
-      { key: "nextjs", name: "Next.js (App Router)" },
-      { key: "tailwind", name: "Tailwind CSS" },
-      { key: "responsive", name: "Responsive Web Design", isWide: true },
-      {
-        key: "frontend_perf",
-        name: "Frontend Performance Optimization (Lighthouse >90)",
-        isWide: true,
-      },
-      {
-        key: "accessibility",
-        name: "Web Accessibility (WCAG Basics)",
-        isWide: true,
-      },
-      { key: "redux", name: "Redux (Conceptual)" },
-      { key: "zustand", name: "Context API / Zustand (Planned)" },
+      { name: "React", proficiency: 3, key: "react" },
+      { name: "Vanilla JavaScript", proficiency: 3, key: "javascript" },
+      { name: "Responsive Web Design", proficiency: 3, key: "responsive" },
+      { name: "jQuery", proficiency: 3, key: "jquery" },
+      { name: "Web Accessibility", proficiency: 2, key: "accessibility" },
+      { name: "State Management", proficiency: 2, key: "state_management" },
+      { name: "Bootstrap", proficiency: 2, key: "bootstrap" },
+      { name: "Client-Side Routing", proficiency: 1, key: "client_side_routing" },
+      { name: "Redux", proficiency: 1, key: "redux" },
     ],
   },
   {
     id: "backend",
     skills: [
-      { key: "dotnet", name: ".NET Core" },
-      { key: "nodejs", name: "Node.js" },
-      { key: "rest_api", name: "REST API Development" },
-      { key: "mvc", name: "MVC Architecture" },
-      { key: "sockets", name: "Socket Programming" },
-    ],
-  },
-  {
-    id: "problem-solving",
-    skills: [
-      { key: "data_structures", name: "Data Structures" },
-      { key: "algorithms", name: "Algorithms" },
+      { name: ".NET Core", proficiency: 3, key: "dotnet" },
+      { name: "MVC Architecture", proficiency: 3, key: "mvc" },
+      { name: "Node.js", proficiency: 2, key: "nodejs" },
+      { name: "REST API Development", proficiency: 2, key: "rest_api" },
+      { name: "Socket Programming", proficiency: 2, key: "sockets" },
+      { name: "Cross-Platform Dev (.NET)", proficiency: 2, key: "cross_platform_dev" },
     ],
   },
   {
     id: "databases",
     skills: [
-      { key: "mysql", name: "MySQL" },
-      { key: "redis", name: "Redis (Basic)" },
-      { key: "elasticsearch", name: "Elasticsearch (Basic)" },
-    ],
-  },
-  {
-    id: "devops",
-    skills: [
-      { key: "git", name: "Git" },
-      { key: "github_gitlab", name: "GitHub / GitLab" },
-      { key: "docker", name: "Docker (Basic / Learning)" },
-      { key: "agile", name: "Agile (Scrum/Kanban)" },
-      { key: "npm", name: "npm" },
-      { key: "vscode", name: "VS Code" },
-    ],
-  },
-  {
-    id: "cms",
-    skills: [
-      {
-        key: "wordpress",
-        name: "WordPress (Theme/Plugin Dev, API Integration, Optimization)",
-        isWide: true,
-      },
+      { name: "MySQL", proficiency: 3, key: "mysql" },
+      { name: "Redis", proficiency: 2, key: "redis" },
+      { name: "Elasticsearch", proficiency: 1, key: "elasticsearch" },
     ],
   },
   {
     id: "performance",
     skills: [
-      {
-        key: "perf_tuning",
-        name: "Performance Tuning (Frontend/Backend)",
-        isWide: true,
-      },
-      { key: "seo", name: "SEO Implementation & Analysis", isWide: true },
-      { key: "lighthouse", name: "Google Lighthouse (>90 Scores)" },
-      { key: "analytics", name: "Google Analytics" },
+      { name: "Performance Optimization", proficiency: 3, key: "perf_tuning" },
+      { name: "Lighthouse (>90)", proficiency: 3, key: "lighthouse" },
+      { name: "SEO Implementation", proficiency: 3, key: "seo" },
+      { name: "Platform Optimization", proficiency: 3, key: "platform_optimization" },
+      { name: "Google Analytics", proficiency: 3, key: "analytics" },
+      { name: "Workflow Automation", proficiency: 2, key: "workflow_optimization" },
+      { name: "Efficient Querying (MySQL)", proficiency: 2, key: "efficient_querying" },
+    ],
+  },
+  {
+    id: "cms",
+    skills: [
+      { name: "WordPress (Full Stack)", proficiency: 3, key: "wordpress" },
+      { name: "Custom Theme Development", proficiency: 2, key: "custom_theme_dev" },
+      { name: "Custom Plugin Development", proficiency: 2, key: "custom_plugin_dev" },
+      { name: "E-commerce Platforms", proficiency: 2, key: "ecommerce_platforms" },
+      { name: "WordPress API Integrations", proficiency: 2, key: "wp_api_integrations" },
+    ],
+  },
+  {
+    id: "devops",
+    skills: [
+      { name: "Git", proficiency: 3, key: "git" },
+      { name: "GitHub / GitLab", proficiency: 3, key: "github_gitlab" },
+      { name: "Agile Methodologies", proficiency: 3, key: "agile" },
+      { name: "Docker", proficiency: 2, key: "docker" },
+      { name: "npm / yarn", proficiency: 2, key: "npm" },
+    ],
+  },
+  {
+    id: "security_systems",
+    skills: [
+      { name: "Security Best Practices", proficiency: 2, key: "security_best_practices" },
+      { name: "Proactive Security", proficiency: 2, key: "proactive_security" },
+      { name: "SQLi/XSS/CSRF Awareness", proficiency: 2, key: "security_awareness" },
+      { name: "HTTPS", proficiency: 2, key: "https" },
+      { name: "Encryption Concepts", proficiency: 2, key: "encryption_concepts" },
+      { name: "Rate Limiting", proficiency: 2, key: "rate_limiting" },
+      { name: "Logging & Auditing", proficiency: 2, key: "logging_auditing" },
+      { name: "Linux / WSL", proficiency: 2, key: "linux_os" },
+      { name: "Windows", proficiency: 2, key: "windows_os" },
+      { name: "Compression Algorithms", proficiency: 2, key: "compression_concepts" },
     ],
   },
   {
     id: "concepts",
     skills: [
-      {
-        key: "web_security",
-        name: "Web Security Fundamentals (OWASP)",
-        isWide: true,
-      },
-      {
-        key: "os",
-        name: "Operating Systems (Linux, Windows, WSL)",
-        isWide: true,
-      },
-      {
-        key: "ai_tools",
-        name: "AI Tools Familiarity (ChatGPT, Claude, etc.)",
-        isWide: true,
-      },
+      { name: "Continuous Learning", proficiency: 3, key: "continuous_learning" },
+      { name: "Troubleshooting", proficiency: 3, key: "troubleshooting" },
+      { name: "AI Tool Familiarity", proficiency: 3, key: "ai_tools" },
+      { name: "Technical Support", proficiency: 3, key: "tech_support" },
+      { name: "Algorithms & Data Structures", proficiency: 2, key: "algorithms" },
+      { name: "IT Infrastructure", proficiency: 1, key: "it_infrastructure" },
+      { name: "System Resource Monitoring", proficiency: 1, key: "system_resource_monitoring" },
     ],
   },
 ];
@@ -136,27 +154,59 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 const Skills: React.FC = () => {
   const t = useTranslations("Skills");
   const tTooltips = useTranslations("skillTags");
+  const tProficiency = useTranslations("Proficiency");
+
+  const proficiencyKeyMap: Record<ProficiencyLevel, "expert" | "proficient" | "familiar"> = {
+    3: "expert",
+    2: "proficient",
+    1: "familiar",
+  };
 
   return (
     <Section id="skills" title="skills">
+      <div className="flex justify-center items-center flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 mb-10 text-sm text-secondary-text font_fira_code animate-on-scroll">
+        <div className="flex items-center gap-2">
+          <ProficiencyIndicator level={3} />
+          <span>{tProficiency("expert")}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <ProficiencyIndicator level={2} />
+          <span>{tProficiency("proficient")}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <ProficiencyIndicator level={1} />
+          <span>{tProficiency("familiar")}</span>
+        </div>
+      </div>
+
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
         {SKILL_CATEGORIES.map((category) => (
           <Panel as="li" key={category.id} className="h-full" variant="default">
             <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
-              {t(category.id)}
+              {t(category.id as any)}
             </p>
-            <div className="flex flex-wrap gap-2">
-              {category.skills.map((skill) => (
-                <span
-                  key={skill.key}
-                  title={tTooltips(skill.key)}
-                  className={clsx(
-                    "inline-block bg-tag-bg text-secondary-text px-3 py-1.5 rounded-md text-sm border border-border cursor-pointer interactive-glow",
-                    { "w-full text-center": skill.isWide }
-                  )}>
-                  {skill.name}
-                </span>
-              ))}
+            <div className="flex flex-col space-y-2">
+              {[...category.skills]
+                .sort((a, b) => b.proficiency - a.proficiency)
+                .map((skill) => {
+                  const proficiencyKey = proficiencyKeyMap[skill.proficiency];
+                  const proficiencyLabel = tProficiency(proficiencyKey);
+                  const skillDescription = tTooltips(skill.key as any);
+                  const combinedTooltip = `${proficiencyLabel}: ${skillDescription}`;
+
+                  return (
+                    <div
+                      key={skill.key}
+                      title={combinedTooltip}
+                      className="flex items-center justify-between bg-primary-bg/40 px-3 py-2 rounded-md border border-border cursor-default interactive-glow group"
+                    >
+                      <span className="text-sm text-secondary-text group-hover:text-primary-text transition-colors duration-300">
+                        {skill.name}
+                      </span>
+                      <ProficiencyIndicator level={skill.proficiency} />
+                    </div>
+                  );
+                })}
             </div>
           </Panel>
         ))}

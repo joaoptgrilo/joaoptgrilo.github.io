@@ -62,11 +62,11 @@ const Navigation: React.FC = () => {
     "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-[background-color,backdrop-filter] duration-300 ease-in-out";
 
   const activeNavLookClasses =
-    "bg-secondary-bg/75 backdrop-blur-custom backdrop-saturate-150 animate-glow-shadow";
+    "bg-secondary-bg/75 backdrop-blur-nav backdrop-saturate-150 panel-glow-anim"; // <-- UPDATED
 
   const topTransparentNavLookClasses = "bg-transparent shadow-none";
 
-  const mobileMenuContainerClasses = "bg-secondary-bg/85 backdrop-blur-custom";
+  const mobileMenuContainerClasses = "bg-secondary-bg/85 backdrop-blur-nav"; // <-- UPDATED
 
   const pillClasses = `flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font_fira_code font-semibold text-accent bg-primary-bg/70 backdrop-blur-sm border border-accent shadow-accent-glow transition-opacity duration-300 ease-in-out hover:opacity-90`;
   const desktopNavLinkClasses =

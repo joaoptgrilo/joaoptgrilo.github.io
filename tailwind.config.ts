@@ -10,8 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       backdropBlur: {
-        // UPDATED: Now points to our dynamic CSS variable
         custom: "var(--blur-intensity)",
+        nav: "10px", // <-- ADDED
       },
       colors: {
         "primary-bg": "var(--color-primary-bg)",

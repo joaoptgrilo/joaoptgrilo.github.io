@@ -1,4 +1,4 @@
-/* globals.css */
+/* src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,12 +14,14 @@
   --color-accent-hover: #4dd6ff;
   --color-info-accent: #60a5fa;
   --color-border: rgba(55, 65, 81, 0.5);
-  --color-tag-bg: transparent; /* UPDATED: Removed background from tags */
+  --color-tag-bg: transparent;
   --color-shadow: rgba(0, 0, 0, 0);
   --blur-intensity: 7px;
+  --text-stroke-color: black;
+  --color-prof-familiar: #858585; /* <-- NEW */
 }
 
-/* Light Theme Variables (Sharp Card v3.0) */
+/* Light Theme Variables */
 html.light {
   --color-primary-bg: #ffffff;
   --color-secondary-bg: #ffffff;
@@ -30,9 +32,11 @@ html.light {
   --color-accent-hover: #0090c0;
   --color-info-accent: #1e90ff;
   --color-border: #d1d5db;
-  --color-tag-bg: transparent; /* UPDATED: Removed background from tags */
+  --color-tag-bg: transparent;
   --color-shadow: rgba(10, 25, 47, 0.1);
   --blur-intensity: 3px;
+  --text-stroke-color: white;
+  --color-prof-familiar: #a0a0a0; /* <-- NEW */
 }
 
 body {
@@ -44,6 +48,9 @@ body {
   position: relative;
   z-index: 0;
   transition: background-color 0.3s ease-in-out;
+  -webkit-text-stroke: 2px var(--text-stroke-color);
+  text-stroke: 2px var(--text-stroke-color);
+  paint-order: stroke fill;
 }
 
 html.light body {
@@ -66,29 +73,6 @@ body::before {
   transition: opacity 0.4s ease-in-out;
 }
 
-/* --- Section Title Shadow Fix --- */
-.section-title {
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-}
-html.light .section-title {
-  text-shadow: none;
-}
-
-/* --- Selective Logo Inversion --- */
-.logo-inverts-on-dark {
-  filter: brightness(0) invert(1);
-}
-html.light .logo-inverts-on-dark {
-  filter: none;
-}
-
-.logo-inverts-on-light {
-  filter: none;
-}
-html.light .logo-inverts-on-light {
-  filter: brightness(0) invert(1);
-}
-
 @keyframes performantPan {
   0% {
     transform: translate(0, 0);
@@ -98,7 +82,20 @@ html.light .logo-inverts-on-light {
   }
 }
 
-/* --- START: ALL GLOW EFFECTS (ENHANCED) --- */
+@layer utilities {
+  .logo-stroke {
+    filter: drop-shadow(1px 1px 0 var(--color-border))
+      drop-shadow(-1px 1px 0 var(--color-border))
+      drop-shadow(1px -1px 0 var(--color-border))
+      drop-shadow(-1px -1px 0 var(--color-border));
+  }
+  
+  .no-text-stroke {
+    -webkit-text-stroke-width: 0;
+    text-stroke-width: 0;
+  }
+}
+
 .animate-glow-shadow {
   animation: glow-shadow-keyframes 3s ease-in-out infinite alternate;
   will-change: box-shadow;
@@ -126,7 +123,6 @@ html.light .logo-inverts-on-light {
     box-shadow: 0 0 35px -8px var(--color-accent);
   }
 }
-/* --- END: ALL GLOW EFFECTS (ENHANCED) --- */
 
 .panel-with-corners {
   position: relative;
