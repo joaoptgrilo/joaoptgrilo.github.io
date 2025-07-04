@@ -34,14 +34,14 @@ export default function LanguageSwitcher() {
       "px-3 py-1.5 text-xs rounded-md transition-colors duration-200 uppercase",
       {
         // CORRECTED: "Solid State" - vibrant background with dark text and bold font for a clear active state.
-        "bg-accent text-primary-bg font-bold": locale === lang,
+        "bg-accent text-primary-bg font-bold no-text-stroke": locale === lang,
         "bg-primary-bg/50 text-secondary-text hover:bg-primary-bg hover:text-accent font-semibold":
           locale !== lang,
       }
     );
 
   return (
-    <div className="flex items-center space-x-1 p-1 rounded-lg border border-border/50 bg-secondary-bg/50">
+    <div className="flex items-center space-x-1 p-1 rounded-lg bg-secondary-bg/50">
       <FaGlobe className="w-4 h-4 text-secondary-text mx-1" />
       <button
         onClick={() => handleSwitch("en")}

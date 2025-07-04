@@ -34,11 +34,7 @@ const ExperienceClient = ({
                     <div className="flex items-center">
                       {item.companyLogoUrl ? (
                         <div
-                          className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border ${
-                            item.invertInLightMode
-                              ? "logo-inverts-on-light"
-                              : "logo-inverts-on-dark"
-                          }`}>
+                          className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border`}>
                           <div className="relative w-full h-full">
                             <Image
                               src={item.companyLogoUrl}
@@ -47,6 +43,7 @@ const ExperienceClient = ({
                               }
                               fill
                               style={{ objectFit: "contain" }}
+                              className="logo-stroke"
                             />
                           </div>
                         </div>

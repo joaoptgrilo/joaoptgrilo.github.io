@@ -1,12 +1,12 @@
 // src/data/types.ts
 import React from "react";
 
-// For Skills (Updated)
+// For Skills
 export type ProficiencyLevel = "expert" | "proficient" | "familiar";
 
 export interface SkillItem {
-  key: string; // Corresponds to i18n key
-  name: string; // The display name of the skill
+  key: string;
+  name: string;
   proficiency: ProficiencyLevel;
 }
 
@@ -42,7 +42,6 @@ export interface ExperienceItem {
   companyLink?: string;
   companyLogoUrl?: string;
   companyLogoAlt?: string;
-  invertInLightMode?: boolean;
   location: string;
   period: string;
   descriptionItems: React.ReactNode[];
