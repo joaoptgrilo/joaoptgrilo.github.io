@@ -13,8 +13,6 @@ interface SkillCategory {
   skills: SkillItem[];
 }
 
-const proficiencyOrder: ProficiencyLevel[] = [3, 2, 1];
-
 const ProficiencyIndicator: React.FC<{ level: ProficiencyLevel }> = ({
   level,
 }) => {
@@ -24,23 +22,26 @@ const ProficiencyIndicator: React.FC<{ level: ProficiencyLevel }> = ({
     1: { bars: 1, color: "bg-[var(--color-prof-familiar)]" },
   };
   const currentLevel = levels[level];
-  const barHeights = ["h-1.5", "h-3", "h-4"];
 
   return (
     <div className="flex h-4 items-end space-x-1">
-      {Array.from({ length: currentLevel.bars }).map((_, i) => (
+      {Array.from({ length: 3 }).map((_, i) => (
         <span
           key={i}
           className={clsx(
-            "w-1.5 rounded-sm",
-            barHeights[i],
-            currentLevel.color
+            "w-1.5 rounded-sm transition-colors duration-300",
+            "h-4", // Consistent height for all bars
+            // Use opacity to show/hide bars that are not part of the level
+            i < currentLevel.bars ? "opacity-100" : "opacity-20",
+            // Apply color to active bars, and a base color to inactive placeholders
+            i < currentLevel.bars ? currentLevel.color : "bg-neutral-500/50"
           )}
         />
       ))}
     </div>
   );
 };
+
 
 // DEFINITIVE ORDERING: Categories and skills are now manually ordered for optimal presentation.
 const SKILL_CATEGORIES: SkillCategory[] = [

@@ -6,16 +6,10 @@
 const ThemeInitializer = () => {
   const script = `
     (function() {
-      function getInitialTheme() {
-        const storedTheme = localStorage.getItem('theme');
-        if (storedTheme) {
-          return storedTheme;
-        }
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        return prefersDark ? 'dark' : 'light';
-      }
-      const theme = getInitialTheme();
-      if (theme === 'light') {
+      // The site defaults to dark mode.
+      // We only add the 'light' class if it's explicitly set in localStorage.
+      const storedTheme = localStorage.getItem('theme');
+      if (storedTheme === 'light') {
         document.documentElement.classList.add('light');
       }
     })();
