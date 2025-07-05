@@ -10,7 +10,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "../../../i18n";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import ThemeInitializer from "@/components/ThemeInitializer"; // <-- IMPORT THE FIX
+import ThemeInitializer from "@/components/ThemeInitializer";
+import ScrollRestorer from "@/components/ScrollRestorer"; // <-- IMPORT NEW COMPONENT
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -58,9 +59,10 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <ThemeInitializer /> {/* <-- ADD THE INITIALIZER SCRIPT HERE */}
+        <ThemeInitializer />
         <ThemeProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
+            <ScrollRestorer /> {/* <-- ADD COMPONENT HERE */}
             <Navigation />
             {children}
             <ScrollToTopButton />

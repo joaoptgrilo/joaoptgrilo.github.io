@@ -21,7 +21,8 @@ export interface Project {
   title: string;
   imageUrl?: string;
   imageAlt?: string;
-  description: string;
+  description: string; // This will now be the short description for the card
+  detailedDescription?: React.ReactNode[]; // Full, rich description for the modal
   techStack: ProjectTechItem[];
   liveLink?: string;
   codeLink?: string;
