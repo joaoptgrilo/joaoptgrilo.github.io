@@ -1,6 +1,6 @@
 // src/components/ProjectsClient.tsx
 "use client";
-import React from "react";
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import { Project, ProjectTechItem } from "@/data";
 import {
@@ -14,6 +14,7 @@ import { FaCodepen } from "react-icons/fa";
 import Section from "./Section";
 import Panel from "./Panel";
 import { useTranslations } from "next-intl";
+import { clsx } from "clsx";
 
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
   const t = useTranslations("Projects");
@@ -113,34 +114,103 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
   projectsData,
 }) => {
-  const t = useTranslations("MoreComing");
+  const tMore = useTranslations("MoreComing");
+  const tProjects = useTranslations("Projects");
+
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const techList = useMemo(() => {
+    const allTechs = projectsData.flatMap((project) =>
+      project.techStack.map((tech) => tech.name)
+    );
+    const uniqueTechs = [...new Set(allTechs)];
+    return ["All", ...uniqueTechs.sort()];
+  }, [projectsData]);
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "All") {
+      return projectsData;
+    }
+    return projectsData.filter((project) =>
+      project.techStack.some((tech) => tech.name === activeFilter)
+    );
+  }, [activeFilter, projectsData]);
+
+  const getFilterButtonClasses = (tech: string) => {
+    return clsx(
+      "px-3 py-1.5 text-sm rounded-md transition-all duration-300 ease-in-out font_fira_code font-medium interactive-glow",
+      {
+        "bg-accent text-primary-bg no-text-stroke scale-105 shadow-md shadow-accent/20":
+          activeFilter === tech,
+        "bg-light-panel-bg/20 text-secondary-text hover:bg-light-panel-bg/50 hover:text-primary-text":
+          activeFilter !== tech,
+      }
+    );
+  };
+
   return (
     <Section id="projects" title="projects">
       {projectsData.length > 0 ? (
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {projectsData.map((project) => (
-            <li key={project.id} className="flex">
-              <ProjectCard project={project} />
-            </li>
-          ))}
-          <li className="flex">
-            <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-border/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 transition-all duration-300 w-full">
-              <div className="animate-on-scroll p-6">
-                <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4 mx-auto" />
-                <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
-                  {t("title", { item: t("projects") })}
-                </p>
-                <p className="text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">
-                  {t("description")}
-                </p>
-              </div>
+        <>
+          <Panel
+            variant="simple"
+            className="mb-10 animate-on-scroll max-w-4xl mx-auto p-4 md:p-6 panel-glow-anim"
+          >
+            <p className="text-center font-semibold text-lg text-info-accent mb-4">
+              {tProjects("filterTitle")}
+            </p>
+            <div className="flex justify-center flex-wrap gap-2">
+              {techList.map((tech) => (
+                <button
+                  key={tech}
+                  onClick={() => setActiveFilter(tech)}
+                  className={getFilterButtonClasses(tech)}
+                >
+                  {tech}
+                </button>
+              ))}
             </div>
-          </li>
-        </ul>
+          </Panel>
+
+          <ul
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            key={activeFilter} // Change key to force re-render and re-trigger animations
+          >
+            {filteredProjects.map((project, index) => (
+              <li
+                key={project.id}
+                className="flex animate-on-scroll"
+                style={{ animationDelay: `${index * 100}ms` }} // Staggered animation
+              >
+                <ProjectCard project={project} />
+              </li>
+            ))}
+            {activeFilter === "All" && (
+              <li
+                className="flex animate-on-scroll"
+                style={{
+                  animationDelay: `${filteredProjects.length * 100}ms`,
+                }}
+              >
+                <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-border/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 transition-all duration-300 w-full">
+                  <div className="p-6">
+                    <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4 mx-auto" />
+                    <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
+                      {tMore("title", { item: tMore("projects") })}
+                    </p>
+                    <p className="text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">
+                      {tMore("description")}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            )}
+          </ul>
+        </>
       ) : (
         <Panel variant="default" className="text-center">
           <p className="text-center text-secondary-text text-lg">
-            {useTranslations("Projects")("noProjects")}
+            {tProjects("noProjects")}
           </p>
         </Panel>
       )}

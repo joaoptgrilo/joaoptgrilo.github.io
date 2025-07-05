@@ -98,7 +98,8 @@
     "codeButton": "Ver Código",
     "privateProject": "Projeto Privado",
     "learnMoreButton": "Saber Mais",
-    "noProjects": "A exibir uma seleção do meu trabalho em breve. Fique atento!"
+    "noProjects": "A exibir uma seleção do meu trabalho em breve. Fique atento!",
+    "filterTitle": "Filtrar por Tecnologia"
   },
   "Certifications": {
     "issuerLabel": "Emitido por",

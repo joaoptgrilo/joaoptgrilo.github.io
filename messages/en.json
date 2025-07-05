@@ -97,7 +97,8 @@
     "codeButton": "View Code",
     "privateProject": "Private Project",
     "learnMoreButton": "Learn More",
-    "noProjects": "Showcasing a selection of my work soon. Stay tuned!"
+    "noProjects": "Showcasing a selection of my work soon. Stay tuned!",
+    "filterTitle": "Filter by Technology"
   },
   "Certifications": {
     "issuerLabel": "Issued by",
