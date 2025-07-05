@@ -1,5 +1,5 @@
 // src/components/Panel.tsx
-import React from "react";
+import React, { forwardRef } from "react";
 import { clsx } from "clsx";
 
 interface PanelProps {
@@ -9,41 +9,47 @@ interface PanelProps {
   variant?: "default" | "simple";
 }
 
-const Panel: React.FC<PanelProps> = ({
-  children,
-  className,
-  as: Component = "div",
-  variant = "default",
-}) => {
-  const baseClasses = "p-6 md:p-8 rounded-lg transition-all duration-300";
+const Panel = forwardRef<HTMLDivElement, PanelProps>(
+  (
+    { children, className, as: Component = "div", variant = "default" },
+    ref
+  ) => {
+    const baseClasses = "p-6 md:p-8 rounded-lg transition-all duration-300";
 
-  const darkThemeClasses = `
-    dark:bg-light-panel-bg/5
-    dark:backdrop-blur-custom 
-    dark:border-border
-    dark:hover:border-accent/50
-  `;
+    const darkThemeClasses = `
+      dark:bg-light-panel-bg/5
+      dark:backdrop-blur-custom 
+      dark:border-border
+      dark:hover:border-accent/50
+    `;
 
-  const lightThemeClasses = `
-    light:bg-light-panel-bg/90  
-    light:backdrop-blur-custom 
-    light:border-border
-    light:shadow-[0_4px_16px_var(--color-shadow)]
-    light:hover:border-accent
-  `;
+    const lightThemeClasses = `
+      light:bg-light-panel-bg/90  
+      light:backdrop-blur-custom 
+      light:border-border
+      light:shadow-[0_4px_16px_var(--color-shadow)]
+      light:hover:border-accent
+    `;
 
-  const combinedClasses = clsx(
-    baseClasses,
-    darkThemeClasses,
-    lightThemeClasses,
-    "animate-on-scroll",
-    {
-      "panel-with-corners panel-glow-anim": variant === "default",
-    },
-    className
-  );
+    const combinedClasses = clsx(
+      baseClasses,
+      darkThemeClasses,
+      lightThemeClasses,
+      "animate-on-scroll",
+      {
+        "panel-with-corners panel-glow-anim": variant === "default",
+      },
+      className
+    );
 
-  return <Component className={combinedClasses}>{children}</Component>;
-};
+    return (
+      <Component ref={ref} className={combinedClasses}>
+        {children}
+      </Component>
+    );
+  }
+);
+
+Panel.displayName = "Panel";
 
 export default Panel;

@@ -1,7 +1,8 @@
+// src/components/About.tsx
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 import { IconType } from "react-icons";
 import {
   FiBriefcase,
@@ -15,6 +16,43 @@ import Highlight from "./Highlight";
 import Section from "./Section";
 import Panel from "./Panel";
 import { useTranslations } from "next-intl";
+import CountUp from "react-countup";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+
+// Helper component to parse and animate numerical values
+const AnimatedValue: React.FC<{
+  value: string | React.ReactNode;
+  startAnimation: boolean;
+}> = ({ value, startAnimation }) => {
+  if (typeof value !== "string") {
+    return <>{value}</>;
+  }
+
+  const match = value.match(/([>~<]*)(\d+(\.\d+)?)(\+?%?.*)/);
+
+  if (!match) {
+    return <>{value}</>;
+  }
+
+  const prefix = match[1] || "";
+  const number = parseFloat(match[2]);
+  const suffix = match[4] || "";
+  const decimals = (match[3] || ".").length - 1;
+
+  return (
+    <>
+      {prefix}
+      <CountUp
+        start={0}
+        end={startAnimation ? number : 0}
+        duration={2.5}
+        decimals={decimals > 0 ? decimals : 0}
+        useEasing={true}
+      />
+      {suffix}
+    </>
+  );
+};
 
 interface InfoPanelProps {
   icon: IconType;
@@ -22,6 +60,7 @@ interface InfoPanelProps {
   value: string | React.ReactNode;
   className?: string;
   tooltip?: string;
+  startAnimation: boolean;
 }
 
 const InfoPanel: React.FC<InfoPanelProps> = ({
@@ -30,6 +69,7 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
   value,
   className = "",
   tooltip,
+  startAnimation,
 }) => (
   <div
     title={tooltip}
@@ -37,7 +77,7 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
     <IconComponent className="w-8 h-8 text-info-accent mb-2" />
     <p className="font_fira_code text-sm text-secondary-text mb-1">{title}</p>
     <p className="text-primary-text text-base md:text-lg font-semibold">
-      {value}
+      <AnimatedValue value={value} startAnimation={startAnimation} />
     </p>
   </div>
 );
@@ -45,6 +85,13 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
 const About: React.FC = () => {
   const t = useTranslations("About");
   const h = useTranslations("Hero");
+
+  // Setup ref and use the hook with the corrected options
+  const metricsPanelRef = useRef<HTMLDivElement | null>(null);
+  const isIntersecting = useIntersectionObserver(metricsPanelRef, {
+    rootMargin: "0px 0px -200px 0px", // Trigger only after scrolling ~200px into view
+    threshold: 0.01,
+  });
 
   return (
     <Section
@@ -107,7 +154,7 @@ const About: React.FC = () => {
           </div>
         </Panel>
       </div>
-      <Panel>
+      <Panel ref={metricsPanelRef}>
         <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-8 text-center font-semibold">
           {t("metricsTitle")}
         </p>
@@ -117,36 +164,42 @@ const About: React.FC = () => {
             title={t("experienceTitle")}
             value={t("experienceValue")}
             tooltip={t("experienceTooltip")}
+            startAnimation={isIntersecting}
           />
           <InfoPanel
             icon={FiTarget}
             title={t("lighthouseTitle")}
             value={t("lighthouseValue")}
             tooltip={t("lighthouseTooltip")}
+            startAnimation={isIntersecting}
           />
           <InfoPanel
             icon={FiZap}
             title={t("trafficTitle")}
             value={t("trafficValue")}
             tooltip={t("trafficTooltip")}
+            startAnimation={isIntersecting}
           />
           <InfoPanel
             icon={FiCpu}
             title={t("stacksTitle")}
             value={t("stacksValue")}
             tooltip={t("stacksTooltip")}
+            startAnimation={isIntersecting}
           />
           <InfoPanel
             icon={FiMessageSquare}
             title={t("englishTitle")}
             value={t("englishValue")}
             tooltip={t("englishTooltip")}
+            startAnimation={isIntersecting}
           />
           <InfoPanel
             icon={FiGlobe}
             title={t("workTitle")}
             value={t("workValue")}
             tooltip={t("workTooltip")}
+            startAnimation={isIntersecting}
           />
         </div>
       </Panel>
