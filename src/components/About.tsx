@@ -18,6 +18,7 @@ import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import CountUp from "react-countup";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { clsx } from "clsx";
 
 // Helper component to parse and animate numerical values
 const AnimatedValue: React.FC<{
@@ -54,6 +55,7 @@ const AnimatedValue: React.FC<{
   );
 };
 
+// InfoPanel component now accepts animationDelay and applies will-animate class
 interface InfoPanelProps {
   icon: IconType;
   title: string;
@@ -61,6 +63,7 @@ interface InfoPanelProps {
   className?: string;
   tooltip?: string;
   startAnimation: boolean;
+  animationDelay: string;
 }
 
 const InfoPanel: React.FC<InfoPanelProps> = ({
@@ -70,10 +73,12 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
   className = "",
   tooltip,
   startAnimation,
+  animationDelay,
 }) => (
   <div
     title={tooltip}
-    className={`flex flex-col items-center text-center p-4 rounded-lg border border-neutral-700/50 transform transition-transform hover:scale-105 cursor-default w-full interactive-glow ${className.trim()}`}>
+    className={`flex flex-col items-center text-center p-4 rounded-lg border border-neutral-700/50 transform transition-transform hover:scale-105 cursor-default w-full interactive-glow will-animate ${className.trim()}`}
+    style={{ animationDelay }}>
     <IconComponent className="w-8 h-8 text-info-accent mb-2" />
     <p className="font_fira_code text-sm text-secondary-text mb-1">{title}</p>
     <p className="text-primary-text text-base md:text-lg font-semibold">
@@ -86,20 +91,79 @@ const About: React.FC = () => {
   const t = useTranslations("About");
   const h = useTranslations("Hero");
 
-  // Setup ref and use the hook with the corrected options
+  const aboutSectionRef = useRef<HTMLElement | null>(null);
   const metricsPanelRef = useRef<HTMLDivElement | null>(null);
-  const isIntersecting = useIntersectionObserver(metricsPanelRef, {
-    rootMargin: "0px 0px -200px 0px", // Trigger only after scrolling ~200px into view
-    threshold: 0.01,
+
+  // Observer for the entire section, to animate the top panels
+  const isAboutSectionInView = useIntersectionObserver(aboutSectionRef, {
+    rootMargin: "0px 0px -250px 0px",
+    threshold: 0.1,
   });
+
+  // THE DEFINITIVE FIX: A separate observer for the metrics panel with center-screen options
+  const isMetricsPanelCentered = useIntersectionObserver(metricsPanelRef, {
+    rootMargin: "-40% 0px -40% 0px", // Creates a trigger zone in the middle 20% of the screen
+    threshold: 0.5, // 50% of the panel must be in the trigger zone
+  });
+
+  const metricsData = [
+    {
+      id: "experience",
+      icon: FiBriefcase,
+      title: t("experienceTitle"),
+      value: t("experienceValue"),
+      tooltip: t("experienceTooltip"),
+    },
+    {
+      id: "lighthouse",
+      icon: FiTarget,
+      title: t("lighthouseTitle"),
+      value: t("lighthouseValue"),
+      tooltip: t("lighthouseTooltip"),
+    },
+    {
+      id: "traffic",
+      icon: FiZap,
+      title: t("trafficTitle"),
+      value: t("trafficValue"),
+      tooltip: t("trafficTooltip"),
+    },
+    {
+      id: "stacks",
+      icon: FiCpu,
+      title: t("stacksTitle"),
+      value: t("stacksValue"),
+      tooltip: t("stacksTooltip"),
+    },
+    {
+      id: "english",
+      icon: FiMessageSquare,
+      title: t("englishTitle"),
+      value: t("englishValue"),
+      tooltip: t("englishTooltip"),
+    },
+    {
+      id: "work",
+      icon: FiGlobe,
+      title: t("workTitle"),
+      value: t("workValue"),
+      tooltip: t("workTooltip"),
+    },
+  ];
 
   return (
     <Section
       id="about"
+      ref={aboutSectionRef}
       title="about"
-      className="py-16 md:py-24 pt-32 md:pt-40 relative overflow-hidden">
+      className={clsx(
+        "py-16 md:py-24 pt-32 md:pt-40 relative overflow-hidden",
+        {
+          "is-in-view": isAboutSectionInView, // Use this class to animate the top part
+        }
+      )}>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start mb-8 lg:mb-12">
-        <Panel className="lg:col-span-1">
+        <Panel className="lg:col-span-1 will-animate">
           <div className="flex flex-col items-center">
             <div className="relative w-40 h-40 md:w-48 md:h-48 mb-6">
               <Image
@@ -126,7 +190,9 @@ const About: React.FC = () => {
             </p>
           </div>
         </Panel>
-        <Panel className="lg:col-span-2">
+        <Panel
+          className="lg:col-span-2 will-animate"
+          style={{ animationDelay: "100ms" }}>
           <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-4 text-center sm:text-left font-semibold">
             {t("summaryTitle")}
           </p>
@@ -154,55 +220,31 @@ const About: React.FC = () => {
           </div>
         </Panel>
       </div>
-      <Panel ref={metricsPanelRef}>
-        <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-8 text-center font-semibold">
-          {t("metricsTitle")}
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-items-stretch w-full max-w-4xl mx-auto">
-          <InfoPanel
-            icon={FiBriefcase}
-            title={t("experienceTitle")}
-            value={t("experienceValue")}
-            tooltip={t("experienceTooltip")}
-            startAnimation={isIntersecting}
-          />
-          <InfoPanel
-            icon={FiTarget}
-            title={t("lighthouseTitle")}
-            value={t("lighthouseValue")}
-            tooltip={t("lighthouseTooltip")}
-            startAnimation={isIntersecting}
-          />
-          <InfoPanel
-            icon={FiZap}
-            title={t("trafficTitle")}
-            value={t("trafficValue")}
-            tooltip={t("trafficTooltip")}
-            startAnimation={isIntersecting}
-          />
-          <InfoPanel
-            icon={FiCpu}
-            title={t("stacksTitle")}
-            value={t("stacksValue")}
-            tooltip={t("stacksTooltip")}
-            startAnimation={isIntersecting}
-          />
-          <InfoPanel
-            icon={FiMessageSquare}
-            title={t("englishTitle")}
-            value={t("englishValue")}
-            tooltip={t("englishTooltip")}
-            startAnimation={isIntersecting}
-          />
-          <InfoPanel
-            icon={FiGlobe}
-            title={t("workTitle")}
-            value={t("workValue")}
-            tooltip={t("workTooltip")}
-            startAnimation={isIntersecting}
-          />
-        </div>
-      </Panel>
+      <div
+        ref={metricsPanelRef}
+        className={clsx({ "is-in-view": isMetricsPanelCentered })}>
+        <Panel>
+          <p
+            className="font_fira_code text-xl md:text-2xl text-info-accent mb-8 text-center font-semibold will-animate"
+            style={{ animationDelay: "1000ms" }} // Base 1s delay for title
+          >
+            {t("metricsTitle")}
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-items-stretch w-full max-w-4xl mx-auto">
+            {metricsData.map((metric, index) => (
+              <InfoPanel
+                key={metric.id}
+                icon={metric.icon}
+                title={metric.title}
+                value={metric.value}
+                tooltip={metric.tooltip}
+                startAnimation={isMetricsPanelCentered}
+                animationDelay={`${1000 + (index + 1) * 100}ms`} // 1s base delay + stagger
+              />
+            ))}
+          </div>
+        </Panel>
+      </div>
     </Section>
   );
 };

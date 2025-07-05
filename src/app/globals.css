@@ -4,42 +4,42 @@
 @tailwind utilities;
 
 /* ======================
-   Cores globais (modo escuro por defeito)
+   Global Colors (default to dark mode)
    ====================== */
 :root {
-  /* Fundo */
+  /* Background */
   --color-primary-bg: #0a0a0a;
   --color-secondary-bg: #141414;
   --color-light-panel-bg: #1f1f1f;
 
-  /* Texto */
+  /* Text */
   --color-primary-text: #e6faff;
   --color-secondary-text: #a9d3e2;
 
-  /* Cores de destaque (base cyan neon) */
-  --color-accent: #00bfff;                    /* Deep Sky Blue */
-  --color-accent-hover: #1fd4ff;              /* Hover ligeiramente mais claro */
-  --color-info-accent: #66e0ff;               /* Info: tom mais suave */
-  --color-prof-familiar: #4a5568;             /* ADDED: Gray for familiar proficiency */
+  /* Accent Colors (cyan neon base) */
+  --color-accent: #00bfff; /* Deep Sky Blue */
+  --color-accent-hover: #1fd4ff; /* Lighter hover */
+  --color-info-accent: #66e0ff; /* Softer info tone */
+  --color-prof-familiar: #4a5568; /* Gray for familiar proficiency */
 
-  /* Bordas e sombras */
+  /* Borders and Shadows */
   --color-border: rgba(0, 191, 255, 0.15);
   --color-border-hover: rgba(0, 191, 255, 0.4);
   --color-shadow: rgba(0, 191, 255, 0.6);
 
-  /* Vidro fosco / blur */
+  /* Frosted Glass / Blur */
   --glass-bg: rgba(20, 20, 20, 0.7);
   --glass-border: rgba(0, 191, 255, 0.2);
 
-  /* Intensidade de blur */
+  /* Blur Intensity */
   --blur-intensity: 6px;
 
-  /* Contorno de texto (se usares stroke no texto) */
+  /* Text Stroke (if used) */
   --text-stroke-color: #000000;
 }
 
 /* ======================
-   Tema claro
+   Light Theme
    ====================== */
 html.light {
   --color-primary-bg: #f5faff;
@@ -49,10 +49,10 @@ html.light {
   --color-primary-text: #1a2c44;
   --color-secondary-text: #345679;
 
-  --color-accent: #3182CE;                    /* Azul suave */
+  --color-accent: #3182ce; /* Soft Blue */
   --color-accent-hover: #4299e1;
   --color-info-accent: #63b3ed;
-  --color-prof-familiar: #a0aec0;             /* ADDED: Lighter gray for light mode */
+  --color-prof-familiar: #a0aec0; /* Lighter gray for light mode */
 
   --color-border: rgba(49, 130, 206, 0.2);
   --color-border-hover: rgba(49, 130, 206, 0.4);
@@ -65,7 +65,6 @@ html.light {
 
   --text-stroke-color: #ffffff;
 }
-
 
 body {
   color: var(--color-primary-text);
@@ -120,6 +119,41 @@ html.light body::before {
   }
 }
 
+/* Staggered Animation Logic */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(
+      0,
+      30px,
+      0
+    ); /* Use 3d transform for hardware acceleration */
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Base state for elements that will be animated */
+.will-animate {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/* 
+  CORRECTED IMPLEMENTATION:
+  Trigger animation by defining individual properties, allowing `animation-delay` 
+  to be applied via inline styles without being overridden by the shorthand.
+*/
+.is-in-view .will-animate {
+  animation-name: fadeInUp;
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: forwards;
+}
+/* End Staggered Animation Logic */
+
 @layer utilities {
   .logo-stroke {
     filter: drop-shadow(1px 1px 0 var(--color-border))
@@ -127,7 +161,7 @@ html.light body::before {
       drop-shadow(1px -1px 0 var(--color-border))
       drop-shadow(-1px -1px 0 var(--color-border));
   }
-  
+
   .no-text-stroke {
     -webkit-text-stroke-width: 0;
     text-stroke-width: 0;
@@ -138,39 +172,6 @@ html.light body::before {
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(var(--blur-intensity));
     -webkit-backdrop-filter: blur(var(--blur-intensity));
-  }
-
-  .theme-transition {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .text-gradient {
-    background: linear-gradient(135deg, var(--color-accent), var(--color-info-accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .border-gradient {
-    background: linear-gradient(135deg, var(--color-accent), var(--color-info-accent));
-    background-clip: padding-box;
-  }
-}
-
-.animate-glow-shadow {
-  animation: glow-shadow-keyframes 4s ease-in-out infinite alternate;
-  will-change: box-shadow;
-}
-
-@keyframes glow-shadow-keyframes {
-  0% {
-    box-shadow: 0 4px 20px -10px var(--color-accent-shadow-end);
-  }
-  50% {
-    box-shadow: 0 8px 30px -5px var(--color-accent-shadow-start);
-  }
-  100% {
-    box-shadow: 0 6px 25px -8px var(--color-accent-shadow-end);
   }
 }
 
@@ -242,7 +243,7 @@ html.light body::before {
 
 .interactive-glow:hover {
   border-color: var(--color-border-hover);
-  box-shadow: 0 4px 20px -10px var(--color-accent-shadow-start);
+  box-shadow: 0 4px 20px -10px var(--color-shadow);
   transform: translateY(-2px);
 }
 
@@ -258,17 +259,6 @@ html {
 
 .section-scroll-margin {
   scroll-margin-top: 5rem;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @keyframes fadeInDown {
@@ -336,14 +326,13 @@ html {
 /* Enhanced Focus States */
 *:focus-visible {
   outline: none !important;
-  box-shadow: 0 0 0 3px var(--color-primary-bg), 
-              0 0 0 6px var(--color-accent) !important;
+  box-shadow: 0 0 0 3px var(--color-primary-bg), 0 0 0 6px var(--color-accent) !important;
   transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .interactive-glow:focus-visible {
   box-shadow: 0 0 0 3px var(--color-primary-bg),
-              0 0 0 6px var(--color-info-accent) !important;
+    0 0 0 6px var(--color-info-accent) !important;
 }
 
 /* Improved Scrollbar Styling */
@@ -378,154 +367,27 @@ html {
   color: var(--color-primary-bg);
 }
 
-/* Improved Button and Input Styling */
-.btn-primary {
-  background: var(--color-accent);
-  color: var(--color-primary-bg);
-  border: 1px solid var(--color-accent);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 600; /* Bolder for impact */
-  text-transform: uppercase; /* Techy feel */
-  letter-spacing: 0.05em;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  box-shadow: 0 0 15px -5px var(--color-accent-shadow-start);
-}
-
-html.light .btn-primary {
-    color: #fff;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  background: var(--color-accent-hover);
-  box-shadow: 0 0 25px -5px var(--color-accent-shadow-start);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--color-accent);
-  border: 1px solid var(--color-accent);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-}
-
-.btn-secondary:hover {
-  background: rgba(100, 255, 218, 0.1);
-  border-color: var(--color-accent-hover);
-  color: var(--color-accent-hover);
-}
-
-html.light .btn-secondary {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
-}
-
-html.light .btn-secondary:hover {
-    background: rgba(13, 110, 253, 0.1);
-    border-color: var(--color-accent-hover);
-    color: var(--color-accent-hover);
-}
-
-
-.input-field {
-  background: var(--color-secondary-bg);
-  border: 1px solid var(--color-border);
-  color: var(--color-primary-text);
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 100%;
-}
-
-.input-field:focus {
-  border-color: var(--color-accent);
-  background: var(--color-light-panel-bg);
-  box-shadow: 0 0 0 3px var(--color-accent-shadow-end);
-}
-
-.input-field::placeholder {
-  color: var(--color-secondary-text);
-  opacity: 0.7;
-}
-
-/* Card Styles */
-.card {
-  background: var(--color-secondary-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card:hover {
-  border-color: var(--color-border-hover);
-  box-shadow: 0 8px 30px -12px var(--color-shadow);
-  transform: translateY(-2px);
-}
-
-.card-glass {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  backdrop-filter: blur(var(--blur-intensity));
-  -webkit-backdrop-filter: blur(var(--blur-intensity));
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* Responsive Design Improvements */
 @media (max-width: 768px) {
   body {
     background-size: 200px 200px;
   }
-  
+
   body::before {
     background-size: 250px 250px;
   }
-  
+
   .panel-with-corners::before,
   .panel-with-corners::after {
     width: 20px;
     height: 20px;
   }
-  
+
   .panel-with-corners:hover::before,
   .panel-with-corners:hover::after {
     width: 22px;
     height: 22px;
   }
-}
-
-/* Light Mode Specific Enhancements */
-html.light .card {
-  background: var(--color-light-panel-bg);
-  box-shadow: 0 2px 10px -5px var(--color-shadow);
-}
-
-html.light .card:hover {
-  box-shadow: 0 8px 30px -12px var(--color-shadow-intense);
-}
-
-html.light .input-field {
-  background: var(--color-light-panel-bg);
-  box-shadow: 0 1px 3px -2px var(--color-shadow);
-}
-
-html.light .input-field:focus {
-  box-shadow: 0 0 0 3px var(--color-accent-shadow-end), 0 2px 8px -3px var(--color-shadow);
-}
-
-html.light .interactive-glow {
-  box-shadow: 0 1px 3px -2px var(--color-shadow);
-}
-
-html.light .interactive-glow:hover {
-  box-shadow: 0 4px 20px -10px var(--color-accent-shadow-start), 0 2px 8px -3px var(--color-shadow);
 }
 
 /* Reduced Motion Support */
@@ -537,13 +399,16 @@ html.light .interactive-glow:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   body::before {
     animation: none;
   }
-  
-  .animate-glow-shadow,
+
   .panel-glow-anim {
     animation: none;
+  }
+
+  .will-animate {
+    opacity: 1; /* Instantly visible if motion is reduced */
   }
 }

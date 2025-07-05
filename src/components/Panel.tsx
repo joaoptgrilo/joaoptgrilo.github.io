@@ -2,16 +2,22 @@
 import React, { forwardRef } from "react";
 import { clsx } from "clsx";
 
-interface PanelProps {
+interface PanelProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   className?: string;
   as?: React.ElementType;
   variant?: "default" | "simple";
 }
 
-const Panel = forwardRef<HTMLDivElement, PanelProps>(
+const Panel = forwardRef<HTMLElement, PanelProps>(
   (
-    { children, className, as: Component = "div", variant = "default" },
+    {
+      children,
+      className,
+      as: Component = "div",
+      variant = "default",
+      ...props
+    },
     ref
   ) => {
     const baseClasses = "p-6 md:p-8 rounded-lg transition-all duration-300";
@@ -35,7 +41,6 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
       baseClasses,
       darkThemeClasses,
       lightThemeClasses,
-      "animate-on-scroll",
       {
         "panel-with-corners panel-glow-anim": variant === "default",
       },
@@ -43,7 +48,7 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
     );
 
     return (
-      <Component ref={ref} className={combinedClasses}>
+      <Component ref={ref} className={combinedClasses} {...props}>
         {children}
       </Component>
     );
