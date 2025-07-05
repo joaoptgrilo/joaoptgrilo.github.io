@@ -20,6 +20,7 @@
   --color-accent: #00bfff;                    /* Deep Sky Blue */
   --color-accent-hover: #1fd4ff;              /* Hover ligeiramente mais claro */
   --color-info-accent: #66e0ff;               /* Info: tom mais suave */
+  --color-prof-familiar: #4a5568;             /* ADDED: Gray for familiar proficiency */
 
   /* Bordas e sombras */
   --color-border: rgba(0, 191, 255, 0.15);
@@ -51,6 +52,7 @@ html.light {
   --color-accent: #3182CE;                    /* Azul suave */
   --color-accent-hover: #4299e1;
   --color-info-accent: #63b3ed;
+  --color-prof-familiar: #a0aec0;             /* ADDED: Lighter gray for light mode */
 
   --color-border: rgba(49, 130, 206, 0.2);
   --color-border-hover: rgba(49, 130, 206, 0.4);
