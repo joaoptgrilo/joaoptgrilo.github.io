@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 const Footer: React.FC = () => {
   const t = useTranslations("Footer");
   const currentYear = new Date().getFullYear();
-  const websiteVersion = "v1.2.0-skills"; // <-- VERSION UPDATED
+  const websiteVersion = "v1.3.0-filtering"; // <-- VERSION UPDATED
 
   return (
     <footer id="footer" className="w-full py-10 md:py-16">
