@@ -34,7 +34,7 @@ const ExperienceClient = ({
                     <div className="flex items-center">
                       {item.companyLogoUrl ? (
                         <div
-                          className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border`}>
+                          className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border bg-black opacity-80`}>
                           <div className="relative w-full h-full">
                             <Image
                               src={item.companyLogoUrl}
