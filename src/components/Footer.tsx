@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
   return (
     <footer id="footer" className="w-full py-10 md:py-16">
       <div className="container mx-auto px-4">
-        <Panel variant="default" className="text-center animate-on-scroll">
+        <Panel variant="default" className="text-center">
           <p className="text-sm text-secondary-text font_fira_code">
             {t("copyright", { currentYear })}
           </p>

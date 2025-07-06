@@ -6,7 +6,7 @@ interface PanelProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   className?: string;
   as?: React.ElementType;
-  variant?: "default" | "simple";
+  variant?: "default" | "simple" | "modal";
 }
 
 const Panel = forwardRef<HTMLElement, PanelProps>(
@@ -20,30 +20,20 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
     },
     ref
   ) => {
-    const baseClasses = "p-6 md:p-8 rounded-lg transition-all duration-300";
+    // Base styles applied to ALL panels, including the glass effect.
+    const baseClasses = "rounded-lg transition-all duration-300 glass-effect";
 
-    const darkThemeClasses = `
-      dark:bg-light-panel-bg/5
-      dark:backdrop-blur-custom 
-      dark:border-border
-      dark:hover:border-accent/50
-    `;
-
-    const lightThemeClasses = `
-      light:bg-light-panel-bg/90  
-      light:backdrop-blur-custom 
-      light:border-border
-      light:shadow-[0_4px_16px_var(--color-shadow)]
-      light:hover:border-accent
-    `;
+    // Variant classes ADD or OVERRIDE the base styles.
+    const variantClasses = {
+      default: "p-6 md:p-8 panel-with-corners panel-glow-anim",
+      simple: "p-6 md:p-8",
+      modal:
+        "!p-0 overflow-y-auto dark:bg-secondary-bg light:bg-white border dark:border-border light:border-neutral-200 backdrop-blur-none",
+    };
 
     const combinedClasses = clsx(
       baseClasses,
-      darkThemeClasses,
-      lightThemeClasses,
-      {
-        "panel-with-corners panel-glow-anim": variant === "default",
-      },
+      variantClasses[variant],
       className
     );
 

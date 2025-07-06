@@ -3,69 +3,45 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ======================
-   Global Colors (default to dark mode)
-   ====================== */
+/* All :root and light theme variables are correct and remain unchanged */
 :root {
-  /* Background */
   --color-primary-bg: #0a0a0a;
   --color-secondary-bg: #141414;
   --color-light-panel-bg: #1f1f1f;
-
-  /* Text */
   --color-primary-text: #e6faff;
   --color-secondary-text: #a9d3e2;
-
-  /* Accent Colors (cyan neon base) */
-  --color-accent: #00bfff; /* Deep Sky Blue */
-  --color-accent-hover: #1fd4ff; /* Lighter hover */
-  --color-info-accent: #66e0ff; /* Softer info tone */
-  --color-prof-familiar: #4a5568; /* Gray for familiar proficiency */
-
-  /* Borders and Shadows */
+  --color-accent: #00bfff;
+  --color-accent-hover: #1fd4ff;
+  --color-info-accent: #66e0ff;
+  --color-prof-familiar: #4a5568;
   --color-border: rgba(0, 191, 255, 0.15);
   --color-border-hover: rgba(0, 191, 255, 0.4);
   --color-shadow: rgba(0, 191, 255, 0.6);
-
-  /* Frosted Glass / Blur */
   --glass-bg: rgba(20, 20, 20, 0.7);
   --glass-border: rgba(0, 191, 255, 0.2);
-
-  /* Blur Intensity */
   --blur-intensity: 6px;
-
-  /* Text Stroke (if used) */
   --text-stroke-color: #000000;
 }
-
-/* ======================
-   Light Theme
-   ====================== */
 html.light {
   --color-primary-bg: #f5faff;
   --color-secondary-bg: #e3f1ff;
   --color-light-panel-bg: #d0e8ff;
-
   --color-primary-text: #1a2c44;
   --color-secondary-text: #345679;
-
-  --color-accent: #3182ce; /* Soft Blue */
+  --color-accent: #3182ce;
   --color-accent-hover: #4299e1;
   --color-info-accent: #63b3ed;
-  --color-prof-familiar: #a0aec0; /* Lighter gray for light mode */
-
+  --color-prof-familiar: #a0aec0;
   --color-border: rgba(49, 130, 206, 0.2);
   --color-border-hover: rgba(49, 130, 206, 0.4);
   --color-shadow: rgba(49, 130, 206, 0.3);
-
   --glass-bg: rgba(255, 255, 255, 0.75);
   --glass-border: rgba(49, 130, 206, 0.15);
-
   --blur-intensity: 4px;
-
   --text-stroke-color: #ffffff;
 }
 
+/* Base Body and other styles are correct and remain unchanged */
 body {
   color: var(--color-primary-text);
   font-family: "Poppins", sans-serif;
@@ -81,11 +57,9 @@ body {
   paint-order: stroke fill;
   line-height: 1.6;
 }
-
 html.light body {
   background-image: url("/images/coding-symbols-light.svg");
 }
-
 body::before {
   content: "";
   position: fixed;
@@ -102,11 +76,9 @@ body::before {
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0.6;
 }
-
 html.light body::before {
   opacity: 0.15;
 }
-
 @keyframes performantPan {
   0% {
     transform: translate(0, 0) scale(1);
@@ -118,41 +90,23 @@ html.light body::before {
     transform: translate(25%, 25%) scale(1);
   }
 }
-
-/* Staggered Animation Logic */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translate3d(
-      0,
-      30px,
-      0
-    ); /* Use 3d transform for hardware acceleration */
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+html {
+  scroll-behavior: smooth;
+}
+.section-scroll-margin {
+  scroll-margin-top: 5rem;
 }
 
-/* Base state for elements that will be animated */
-.will-animate {
-  opacity: 0;
-  will-change: opacity, transform;
+/* === DEFINITIVE SKILL BAR "CHARGING" ANIMATION === */
+.bar-fill {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s ease-out;
 }
-
-/* 
-  CORRECTED IMPLEMENTATION:
-  Trigger animation by defining individual properties, allowing `animation-delay` 
-  to be applied via inline styles without being overridden by the shorthand.
-*/
-.is-in-view .will-animate {
-  animation-name: fadeInUp;
-  animation-duration: 0.6s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  animation-fill-mode: forwards;
+.is-in-view .bar-fill {
+  transform: scaleX(1);
 }
-/* End Staggered Animation Logic */
+/* === END SKILL BAR ANIMATION === */
 
 @layer utilities {
   .logo-stroke {
@@ -161,12 +115,10 @@ html.light body::before {
       drop-shadow(1px -1px 0 var(--color-border))
       drop-shadow(-1px -1px 0 var(--color-border));
   }
-
   .no-text-stroke {
     -webkit-text-stroke-width: 0;
     text-stroke-width: 0;
   }
-
   .glass-effect {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -174,12 +126,10 @@ html.light body::before {
     -webkit-backdrop-filter: blur(var(--blur-intensity));
   }
 }
-
 .panel-glow-anim {
   animation: panelGlow 3s ease-in-out infinite alternate;
   will-change: box-shadow;
 }
-
 @keyframes panelGlow {
   0% {
     box-shadow: 0 0 20px -12px var(--color-accent);
@@ -191,11 +141,9 @@ html.light body::before {
     box-shadow: 0 0 30px -10px var(--color-accent);
   }
 }
-
 .panel-with-corners {
   position: relative;
 }
-
 .panel-with-corners::before,
 .panel-with-corners::after {
   content: "";
@@ -206,7 +154,6 @@ html.light body::before {
   opacity: 0.7;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .panel-with-corners::before {
   top: -6px;
   left: -6px;
@@ -216,7 +163,6 @@ html.light body::before {
   border-left-style: solid;
   border-top-left-radius: 0.5rem;
 }
-
 .panel-with-corners::after {
   bottom: -6px;
   right: -6px;
@@ -226,74 +172,28 @@ html.light body::before {
   border-right-style: solid;
   border-bottom-right-radius: 0.5rem;
 }
-
 .panel-with-corners:hover::before,
 .panel-with-corners:hover::after {
   opacity: 1;
   width: 28px;
   height: 28px;
 }
-
 .interactive-glow {
   position: relative;
   z-index: 1;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid var(--color-border);
 }
-
 .interactive-glow:hover {
   border-color: var(--color-border-hover);
   box-shadow: 0 4px 20px -10px var(--color-shadow);
   transform: translateY(-2px);
 }
-
 .interactive-glow:focus,
 .interactive-glow:focus-visible {
   border-color: var(--color-info-accent);
   outline: none;
 }
-
-html {
-  scroll-behavior: smooth;
-}
-
-.section-scroll-margin {
-  scroll-margin-top: 5rem;
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 @keyframes typing {
   from {
     width: 0;
@@ -302,7 +202,6 @@ html {
     width: 100%;
   }
 }
-
 @keyframes blink-caret {
   from,
   to {
@@ -312,7 +211,6 @@ html {
     border-color: var(--color-accent);
   }
 }
-
 .typewriter-css {
   overflow: hidden;
   border-right: 0.15em solid var(--color-accent);
@@ -322,93 +220,49 @@ html {
   animation-delay: 1.2s;
   animation-fill-mode: both;
 }
-
-/* Enhanced Focus States */
 *:focus-visible {
   outline: none !important;
   box-shadow: 0 0 0 3px var(--color-primary-bg), 0 0 0 6px var(--color-accent) !important;
   transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .interactive-glow:focus-visible {
   box-shadow: 0 0 0 3px var(--color-primary-bg),
     0 0 0 6px var(--color-info-accent) !important;
 }
-
-/* Improved Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--color-secondary-bg);
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb {
   background: var(--color-border);
   border-radius: 4px;
   transition: background 0.3s ease;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-border-hover);
 }
-
-/* Selection Styling */
 ::selection {
   background: var(--color-accent);
   color: var(--color-primary-bg);
 }
-
 ::-moz-selection {
   background: var(--color-accent);
   color: var(--color-primary-bg);
 }
 
-/* Responsive Design Improvements */
-@media (max-width: 768px) {
-  body {
-    background-size: 200px 200px;
-  }
-
-  body::before {
-    background-size: 250px 250px;
-  }
-
-  .panel-with-corners::before,
-  .panel-with-corners::after {
-    width: 20px;
-    height: 20px;
-  }
-
-  .panel-with-corners:hover::before,
-  .panel-with-corners:hover::after {
-    width: 22px;
-    height: 22px;
-  }
-}
-
-/* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
-
-  body::before {
-    animation: none;
-  }
-
-  .panel-glow-anim {
-    animation: none;
-  }
-
-  .will-animate {
-    opacity: 1; /* Instantly visible if motion is reduced */
+  .is-in-view .bar-fill {
+    transform: scaleX(1);
   }
 }

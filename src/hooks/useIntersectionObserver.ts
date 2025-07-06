@@ -14,12 +14,14 @@ export function useIntersectionObserver(
   options: IntersectionObserverOptions = {}
 ): boolean {
   const [isIntersecting, setIntersecting] = useState(false);
+  const { threshold = 0.1, root = null, rootMargin = "0px" } = options;
 
   useEffect(() => {
+    if (isIntersecting) return;
+
     const element = ref.current;
     if (!element) return;
 
-    // Check for prefers-reduced-motion immediately
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mediaQuery.matches) {
       setIntersecting(true);
@@ -28,27 +30,20 @@ export function useIntersectionObserver(
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Update state when intersection changes
         if (entry.isIntersecting) {
           setIntersecting(true);
-          // Stop observing once it has intersected
           observer.unobserve(element);
         }
       },
-      {
-        threshold: options.threshold || 0.1,
-        root: options.root || null,
-        rootMargin: options.rootMargin || "0px",
-      }
+      { threshold, root, rootMargin }
     );
 
     observer.observe(element);
 
-    // Cleanup function
     return () => {
       observer.unobserve(element);
     };
-  }, [ref, options.threshold, options.root, options.rootMargin]);
+  }, [ref, threshold, root, rootMargin, isIntersecting]);
 
   return isIntersecting;
 }
