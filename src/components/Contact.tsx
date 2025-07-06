@@ -31,15 +31,15 @@ const ContactLink: React.FC<{
       href={href}
       target={newTab ? "_blank" : undefined}
       rel={newTab ? "noopener noreferrer" : undefined}
-      className={clsx(baseClasses, primaryClasses, {
-        "no-text-stroke": isPrimary, // <-- ADDED
-      })}>
+      className={clsx(baseClasses, primaryClasses)}
+    >
       <span
         className={clsx("mr-2.5 text-xl", {
           "text-primary-bg": isPrimary,
           "text-info-accent group-hover:text-accent transition-colors duration-300":
             !isPrimary,
-        })}>
+        })}
+      >
         {icon}
       </span>
       {label}
@@ -55,11 +55,13 @@ const Contact: React.FC = () => {
     <Section
       id="contact"
       title="contact"
-      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center">
+      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center"
+    >
       <div className="container mx-auto px-4 flex flex-col items-center">
         <Panel
           variant="default"
-          className="w-full max-w-2xl text-center animate-on-scroll">
+          className="w-full max-w-2xl text-center animate-on-scroll"
+        >
           <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
             {t.rich("description", {
               highlight: (chunks) => <Highlight>{chunks}</Highlight>,
