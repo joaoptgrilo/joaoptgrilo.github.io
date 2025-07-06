@@ -5,13 +5,13 @@ import "../globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-import ScrollSpy from "@/components/ScrollSpy";
+// import ScrollSpy from "@/components/ScrollSpy"; // <-- DISABLED
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "../../../i18n";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import ThemeInitializer from "@/components/ThemeInitializer";
-import ScrollRestorer from "@/components/ScrollRestorer"; // <-- IMPORT NEW COMPONENT
+import ScrollRestorer from "@/components/ScrollRestorer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -49,7 +49,8 @@ export default async function RootLayout({
     <html
       lang={locale}
       className={`${poppins.variable} ${firaCode.variable} antialiased`}
-      suppressHydrationWarning>
+      suppressHydrationWarning
+    >
       <head>
         <link
           rel="preload"
@@ -62,11 +63,11 @@ export default async function RootLayout({
         <ThemeInitializer />
         <ThemeProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <ScrollRestorer /> {/* <-- ADD COMPONENT HERE */}
+            <ScrollRestorer />
             <Navigation />
             {children}
             <ScrollToTopButton />
-            <ScrollSpy />
+            {/* <ScrollSpy /> */} {/* <-- DISABLED TO PREVENT RE-RENDERS */}
             <Footer />
           </NextIntlClientProvider>
         </ThemeProvider>
