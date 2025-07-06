@@ -1,12 +1,26 @@
 // src/components/DeferredSections.tsx
-import React from "react";
-import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
-import Certifications from "@/components/Certifications";
-import Contact from "@/components/Contact";
+"use client"; // This component now manages dynamic imports, so it must be a client component.
 
-// No longer needs to be a client component with dynamic imports,
-// as the async data fetching handles the loading.
+import dynamic from "next/dynamic";
+import SectionSkeleton from "./SectionSkeleton";
+
+// Dynamically import each heavy section with a skeleton loader.
+const Experience = dynamic(() => import("@/components/Experience"), {
+  loading: () => <SectionSkeleton />,
+});
+
+const Projects = dynamic(() => import("@/components/Projects"), {
+  loading: () => <SectionSkeleton />,
+});
+
+const Certifications = dynamic(() => import("@/components/Certifications"), {
+  loading: () => <SectionSkeleton />,
+});
+
+const Contact = dynamic(() => import("@/components/Contact"), {
+  loading: () => <SectionSkeleton />,
+});
+
 const DeferredSections = () => {
   return (
     <>
