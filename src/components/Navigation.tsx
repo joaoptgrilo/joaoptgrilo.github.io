@@ -7,6 +7,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { clsx } from "clsx";
 
 interface NavLinkItem {
   href: string;
@@ -19,6 +20,8 @@ const Navigation: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const SCROLL_THRESHOLD = 10;
 
+  // MOVED BACK INSIDE: navLinks must be defined inside the component
+  // to have access to the `t` function from the hook.
   const navLinks: NavLinkItem[] = [
     { href: "#about", label: t("about") },
     { href: "#skills", label: t("skills") },
@@ -58,13 +61,14 @@ const Navigation: React.FC = () => {
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const isActiveNavStyle = isScrolled || isMobileMenuOpen;
 
-  const baseNavClasses =
-    "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-[background-color] duration-300 ease-in-out";
-
-  const activeNavLookClasses =
-    "bg-secondary-bg/90 backdrop-blur-nav backdrop-saturate-150";
-
-  const topTransparentNavLookClasses = "bg-transparent shadow-none";
+  const navClasses = clsx(
+    "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-all duration-300 ease-in-out",
+    {
+      "bg-secondary-bg/90 backdrop-blur-nav backdrop-saturate-150 nav-glow":
+        isActiveNavStyle,
+      "bg-transparent shadow-none": !isActiveNavStyle,
+    }
+  );
 
   const mobileMenuContainerClasses = "bg-secondary-bg/95 backdrop-blur-nav";
 
@@ -76,10 +80,7 @@ const Navigation: React.FC = () => {
 
   return (
     <>
-      <nav
-        className={`${baseNavClasses} ${
-          isActiveNavStyle ? activeNavLookClasses : topTransparentNavLookClasses
-        }`}>
+      <nav className={navClasses}>
         <div className="container mx-auto flex justify-between items-center h-14 sm:h-16">
           <Link
             href="#hero"
@@ -91,19 +92,23 @@ const Navigation: React.FC = () => {
             tabIndex={isScrolled ? 0 : -1}
             aria-hidden={!isScrolled}>
             <span className={pillClasses}>
-              <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse-dot"></span>
+              <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse"></span>
               {t("namePill")}
             </span>
           </Link>
           <div className="hidden lg:flex items-center space-x-5">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={desktopNavLinkClasses}>
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map(
+              (
+                link: NavLinkItem // Explicitly typed 'link'
+              ) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={desktopNavLinkClasses}>
+                  {link.label}
+                </Link>
+              )
+            )}
             <div className="flex items-center space-x-2">
               <LanguageSwitcher />
               <ThemeSwitcher />
@@ -122,15 +127,19 @@ const Navigation: React.FC = () => {
           <div
             className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}>
             <div className="container mx-auto flex flex-col items-center space-y-3 px-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={`mobile-${link.label}`}
-                  href={link.href}
-                  className={mobileMenuLinkClasses}
-                  onClick={closeMobileMenu}>
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map(
+                (
+                  link: NavLinkItem // Explicitly typed 'link'
+                ) => (
+                  <Link
+                    key={`mobile-${link.label}`}
+                    href={link.href}
+                    className={mobileMenuLinkClasses}
+                    onClick={closeMobileMenu}>
+                    {link.label}
+                  </Link>
+                )
+              )}
               <div className="flex items-center space-x-4 mt-4">
                 <LanguageSwitcher />
                 <ThemeSwitcher />

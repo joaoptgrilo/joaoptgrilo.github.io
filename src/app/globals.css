@@ -16,10 +16,8 @@
   --color-border: rgba(0, 191, 255, 0.15);
   --color-border-hover: rgba(0, 191, 255, 0.4);
   --color-shadow: rgba(0, 191, 255, 0.6);
-  /* UPDATED: Dark mode glass background opacity to 0.8 */
   --glass-bg: rgba(0, 0, 0, 0.8);
   --glass-border: rgba(0, 191, 255, 0.2);
-  /* UPDATED: Tag background now uses the main panel background for consistency */
   --color-tag-bg: var(--glass-bg);
   --blur-intensity: 6px;
   --text-stroke-color: #000000;
@@ -37,10 +35,8 @@ html.light {
   --color-border: rgba(49, 130, 206, 0.2);
   --color-border-hover: rgba(49, 130, 206, 0.4);
   --color-shadow: rgba(49, 130, 206, 0.3);
-  /* Light mode glass background remains at 0.5 opacity */
   --glass-bg: rgba(255, 255, 255, 0.5);
   --glass-border: rgba(49, 130, 206, 0.15);
-  /* Light mode tag background also uses the main panel background */
   --color-tag-bg: var(--glass-bg);
   --blur-intensity: 4px;
   --text-stroke-color: #ffffff;
@@ -130,8 +126,8 @@ html {
 .panel-with-corners:hover::before,
 .panel-with-corners:hover::after {
   opacity: 1;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
 }
 .interactive-glow {
   position: relative;
@@ -141,9 +137,9 @@ html {
 }
 .interactive-glow:hover {
   border-color: var(--color-border-hover);
-  transform: translateY(-2px);
-  /* UPDATED: Brighter, more pronounced glow on hover */
-  box-shadow: 0 8px 35px -10px var(--color-shadow);
+  /* UPDATED: Added scale and changed shadow for a better glow effect */
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 40px -10px var(--color-shadow);
 }
 .interactive-glow:focus,
 .interactive-glow:focus-visible {
@@ -166,6 +162,9 @@ html {
   50% {
     border-color: var(--color-accent);
   }
+}
+.nav-glow {
+  box-shadow: 0 4px 20px -10px var(--color-shadow);
 }
 .typewriter-css {
   overflow: hidden;
