@@ -1,0 +1,33 @@
+// src/components/IconMap.tsx
+import "server-only";
+import {
+  FiBriefcase,
+  FiTarget,
+  FiCpu,
+  FiZap,
+  FiMessageSquare,
+  FiGlobe,
+} from "react-icons/fi";
+
+const iconMap = {
+  FiBriefcase,
+  FiTarget,
+  FiCpu,
+  FiZap,
+  FiMessageSquare,
+  FiGlobe,
+};
+
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+  iconId: keyof typeof iconMap;
+}
+
+const Icon = ({ iconId, ...props }: IconProps) => {
+  const IconComponent = iconMap[iconId];
+  if (!IconComponent) {
+    return null;
+  }
+  return <IconComponent {...props} />;
+};
+
+export default Icon;

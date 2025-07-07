@@ -39,24 +39,38 @@
     "summaryP3": "Passionate about <highlight>Agile methodologies</highlight> and continuous learning, I embrace a <highlight>user-centric approach</highlight> to build scalable, secure, and intuitive software. Fluent in English (C2 level).",
     "summaryP4": "In a <highlight>remote work</highlight> setting, values a <highlight>healthy work-life balance</highlight>, dedicating time to <highlight>continuous learning</highlight> through <highlight>certifications</highlight>, exploring <highlight>new technologies</highlight>, and enjoying meaningful moments with <highlight>family and pets</highlight>.",
     "metricsTitle": "Key Metrics & Info",
-    "experienceTitle": "Experience",
-    "experienceValue": "4.5+ Years",
-    "experienceTooltip": "Years of professional software development experience",
-    "lighthouseTitle": "Lighthouse Avg.",
-    "lighthouseValue": ">90",
-    "lighthouseTooltip": "Average performance/accessibility score using Google Lighthouse",
-    "trafficTitle": "Traffic Growth (SEO)",
-    "trafficValue": "~15%",
-    "trafficTooltip": "Estimated organic traffic increase through SEO & optimization",
-    "stacksTitle": "Core Stacks",
-    "stacksValue": "PHP, JS, .NET",
-    "stacksTooltip": "Main backend and frontend technologies used professionally",
-    "englishTitle": "English Level",
-    "englishValue": "C2 Fluent",
-    "englishTooltip": "Proficient in professional English communication (C2 level)",
-    "workTitle": "Work Preference",
-    "workValue": "Remote",
-    "workTooltip": "Available and experienced in remote, asynchronous collaboration"
+    "metrics": {
+      "experience": {
+        "title": "Experience",
+        "tooltip": "Years of professional software development experience",
+        "displayValue": "{value}+ Years"
+      },
+      "lighthouse": {
+        "title": "Lighthouse Avg.",
+        "tooltip": "Average performance/accessibility score using Google Lighthouse",
+        "displayValue": ">{value}"
+      },
+      "traffic": {
+        "title": "Traffic Growth (SEO)",
+        "tooltip": "Estimated organic traffic increase through SEO & optimization",
+        "displayValue": "~{value}%"
+      },
+      "stacks": {
+        "title": "Core Stacks",
+        "tooltip": "Main backend and frontend technologies used professionally",
+        "displayValue": "PHP, JS, .NET"
+      },
+      "english": {
+        "title": "English Level",
+        "tooltip": "Proficient in professional English communication (C2 level)",
+        "displayValue": "C2 Fluent"
+      },
+      "work": {
+        "title": "Work Preference",
+        "tooltip": "Available and experienced in remote, asynchronous collaboration",
+        "displayValue": "Remote"
+      }
+    }
   },
   "Contact": {
     "description": "Have a <highlight>project in mind</highlight>, an <highlight>opportunity</highlight> to discuss, or just want to <highlight>say hi</highlight>? I'm always open to <highlight>connecting</highlight>!",
@@ -89,7 +103,8 @@
   },
   "Experience": {
     "keyTech": "Key Technologies",
-    "achievements": "Achievements & Responsibilities"
+    "achievements": "Achievements & Responsibilities",
+    "noExperience": "Professional Experience details are being updated. Please check back soon!"
   },
   "Projects": {
     "techStack": "Tech Stack",

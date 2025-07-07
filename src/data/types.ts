@@ -1,8 +1,8 @@
 // src/data/types.ts
 import React from "react";
 
-// For Skills (Updated to use numerical levels)
-export type ProficiencyLevel = 3 | 2 | 1; // 3: expert, 2: proficient, 1: familiar
+// For Skills
+export type ProficiencyLevel = 3 | 2 | 1;
 
 export interface SkillItem {
   key: string;
@@ -21,8 +21,8 @@ export interface Project {
   title: string;
   imageUrl?: string;
   imageAlt?: string;
-  description: string; // This will now be the short description for the card
-  detailedDescription?: React.ReactNode[]; // Full, rich description for the modal
+  description: string;
+  detailedDescription?: React.ReactNode[];
   techStack: ProjectTechItem[];
   liveLink?: string;
   codeLink?: string;
@@ -59,4 +59,14 @@ export interface CertificationItem {
   icon?: React.ElementType;
   description?: React.ReactNode;
   isInProgress?: boolean;
+}
+
+// For About Metrics
+export interface MetricItem {
+  id: string;
+  iconId: string;
+  value: number;
+  decimals?: number;
+  prefix?: string;
+  suffix?: string;
 }
