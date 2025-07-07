@@ -7,7 +7,6 @@ import { FiClock, FiActivity } from "react-icons/fi";
 import Section from "./Section";
 import Panel from "./Panel";
 import { useTranslations } from "next-intl";
-import AnimateOnScroll from "./AnimateOnScroll";
 
 const CertificationsClient = ({
   certificationsData,
@@ -21,8 +20,8 @@ const CertificationsClient = ({
     <Section id="certifications" title="certifications">
       {certificationsData.length > 0 ? (
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {certificationsData.map((cert, index) => (
-            <AnimateOnScroll as="li" key={cert.id} staggerDelay={index * 100}>
+          {certificationsData.map((cert) => (
+            <li key={cert.id}>
               <Panel
                 className="flex flex-col h-full group w-full"
                 variant="default">
@@ -78,12 +77,10 @@ const CertificationsClient = ({
                   )}
                 </div>
               </Panel>
-            </AnimateOnScroll>
+            </li>
           ))}
-          <AnimateOnScroll
-            as="li"
-            staggerDelay={certificationsData.length * 100}>
-            <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-neutral-700/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 transition-all duration-300 w-full">
+          <li className="flex">
+            <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-border/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 transition-all duration-300 w-full">
               <div className="p-6">
                 <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4 mx-auto" />
                 <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
@@ -94,14 +91,12 @@ const CertificationsClient = ({
                 </p>
               </div>
             </div>
-          </AnimateOnScroll>
+          </li>
         </ul>
       ) : (
-        <AnimateOnScroll>
-          <Panel variant="default" className="text-center">
-            <p className="text-lg text-secondary-text">{tCerts("noCerts")}</p>
-          </Panel>
-        </AnimateOnScroll>
+        <Panel variant="default" className="text-center">
+          <p className="text-lg text-secondary-text">{tCerts("noCerts")}</p>
+        </Panel>
       )}
     </Section>
   );

@@ -9,7 +9,6 @@ import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import { clsx } from "clsx";
 import ProjectModal from "./ProjectModal";
-import AnimateOnScroll from "./AnimateOnScroll";
 
 const ProjectCard: React.FC<{
   project: Project;
@@ -128,60 +127,48 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
       <Section id="projects" title="projects">
         {projectsData.length > 0 ? (
           <>
-            <AnimateOnScroll>
-              <Panel
-                variant="simple"
-                className="mb-10 max-w-4xl mx-auto p-4 md:p-6">
-                <p className="text-center font-semibold text-lg text-info-accent mb-4">
-                  {tProjects("filterTitle")}
-                </p>
-                <div className="flex justify-center flex-wrap gap-2">
-                  {techList.map((tech) => (
-                    <button
-                      key={tech}
-                      onClick={() => setActiveFilter(tech)}
-                      className={getFilterButtonClasses(tech)}>
-                      {tech}
-                    </button>
-                  ))}
-                </div>
-              </Panel>
-            </AnimateOnScroll>
+            <Panel
+              variant="simple"
+              className="mb-10 max-w-4xl mx-auto p-4 md:p-6">
+              <p className="text-center font-semibold text-lg text-info-accent mb-4">
+                {tProjects("filterTitle")}
+              </p>
+              <div className="flex justify-center flex-wrap gap-2">
+                {techList.map((tech) => (
+                  <button
+                    key={tech}
+                    onClick={() => setActiveFilter(tech)}
+                    className={getFilterButtonClasses(tech)}>
+                    {tech}
+                  </button>
+                ))}
+              </div>
+            </Panel>
 
             <ul
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
               key={activeFilter}>
-              {filteredProjects.map((project, index) => (
+              {filteredProjects.map((project) => (
                 <li key={project.id} className="flex">
-                  <AnimateOnScroll
-                    as="div"
-                    className="w-full h-full"
-                    staggerDelay={index * 100}>
-                    <ProjectCard
-                      project={project}
-                      onCardClick={handleOpenModal}
-                    />
-                  </AnimateOnScroll>
+                  <ProjectCard
+                    project={project}
+                    onCardClick={handleOpenModal}
+                  />
                 </li>
               ))}
               {activeFilter === "All" && (
                 <li className="flex">
-                  <AnimateOnScroll
-                    as="div"
-                    className="w-full h-full"
-                    staggerDelay={filteredProjects.length * 100}>
-                    <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-border/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 transition-all duration-300 w-full">
-                      <div className="p-6">
-                        <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4 mx-auto" />
-                        <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
-                          {tMore("title", { item: tMore("projects") })}
-                        </p>
-                        <p className="text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">
-                          {tMore("description")}
-                        </p>
-                      </div>
+                  <div className="bg-light-panel-bg/10 backdrop-blur-md border-2 border-dashed border-border/50 p-6 rounded-lg panel-with-corners relative flex flex-col h-full items-center justify-center text-center group hover:border-accent/50 transition-all duration-300 w-full">
+                    <div className="p-6">
+                      <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4 mx-auto" />
+                      <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
+                        {tMore("title", { item: tMore("projects") })}
+                      </p>
+                      <p className="text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">
+                        {tMore("description")}
+                      </p>
                     </div>
-                  </AnimateOnScroll>
+                  </div>
                 </li>
               )}
             </ul>
