@@ -20,12 +20,10 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
     },
     ref
   ) => {
-    // Base styles applied to ALL panels, including the glass effect.
     const baseClasses = "rounded-lg transition-all duration-300 glass-effect";
 
-    // Variant classes ADD or OVERRIDE the base styles.
     const variantClasses = {
-      default: "p-6 md:p-8 panel-with-corners panel-glow-anim",
+      default: "p-6 md:p-8 panel-with-corners",
       simple: "p-6 md:p-8",
       modal:
         "!p-0 overflow-y-auto dark:bg-secondary-bg light:bg-white border dark:border-border light:border-neutral-200 backdrop-blur-none",

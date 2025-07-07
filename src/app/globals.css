@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* All :root and light theme variables are correct and remain unchanged */
 :root {
   --color-primary-bg: #0a0a0a;
   --color-secondary-bg: #141414;
@@ -17,7 +16,7 @@
   --color-border: rgba(0, 191, 255, 0.15);
   --color-border-hover: rgba(0, 191, 255, 0.4);
   --color-shadow: rgba(0, 191, 255, 0.6);
-  --glass-bg: rgba(20, 20, 20, 0.7);
+  --glass-bg: rgba(20, 20, 20, 0.85);
   --glass-border: rgba(0, 191, 255, 0.2);
   --blur-intensity: 6px;
   --text-stroke-color: #000000;
@@ -35,13 +34,12 @@ html.light {
   --color-border: rgba(49, 130, 206, 0.2);
   --color-border-hover: rgba(49, 130, 206, 0.4);
   --color-shadow: rgba(49, 130, 206, 0.3);
-  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-bg: rgba(255, 255, 255, 0.9);
   --glass-border: rgba(49, 130, 206, 0.15);
   --blur-intensity: 4px;
   --text-stroke-color: #ffffff;
 }
 
-/* Base Body and other styles are correct and remain unchanged */
 body {
   color: var(--color-primary-text);
   font-family: "Poppins", sans-serif;
@@ -52,7 +50,6 @@ body {
   position: relative;
   z-index: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  /* The performance-killing text-stroke properties have been removed. */
   line-height: 1.6;
 }
 html.light body {
@@ -95,7 +92,6 @@ html {
   scroll-margin-top: 5rem;
 }
 
-/* === DEFINITIVE SKILL BAR "CHARGING" ANIMATION === */
 .bar-fill {
   transform: scaleX(0);
   transform-origin: left;
@@ -104,7 +100,6 @@ html {
 .is-in-view .bar-fill {
   transform: scaleX(1);
 }
-/* === END SKILL BAR ANIMATION === */
 
 @layer utilities {
   .logo-stroke {
@@ -120,27 +115,12 @@ html {
   .glass-effect {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(var(--blur-intensity));
-    -webkit-backdrop-filter: blur(var(--blur-intensity));
   }
 }
-.panel-glow-anim {
-  animation: panelGlow 3s ease-in-out infinite alternate;
-  will-change: box-shadow;
-}
-@keyframes panelGlow {
-  0% {
-    box-shadow: 0 0 20px -12px var(--color-accent);
-  }
-  50% {
-    box-shadow: 0 0 40px -8px var(--color-accent);
-  }
-  100% {
-    box-shadow: 0 0 30px -10px var(--color-accent);
-  }
-}
+
 .panel-with-corners {
   position: relative;
+  box-shadow: 0 0 20px -12px var(--color-accent);
 }
 .panel-with-corners::before,
 .panel-with-corners::after {
@@ -184,8 +164,8 @@ html {
 }
 .interactive-glow:hover {
   border-color: var(--color-border-hover);
-  box-shadow: 0 4px 20px -10px var(--color-shadow);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px -10px var(--color-shadow);
 }
 .interactive-glow:focus,
 .interactive-glow:focus-visible {
@@ -250,6 +230,12 @@ html {
 ::-moz-selection {
   background: var(--color-accent);
   color: var(--color-primary-bg);
+}
+
+@media (max-width: 1024px) {
+  body::before {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
