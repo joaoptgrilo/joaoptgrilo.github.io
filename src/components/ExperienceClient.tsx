@@ -92,7 +92,7 @@ const ExperienceClient = ({
                             <li key={tech.name}>
                               <span
                                 title={tech.description}
-                                className="inline-block bg-tag-bg text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-default">
+                                className="inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-default">
                                 {tech.name}
                               </span>
                             </li>

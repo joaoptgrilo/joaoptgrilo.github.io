@@ -5,7 +5,7 @@ import "../globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-// import ScrollSpy from "@/components/ScrollSpy"; // <-- DISABLED
+import ScrollSpy from "@/components/ScrollSpy"; // IMPORTED
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "../../../i18n";
@@ -49,8 +49,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       className={`${poppins.variable} ${firaCode.variable} antialiased`}
-      suppressHydrationWarning
-    >
+      suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -67,7 +66,7 @@ export default async function RootLayout({
             <Navigation />
             {children}
             <ScrollToTopButton />
-            {/* <ScrollSpy /> */} {/* <-- DISABLED TO PREVENT RE-RENDERS */}
+            <ScrollSpy /> {/* ADDED */}
             <Footer />
           </NextIntlClientProvider>
         </ThemeProvider>

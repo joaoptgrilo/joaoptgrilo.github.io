@@ -18,16 +18,19 @@ const iconMap = {
   FiGlobe,
 };
 
+// Interface now includes className
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   iconId: keyof typeof iconMap;
+  className?: string;
 }
 
-const Icon = ({ iconId, ...props }: IconProps) => {
+const Icon = ({ iconId, className, ...props }: IconProps) => {
   const IconComponent = iconMap[iconId];
   if (!IconComponent) {
     return null;
   }
-  return <IconComponent {...props} />;
+  // Pass className to the rendered icon component
+  return <IconComponent className={className} {...props} />;
 };
 
 export default Icon;

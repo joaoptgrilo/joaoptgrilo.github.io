@@ -20,8 +20,6 @@ const Navigation: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const SCROLL_THRESHOLD = 10;
 
-  // MOVED BACK INSIDE: navLinks must be defined inside the component
-  // to have access to the `t` function from the hook.
   const navLinks: NavLinkItem[] = [
     { href: "#about", label: t("about") },
     { href: "#skills", label: t("skills") },
@@ -64,13 +62,12 @@ const Navigation: React.FC = () => {
   const navClasses = clsx(
     "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-all duration-300 ease-in-out",
     {
-      "bg-secondary-bg/90 backdrop-blur-nav backdrop-saturate-150 nav-glow":
-        isActiveNavStyle,
+      "bg-secondary-bg/90 backdrop-blur-sm nav-glow": isActiveNavStyle,
       "bg-transparent shadow-none": !isActiveNavStyle,
     }
   );
 
-  const mobileMenuContainerClasses = "bg-secondary-bg/95 backdrop-blur-nav";
+  const mobileMenuContainerClasses = "bg-secondary-bg/95 backdrop-blur-sm";
 
   const pillClasses = `flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font_fira_code font-semibold text-accent bg-primary-bg/80 border border-accent shadow-md shadow-accent/20 transition-opacity duration-300 ease-in-out hover:opacity-90`;
   const desktopNavLinkClasses =
@@ -84,6 +81,7 @@ const Navigation: React.FC = () => {
         <div className="container mx-auto flex justify-between items-center h-14 sm:h-16">
           <Link
             href="#hero"
+            scroll={false} // ADDED
             onClick={closeMobileMenu}
             className={`${
               isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -97,18 +95,15 @@ const Navigation: React.FC = () => {
             </span>
           </Link>
           <div className="hidden lg:flex items-center space-x-5">
-            {navLinks.map(
-              (
-                link: NavLinkItem // Explicitly typed 'link'
-              ) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className={desktopNavLinkClasses}>
-                  {link.label}
-                </Link>
-              )
-            )}
+            {navLinks.map((link: NavLinkItem) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                scroll={false} // ADDED
+                className={desktopNavLinkClasses}>
+                {link.label}
+              </Link>
+            ))}
             <div className="flex items-center space-x-2">
               <LanguageSwitcher />
               <ThemeSwitcher />
@@ -127,19 +122,16 @@ const Navigation: React.FC = () => {
           <div
             className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}>
             <div className="container mx-auto flex flex-col items-center space-y-3 px-4">
-              {navLinks.map(
-                (
-                  link: NavLinkItem // Explicitly typed 'link'
-                ) => (
-                  <Link
-                    key={`mobile-${link.label}`}
-                    href={link.href}
-                    className={mobileMenuLinkClasses}
-                    onClick={closeMobileMenu}>
-                    {link.label}
-                  </Link>
-                )
-              )}
+              {navLinks.map((link: NavLinkItem) => (
+                <Link
+                  key={`mobile-${link.label}`}
+                  href={link.href}
+                  scroll={false} // ADDED
+                  className={mobileMenuLinkClasses}
+                  onClick={closeMobileMenu}>
+                  {link.label}
+                </Link>
+              ))}
               <div className="flex items-center space-x-4 mt-4">
                 <LanguageSwitcher />
                 <ThemeSwitcher />
@@ -150,7 +142,7 @@ const Navigation: React.FC = () => {
       </nav>
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/30 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
           onClick={closeMobileMenu}
           aria-hidden="true"
         />

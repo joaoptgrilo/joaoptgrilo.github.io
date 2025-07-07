@@ -23,9 +23,9 @@ const About = async () => {
 
   return (
     <Section id="about" title="about">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start mb-8 lg:mb-12">
-        <AnimateOnScroll staggerDelay={0}>
-          <Panel className="lg:col-span-1">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch mb-8 lg:mb-12">
+        <AnimateOnScroll staggerDelay={0} className="h-full lg:col-span-1">
+          <Panel className="h-full">
             <div className="flex flex-col items-center">
               <div className="relative w-40 h-40 md:w-48 md:h-48 mb-6">
                 <Image
@@ -53,12 +53,12 @@ const About = async () => {
             </div>
           </Panel>
         </AnimateOnScroll>
-        <AnimateOnScroll staggerDelay={150}>
-          <Panel className="lg:col-span-2">
+        <AnimateOnScroll staggerDelay={150} className="h-full lg:col-span-2">
+          <Panel className="h-full flex flex-col">
             <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-4 text-center sm:text-left font-semibold">
               {t("summaryTitle")}
             </p>
-            <div className="space-y-4 text-secondary-text leading-relaxed">
+            <div className="space-y-4 text-secondary-text leading-relaxed flex-grow">
               <p>
                 {t.rich("summaryP1", {
                   highlight: (chunks) => <Highlight>{chunks}</Highlight>,
@@ -85,20 +85,27 @@ const About = async () => {
       </div>
 
       <AnimateOnScroll staggerDelay={300}>
-        <Panel>
+        <div className="p-6 md:p-8 rounded-lg glass-effect panel-with-corners">
           <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-8 text-center font-semibold">
             {t("metricsTitle")}
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-items-stretch w-full max-w-4xl mx-auto">
-            {metricsData.map((metric) => (
-              <InfoPanel
+          <ul className="grid grid-cols-2 md:grid-cols-3 gap-6 justify-items-stretch w-full max-w-4xl mx-auto">
+            {metricsData.map((metric, index) => (
+              <AnimateOnScroll
+                as="li"
                 key={metric.id}
-                metric={metric}
-                icon={<Icon iconId={metric.iconId as any} />}
-              />
+                staggerDelay={index * 100}>
+                <InfoPanel
+                  metric={metric}
+                  /* UPDATED: Applying size classes directly to the icon */
+                  icon={
+                    <Icon iconId={metric.iconId as any} className="w-10 h-10" />
+                  }
+                />
+              </AnimateOnScroll>
             ))}
-          </div>
-        </Panel>
+          </ul>
+        </div>
       </AnimateOnScroll>
     </Section>
   );

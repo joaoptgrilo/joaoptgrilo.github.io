@@ -82,7 +82,8 @@ const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
           </div>
         </div>
       </AnimateOnScroll>
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+      {/* CORRECTED: Added items-stretch for equal height panels */}
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
         {skillsData.map((category, index) => (
           <AnimateOnScroll as="li" key={category.id} staggerDelay={index * 100}>
             <Panel className="h-full" variant="default">

@@ -1,11 +1,11 @@
 // src/components/InfoPanel.tsx
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import AnimatedValue from "./AnimatedValue";
+import Panel from "./Panel";
 import type { MetricItem } from "@/data/types";
 import { useTranslations } from "next-intl";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 interface InfoPanelProps {
   metric: MetricItem;
@@ -14,17 +14,11 @@ interface InfoPanelProps {
 
 const InfoPanel: React.FC<InfoPanelProps> = ({ metric, icon }) => {
   const t = useTranslations("About.metrics");
-  const panelRef = useRef<HTMLDivElement>(null);
-  const startAnimation = useIntersectionObserver(panelRef, {
-    threshold: 0.5,
-  });
-
   const { id, value, decimals } = metric;
   const translationTemplate = t.raw(`${id}.displayValue`) as string;
 
   let displayValueNode: React.ReactNode;
 
-  // Manually construct the JSX to avoid i18n function ambiguity
   if (translationTemplate.includes("{value}")) {
     const parts = translationTemplate.split("{value}");
     const prefix = parts[0] || "";
@@ -35,30 +29,30 @@ const InfoPanel: React.FC<InfoPanelProps> = ({ metric, icon }) => {
         {prefix}
         <AnimatedValue
           value={value}
-          startAnimation={startAnimation}
+          startAnimation={true}
           decimals={decimals}
         />
         {suffix}
       </>
     );
   } else {
-    // This handles static strings like "Remote".
     displayValueNode = <span>{translationTemplate}</span>;
   }
 
   return (
-    <div
-      ref={panelRef}
+    <Panel
+      variant="simple"
       title={t(id + ".tooltip")}
-      className="flex flex-col items-center text-center p-4 rounded-lg border border-border interactive-glow">
-      <div className="w-8 h-8 text-info-accent mb-2">{icon}</div>
+      className="flex flex-col items-center justify-center text-center p-4 interactive-glow h-full">
+      {/* UPDATED: Sizing classes removed from this div */}
+      <div className="text-info-accent mb-3">{icon}</div>
       <p className="font_fira_code text-sm text-secondary-text mb-1">
         {t(id + ".title")}
       </p>
       <p className="text-primary-text text-base md:text-lg font-semibold">
         {displayValueNode}
       </p>
-    </div>
+    </Panel>
   );
 };
 
