@@ -82,7 +82,6 @@ const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
           </div>
         </div>
       </AnimateOnScroll>
-      {/* CORRECTED: Added items-stretch for equal height panels */}
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
         {skillsData.map((category, index) => (
           <AnimateOnScroll as="li" key={category.id} staggerDelay={index * 100}>
@@ -99,10 +98,11 @@ const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
                     const skillDescription = tSkillTags(skill.key as any);
                     const combinedTooltip = `${proficiencyLabel}: ${skillDescription}`;
                     return (
+                      // CORRECTED: Removed the bg-tag-bg class
                       <div
                         key={skill.key}
                         title={combinedTooltip}
-                        className="flex items-center justify-between bg-tag-bg px-3 py-2 rounded-md border border-border cursor-default interactive-glow group">
+                        className="flex items-center justify-between px-3 py-2 rounded-md border border-border cursor-default interactive-glow group">
                         <span className="text-sm text-secondary-text group-hover:text-primary-text transition-colors duration-300">
                           {skill.name}
                         </span>

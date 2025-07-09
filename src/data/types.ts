@@ -62,11 +62,14 @@ export interface CertificationItem {
 }
 
 // For About Metrics
+export interface StackItem {
+  name: string;
+}
+
 export interface MetricItem {
   id: string;
   iconId: string;
-  value: number;
+  value?: number;
   decimals?: number;
-  prefix?: string;
-  suffix?: string;
+  stacks?: StackItem[];
 }

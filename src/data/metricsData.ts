@@ -1,26 +1,34 @@
 // src/data/metricsData.ts
-import { IconType } from "react-icons";
-
-export interface MetricItem {
-  id: string;
-  iconId: string;
-  value: number;
-  decimals?: number;
-  prefix?: string;
-  suffix?: string;
-}
+import { MetricItem } from "./types";
 
 export const metricsData: MetricItem[] = [
   {
     id: "experience",
     iconId: "FiBriefcase",
-    value: 4.5,
-    decimals: 1,
-    suffix: "+",
+    value: 5,
+    decimals: 0,
   },
-  { id: "lighthouse", iconId: "FiTarget", value: 90, prefix: ">" },
-  { id: "traffic", iconId: "FiZap", value: 15, prefix: "~", suffix: "%" },
-  { id: "stacks", iconId: "FiCpu", value: 3 },
-  { id: "english", iconId: "FiMessageSquare", value: 2 },
-  { id: "work", iconId: "FiGlobe", value: 0 },
+  {
+    id: "lighthouse",
+    iconId: "FiTarget",
+    value: 90,
+  },
+  {
+    id: "traffic",
+    iconId: "FiZap",
+    value: 15,
+  },
+  {
+    id: "stacks",
+    iconId: "FiCpu",
+    stacks: [{ name: "React" }, { name: ".NET" }, { name: "PHP" }],
+  },
+  {
+    id: "english",
+    iconId: "FiMessageSquare",
+  },
+  {
+    id: "work",
+    iconId: "FiGlobe",
+  },
 ];

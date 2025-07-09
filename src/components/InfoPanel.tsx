@@ -14,44 +14,57 @@ interface InfoPanelProps {
 
 const InfoPanel: React.FC<InfoPanelProps> = ({ metric, icon }) => {
   const t = useTranslations("About.metrics");
-  const { id, value, decimals } = metric;
-  const translationTemplate = t.raw(`${id}.displayValue`) as string;
+  const { id, value, decimals, stacks } = metric;
 
   let displayValueNode: React.ReactNode;
 
-  if (translationTemplate.includes("{value}")) {
-    const parts = translationTemplate.split("{value}");
-    const prefix = parts[0] || "";
-    const suffix = parts[1] || "";
+  // Define consistent styling for the main value text
+  const valueClasses = "text-primary-text text-lg font-bold font-fira_code";
 
+  if (stacks) {
     displayValueNode = (
-      <>
-        {prefix}
-        <AnimatedValue
-          value={value}
-          startAnimation={true}
-          decimals={decimals}
-        />
-        {suffix}
-      </>
+      <p className={valueClasses}>
+        {stacks.map((stack, index) => (
+          <React.Fragment key={stack.name}>
+            {stack.name}
+            {/* UPDATED: Separator is now just a comma, with no surrounding spaces */}
+            {index < stacks.length - 1 && <span>,</span>}
+          </React.Fragment>
+        ))}
+      </p>
     );
   } else {
-    displayValueNode = <span>{translationTemplate}</span>;
+    // Standard rendering for all other numeric or text-based metrics
+    const translationTemplate = t.raw(`${id}.displayValue`) as string;
+    if (value !== undefined && translationTemplate.includes("{value}")) {
+      const parts = translationTemplate.split("{value}");
+      const prefix = parts[0] || "";
+      const suffix = parts[1] || "";
+
+      displayValueNode = (
+        <p className={valueClasses}>
+          {prefix}
+          <AnimatedValue
+            value={value}
+            startAnimation={true}
+            decimals={decimals}
+          />
+          {suffix}
+        </p>
+      );
+    } else {
+      displayValueNode = <p className={valueClasses}>{translationTemplate}</p>;
+    }
   }
 
   return (
     <Panel
       variant="simple"
       title={t(id + ".tooltip")}
-      className="flex flex-col items-center justify-center text-center p-4 interactive-glow h-full">
-      {/* UPDATED: Sizing classes removed from this div */}
-      <div className="text-info-accent mb-3">{icon}</div>
-      <p className="font_fira_code text-sm text-secondary-text mb-1">
-        {t(id + ".title")}
-      </p>
-      <p className="text-primary-text text-base md:text-lg font-semibold">
-        {displayValueNode}
-      </p>
+      className="flex flex-col items-center justify-center text-center p-4 interactive-glow h-full min-h-[160px]">
+      <div className="w-10 h-10 text-info-accent mb-3">{icon}</div>
+      <p className="text-xs text-secondary-text mb-2">{t(id + ".title")}</p>
+      {displayValueNode}
     </Panel>
   );
 };

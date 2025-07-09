@@ -34,7 +34,7 @@
     "jobTitle": "Desenvolvedor Full-Stack",
     "location": "Residente em Portimão, Portugal",
     "summaryTitle": "Resumo Profissional",
-    "summaryP1": "Um Desenvolvedor Full-Stack dedicado com mais de <highlight>4.5 anos</highlight> de experiência a criar aplicações web escaláveis e de <highlight>alta performance</highlight>. Competente a transformar requisitos complexos em soluções robustas e limpas que servem de forma fiável um elevado tráfego de utilizadores.",
+    "summaryP1": "Um Desenvolvedor Full-Stack dedicado com mais de <highlight>~5 anos</highlight> de experiência a criar aplicações web escaláveis e de <highlight>alta performance</highlight>. Competente a transformar requisitos complexos em soluções robustas e limpas que servem de forma fiável um elevado tráfego de utilizadores.",
     "summaryP2": "Especializado em <highlight>PHP</highlight>, <highlight>JavaScript (React)</highlight>, e <highlight>.NET Core</highlight>. Reconhecido por melhorar a experiência do utilizador, alcançar ganhos de performance significativos (ex: <highlight>scores >90 no Lighthouse</highlight>), e impulsionar o crescimento do tráfego orgânico em aproximadamente <highlight>~15%</highlight> através de SEO e otimização de performance.",
     "summaryP3": "Apaixonado por <highlight>metodologias Agile</highlight> e aprendizagem contínua, adoto uma <highlight>abordagem centrada no utilizador</highlight> para construir software escalável, seguro e intuitivo. Fluente em Inglês (nível C2).",
     "summaryP4": "Num ambiente de <highlight>trabalho remoto</highlight>, valorizo um <highlight>equilíbrio saudável entre a vida profissional e pessoal</highlight>, dedicando tempo à <highlight>aprendizagem contínua</highlight> através de <highlight>certificações</highlight>, explorando <highlight>novas tecnologias</highlight> e desfrutando de momentos significativos com a <highlight>família e animais de estimação</highlight>.",
@@ -43,7 +43,7 @@
       "experience": {
         "title": "Experiência",
         "tooltip": "Anos de experiência profissional em desenvolvimento de software",
-        "displayValue": "{value}+ Anos"
+        "displayValue": "~{value} Anos"
       },
       "lighthouse": {
         "title": "Média Lighthouse",
@@ -57,8 +57,8 @@
       },
       "stacks": {
         "title": "Tecnologias Core",
-        "tooltip": "Principais tecnologias de backend e frontend usadas profissionalmente",
-        "displayValue": "PHP, JS, .NET"
+        "tooltip": "Experiência principal em tecnologias de frontend (React) e backend (.NET, PHP).",
+        "displayValue": "React, .NET, e PHP"
       },
       "english": {
         "title": "Nível de Inglês",
