@@ -4,7 +4,7 @@ import { unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "../../../i18n";
 import { getData } from "@/data";
 
-// Direct imports for all components. No more dynamic loading.
+// Direct imports for all components.
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
@@ -17,7 +17,7 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-// The Home page is now an async Server Component that fetches everything.
+// The Home page is an async Server Component that fetches everything upfront.
 export default async function Home({
   params: { locale },
 }: {
@@ -40,7 +40,7 @@ export default async function Home({
       {/* 
         All components are rendered directly on the server.
         Data is passed down as props.
-        No more <Suspense> boundaries or skeletons are needed here.
+        There are no <Suspense> or <DeferredSections> wrappers.
       */}
       <Hero />
       <About />
