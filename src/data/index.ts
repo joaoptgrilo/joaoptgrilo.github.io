@@ -1,10 +1,10 @@
 // src/data/index.ts
-import "server-only";
 import type {
   CertificationItem,
   ExperienceItem,
   Project,
-  ProjectTechItem,
+  MetricItem,
+  SkillItem,
 } from "./types";
 
 type Locale = "en" | "pt";
@@ -13,9 +13,11 @@ interface DataLoaders {
   getCertifications: () => Promise<CertificationItem[]>;
   getExperience: () => Promise<ExperienceItem[]>;
   getProjects: () => Promise<Project[]>;
+  getMetrics: () => Promise<MetricItem[]>;
+  getSkillCategories: () => Promise<{ id: string; skills: SkillItem[] }[]>;
 }
 
-const dataLoaders: Record<Locale, DataLoaders> = {
+const dataLoaders: Record<Locale, Partial<DataLoaders>> = {
   en: {
     getCertifications: () =>
       import("./en/certificationsData").then((m) => m.certificationsData),
@@ -32,8 +34,17 @@ const dataLoaders: Record<Locale, DataLoaders> = {
   },
 };
 
-export const getData = (locale: Locale) => {
-  return dataLoaders[locale] || dataLoaders.en;
+const commonData = {
+  getMetrics: () => import("./metricsData").then((m) => m.metricsData),
+  getSkillCategories: () =>
+    import("./skillsData").then((m) => m.SKILL_CATEGORIES_DATA),
+};
+
+export const getData = (locale: Locale): DataLoaders => {
+  return {
+    ...commonData,
+    ...(dataLoaders[locale] || dataLoaders.en),
+  } as DataLoaders;
 };
 
 export * from "./types";

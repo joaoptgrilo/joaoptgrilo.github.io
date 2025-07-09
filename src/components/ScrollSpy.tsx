@@ -1,59 +1,64 @@
+// src/components/ScrollSpy.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 const ScrollSpy = () => {
-  const sectionsRef = useRef<HTMLElement[]>([]);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const activeSectionId = useRef<string | null>(null);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
-    // Find all sections with an 'id' attribute
-    sectionsRef.current = Array.from(document.querySelectorAll("section[id]"));
+    // Disconnect any existing observer before creating a new one
+    if (observer.current) {
+      observer.current.disconnect();
+    }
 
-    const handleScroll = () => {
-      // Debounce the scroll handler to improve performance
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
+    // Create the single observer instance
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        // Find the last entry that is intersecting.
+        // This works because the browser processes entries in document order.
+        // The "last" one visible in our trigger zone is the one we want active.
+        const visibleSection = entries.findLast(
+          (entry) => entry.isIntersecting
+        );
+
+        const newActiveId = visibleSection ? visibleSection.target.id : null;
+
+        // Only update the URL if the active section has changed, preventing unnecessary history updates
+        if (newActiveId !== activeSectionId.current) {
+          activeSectionId.current = newActiveId;
+          const hash = newActiveId ? `#${newActiveId}` : "";
+          const url = pathname + hash;
+          // Use replaceState to avoid polluting browser history and triggering re-renders
+          window.history.replaceState(null, "", url);
+        }
+      },
+      {
+        // This defines a horizontal "trigger line" that is 30% from the top of the viewport.
+        rootMargin: "-30% 0px -70% 0px",
+        threshold: 0,
       }
+    );
 
-      timeoutRef.current = setTimeout(() => {
-        let currentSectionId = "";
-        const scrollPosition = window.scrollY + window.innerHeight / 2;
+    const currentObserver = observer.current;
 
-        for (const section of sectionsRef.current) {
-          if (section.offsetTop <= scrollPosition) {
-            currentSectionId = section.id;
-          } else {
-            break;
-          }
-        }
+    // Observe all sections that have an ID
+    document.querySelectorAll("section[id]").forEach((section) => {
+      if (section) {
+        currentObserver.observe(section);
+      }
+    });
 
-        // Update the URL hash without adding to history
-        if (
-          currentSectionId &&
-          window.location.hash !== `#${currentSectionId}`
-        ) {
-          // Use replaceState to avoid polluting browser history
-          window.history.replaceState(
-            null,
-            "",
-            `${window.location.pathname}#${currentSectionId}`
-          );
-        } else if (!currentSectionId && window.location.hash) {
-          // If we've scrolled to the top, clean the hash
-          window.history.replaceState(null, "", window.location.pathname);
-        }
-      }, 100); // 100ms debounce
-    };
-
-    window.addEventListener("scroll", handleScroll);
+    // Cleanup function to disconnect the observer when the component unmounts
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
+      if (currentObserver) {
+        currentObserver.disconnect();
       }
     };
-  }, []);
+  }, [pathname]); // Re-run this effect if the page path changes
 
   return null; // This component renders nothing
 };

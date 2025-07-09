@@ -6,32 +6,32 @@ import { usePathname } from "next/navigation";
 
 const ScrollRestorer = () => {
   const pathname = usePathname();
-  const storageKey = `scroll-position-${pathname}`;
 
   useEffect(() => {
-    // Disable the browser's default scroll restoration
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
+    // This effect runs once on component mount for the current page.
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
     }
 
-    // Restore scroll position on mount
-    const savedPosition = sessionStorage.getItem(storageKey);
-    if (savedPosition) {
-      const position = JSON.parse(savedPosition);
-      window.scrollTo(0, position);
-      sessionStorage.removeItem(storageKey); // Clean up after use
-    }
-
-    // Save scroll position on unload
     const handleBeforeUnload = () => {
-      sessionStorage.setItem(storageKey, JSON.stringify(window.scrollY));
+      // Save the scroll position just before the page is left (e.g., on refresh)
+      sessionStorage.setItem(
+        `scroll-position-${pathname}`,
+        window.scrollY.toString()
+      );
     };
+
+    const savedPosition = sessionStorage.getItem(`scroll-position-${pathname}`);
+    if (savedPosition) {
+      window.scrollTo(0, parseInt(savedPosition, 10));
+      sessionStorage.removeItem(`scroll-position-${pathname}`);
+    }
 
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [pathname, storageKey]);
+  }, [pathname]);
 
   return null; // This component does not render anything
 };

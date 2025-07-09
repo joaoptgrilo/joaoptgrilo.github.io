@@ -7,6 +7,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { clsx } from "clsx";
 
 interface NavLinkItem {
   href: string;
@@ -58,17 +59,17 @@ const Navigation: React.FC = () => {
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const isActiveNavStyle = isScrolled || isMobileMenuOpen;
 
-  const baseNavClasses =
-    "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-[background-color,backdrop-filter] duration-300 ease-in-out";
+  const navClasses = clsx(
+    "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-all duration-300 ease-in-out",
+    {
+      "bg-secondary-bg/90 backdrop-blur-sm nav-glow": isActiveNavStyle,
+      "bg-transparent shadow-none": !isActiveNavStyle,
+    }
+  );
 
-  const activeNavLookClasses =
-    "bg-secondary-bg/75 backdrop-blur-nav backdrop-saturate-150 panel-glow-anim"; // <-- UPDATED
+  const mobileMenuContainerClasses = "bg-secondary-bg/95 backdrop-blur-sm";
 
-  const topTransparentNavLookClasses = "bg-transparent shadow-none";
-
-  const mobileMenuContainerClasses = "bg-secondary-bg/85 backdrop-blur-nav"; // <-- UPDATED
-
-  const pillClasses = `flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font_fira_code font-semibold text-accent bg-primary-bg/70 backdrop-blur-sm border border-accent shadow-accent-glow transition-opacity duration-300 ease-in-out hover:opacity-90 panel-glow-anim`;
+  const pillClasses = `flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font_fira_code font-semibold text-accent bg-primary-bg/80 border border-accent shadow-md shadow-accent/20 transition-opacity duration-300 ease-in-out hover:opacity-90`;
   const desktopNavLinkClasses =
     "font-poppins text-primary-text hover:text-accent transition-colors text-sm";
   const mobileMenuLinkClasses =
@@ -76,13 +77,11 @@ const Navigation: React.FC = () => {
 
   return (
     <>
-      <nav
-        className={`${baseNavClasses} ${
-          isActiveNavStyle ? activeNavLookClasses : topTransparentNavLookClasses
-        }`}>
+      <nav className={navClasses}>
         <div className="container mx-auto flex justify-between items-center h-14 sm:h-16">
           <Link
             href="#hero"
+            scroll={false} // ADDED
             onClick={closeMobileMenu}
             className={`${
               isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -91,15 +90,16 @@ const Navigation: React.FC = () => {
             tabIndex={isScrolled ? 0 : -1}
             aria-hidden={!isScrolled}>
             <span className={pillClasses}>
-              <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse-dot"></span>
+              <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse"></span>
               {t("namePill")}
             </span>
           </Link>
           <div className="hidden lg:flex items-center space-x-5">
-            {navLinks.map((link) => (
+            {navLinks.map((link: NavLinkItem) => (
               <Link
                 key={link.label}
                 href={link.href}
+                scroll={false} // ADDED
                 className={desktopNavLinkClasses}>
                 {link.label}
               </Link>
@@ -122,10 +122,11 @@ const Navigation: React.FC = () => {
           <div
             className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}>
             <div className="container mx-auto flex flex-col items-center space-y-3 px-4">
-              {navLinks.map((link) => (
+              {navLinks.map((link: NavLinkItem) => (
                 <Link
                   key={`mobile-${link.label}`}
                   href={link.href}
+                  scroll={false} // ADDED
                   className={mobileMenuLinkClasses}
                   onClick={closeMobileMenu}>
                   {link.label}
@@ -141,7 +142,7 @@ const Navigation: React.FC = () => {
       </nav>
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm transition-opacity duration-300 ease-in-out lg:hidden"
+          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
           onClick={closeMobileMenu}
           aria-hidden="true"
         />

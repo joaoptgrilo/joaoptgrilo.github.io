@@ -8,6 +8,7 @@ import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import Section from "./Section";
 import { clsx } from "clsx";
+import AnimateOnScroll from "./AnimateOnScroll";
 
 const ContactLink: React.FC<{
   href: string;
@@ -31,9 +32,7 @@ const ContactLink: React.FC<{
       href={href}
       target={newTab ? "_blank" : undefined}
       rel={newTab ? "noopener noreferrer" : undefined}
-      className={clsx(baseClasses, primaryClasses, {
-        "no-text-stroke": isPrimary, // <-- ADDED
-      })}>
+      className={clsx(baseClasses, primaryClasses)}>
       <span
         className={clsx("mr-2.5 text-xl", {
           "text-primary-bg": isPrimary,
@@ -57,38 +56,38 @@ const Contact: React.FC = () => {
       title="contact"
       className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center">
       <div className="container mx-auto px-4 flex flex-col items-center">
-        <Panel
-          variant="default"
-          className="w-full max-w-2xl text-center animate-on-scroll">
-          <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
-            {t.rich("description", {
-              highlight: (chunks) => <Highlight>{chunks}</Highlight>,
-            })}
-          </p>
-          <p className="font_fira_code text-info-accent mb-6 text-sm">
-            {t("prompt")}
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
-            <ContactLink
-              href="mailto:joao.grilo.dev@gmail.com"
-              icon={<FaEnvelope />}
-              label={t("emailButton")}
-              isPrimary={true}
-            />
-            <ContactLink
-              href="https://www.linkedin.com/in/joaoptgrilo/"
-              icon={<FaLinkedin />}
-              label={t("linkedinButton")}
-              newTab={true}
-            />
-            <ContactLink
-              href={GITHUB_PROFILE_URL}
-              icon={<FaGithub />}
-              label={t("githubButton")}
-              newTab={true}
-            />
-          </div>
-        </Panel>
+        <AnimateOnScroll className="w-full max-w-2xl">
+          <Panel variant="default" className="text-center">
+            <p className="text-secondary-text max-w-md mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
+              {t.rich("description", {
+                highlight: (chunks) => <Highlight>{chunks}</Highlight>,
+              })}
+            </p>
+            <p className="font_fira_code text-info-accent mb-6 text-sm">
+              {t("prompt")}
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
+              <ContactLink
+                href="mailto:joao.grilo.dev@gmail.com"
+                icon={<FaEnvelope />}
+                label={t("emailButton")}
+                isPrimary={true}
+              />
+              <ContactLink
+                href="https://www.linkedin.com/in/joaoptgrilo/"
+                icon={<FaLinkedin />}
+                label={t("linkedinButton")}
+                newTab={true}
+              />
+              <ContactLink
+                href={GITHUB_PROFILE_URL}
+                icon={<FaGithub />}
+                label={t("githubButton")}
+                newTab={true}
+              />
+            </div>
+          </Panel>
+        </AnimateOnScroll>
       </div>
     </Section>
   );

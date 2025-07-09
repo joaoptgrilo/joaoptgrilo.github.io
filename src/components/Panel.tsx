@@ -1,49 +1,48 @@
 // src/components/Panel.tsx
-import React from "react";
+import React, { forwardRef } from "react";
 import { clsx } from "clsx";
 
-interface PanelProps {
+interface PanelProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   className?: string;
   as?: React.ElementType;
-  variant?: "default" | "simple";
+  variant?: "default" | "simple" | "modal";
 }
 
-const Panel: React.FC<PanelProps> = ({
-  children,
-  className,
-  as: Component = "div",
-  variant = "default",
-}) => {
-  const baseClasses = "p-6 md:p-8 rounded-lg transition-all duration-300";
-
-  const darkThemeClasses = `
-    dark:bg-light-panel-bg/5
-    dark:backdrop-blur-custom 
-    dark:border-border
-    dark:hover:border-accent/50
-  `;
-
-  const lightThemeClasses = `
-    light:bg-light-panel-bg/90  
-    light:backdrop-blur-custom 
-    light:border-border
-    light:shadow-[0_4px_16px_var(--color-shadow)]
-    light:hover:border-accent
-  `;
-
-  const combinedClasses = clsx(
-    baseClasses,
-    darkThemeClasses,
-    lightThemeClasses,
-    "animate-on-scroll",
+const Panel = forwardRef<HTMLElement, PanelProps>(
+  (
     {
-      "panel-with-corners panel-glow-anim": variant === "default",
+      children,
+      className,
+      as: Component = "div",
+      variant = "default",
+      ...props
     },
-    className
-  );
+    ref
+  ) => {
+    const baseClasses = "rounded-lg transition-all duration-300 glass-effect";
 
-  return <Component className={combinedClasses}>{children}</Component>;
-};
+    const variantClasses = {
+      default: "p-6 md:p-8 panel-with-corners",
+      simple: "p-6 md:p-8",
+      modal:
+        "!p-0 overflow-y-auto dark:bg-secondary-bg light:bg-white border dark:border-border light:border-neutral-200 backdrop-blur-none",
+    };
+
+    const combinedClasses = clsx(
+      baseClasses,
+      variantClasses[variant],
+      className
+    );
+
+    return (
+      <Component ref={ref} className={combinedClasses} {...props}>
+        {children}
+      </Component>
+    );
+  }
+);
+
+Panel.displayName = "Panel";
 
 export default Panel;

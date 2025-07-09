@@ -2,6 +2,11 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  // DEFINITIVE FIX: Change darkMode strategy to 'class'.
+  // This disables the automatic @media (prefers-color-scheme) behavior
+  // and relies solely on the class set on the <html> element by our script.
+  darkMode: "class",
+
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,10 +14,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backdropBlur: {
-        custom: "var(--blur-intensity)",
-        nav: "10px", // <-- ADDED
-      },
       colors: {
         "primary-bg": "var(--color-primary-bg)",
         "secondary-bg": "var(--color-secondary-bg)",
@@ -23,39 +24,22 @@ const config: Config = {
         "accent-hover": "var(--color-accent-hover)",
         "info-accent": "var(--color-info-accent)",
         border: "var(--color-border)",
-        "tag-bg": "var(--color-tag-bg)",
-        shadow: "var(--color-shadow)",
+        "tag-bg": "var(--color-light-panel-bg)",
       },
       fontFamily: {
         poppins: ["var(--font-poppins)", "sans-serif"],
         fira_code: ["var(--font-fira-code)", "monospace"],
       },
-      keyframes: {
-        glowShadow: {
-          "0%": { boxShadow: "0 0 5px var(--color-accent-shadow-start)" },
-          "50%": {
-            boxShadow: "0 0 20px 5px var(--color-accent-shadow-strong)",
-          },
-          "100%": { boxShadow: "0 0 5px var(--color-accent-shadow-start)" },
-        },
-        fadeInUp: {
-          from: { opacity: "0", transform: "translateY(30px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        typing: {
-          from: { width: "0" },
-          to: { width: "100%" },
-        },
-        "blink-caret": {
-          "from, to": { borderColor: "transparent" },
-          "50%": { borderColor: "var(--color-accent)" },
-        },
+      backdropBlur: {
+        custom: "var(--blur-intensity)",
+        nav: "10px",
       },
-      animation: {
-        "glow-shadow": "glowShadow 5s ease-in-out infinite alternate",
+      boxShadow: {
+        "accent-glow": "0 0 25px -5px var(--color-accent)",
       },
     },
   },
   plugins: [],
 };
+
 export default config;

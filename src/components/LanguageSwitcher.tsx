@@ -33,8 +33,7 @@ export default function LanguageSwitcher() {
     clsx(
       "px-3 py-1.5 text-xs rounded-md transition-colors duration-200 uppercase",
       {
-        // CORRECTED: "Solid State" - vibrant background with dark text and bold font for a clear active state.
-        "bg-accent text-primary-bg font-bold no-text-stroke": locale === lang,
+        "bg-accent text-primary-bg font-bold": locale === lang,
         "bg-primary-bg/50 text-secondary-text hover:bg-primary-bg hover:text-accent font-semibold":
           locale !== lang,
       }
@@ -46,13 +45,15 @@ export default function LanguageSwitcher() {
       <button
         onClick={() => handleSwitch("en")}
         className={buttonClasses("en")}
-        disabled={isPending || locale === "en"}>
+        disabled={isPending || locale === "en"}
+      >
         EN
       </button>
       <button
         onClick={() => handleSwitch("pt")}
         className={buttonClasses("pt")}
-        disabled={isPending || locale === "pt"}>
+        disabled={isPending || locale === "pt"}
+      >
         PT
       </button>
     </div>
