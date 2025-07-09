@@ -36,11 +36,12 @@ const AnimateOnScroll: React.FC<AnimateOnScrollProps> = ({
     <Component
       ref={ref}
       className={clsx(
-        // UPDATED: Changed duration from 700ms to 500ms for a snappier feel
-        "transition-all duration-500 ease-out",
+        // UPDATED: Faster duration
+        "transition-all duration-300 ease-out",
         hasBeenVisible
           ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-4",
+          : // UPDATED: Starting opacity is now 50% for a smoother reveal
+            "opacity-50 translate-y-4",
         className
       )}
       style={{

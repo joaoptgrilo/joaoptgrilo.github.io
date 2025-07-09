@@ -5,13 +5,14 @@ import "../globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-import ScrollSpy from "@/components/ScrollSpy"; // IMPORTED
+import ScrollSpy from "@/components/ScrollSpy";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "../../../i18n";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import ThemeInitializer from "@/components/ThemeInitializer";
 import ScrollRestorer from "@/components/ScrollRestorer";
+import AnimateOnScroll from "@/components/AnimateOnScroll"; // Import the animation wrapper
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -66,8 +67,11 @@ export default async function RootLayout({
             <Navigation />
             {children}
             <ScrollToTopButton />
-            <ScrollSpy /> {/* ADDED */}
-            <Footer />
+            <ScrollSpy />
+            {/* WRAPPED a an AnimateOnScroll */}
+            <AnimateOnScroll>
+              <Footer />
+            </AnimateOnScroll>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

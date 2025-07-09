@@ -44,15 +44,20 @@ const ProficiencyIndicator: React.FC<{
   );
 };
 
-const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
-  const tProficiency = useTranslations("Proficiency");
+// NEW: A dedicated component for each skill panel
+const SkillPanel: React.FC<{
+  category: { id: string; skills: SkillItem[] };
+  index: number;
+}> = ({ category, index }) => {
   const tSkills = useTranslations("Skills");
   const tSkillTags = useTranslations("skillTags");
+  const tProficiency = useTranslations("Proficiency");
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useIntersectionObserver(sectionRef, {
-    threshold: 0.1,
-    rootMargin: "0px 0px -100px 0px",
+  // This panel now observes ITS OWN visibility to trigger the bar animations
+  const panelRef = useRef<HTMLDivElement>(null);
+  const isInView = useIntersectionObserver(panelRef, {
+    threshold: 0.2,
+    rootMargin: "0px 0px -50px 0px",
   });
 
   const proficiencyKeyMap: Record<
@@ -61,11 +66,48 @@ const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
   > = { 3: "expert", 2: "proficient", 1: "familiar" };
 
   return (
-    <Section
-      ref={sectionRef}
-      id="skills"
-      title="skills"
-      className={clsx({ "is-in-view": isInView })}>
+    <AnimateOnScroll as="li" staggerDelay={index * 100}>
+      <Panel
+        ref={panelRef} // The ref for the observer is on the Panel itself
+        className={clsx("h-full", { "is-in-view": isInView })} // Apply class only when THIS panel is visible
+        variant="default">
+        <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
+          {tSkills(category.id as any)}
+        </p>
+        <div className="flex flex-col space-y-2">
+          {[...category.skills]
+            .sort((a, b) => b.proficiency - a.proficiency)
+            .map((skill, skillIndex) => {
+              const proficiencyKey = proficiencyKeyMap[skill.proficiency];
+              const proficiencyLabel = tProficiency(proficiencyKey);
+              const skillDescription = tSkillTags(skill.key as any);
+              const combinedTooltip = `${proficiencyLabel}: ${skillDescription}`;
+              return (
+                <div
+                  key={skill.key}
+                  title={combinedTooltip}
+                  className="flex items-center justify-between px-3 py-2 rounded-md border border-border cursor-default interactive-glow group">
+                  <span className="text-sm text-secondary-text group-hover:text-primary-text transition-colors duration-300">
+                    {skill.name}
+                  </span>
+                  <ProficiencyIndicator
+                    level={skill.proficiency}
+                    delayIndex={skillIndex}
+                  />
+                </div>
+              );
+            })}
+        </div>
+      </Panel>
+    </AnimateOnScroll>
+  );
+};
+
+const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
+  const tProficiency = useTranslations("Proficiency");
+
+  return (
+    <Section id="skills" title="skills">
       <AnimateOnScroll>
         <div className="flex justify-center items-center flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 mb-10 text-sm text-secondary-text font_fira_code">
           <div className="flex items-center gap-2">
@@ -84,38 +126,7 @@ const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
       </AnimateOnScroll>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
         {skillsData.map((category, index) => (
-          <AnimateOnScroll as="li" key={category.id} staggerDelay={index * 100}>
-            <Panel className="h-full" variant="default">
-              <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
-                {tSkills(category.id as any)}
-              </p>
-              <div className="flex flex-col space-y-2">
-                {[...category.skills]
-                  .sort((a, b) => b.proficiency - a.proficiency)
-                  .map((skill, skillIndex) => {
-                    const proficiencyKey = proficiencyKeyMap[skill.proficiency];
-                    const proficiencyLabel = tProficiency(proficiencyKey);
-                    const skillDescription = tSkillTags(skill.key as any);
-                    const combinedTooltip = `${proficiencyLabel}: ${skillDescription}`;
-                    return (
-                      // CORRECTED: Removed the bg-tag-bg class
-                      <div
-                        key={skill.key}
-                        title={combinedTooltip}
-                        className="flex items-center justify-between px-3 py-2 rounded-md border border-border cursor-default interactive-glow group">
-                        <span className="text-sm text-secondary-text group-hover:text-primary-text transition-colors duration-300">
-                          {skill.name}
-                        </span>
-                        <ProficiencyIndicator
-                          level={skill.proficiency}
-                          delayIndex={skillIndex}
-                        />
-                      </div>
-                    );
-                  })}
-              </div>
-            </Panel>
-          </AnimateOnScroll>
+          <SkillPanel key={category.id} category={category} index={index} />
         ))}
       </ul>
     </Section>

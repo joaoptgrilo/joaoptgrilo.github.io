@@ -14,18 +14,17 @@ const AnimatedValue: React.FC<AnimatedValueProps> = ({
   startAnimation,
   decimals = 0,
 }) => {
-  // If the animation hasn't started, render a non-breaking space
-  // to hold the space without showing a "0".
   if (!startAnimation) {
     return <span aria-hidden="true"> </span>;
   }
 
-  // Once triggered, render the CountUp component to animate the number.
   return (
     <CountUp
       start={0}
       end={value}
       duration={2.5}
+      // ADDED: Delay the start of the count-up by 0.5s to match the panel's animation
+      delay={0.5}
       decimals={decimals}
       useEasing={true}
     />
