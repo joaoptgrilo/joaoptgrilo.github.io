@@ -21,12 +21,14 @@ const AnimateOnScroll: React.FC<AnimateOnScrollProps> = ({
   const ref = useRef<HTMLElement>(null);
   const [hasBeenVisible, setHasBeenVisible] = useState(false);
 
+  // Use the generic observer to detect if it's currently in view
   const isInView = useIntersectionObserver(ref, {
     threshold: 0.1,
     rootMargin: "0px 0px -50px 0px",
   });
 
   useEffect(() => {
+    // Fire-once logic: if it's in view and hasn't been visible before, set it.
     if (isInView && !hasBeenVisible) {
       setHasBeenVisible(true);
     }
@@ -36,12 +38,13 @@ const AnimateOnScroll: React.FC<AnimateOnScrollProps> = ({
     <Component
       ref={ref}
       className={clsx(
-        // UPDATED: Faster duration
         "transition-all duration-300 ease-out",
-        hasBeenVisible
-          ? "opacity-100 translate-y-0"
-          : // UPDATED: Starting opacity is now 50% for a smoother reveal
-            "opacity-50 translate-y-4",
+        {
+          // When visible, apply these classes
+          "opacity-100 translate-y-0 is-in-view": hasBeenVisible,
+          // When not yet visible, apply these
+          "opacity-50 translate-y-4": !hasBeenVisible,
+        },
         className
       )}
       style={{

@@ -22,9 +22,7 @@ const About = async () => {
   const metricsData = await dataLoaders.getMetrics();
 
   return (
-    // CORRECTED: Re-added the required 'title' prop
     <Section id="about" title="about">
-      {/* The h2 is now correctly rendered by the Section component, so we remove the duplicate one */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch mb-8 lg:mb-12">
         <AnimateOnScroll staggerDelay={0} className="h-full lg:col-span-1">
           <Panel className="h-full">
@@ -102,6 +100,7 @@ const About = async () => {
                   icon={
                     <Icon iconId={metric.iconId as any} className="w-12 h-12" />
                   }
+                  staggerDelay={index}
                 />
               </AnimateOnScroll>
             ))}

@@ -1,23 +1,40 @@
 // src/components/InfoPanel.tsx
 "use client";
 
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import AnimatedValue from "./AnimatedValue";
 import Panel from "./Panel";
 import type { MetricItem } from "@/data/types";
 import { useTranslations } from "next-intl";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 interface InfoPanelProps {
   metric: MetricItem;
   icon: React.ReactNode;
+  staggerDelay: number;
 }
 
-const InfoPanel: React.FC<InfoPanelProps> = ({ metric, icon }) => {
+const InfoPanel: React.FC<InfoPanelProps> = ({
+  metric,
+  icon,
+  staggerDelay,
+}) => {
   const t = useTranslations("About.metrics");
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  const isPanelInView = useIntersectionObserver(panelRef, { threshold: 0.5 });
+  const [hasBeenVisible, setHasBeenVisible] = useState(false);
+
+  useEffect(() => {
+    if (isPanelInView && !hasBeenVisible) {
+      setHasBeenVisible(true);
+    }
+  }, [isPanelInView, hasBeenVisible]);
+
   const { id, value, decimals, stacks } = metric;
+  const valueClasses = "text-primary-text text-lg font-bold font-fira_code";
 
   let displayValueNode: React.ReactNode;
-  const valueClasses = "text-primary-text text-lg font-bold font-fira_code";
 
   if (stacks) {
     displayValueNode = (
@@ -25,7 +42,7 @@ const InfoPanel: React.FC<InfoPanelProps> = ({ metric, icon }) => {
         {stacks.map((stack, index) => (
           <React.Fragment key={stack.name}>
             {stack.name}
-            {index < stacks.length - 1 && <span className="mx-1">,</span>}
+            {index < stacks.length - 1 && <span>, </span>}
           </React.Fragment>
         ))}
       </p>
@@ -42,8 +59,9 @@ const InfoPanel: React.FC<InfoPanelProps> = ({ metric, icon }) => {
           {prefix}
           <AnimatedValue
             value={value}
-            startAnimation={true}
+            startAnimation={hasBeenVisible}
             decimals={decimals}
+            staggerDelay={staggerDelay * 0.1}
           />
           {suffix}
         </p>
@@ -55,6 +73,7 @@ const InfoPanel: React.FC<InfoPanelProps> = ({ metric, icon }) => {
 
   return (
     <Panel
+      ref={panelRef}
       variant="simple"
       title={t(id + ".tooltip")}
       className="flex flex-col items-center justify-center text-center p-4 interactive-glow h-full min-h-[160px]">
@@ -62,10 +81,10 @@ const InfoPanel: React.FC<InfoPanelProps> = ({ metric, icon }) => {
       <p className="flex-grow text-xs text-secondary-text mb-2">
         {t(id + ".title")}
       </p>
-      {/* REMOVED: The incorrect transition styles from this element */}
       {displayValueNode}
     </Panel>
   );
 };
 
+// ADDED: The missing default export line
 export default InfoPanel;

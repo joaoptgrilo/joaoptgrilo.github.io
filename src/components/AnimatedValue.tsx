@@ -7,24 +7,28 @@ interface AnimatedValueProps {
   value: number;
   startAnimation: boolean;
   decimals?: number;
+  staggerDelay?: number; // New prop for cascading effect
 }
 
 const AnimatedValue: React.FC<AnimatedValueProps> = ({
   value,
   startAnimation,
   decimals = 0,
+  staggerDelay = 0,
 }) => {
   if (!startAnimation) {
     return <span aria-hidden="true"> </span>;
   }
+
+  // The final delay is a base value (for the panel to appear) + a staggered value
+  const finalDelay = 0.35 + staggerDelay;
 
   return (
     <CountUp
       start={0}
       end={value}
       duration={2.5}
-      // ADDED: Delay the start of the count-up by 0.5s to match the panel's animation
-      delay={0.5}
+      delay={finalDelay}
       decimals={decimals}
       useEasing={true}
     />

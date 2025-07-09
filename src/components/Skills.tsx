@@ -44,7 +44,6 @@ const ProficiencyIndicator: React.FC<{
   );
 };
 
-// NEW: A dedicated component for each skill panel
 const SkillPanel: React.FC<{
   category: { id: string; skills: SkillItem[] };
   index: number;
@@ -53,7 +52,6 @@ const SkillPanel: React.FC<{
   const tSkillTags = useTranslations("skillTags");
   const tProficiency = useTranslations("Proficiency");
 
-  // This panel now observes ITS OWN visibility to trigger the bar animations
   const panelRef = useRef<HTMLDivElement>(null);
   const isInView = useIntersectionObserver(panelRef, {
     threshold: 0.2,
@@ -68,8 +66,8 @@ const SkillPanel: React.FC<{
   return (
     <AnimateOnScroll as="li" staggerDelay={index * 100}>
       <Panel
-        ref={panelRef} // The ref for the observer is on the Panel itself
-        className={clsx("h-full", { "is-in-view": isInView })} // Apply class only when THIS panel is visible
+        ref={panelRef}
+        className={clsx("h-full", { "is-in-view": isInView })}
         variant="default">
         <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
           {tSkills(category.id as any)}
@@ -108,6 +106,7 @@ const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
 
   return (
     <Section id="skills" title="skills">
+      {/* CORRECTED: The legend is now wrapped in the animation component */}
       <AnimateOnScroll>
         <div className="flex justify-center items-center flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 mb-10 text-sm text-secondary-text font_fira_code">
           <div className="flex items-center gap-2">
