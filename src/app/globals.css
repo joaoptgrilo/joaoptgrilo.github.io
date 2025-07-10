@@ -4,6 +4,7 @@
 @tailwind utilities;
 
 :root {
+  /* Dark mode remains unchanged */
   --color-primary-bg: #0a0a0a;
   --color-secondary-bg: #141414;
   --color-light-panel-bg: #1f1f1f;
@@ -22,21 +23,23 @@
   --blur-intensity: 6px;
   --text-stroke-color: #000000;
 }
+
 html.light {
-  --color-primary-bg: #f8fafc; /* slate-50 */
-  --color-secondary-bg: #f1f5f9; /* slate-100 */
-  --color-light-panel-bg: #e2e8f0; /* slate-200 */
-  --color-primary-text: #1e293b; /* slate-800 */
-  --color-secondary-text: #475569; /* slate-600 */
-  --color-accent: #475569; /* slate-600 */
-  --color-accent-hover: #334155; /* slate-700 */
-  --color-info-accent: #64748b; /* slate-500 */
-  --color-prof-familiar: #94a3b8; /* slate-400 */
-  --color-border: rgba(100, 116, 139, 0.2); /* slate-500 at 20% */
-  --color-border-hover: rgba(71, 85, 105, 0.4); /* slate-600 at 40% */
-  --color-shadow: rgba(71, 85, 105, 0.3); /* slate-600 at 30% */
-  --glass-bg: rgba(248, 250, 252, 0.8); /* slate-50 at 80% */
-  --glass-border: rgba(226, 232, 240, 0.5); /* slate-200 at 50% */
+  --color-primary-bg: #f7fafc;
+  --color-secondary-bg: #f1f5f9;
+  --color-light-panel-bg: #e2e8f0;
+  --color-primary-text: #1e293b;
+  --color-secondary-text: #475569;
+  --color-accent: #3182ce;
+  --color-accent-hover: #2b6cb0;
+  --color-info-accent: #4299e1;
+  --color-prof-familiar: #94a3b8;
+  --color-border: rgba(49, 130, 206, 0.2);
+  --color-border-hover: rgba(49, 130, 206, 0.4);
+  --color-shadow: rgba(49, 130, 206, 0.3);
+  /* UPDATED: Light mode panel opacity decreased further */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(226, 232, 240, 0.7);
   --color-tag-bg: var(--glass-bg);
   --blur-intensity: 4px;
   --text-stroke-color: #ffffff;
