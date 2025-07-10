@@ -12,7 +12,7 @@ import { locales } from "../../../i18n";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import ThemeInitializer from "@/components/ThemeInitializer";
 import ScrollRestorer from "@/components/ScrollRestorer";
-import AnimateOnScroll from "@/components/AnimateOnScroll"; // Import the animation wrapper
+import ClientInitializer from "@/components/ClientInitializer"; // UPDATED: Import the new component
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,6 +32,8 @@ export const metadata: Metadata = {
     "The professional portfolio of João Grilo, a results-driven Full-Stack Developer crafting high-performance web solutions and seamless user experiences.",
 };
 
+// REMOVED: The local ClientInitializer definition is no longer here.
+
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
@@ -50,7 +52,8 @@ export default async function RootLayout({
     <html
       lang={locale}
       className={`${poppins.variable} ${firaCode.variable} antialiased`}
-      suppressHydrationWarning>
+      suppressHydrationWarning
+    >
       <head>
         <link
           rel="preload"
@@ -63,15 +66,13 @@ export default async function RootLayout({
         <ThemeInitializer />
         <ThemeProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
+            <ClientInitializer /> {/* UPDATED: Use the imported component */}
             <ScrollRestorer />
             <Navigation />
             {children}
             <ScrollToTopButton />
             <ScrollSpy />
-            {/* WRAPPED a an AnimateOnScroll */}
-            <AnimateOnScroll>
-              <Footer />
-            </AnimateOnScroll>
+            <Footer />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

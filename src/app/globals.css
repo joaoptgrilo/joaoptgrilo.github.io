@@ -4,6 +4,7 @@
 @tailwind utilities;
 
 :root {
+  /* Dark mode remains unchanged */
   --color-primary-bg: #0a0a0a;
   --color-secondary-bg: #141414;
   --color-light-panel-bg: #1f1f1f;
@@ -22,21 +23,23 @@
   --blur-intensity: 6px;
   --text-stroke-color: #000000;
 }
+
 html.light {
-  --color-primary-bg: #f5faff;
-  --color-secondary-bg: #e3f1ff;
-  --color-light-panel-bg: #d0e8ff;
-  --color-primary-text: #1a2c44;
-  --color-secondary-text: #345679;
+  --color-primary-bg: #f7fafc;
+  --color-secondary-bg: #f1f5f9;
+  --color-light-panel-bg: #e2e8f0;
+  --color-primary-text: #1e293b;
+  --color-secondary-text: #475569;
   --color-accent: #3182ce;
-  --color-accent-hover: #4299e1;
-  --color-info-accent: #63b3ed;
-  --color-prof-familiar: #a0aec0;
+  --color-accent-hover: #2b6cb0;
+  --color-info-accent: #4299e1;
+  --color-prof-familiar: #94a3b8;
   --color-border: rgba(49, 130, 206, 0.2);
   --color-border-hover: rgba(49, 130, 206, 0.4);
   --color-shadow: rgba(49, 130, 206, 0.3);
-  --glass-bg: rgba(255, 255, 255, 0.5);
-  --glass-border: rgba(49, 130, 206, 0.15);
+  /* UPDATED: Light mode panel opacity decreased further */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(226, 232, 240, 0.7);
   --color-tag-bg: var(--glass-bg);
   --blur-intensity: 4px;
   --text-stroke-color: #ffffff;
