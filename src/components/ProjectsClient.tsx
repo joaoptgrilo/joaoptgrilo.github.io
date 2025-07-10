@@ -3,25 +3,32 @@
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import { Project, ProjectTechItem } from "@/data";
-import { FiEye, FiClock } from "react-icons/fi";
+import { FiEye } from "react-icons/fi";
 import Section from "./Section";
 import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import { clsx } from "clsx";
 import ProjectModal from "./ProjectModal";
 import AnimateOnScroll from "./AnimateOnScroll";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const ProjectCard: React.FC<{
   project: Project;
   onCardClick: (project: Project) => void;
 }> = ({ project, onCardClick }) => {
   const t = useTranslations("Projects");
+  const { theme } = useTheme();
+  const placeholderIconSrc =
+    theme === "dark"
+      ? "/images/animated-placeholder-dark.svg"
+      : "/images/animated-placeholder-light.svg";
 
   return (
     <button
       onClick={() => onCardClick(project)}
       className="flex flex-col h-full group w-full text-left"
-      aria-label={`View details for ${project.title}`}>
+      aria-label={`View details for ${project.title}`}
+    >
       <Panel className="flex flex-col h-full" variant="default">
         <article className="flex flex-col flex-grow h-full">
           <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden mb-4 border border-border transition-transform duration-300 ease-out group-hover:scale-105">
@@ -36,7 +43,14 @@ const ProjectCard: React.FC<{
               />
             ) : (
               <div className="w-full h-full bg-secondary-bg/40 flex items-center justify-center">
-                <FiClock className="w-12 h-12 text-neutral-500" />
+                <div className="relative w-16 h-16">
+                  <Image
+                    src={placeholderIconSrc}
+                    alt="Placeholder"
+                    fill
+                    sizes="64px"
+                  />
+                </div>
               </div>
             )}
           </div>
@@ -56,7 +70,8 @@ const ProjectCard: React.FC<{
                   <li key={tech.name}>
                     <span
                       title={tech.description || tech.name}
-                      className="inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-default">
+                      className="inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-default"
+                    >
                       {tech.name}
                     </span>
                   </li>
@@ -81,6 +96,11 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
 }) => {
   const tMore = useTranslations("MoreComing");
   const tProjects = useTranslations("Projects");
+  const { theme } = useTheme();
+  const placeholderIconSrc =
+    theme === "dark"
+      ? "/images/animated-placeholder-dark.svg"
+      : "/images/animated-placeholder-light.svg";
 
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -131,7 +151,8 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
             <AnimateOnScroll>
               <Panel
                 variant="simple"
-                className="mb-10 max-w-4xl mx-auto p-4 md:p-6">
+                className="mb-10 max-w-4xl mx-auto p-4 md:p-6"
+              >
                 <p className="text-center font-semibold text-lg text-info-accent mb-4">
                   {tProjects("filterTitle")}
                 </p>
@@ -140,7 +161,8 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
                     <button
                       key={tech}
                       onClick={() => setActiveFilter(tech)}
-                      className={getFilterButtonClasses(tech)}>
+                      className={getFilterButtonClasses(tech)}
+                    >
                       {tech}
                     </button>
                   ))}
@@ -150,13 +172,15 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
 
             <ul
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-              key={activeFilter}>
+              key={activeFilter}
+            >
               {filteredProjects.map((project, index) => (
                 <li key={project.id} className="flex">
                   <AnimateOnScroll
                     as="div"
                     className="w-full h-full"
-                    staggerDelay={index * 100}>
+                    staggerDelay={index * 100}
+                  >
                     <ProjectCard
                       project={project}
                       onCardClick={handleOpenModal}
@@ -169,12 +193,21 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
                   <AnimateOnScroll
                     as="div"
                     className="w-full h-full"
-                    staggerDelay={filteredProjects.length * 100}>
+                    staggerDelay={filteredProjects.length * 100}
+                  >
                     <Panel
                       variant="simple"
-                      className="!border-dashed !border-neutral-700/60 hover:!border-accent/60 flex flex-col items-center justify-center text-center group w-full h-full transition-all duration-300">
+                      className="border-spaced-dashed hover:border-solid hover:!border-accent/60 flex flex-col items-center justify-center text-center group w-full h-full transition-all duration-300"
+                    >
                       <div className="p-6">
-                        <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4 mx-auto" />
+                        <div className="relative w-16 h-16 group-hover:opacity-80 transition-opacity duration-300 mb-4 mx-auto">
+                          <Image
+                            src={placeholderIconSrc}
+                            alt="More items coming soon"
+                            fill
+                            sizes="64px"
+                          />
+                        </div>
                         <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
                           {tMore("title", { item: tMore("projects") })}
                         </p>

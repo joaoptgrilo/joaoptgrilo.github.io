@@ -37,7 +37,6 @@ html.light {
   --color-border: rgba(49, 130, 206, 0.2);
   --color-border-hover: rgba(49, 130, 206, 0.4);
   --color-shadow: rgba(49, 130, 206, 0.3);
-  /* UPDATED: Light mode panel opacity decreased further */
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(226, 232, 240, 0.7);
   --color-tag-bg: var(--glass-bg);
@@ -91,6 +90,41 @@ html {
   .glass-effect {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
+  }
+
+  .border-spaced-dashed {
+    border: 1px solid transparent !important;
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 16px 1px, 16px 1px, 1px 16px, 1px 16px; /* 4px dash, 12px gap */
+    background-position: left top, left bottom, left top, right top;
+    background-image: repeating-linear-gradient(
+        90deg,
+        var(--color-info-accent),
+        var(--color-info-accent) 4px,
+        transparent 4px,
+        transparent 16px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        var(--color-info-accent),
+        var(--color-info-accent) 4px,
+        transparent 4px,
+        transparent 16px
+      ),
+      repeating-linear-gradient(
+        180deg,
+        var(--color-info-accent),
+        var(--color-info-accent) 4px,
+        transparent 4px,
+        transparent 16px
+      ),
+      repeating-linear-gradient(
+        180deg,
+        var(--color-info-accent),
+        var(--color-info-accent) 4px,
+        transparent 4px,
+        transparent 16px
+      );
   }
 }
 
@@ -165,6 +199,7 @@ html {
     border-color: var(--color-accent);
   }
 }
+
 .nav-glow {
   box-shadow: 0 4px 20px -10px var(--color-shadow);
 }
