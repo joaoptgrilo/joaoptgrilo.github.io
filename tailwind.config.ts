@@ -2,11 +2,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  // DEFINITIVE FIX: Change darkMode strategy to 'class'.
-  // This disables the automatic @media (prefers-color-scheme) behavior
-  // and relies solely on the class set on the <html> element by our script.
   darkMode: "class",
-
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -23,6 +19,7 @@ const config: Config = {
         accent: "var(--color-accent)",
         "accent-hover": "var(--color-accent-hover)",
         "info-accent": "var(--color-info-accent)",
+        "prof-familiar": "var(--color-prof-familiar)",
         border: "var(--color-border)",
         "tag-bg": "var(--color-light-panel-bg)",
       },

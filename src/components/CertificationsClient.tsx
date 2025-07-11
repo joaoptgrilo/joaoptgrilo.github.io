@@ -1,13 +1,15 @@
 // src/components/CertificationsClient.tsx
 "use client";
 import React from "react";
+import Image from "next/image";
 import { CertificationItem } from "@/data";
 import { FaCertificate, FaExternalLinkAlt, FaUniversity } from "react-icons/fa";
-import { FiClock, FiActivity } from "react-icons/fi";
+import { FiActivity } from "react-icons/fi";
 import Section from "./Section";
 import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import AnimateOnScroll from "./AnimateOnScroll";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const CertificationsClient = ({
   certificationsData,
@@ -16,6 +18,11 @@ const CertificationsClient = ({
 }) => {
   const t = useTranslations("MoreComing");
   const tCerts = useTranslations("Certifications");
+  const { theme } = useTheme();
+  const placeholderIconSrc =
+    theme === "dark"
+      ? "/images/animated-placeholder-dark.svg"
+      : "/images/animated-placeholder-light.svg";
 
   return (
     <Section id="certifications" title="certifications">
@@ -25,7 +32,8 @@ const CertificationsClient = ({
             <AnimateOnScroll as="li" key={cert.id} staggerDelay={index * 100}>
               <Panel
                 className="flex flex-col h-full group w-full"
-                variant="default">
+                variant="default"
+              >
                 <div className="flex-grow mb-4">
                   <div className="flex items-start mb-3">
                     {cert.isInProgress ? (
@@ -61,7 +69,8 @@ const CertificationsClient = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`View progress for ${cert.name}`}
-                      className="inline-flex items-center justify-center w-full text-sm text-info-accent hover:text-accent font-medium transition-colors duration-300 bg-primary-bg/70 hover:bg-primary-bg px-4 py-2.5 rounded-md border border-info-accent/50 hover:border-accent interactive-glow">
+                      className="inline-flex items-center justify-center w-full text-sm text-info-accent hover:text-accent font-medium transition-colors duration-300 bg-primary-bg/70 hover:bg-primary-bg px-5 py-3 rounded-md border border-info-accent/50 hover:border-accent interactive-glow"
+                    >
                       <FiActivity className="mr-2 h-3.5 w-3.5" />
                       {tCerts("progressButton")}
                     </a>
@@ -71,7 +80,8 @@ const CertificationsClient = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Verify ${cert.name} certificate`}
-                      className="inline-flex items-center justify-center w-full text-sm text-info-accent hover:text-accent font-medium transition-colors duration-300 bg-primary-bg/70 hover:bg-primary-bg px-4 py-2.5 rounded-md border border-info-accent/50 hover:border-accent interactive-glow">
+                      className="inline-flex items-center justify-center w-full text-sm text-info-accent hover:text-accent font-medium transition-colors duration-300 bg-primary-bg/70 hover:bg-primary-bg px-4 py-2.5 rounded-md border border-info-accent/50 hover:border-accent interactive-glow"
+                    >
                       <FaExternalLinkAlt className="mr-2 h-3.5 w-3.5" />
                       {tCerts("verifyButton")}
                     </a>
@@ -82,12 +92,21 @@ const CertificationsClient = ({
           ))}
           <AnimateOnScroll
             as="li"
-            staggerDelay={certificationsData.length * 100}>
+            staggerDelay={certificationsData.length * 100}
+          >
             <Panel
               variant="simple"
-              className="!border-dashed !border-neutral-700/60 hover:!border-accent/60 flex flex-col items-center justify-center text-center group w-full h-full transition-all duration-300">
+              className="border-spaced-dashed hover:border-solid hover:!border-accent/60 flex flex-col items-center justify-center text-center group w-full h-full transition-all duration-300"
+            >
               <div className="p-6">
-                <FiClock className="w-12 h-12 text-neutral-500 group-hover:text-accent transition-colors duration-300 mb-4 mx-auto" />
+                <div className="relative w-16 h-16 group-hover:opacity-80 transition-opacity duration-300 mb-4 mx-auto">
+                  <Image
+                    src={placeholderIconSrc}
+                    alt="More items coming soon"
+                    fill
+                    sizes="64px"
+                  />
+                </div>
                 <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
                   {t("title", { item: t("certifications") })}
                 </p>
