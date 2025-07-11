@@ -1,6 +1,6 @@
 // src/components/ExperienceClient.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ExperienceItem } from "@/data";
 import {
@@ -32,9 +32,32 @@ const getNodeText = (node: React.ReactNode): string => {
 const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
   const t = useTranslations("Experience");
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    // This check runs once on the client after mount
+    if (typeof window !== "undefined" && window.navigator.maxTouchPoints > 0) {
+      setIsTouchDevice(true);
+    }
+  }, []);
+
+  const handleTechClick = (techName: string) => {
+    // Toggle behavior for touch devices
+    setHoveredTech((prev) => (prev === techName ? null : techName));
+  };
+
+  const handlePanelClick = (e: React.MouseEvent<HTMLElement>) => {
+    // If it's a touch device and the click is outside a tech tag, clear the highlight
+    if (
+      isTouchDevice &&
+      !(e.target as HTMLElement).closest("[data-tech-tag]")
+    ) {
+      setHoveredTech(null);
+    }
+  };
 
   return (
-    <Panel variant="default">
+    <Panel variant="default" onClick={handlePanelClick}>
       <article className="lg:grid lg:grid-cols-12 lg:gap-x-0">
         <div className="lg:col-span-5 lg:pr-6 mb-6 lg:mb-0">
           <p className="text-xl md:text-2xl font-bold text-info-accent mb-4 leading-tight">
@@ -44,8 +67,7 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
             <div className="flex items-center">
               {item.companyLogoUrl ? (
                 <div
-                  className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border bg-black opacity-80`}
-                >
+                  className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border bg-black opacity-80`}>
                   <div className="relative w-full h-full">
                     <Image
                       src={item.companyLogoUrl}
@@ -66,8 +88,7 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
                       href={item.companyLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-accent transition-colors duration-300"
-                    >
+                      className="hover:text-accent transition-colors duration-300">
                       {item.company}
                     </a>
                   ) : (
@@ -99,13 +120,23 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
                 {item.keyTech.map((tech) => (
                   <li
                     key={tech.name}
-                    onMouseEnter={() => setHoveredTech(tech.name)}
-                    onMouseLeave={() => setHoveredTech(null)}
-                  >
+                    data-tech-tag="true" // Identifier for click target check
+                    onClick={
+                      isTouchDevice
+                        ? () => handleTechClick(tech.name)
+                        : undefined
+                    }
+                    onMouseEnter={
+                      !isTouchDevice
+                        ? () => setHoveredTech(tech.name)
+                        : undefined
+                    }
+                    onMouseLeave={
+                      !isTouchDevice ? () => setHoveredTech(null) : undefined
+                    }>
                     <span
                       title={tech.description}
-                      className="inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-pointer"
-                    >
+                      className="inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-pointer">
                       {tech.name}
                     </span>
                   </li>
@@ -131,8 +162,7 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
                   className={clsx(
                     "flex transition-opacity duration-300 ease-in-out",
                     { "opacity-40": isDimmed }
-                  )}
-                >
+                  )}>
                   <span className="text-accent mr-2.5 mt-1.5 flex-shrink-0 text-xs">
                     ◆
                   </span>
