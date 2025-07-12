@@ -30,24 +30,18 @@ const ScrollToTopButton = () => {
   }, []);
 
   const buttonClasses = clsx(
-    // Posição e dimensões
+    // Base position and style
     "fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50",
     "w-11 h-11 flex items-center justify-center",
+    "rounded-full text-accent bg-primary-bg/70 backdrop-blur-sm",
 
-    // Estilo visual
-    "rounded-full text-accent",
-    "bg-primary-bg/70 backdrop-blur-sm",
-    "border-[1px] border-accent", // UPDATED: Explicit 1px width and accent color
-    "panel-glow-anim", // UPDATED: Replaces previous glow animation
+    // Effects
+    "panel-glow-anim",
+    "border border-accent",
+    "transition-all duration-300 ease-in-out",
+    "hover:scale-110 hover:-translate-y-1 hover:shadow-accent-glow",
 
-    // Transições e efeitos de foco
-    "transition-all duration-300 ease-in-out hover:opacity-90",
-    "focus-visible:outline-none",
-    "focus-visible:ring-2 focus-visible:ring-accent",
-    "focus-visible:ring-opacity-50",
-    "focus-visible:ring-offset-2 focus-visible:ring-offset-primary-bg",
-
-    // Visibilidade condicional
+    // Visibility
     {
       "opacity-100 translate-y-0": isVisible,
       "opacity-0 translate-y-4 pointer-events-none": !isVisible,
@@ -59,7 +53,8 @@ const ScrollToTopButton = () => {
       type="button"
       onClick={scrollToTop}
       className={buttonClasses}
-      aria-label="Scroll to top">
+      aria-label="Scroll to top"
+    >
       <FaChevronUp size={20} />
     </button>
   );

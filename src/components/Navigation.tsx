@@ -69,7 +69,18 @@ const Navigation: React.FC = () => {
 
   const mobileMenuContainerClasses = "bg-secondary-bg/95 backdrop-blur-sm";
 
-  const pillClasses = `flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font_fira_code font-semibold text-accent bg-primary-bg/80 border border-accent shadow-md shadow-accent/20 transition-opacity duration-300 ease-in-out hover:opacity-90`;
+  const pillClasses = clsx(
+    // Base styles
+    "flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font_fira_code font-semibold text-accent bg-primary-bg/80",
+    // Original border style
+    "border border-accent",
+    // Ambient glow animation
+    "panel-glow-anim",
+    // Transition and hover effects
+    "transition-all duration-300 ease-in-out",
+    "hover:scale-105 hover:-translate-y-px hover:shadow-accent-glow"
+  );
+
   const desktopNavLinkClasses =
     "font-poppins text-primary-text hover:text-accent transition-colors text-sm";
   const mobileMenuLinkClasses =
@@ -81,14 +92,17 @@ const Navigation: React.FC = () => {
         <div className="container mx-auto flex justify-between items-center h-14 sm:h-16">
           <Link
             href="#hero"
-            scroll={false} // ADDED
+            scroll={false}
             onClick={closeMobileMenu}
-            className={`${
-              isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
-            } transition-opacity duration-300 ease-in-out`}
-            style={{ transitionDelay: isScrolled ? "0.1s" : "0s" }}
+            className={clsx(
+              "transition-all duration-300 ease-in-out transform",
+              isScrolled
+                ? "opacity-100 scale-100 translate-y-0"
+                : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+            )}
             tabIndex={isScrolled ? 0 : -1}
-            aria-hidden={!isScrolled}>
+            aria-hidden={!isScrolled}
+          >
             <span className={pillClasses}>
               <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse"></span>
               {t("namePill")}
@@ -99,8 +113,9 @@ const Navigation: React.FC = () => {
               <Link
                 key={link.label}
                 href={link.href}
-                scroll={false} // ADDED
-                className={desktopNavLinkClasses}>
+                scroll={false}
+                className={desktopNavLinkClasses}
+              >
                 {link.label}
               </Link>
             ))}
@@ -113,22 +128,25 @@ const Navigation: React.FC = () => {
             <button
               onClick={toggleMobileMenu}
               aria-label="Toggle mobile menu"
-              className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10">
+              className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10"
+            >
               {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
         </div>
         {isMobileMenuOpen && (
           <div
-            className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}>
+            className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}
+          >
             <div className="container mx-auto flex flex-col items-center space-y-3 px-4">
               {navLinks.map((link: NavLinkItem) => (
                 <Link
                   key={`mobile-${link.label}`}
                   href={link.href}
-                  scroll={false} // ADDED
+                  scroll={false}
                   className={mobileMenuLinkClasses}
-                  onClick={closeMobileMenu}>
+                  onClick={closeMobileMenu}
+                >
                   {link.label}
                 </Link>
               ))}

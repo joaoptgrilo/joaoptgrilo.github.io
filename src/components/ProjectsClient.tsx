@@ -29,7 +29,10 @@ const ProjectCard: React.FC<{
       className="flex flex-col h-full group w-full text-left"
       aria-label={`View details for ${project.title}`}
     >
-      <Panel className="flex flex-col h-full" variant="default">
+      <Panel
+        className="flex flex-col h-full interactive-glow"
+        variant="default"
+      >
         <article className="flex flex-col flex-grow h-full">
           <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden mb-4 border border-border transition-transform duration-300 ease-out group-hover:scale-105">
             {project.imageUrl ? (
