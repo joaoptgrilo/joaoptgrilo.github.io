@@ -77,6 +77,8 @@ const Hero: React.FC = () => {
             <a
               href={`/${cvToDownload}`}
               download
+              target="_blank" // ADDED
+              rel="noopener noreferrer" // ADDED
               className="inline-flex items-center justify-center bg-transparent text-accent font_fira_code font-semibold text-sm sm:text-base md:text-lg py-3 px-8 sm:py-3.5 sm:px-10 rounded-lg border-2 border-accent hover:bg-accent/10 hover:text-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto interactive-glow"
             >
               <FaDownload className="mr-2.5 h-4 w-4 sm:h-5 sm:w-5" />
