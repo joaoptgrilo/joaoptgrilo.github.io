@@ -16,7 +16,7 @@ const CertificationsClient = ({
 }: {
   certificationsData: CertificationItem[];
 }) => {
-  const t = useTranslations("MoreComing");
+  const tMore = useTranslations("MoreComing");
   const tCerts = useTranslations("Certifications");
   const { theme } = useTheme();
   const placeholderIconSrc =
@@ -31,7 +31,7 @@ const CertificationsClient = ({
           {certificationsData.map((cert, index) => (
             <AnimateOnScroll as="li" key={cert.id} staggerDelay={index * 100}>
               <Panel
-                className="flex flex-col h-full group w-full"
+                className="flex flex-col h-full group w-full interactive-glow"
                 variant="default"
               >
                 <div className="flex-grow mb-4">
@@ -108,10 +108,10 @@ const CertificationsClient = ({
                   />
                 </div>
                 <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
-                  {t("title", { item: t("certifications") })}
+                  {tMore("title", { item: tMore("certifications") })}
                 </p>
                 <p className="text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">
-                  {t("description")}
+                  {tMore("description")}
                 </p>
               </div>
             </Panel>

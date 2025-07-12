@@ -76,7 +76,20 @@ html {
   transform: scaleX(1);
 }
 
+@keyframes panel-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 15px -8px var(--color-shadow);
+  }
+  50% {
+    box-shadow: 0 0 25px -8px var(--color-shadow);
+  }
+}
+
 @layer utilities {
+  .panel-glow-anim {
+    animation: panel-glow 4s ease-in-out infinite;
+  }
   .logo-stroke {
     filter: drop-shadow(1px 1px 0 var(--color-border))
       drop-shadow(-1px 1px 0 var(--color-border))
