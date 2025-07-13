@@ -1,4 +1,8 @@
 {
+  "SEO": {
+    "title": "João Grilo | Desenvolvedor Full-Stack",
+    "description": "O portfólio profissional de João Grilo, um Desenvolvedor Full-Stack orientado a resultados que cria soluções web de alta performance e experiências de utilizador fluidas."
+  },
   "Footer": {
     "copyright": "© {currentYear} João Grilo. Todos os direitos reservados.",
     "version": "Versão: {versionNumber}"
