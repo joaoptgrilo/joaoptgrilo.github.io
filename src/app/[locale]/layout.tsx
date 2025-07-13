@@ -38,9 +38,6 @@ export async function generateMetadata({
   const tSEO = await getTranslations({ locale, namespace: "SEO" });
   const tHero = await getTranslations({ locale, namespace: "Hero" });
 
-  // CORRECTED: Dynamically determine the base URL.
-  // This uses Vercel's system environment variable for preview deployments,
-  // and falls back to the production URL.
   const siteUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : "https://joaoptgrilo.github.io";
@@ -55,9 +52,13 @@ export async function generateMetadata({
   const ogDescription = tSEO("description");
 
   return {
+    // Standard SEO Metadata (This is correct)
     title: seoTitle,
     description: seoDescription,
-    // CORRECTED: Use the dynamic siteUrl for the metadata base.
+    authors: [{ name: "João Grilo", url: siteUrl }],
+    creator: "João Grilo",
+
+    // Open Graph & Twitter Metadata
     metadataBase: new URL(siteUrl),
     openGraph: {
       title: ogTitle,
@@ -66,7 +67,6 @@ export async function generateMetadata({
       siteName: "João Grilo | Portfolio",
       images: [
         {
-          // Now using a relative path, which `metadataBase` will make absolute.
           url: selectedOgImage,
           width: 1200,
           height: 630,
@@ -75,12 +75,12 @@ export async function generateMetadata({
       ],
       locale: locale === "pt" ? "pt_PT" : "en_US",
       type: "website",
+      // CORRECTED: The 'article' property has been removed as it is not valid here.
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description: ogDescription,
-      // `metadataBase` will also correctly resolve this relative path.
       images: [selectedOgImage],
     },
   };
