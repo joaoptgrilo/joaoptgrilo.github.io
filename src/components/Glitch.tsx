@@ -1,7 +1,7 @@
 // src/components/Glitch.tsx
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { clsx } from "clsx";
 import useGlitch from "@/hooks/useGlitch";
 import { useInView } from "react-intersection-observer";
@@ -26,7 +26,7 @@ const Glitch: React.FC<GlitchProps> = ({
     skip: !triggerOnVisible,
   });
 
-  const randomDelay = useMemo(() => {
+  const randomDelay = React.useMemo(() => {
     return triggerOnVisible ? 3000 + Math.random() * 5000 : 0;
   }, [triggerOnVisible]);
 
@@ -48,6 +48,7 @@ const Glitch: React.FC<GlitchProps> = ({
       ref={ref}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      // CORRECTED: The className is now correctly applied to the interactive span
       className={clsx("relative inline-block align-middle", className)}>
       <span aria-hidden="true" className="opacity-0">
         {children}

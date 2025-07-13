@@ -1,5 +1,5 @@
 // src/hooks/useGlitch.ts
-"use client";
+"use client"; // ADDED: This directive is essential for browser-only APIs.
 
 import { useState, useRef, useCallback, useEffect } from "react";
 

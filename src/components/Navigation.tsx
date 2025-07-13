@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { clsx } from "clsx";
-import GlitchText from "./Glitch";
+// REMOVED: The Glitch component is no longer needed in this file.
 
 interface NavLinkItem {
   href: string;
@@ -111,7 +111,8 @@ const Navigation: React.FC = () => {
                 href={link.href}
                 scroll={false}
                 className={desktopNavLinkClasses}>
-                <GlitchText>{link.label}</GlitchText>
+                {/* CORRECTED: Removed the Glitch component wrapper */}
+                {link.label}
               </Link>
             ))}
             <div className="flex items-center space-x-2">
