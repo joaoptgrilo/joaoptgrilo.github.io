@@ -4,8 +4,8 @@
 import React, { forwardRef } from "react";
 import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
+import Glitch from "./Glitch";
 
-// 1. Update props to accept standard HTML attributes
 interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   id: string;
@@ -15,7 +15,6 @@ interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   containerClassName?: string;
 }
 
-// 2. Wrap the component in forwardRef and accept the ref
 const Section = forwardRef<HTMLElement, SectionProps>(
   (
     {
@@ -25,13 +24,14 @@ const Section = forwardRef<HTMLElement, SectionProps>(
       className = "py-16 md:py-24",
       titleClassName = "mb-12 md:mb-16",
       containerClassName = "",
-      ...props // Capture other props like style
+      ...props
     },
     ref
   ) => {
     const t = useTranslations("SectionTitles");
+    const translatedTitle = t(title as any);
+
     return (
-      // 3. Apply the ref and spread other props to the section element
       <section
         ref={ref}
         id={id}
@@ -41,11 +41,10 @@ const Section = forwardRef<HTMLElement, SectionProps>(
           <div className="flex justify-center">
             <h2
               className={clsx(
-                "section-title text-3xl sm:text-4xl md:text-5xl font-bold text-center",
-                "will-animate", // Apply will-animate to the title
+                "text-3xl sm:text-4xl md:text-5xl font-bold text-center",
                 titleClassName
               )}>
-              {t(title as any)}
+              <Glitch triggerOnVisible={true}>{translatedTitle}</Glitch>
             </h2>
           </div>
           {children}
@@ -55,7 +54,6 @@ const Section = forwardRef<HTMLElement, SectionProps>(
   }
 );
 
-// 4. Add the display name
 Section.displayName = "Section";
 
 export default Section;

@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { clsx } from "clsx";
+import GlitchText from "./Glitch";
 
 interface NavLinkItem {
   href: string;
@@ -70,13 +71,9 @@ const Navigation: React.FC = () => {
   const mobileMenuContainerClasses = "bg-secondary-bg/95 backdrop-blur-sm";
 
   const pillClasses = clsx(
-    // Base styles
     "flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font_fira_code font-semibold text-accent bg-primary-bg/80",
-    // Original border style
     "border border-accent",
-    // Ambient glow animation
     "panel-glow-anim",
-    // Transition and hover effects
     "transition-all duration-300 ease-in-out",
     "hover:scale-105 hover:-translate-y-px hover:shadow-accent-glow"
   );
@@ -101,8 +98,7 @@ const Navigation: React.FC = () => {
                 : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
             )}
             tabIndex={isScrolled ? 0 : -1}
-            aria-hidden={!isScrolled}
-          >
+            aria-hidden={!isScrolled}>
             <span className={pillClasses}>
               <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse"></span>
               {t("namePill")}
@@ -114,9 +110,8 @@ const Navigation: React.FC = () => {
                 key={link.label}
                 href={link.href}
                 scroll={false}
-                className={desktopNavLinkClasses}
-              >
-                {link.label}
+                className={desktopNavLinkClasses}>
+                <GlitchText>{link.label}</GlitchText>
               </Link>
             ))}
             <div className="flex items-center space-x-2">
@@ -128,16 +123,14 @@ const Navigation: React.FC = () => {
             <button
               onClick={toggleMobileMenu}
               aria-label="Toggle mobile menu"
-              className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10"
-            >
+              className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10">
               {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
         </div>
         {isMobileMenuOpen && (
           <div
-            className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}
-          >
+            className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}>
             <div className="container mx-auto flex flex-col items-center space-y-3 px-4">
               {navLinks.map((link: NavLinkItem) => (
                 <Link
@@ -145,8 +138,7 @@ const Navigation: React.FC = () => {
                   href={link.href}
                   scroll={false}
                   className={mobileMenuLinkClasses}
-                  onClick={closeMobileMenu}
-                >
+                  onClick={closeMobileMenu}>
                   {link.label}
                 </Link>
               ))}

@@ -108,7 +108,7 @@ html {
   .border-spaced-dashed {
     border: 1px solid transparent !important;
     background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-    background-size: 16px 1px, 16px 1px, 1px 16px, 1px 16px; /* 4px dash, 12px gap */
+    background-size: 16px 1px, 16px 1px, 1px 16px, 1px 16px;
     background-position: left top, left bottom, left top, right top;
     background-image: repeating-linear-gradient(
         90deg,
@@ -145,16 +145,18 @@ html {
   position: relative;
   box-shadow: 0 0 20px -12px var(--color-accent);
 }
+
 .panel-with-corners::before,
 .panel-with-corners::after {
   content: "";
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: 0;
+  height: 0;
   border-color: var(--color-accent);
-  opacity: 0.7;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
 }
+
 .panel-with-corners::before {
   top: -6px;
   left: -6px;
@@ -163,7 +165,9 @@ html {
   border-top-style: solid;
   border-left-style: solid;
   border-top-left-radius: 0.5rem;
+  transition-delay: 0s, 0.3s, 0s;
 }
+
 .panel-with-corners::after {
   bottom: -6px;
   right: -6px;
@@ -172,19 +176,28 @@ html {
   border-bottom-style: solid;
   border-right-style: solid;
   border-bottom-right-radius: 0.5rem;
+  transition-delay: 0s, 0.3s, 0s;
 }
+
+.is-in-view .panel-with-corners::before,
+.is-in-view .panel-with-corners::after {
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+}
+
 .panel-with-corners:hover::before,
 .panel-with-corners:hover::after {
   opacity: 1;
-  width: 32px;
-  height: 32px;
 }
+
 .interactive-glow {
   position: relative;
   z-index: 1;
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
   border: 1px solid var(--color-border);
 }
+
 .interactive-glow:hover {
   border-color: var(--color-border-hover);
   transform: translateY(-2px) scale(1.02);

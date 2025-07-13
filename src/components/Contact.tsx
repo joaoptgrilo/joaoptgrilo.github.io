@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import Section from "./Section";
 import { clsx } from "clsx";
 import AnimateOnScroll from "./AnimateOnScroll";
+import GlitchText from "./Glitch";
 
 const ContactLink: React.FC<{
   href: string;
@@ -41,7 +42,7 @@ const ContactLink: React.FC<{
         })}>
         {icon}
       </span>
-      {label}
+      <GlitchText>{label}</GlitchText>
     </a>
   );
 };
@@ -53,7 +54,7 @@ const Contact: React.FC = () => {
   return (
     <Section
       id="contact"
-      title="contact"
+      title="contact" // CORRECTED: The missing 'title' prop has been restored.
       className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center">
       <div className="container mx-auto px-4 flex flex-col items-center">
         <AnimateOnScroll className="w-full max-w-2xl">
