@@ -47,7 +47,8 @@ export async function generateMetadata({
   const seoDescription = tSEO("description");
 
   const ogTitle = `${tHero("name")} | ${tHero("title")}`;
-  const ogDescription = tHero("tagline");
+  // CORRECTED: Use the longer, more appropriate SEO description for Open Graph as well.
+  const ogDescription = tSEO("description");
 
   return {
     title: seoTitle,
