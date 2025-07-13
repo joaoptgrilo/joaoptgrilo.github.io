@@ -6,7 +6,7 @@ import { ExperienceItem } from "../types";
 export const experienceData: ExperienceItem[] = [
   {
     id: 1,
-    role: "Full-Stack Developer",
+    role: "Programador Full-Stack",
     company: "Fedrax",
     companyLink: "https://www.fedrax.com/",
     companyLogoUrl: "/images/logos/fedrax-logo.svg",
@@ -15,81 +15,85 @@ export const experienceData: ExperienceItem[] = [
     period: "Fev 2020 – Out 2023",
     descriptionItems: [
       <>
-        Arquitetura, desenvolvimento e manutenção de plataformas web críticas e
-        de alto tráfego usando uma stack principal de <Highlight>PHP</Highlight>{" "}
-        e <Highlight>MySQL</Highlight>, garantindo 99.9%+ de uptime e
-        escalabilidade robusta.
+        Arquitetura, desenvolvimento e manutenção de plataformas web de missão
+        crítica e elevado tráfego, utilizando uma stack principal de{" "}
+        <Highlight>PHP</Highlight> e <Highlight>MySQL</Highlight>, garantindo
+        mais de 99,9% de uptime e uma escalabilidade robusta.
       </>,
       <>
-        Criação de componentes frontend dinâmicos, reutilizáveis e performantes
-        com <Highlight>React</Highlight> e <Highlight>JavaScript</Highlight>{" "}
-        moderno, melhorando as métricas de engagement do utilizador (ex: redução
-        de ~10% na taxa de rejeição, aumento de ~12% na duração da sessão).
+        Desenvolvimento de uma biblioteca de componentes de frontend dinâmicos,
+        reutilizáveis e de alta performance com <Highlight>React</Highlight> e{" "}
+        <Highlight>JavaScript</Highlight> moderno, resultando numa melhoria
+        direta das principais métricas de engagement do utilizador, incluindo
+        uma redução de ~10% na bounce rate e um aumento de ~12% na duração das
+        sessões.
       </>,
       <>
-        {/* IMPROVED: Added context and impact. */}
-        Desenho e consumo de <Highlight>APIs RESTful</Highlight> seguras e
-        versionadas para alimentar novas funcionalidades e{" "}
-        <Highlight>permitir integrações com parceiros</Highlight>, reduzindo
-        significativamente os erros de sincronização de dados.
+        Orquestração do ciclo de vida completo de{" "}
+        <Highlight>APIs REST</Highlight> seguras e versionadas, que suportaram
+        novas funcionalidades de produto e{" "}
+        <Highlight>permitiram integrações críticas com parceiros</Highlight>,
+        expandindo as capacidades de negócio e eliminando erros de sincronização
+        de dados.
       </>,
       <>
-        {/* IMPROVED: Added context and impact. */}
-        Promoção de práticas <Highlight>Agile</Highlight> e utilização de{" "}
-        <Highlight>Docker</Highlight> para criar ambientes de desenvolvimento
-        consistentes,{" "}
+        Promoção de metodologias <Highlight>Agile</Highlight> e estandardização
+        de ambientes de desenvolvimento com <Highlight>Docker</Highlight>, o que{" "}
         <Highlight>
-          reduzindo bugs do tipo "na minha máquina funciona" em mais de 50%
+          reduziu os bugs do tipo "funciona na minha máquina" em mais de 50%
         </Highlight>{" "}
-        e acelerando o onboarding de novos developers.
+        e acelerou o onboarding de novos programadores, aumentando a velocidade
+        geral da equipa.
       </>,
       <>
-        Liderança de iniciativas de otimização de frontend e backend, alcançando
-        scores &gt;90 no Google Lighthouse e contribuindo para um crescimento de
-        tráfego orgânico de ~15%.
+        Liderança de uma otimização de performance full-stack, através da
+        otimização de queries de base de dados, implementação de caching
+        avançado e refinação da entrega de assets, elevando as pontuações do
+        Google Lighthouse para mais de 90 e gerando um aumento de ~15% no
+        tráfego orgânico.
       </>,
     ],
     keyTech: [
       {
         name: "PHP",
         description:
-          "Linguagem de scripting do lado do servidor amplamente usada para desenvolvimento web.",
+          "Linguagem de backend principal para a construção de aplicações web e APIs robustas.",
       },
       {
         name: "JavaScript",
         description:
-          "Linguagem versátil e de alto nível para desenvolvimento frontend e backend.",
+          "Linguagem de alto nível para criar experiências de utilizador dinâmicas e interativas.",
       },
       {
         name: "React",
         description:
-          "Biblioteca JavaScript para construir interfaces de utilizador.",
+          "Biblioteca JavaScript para a construção de UIs de alta performance baseadas em componentes.",
       },
       {
         name: "MySQL",
         description:
-          "Popular sistema de gestão de bases de dados relacionais open-source.",
+          "Sistema de gestão de bases de dados relacionais para armazenar e gerir dados de aplicações.",
       },
       {
         name: "REST APIs",
         description:
-          "Desenho e consumo de APIs REpresentational State Transfer.",
+          "Desenho, construção e consumo de APIs para uma comunicação fluida entre serviços.",
       },
       {
         name: "Docker",
         description:
-          "Plataforma para desenvolver, enviar e executar aplicações em contentores.",
+          "Plataforma de contentorização para criar ambientes de desenvolvimento consistentes e portáteis.",
       },
       {
         name: "Agile",
         description:
-          "Abordagem iterativa para a gestão de projetos e desenvolvimento de software.",
+          "Gestão de projetos iterativa para entregar software de alta qualidade de forma eficiente.",
       },
     ],
   },
   {
     id: 2,
-    role: "Full-Stack Developer",
+    role: "Programador Full-Stack",
     company: "ZeroUm",
     companyLink: "https://zeroum.pt/",
     companyLogoUrl: "/images/logos/zeroum-logo.png",
@@ -98,65 +102,65 @@ export const experienceData: ExperienceItem[] = [
     period: "Mar 2019 – Fev 2020",
     descriptionItems: [
       <>
-        Desenvolvimento e personalização de websites{" "}
-        <Highlight>WordPress</Highlight> seguros e de alta performance e
-        soluções <Highlight>WooCommerce</Highlight> complexas, aproveitando um
-        profundo conhecimento da arquitetura <Highlight>PHP</Highlight>{" "}
-        subjacente e das interações com a base de dados{" "}
-        <Highlight>MySQL</Highlight>.
+        Desenvolvimento e escalonamento de sites{" "}
+        <Highlight>WordPress</Highlight> personalizados e soluções{" "}
+        <Highlight>WooCommerce</Highlight> complexas, através de código{" "}
+        <Highlight>PHP</Highlight> limpo e orientado a objetos, e da otimização
+        de queries <Highlight>MySQL</Highlight> para e-commerce de elevado
+        tráfego.
       </>,
       <>
-        {/* IMPROVED: Added context. */}
-        Criação de temas à medida e plugins personalizados com{" "}
-        <Highlight>JavaScript</Highlight>, <Highlight>HTML5</Highlight>{" "}
-        semântico e <Highlight>CSS3</Highlight> avançado para resolver
-        necessidades de negócio específicas dos clientes que não eram
-        satisfeitas por soluções prontas a usar.
+        Criação de temas e plugins personalizados com{" "}
+        <Highlight>JavaScript</Highlight>, <Highlight>HTML5</Highlight> e{" "}
+        <Highlight>CSS3</Highlight> para fornecer funcionalidades à medida, como
+        gateways de pagamento e integrações de APIs, aumentando a receita e a
+        autonomia operacional dos clientes.
       </>,
       <>
-        Melhoria da eficiência operacional de clientes de e-commerce em até 30%
-        através da automação do processamento de encomendas e sincronização de
-        inventário.
+        Otimização das operações de e-commerce dos clientes através da automação
+        do processamento de encomendas e da sincronização de inventário,
+        resultando num aumento de eficiência de até 30%.
       </>,
       <>
-        Implementação de técnicas WPO abrangentes e melhores práticas de
-        segurança, alcançando reduções médias de ~40% no tempo de carregamento
-        nos sites dos clientes.
+        Implementação de otimização de performance web (WPO) e de robustecimento
+        da segurança (security hardening), alcançando uma redução média de ~40%
+        nos tempos de carregamento e melhorando a experiência do utilizador e o
+        ranking nos motores de busca.
       </>,
     ],
     keyTech: [
       {
         name: "PHP",
         description:
-          "Linguagem de scripting do lado do servidor para desenvolvimento web.",
+          "Linguagem principal para o desenvolvimento e personalização de WordPress/WooCommerce.",
       },
       {
         name: "WordPress",
         description:
-          "Popular sistema de gestão de conteúdos para construir websites.",
+          "CMS para construir e gerir websites personalizados e ricos em conteúdo.",
       },
       {
         name: "WooCommerce",
-        description: "Plugin de e-commerce para WordPress.",
+        description:
+          "Plataforma de e-commerce para a criação de lojas online poderosas e escaláveis.",
       },
       {
         name: "MySQL",
         description:
-          "Sistema de gestão de bases de dados relacionais open-source.",
+          "A base de dados subjacente para a gestão de produtos, encomendas e dados de utilizadores.",
       },
       {
         name: "JavaScript",
         description:
-          "Linguagem para desenvolvimento web do lado do cliente e do servidor.",
+          "Utilizado para criar funcionalidades de frontend interativas e personalizadas.",
       },
       {
         name: "HTML5",
-        description:
-          "Versão mais recente da Linguagem de Marcação de Hipertexto.",
+        description: "O padrão para a estruturação de conteúdo web.",
       },
       {
         name: "CSS3",
-        description: "Versão mais recente das Folhas de Estilo em Cascata.",
+        description: "Utilizado para a estilização e design de páginas web.",
       },
     ],
   },

@@ -1,4 +1,4 @@
-// src/data/en/certificationsData.ts
+// src/data/en/certificationsData.tsx
 import React from "react";
 import Highlight from "@/components/Highlight";
 import { CertificationItem } from "../types";
@@ -12,10 +12,10 @@ export const certificationsData: CertificationItem[] = [
       "https://www.freecodecamp.org/certification/JoaoGrilo/responsive-web-design",
     description: (
       <>
-        Covers <Highlight>HTML</Highlight>, <Highlight>CSS</Highlight>, Visual
-        Design, <Highlight>Accessibility</Highlight>, Responsive Design
-        principles, and CSS <Highlight>Flexbox</Highlight> &{" "}
-        <Highlight>Grid</Highlight>.
+        Demonstrated mastery of foundational web technologies, including{" "}
+        <Highlight>semantic HTML</Highlight>, modern{" "}
+        <Highlight>CSS (Flexbox & Grid)</Highlight>, and core principles of{" "}
+        <Highlight>accessible, responsive design</Highlight>.
       </>
     ),
   },
@@ -27,10 +27,11 @@ export const certificationsData: CertificationItem[] = [
       "https://www.freecodecamp.org/certification/JoaoGrilo/javascript-algorithms-and-data-structures-v8",
     description: (
       <>
-        Focuses on JavaScript fundamentals, <Highlight>ES6</Highlight>, Regular
-        Expressions, Debugging,
-        <Highlight>Data Structures</Highlight>, and{" "}
-        <Highlight>Algorithm Scripting</Highlight>.
+        Developed a strong command of JavaScript fundamentals and{" "}
+        <Highlight>ES6+</Highlight>, with a focus on applying{" "}
+        <Highlight>data structures</Highlight> and{" "}
+        <Highlight>algorithmic thinking</Highlight> to solve complex problems
+        efficiently.
       </>
     ),
   },
@@ -42,9 +43,9 @@ export const certificationsData: CertificationItem[] = [
       "https://www.freecodecamp.org/certification/JoaoGrilo/front-end-development-libraries",
     description: (
       <>
-        Teaches modern frontend libraries including{" "}
-        <Highlight>Bootstrap</Highlight>, jQuery, <Highlight>SASS</Highlight>,
-        <Highlight>React</Highlight>, and <Highlight>Redux</Highlight>.
+        Acquired hands-on experience building dynamic user interfaces with
+        popular libraries and frameworks, including <Highlight>React</Highlight>
+        , <Highlight>Redux</Highlight>, and <Highlight>SASS</Highlight>.
       </>
     ),
   },
@@ -56,9 +57,9 @@ export const certificationsData: CertificationItem[] = [
       "https://www.freecodecamp.org/certification/JoaoGrilo/data-visualization",
     description: (
       <>
-        Focuses on <Highlight>D3.js</Highlight> fundamentals, creating bar
-        charts, scatterplots, heat maps, and other{" "}
-        <Highlight>data-driven visualizations</Highlight>.
+        Mastered the <Highlight>D3.js</Highlight> library to transform complex
+        datasets into clear, interactive, and{" "}
+        <Highlight>insightful data visualizations</Highlight>.
       </>
     ),
   },
@@ -69,9 +70,10 @@ export const certificationsData: CertificationItem[] = [
     credentialUrl: "https://leetcode.com/u/joaoptgrilo/",
     description: (
       <>
-        Actively solving challenges to sharpen{" "}
-        <Highlight>algorithmic thinking</Highlight> and master{" "}
-        <Highlight>data structures</Highlight> for optimal, efficient code.
+        Continuously honing <Highlight>problem-solving skills</Highlight> by
+        tackling algorithmic challenges, focusing on{" "}
+        <Highlight>time/space complexity</Highlight> to write highly efficient
+        code.
       </>
     ),
     isInProgress: true,
@@ -83,9 +85,10 @@ export const certificationsData: CertificationItem[] = [
     credentialUrl: "https://www.credly.com/users/joao.grilo.dev",
     description: (
       <>
-        Hands-on learning for <Highlight>AWS Cloud fundamentals</Highlight> and
-        core services, pursuing the <Highlight>Cloud Practitioner</Highlight>{" "}
-        role and other badges.
+        Building practical, real-world cloud skills through AWS's gamified
+        learning platform. Targeting the{" "}
+        <Highlight>Cloud Practitioner</Highlight> certification to validate
+        expertise in <Highlight>core AWS services</Highlight> and architecture.
       </>
     ),
     isInProgress: true,
@@ -97,10 +100,10 @@ export const certificationsData: CertificationItem[] = [
     credentialUrl: "https://tryhackme.com/p/joao.grilo.dev",
     description: (
       <>
-        Progressing through cybersecurity paths, including{" "}
-        <Highlight>Web Hacking</Highlight> and{" "}
-        <Highlight>Offensive Pentesting</Highlight>, to build a defensive
-        mindset.
+        Proactively strengthening <Highlight>cybersecurity knowledge</Highlight>{" "}
+        through hands-on labs in <Highlight>Web Hacking</Highlight> and
+        Pentesting to build more secure and{" "}
+        <Highlight>resilient applications</Highlight>.
       </>
     ),
     isInProgress: true,
