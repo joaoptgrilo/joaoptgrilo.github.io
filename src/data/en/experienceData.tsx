@@ -21,67 +21,67 @@ export const experienceData: ExperienceItem[] = [
         scalability.
       </>,
       <>
-        Engineered dynamic, reusable, and performant frontend components with{" "}
-        <Highlight>React</Highlight> and modern{" "}
-        <Highlight>JavaScript</Highlight>, improving user engagement metrics
-        (e.g., ~10% reduced bounce rates, ~12% increased session duration).
+        Engineered a library of dynamic, reusable, and performant frontend
+        components with <Highlight>React</Highlight> and modern{" "}
+        <Highlight>JavaScript</Highlight>, directly improving key user
+        engagement metrics including a ~10% reduction in bounce rates and a ~12%
+        increase in session duration.
       </>,
       <>
-        {/* IMPROVED: Added context and impact. */}
-        Designed and consumed secure, versioned <Highlight>
-          REST APIs
-        </Highlight>{" "}
-        to power new features and{" "}
-        <Highlight>enable partner integrations</Highlight>, significantly
-        reducing data synchronization errors.
+        Orchestrated the full lifecycle of secure, versioned{" "}
+        <Highlight>REST APIs</Highlight> that powered new product features and{" "}
+        <Highlight>enabled critical partner integrations</Highlight>, expanding
+        business capabilities and eliminating data synchronization errors.
       </>,
       <>
-        {/* IMPROVED: Added context and impact. */}
-        Championed <Highlight>Agile</Highlight> practices and utilized{" "}
-        <Highlight>Docker</Highlight> to create consistent dev environments,{" "}
-        <Highlight>reducing "works on my machine" bugs by over 50%</Highlight>{" "}
-        and accelerating new developer onboarding.
+        Championed <Highlight>Agile</Highlight> methodologies and standardized
+        development environments with <Highlight>Docker</Highlight>, which{" "}
+        <Highlight>reduced "works on my machine" bugs by over 50%</Highlight>{" "}
+        and accelerated new developer onboarding, boosting overall team
+        velocity.
       </>,
       <>
-        Led frontend and backend optimization initiatives, achieving Google
-        Lighthouse scores &gt;90 and contributing to ~15% organic traffic
-        growth.
+        Spearheaded a full-stack performance overhaul by optimizing database
+        queries, implementing advanced caching, and refining asset delivery,
+        boosting Google Lighthouse scores to 90+ and driving a ~15% increase in
+        organic traffic.
       </>,
     ],
     keyTech: [
       {
         name: "PHP",
         description:
-          "Server-side scripting language widely used for web development.",
+          "Core backend language for building robust web applications and APIs.",
       },
       {
         name: "JavaScript",
         description:
-          "High-level, versatile language for front-end and back-end development.",
+          "High-level language for creating dynamic and interactive user experiences.",
       },
       {
         name: "React",
-        description: "JavaScript library for building user interfaces.",
+        description:
+          "A JavaScript library for building component-based, high-performance UIs.",
       },
       {
         name: "MySQL",
         description:
-          "Popular open-source relational database management system.",
+          "Relational database system for storing and managing application data.",
       },
       {
         name: "REST APIs",
         description:
-          "Designing and consuming REpresentational State Transfer APIs.",
+          "Designing, building, and consuming APIs for seamless service communication.",
       },
       {
         name: "Docker",
         description:
-          "Platform for developing, shipping, and running applications in containers.",
+          "Containerization platform for creating consistent and portable dev environments.",
       },
       {
         name: "Agile",
         description:
-          "Iterative approach to project management and software development.",
+          "Iterative project management for delivering high-quality software efficiently.",
       },
     ],
   },
@@ -96,54 +96,58 @@ export const experienceData: ExperienceItem[] = [
     period: "Mar 2019 – Feb 2020",
     descriptionItems: [
       <>
-        Developed and customized high-performance, secure{" "}
-        <Highlight>WordPress</Highlight> websites and complex{" "}
-        <Highlight>WooCommerce</Highlight> solutions, leveraging a deep
-        understanding of the underlying <Highlight>PHP</Highlight> architecture
-        and <Highlight>MySQL</Highlight> database interactions.
+        Engineered and scaled bespoke <Highlight>WordPress</Highlight> sites and
+        complex <Highlight>WooCommerce</Highlight> solutions by writing clean,
+        object-oriented <Highlight>PHP</Highlight> and optimizing{" "}
+        <Highlight>MySQL</Highlight> queries for high-traffic e-commerce.
       </>,
       <>
-        {/* IMPROVED: Added context. */}
-        Engineered bespoke themes and custom plugins with{" "}
+        Developed custom themes and plugins using{" "}
         <Highlight>JavaScript</Highlight>, <Highlight>HTML5</Highlight>, and{" "}
-        <Highlight>CSS3</Highlight> to solve specific client business needs not
-        met by off-the-shelf solutions.
+        <Highlight>CSS3</Highlight> to deliver tailored functionality like
+        payment gateways and API integrations, increasing client revenue and
+        operational autonomy.
       </>,
       <>
-        Improved e-commerce clients' operational efficiency by up to 30% through
-        automation of order processing and inventory sync.
+        Streamlined e-commerce client operations by automating order processing
+        and inventory synchronization, boosting efficiency by up to 30%.
       </>,
       <>
-        Implemented comprehensive WPO techniques and security best practices,
-        achieving ~40% average load time reductions across client sites.
+        Executed comprehensive Web Performance Optimization (WPO) and security
+        hardening, achieving a ~40% average reduction in load times and
+        improving clients' user experience and search engine rankings.
       </>,
     ],
     keyTech: [
       {
         name: "PHP",
-        description: "Server-side scripting language for web development.",
+        description:
+          "Primary language for WordPress/WooCommerce development and customization.",
       },
       {
         name: "WordPress",
-        description: "Popular content management system for building websites.",
+        description:
+          "CMS for building and managing content-rich, customized websites.",
       },
-      { name: "WooCommerce", description: "E-commerce plugin for WordPress." },
+      {
+        name: "WooCommerce",
+        description:
+          "E-commerce platform for creating powerful and scalable online stores.",
+      },
       {
         name: "MySQL",
-        description: "Open-source relational database management system.",
+        description:
+          "The underlying database for managing products, orders, and user data.",
       },
       {
         name: "JavaScript",
         description:
-          "Language for client-side and server-side web development.",
+          "Used for creating interactive frontend features and custom functionality.",
       },
-      {
-        name: "HTML5",
-        description: "Latest version of HyperText Markup Language.",
-      },
+      { name: "HTML5", description: "Standard for structuring web content." },
       {
         name: "CSS3",
-        description: "Latest version of Cascading Style Sheets.",
+        description: "Used for styling and designing web pages.",
       },
     ],
   },

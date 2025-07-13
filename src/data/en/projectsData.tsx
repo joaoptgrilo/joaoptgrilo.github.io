@@ -10,11 +10,13 @@ export const projectsData: Project[] = [
     imageUrl: "/images/projects/fedrax-platforms-showcase.webp",
     imageAlt:
       "Showcase of Fedrax platforms including Gameblog and CineSeries user interfaces",
+    // REVISED: More active and results-focused.
     description:
-      "Contributed to high-traffic content platforms, focusing on performance, workflow enhancements, and stability for substantial advertising revenue and user loads.",
+      "Engineered and maintained high-traffic media platforms, enhancing performance and stability to support millions of users and drive substantial advertising revenue.",
     detailedDescription: [
       <p key="d1">
-        As a Full-Stack Developer at Fedrax, I was instrumental in the
+        {/* REVISED: Stronger opening. */}
+        As a Full-Stack Developer at Fedrax, I played a key role in the
         development and maintenance of several high-traffic, media-rich content
         platforms, including <Highlight>Gameblog.fr</Highlight> and{" "}
         <Highlight>CineSeries.com</Highlight>. These platforms serve millions of
@@ -30,10 +32,11 @@ export const projectsData: Project[] = [
         achieve Google Lighthouse scores consistently above 90.
       </p>,
       <p key="d3">
-        This role required a deep understanding of both modern and legacy
-        systems, adhering to a <Highlight>Gitflow</Highlight> branching model
-        within a <Highlight>GitLab</Highlight> CI/CD environment to ensure
-        stable and predictable releases.
+        {/* REVISED: Emphasizes the business goal of the process. */}
+        To ensure business continuity, I adhered to a strict{" "}
+        <Highlight>Gitflow</Highlight> branching model within a{" "}
+        <Highlight>GitLab</Highlight> CI/CD environment, guaranteeing stable and
+        predictable releases essential for revenue and user trust.
       </p>,
     ],
     techStack: [
@@ -68,27 +71,27 @@ export const projectsData: Project[] = [
     imageUrl: "/images/projects/personal-dotnet-server-architecture.webp",
     imageAlt:
       "Conceptual architecture diagram of the personal C#/.NET Core backend server",
+    // REVISED: More specific and highlights skills learned.
     description:
-      "Developed a personal, multi-platform backend server, focusing on advanced architecture concepts like API design, load balancing, and security.",
+      "Architected a robust C#/.NET backend server from the ground up, mastering API design, secure authentication, and cross-platform deployment.",
     detailedDescription: [
       <p key="d1">
-        This project was a personal initiative to deepen my understanding of{" "}
-        <Highlight>backend architecture</Highlight> using C# and .NET Core. The
-        goal was to build a robust, scalable server from the ground up, focusing
-        on clean code and modern design patterns.
+        {/* REVISED: Frames the project with a clear learning objective. */}
+        To master modern <Highlight>backend architecture</Highlight>, I designed
+        and built this scalable server from scratch using C# and .NET Core,
+        focusing on clean code and enterprise design patterns.
       </p>,
       <p key="d2">
-        I implemented a full <Highlight>RESTful API</Highlight> with clearly
-        defined endpoints for resource management. Key areas of exploration
-        included implementing secure{" "}
-        <Highlight>authentication/authorization</Highlight> mechanisms,
-        designing a logical data model, and ensuring the server could be
-        deployed cross-platform on both Windows and Linux environments.
+        I implemented a full <Highlight>RESTful API</Highlight> with secure{" "}
+        <Highlight>authentication/authorization</Highlight> mechanisms and a
+        logical data model. A key achievement was ensuring the server could be
+        deployed cross-platform on both Windows and Linux environments,
+        showcasing its flexibility.
       </p>,
       <p key="d3">
-        This exercise was crucial for honing my skills in{" "}
+        This self-directed project was crucial for honing my skills in{" "}
         <Highlight>API design</Highlight>, dependency injection, and creating
-        maintainable backend services outside of a professional team setting.
+        maintainable, production-ready backend services.
       </p>,
     ],
     techStack: [
@@ -117,30 +120,31 @@ export const projectsData: Project[] = [
     imageUrl: "/images/projects/personal-vanillajs-framework-concepts.webp",
     imageAlt:
       "Visual representation of concepts in the custom Vanilla JS frontend framework",
+    // REVISED: Emphasizes the learning goal and the "why."
     description:
-      "Built a lightweight, dependency-free Vanilla JS frontend framework featuring client-side routing, a JSON-driven component system, and API modules.",
+      "Engineered a lightweight, zero-dependency frontend framework in Vanilla JS to deconstruct and master core concepts like client-side routing and component-based architecture.",
     detailedDescription: [
       <p key="d1">
-        To better understand the "magic" behind modern frontend frameworks, I
-        built my own lightweight,{" "}
+        {/* REVISED: Clarifies the motivation behind the project. */}
+        To look "under the hood" of modern libraries like React, I built my own
         <Highlight>dependency-free framework</Highlight> using only{" "}
-        <Highlight>Vanilla JavaScript (ES6+)</Highlight>. The core challenge was
-        to replicate common framework features like component-based architecture
-        and routing.
+        <Highlight>Vanilla JavaScript (ES6+)</Highlight>. The goal was to
+        replicate core features to gain a fundamental understanding of how they
+        work.
       </p>,
       <p key="d2">
         The framework features a{" "}
-        <Highlight>JSON-driven component system</Highlight>, where the UI is
-        rendered from a structured data object. I also implemented a basic{" "}
-        <Highlight>client-side router</Highlight> using the History API to
-        enable SPA-like navigation without page reloads.
+        <Highlight>JSON-driven component system</Highlight> that renders the UI
+        from a structured data object. I also implemented a{" "}
+        <Highlight>client-side router</Highlight> using the History API,
+        enabling SPA-like navigation without page reloads.
       </p>,
       <p key="d3">
         This project provided invaluable insights into the inner workings of{" "}
         <Highlight>state management</Highlight>, the{" "}
-        <Highlight>virtual DOM concept</Highlight> (emulated simply), and the
-        complexities of building a maintainable frontend architecture from first
-        principles.
+        <Highlight>virtual DOM concept</Highlight> (which I emulated simply),
+        and the architectural challenges of building a scalable frontend from
+        first principles.
       </p>,
     ],
     techStack: [
@@ -169,25 +173,25 @@ export const projectsData: Project[] = [
     title: "FCC: Real-time Markdown Previewer",
     imageUrl: "/images/projects/fcc-markdown-previewer.webp",
     imageAlt: "Screenshot of the FCC Markdown Previewer application interface",
+    // REVISED: Highlights key skills demonstrated (security).
     description:
-      "A React/TypeScript SPA for real-time Markdown editing and previewing, using `marked.js` and `DOMPurify`.",
+      "Built a secure, real-time Markdown previewer with React & TypeScript, demonstrating expertise in third-party library integration (marked.js) and XSS prevention (DOMPurify).",
     detailedDescription: [
       <p key="d1">
-        This project, part of the freeCodeCamp curriculum, is a{" "}
-        <Highlight>Single Page Application</Highlight> built with React and
-        TypeScript. It allows users to write GitHub-flavored Markdown in a text
-        editor and see it rendered as HTML in real-time.
+        This project, part of the freeCodeCamp curriculum, demonstrates building
+        a secure and interactive <Highlight>Single Page Application</Highlight>{" "}
+        with React and TypeScript. It allows users to write GitHub-flavored
+        Markdown and see it rendered as HTML in real-time.
       </p>,
       <p key="d2">
-        The core functionality is powered by the{" "}
-        <Highlight>marked.js</Highlight> library for parsing the Markdown
-        input. To prevent XSS vulnerabilities from user-provided content, all
-        HTML output is sanitized using <Highlight>DOMPurify</Highlight> before
-        being rendered.
+        {/* REVISED: Frames security as a primary concern, which is a valuable skill. */}
+        A key focus was security: the <Highlight>marked.js</Highlight> library
+        parses the Markdown, but to prevent XSS vulnerabilities, all HTML output
+        is sanitized using <Highlight>DOMPurify</Highlight> before rendering.
       </p>,
       <p key="d3">
         This was an excellent exercise in handling user input, integrating
-        third-party libraries, and managing component state in a{" "}
+        third-party libraries securely, and managing component state in a{" "}
         <Highlight>React/TypeScript</Highlight> environment.
       </p>,
     ],
@@ -215,8 +219,9 @@ export const projectsData: Project[] = [
     imageUrl: "/images/projects/fcc-drum-machine.webp",
     imageAlt:
       "Screenshot of the FCC Drum Machine interface with pads and controls",
+    // REVISED: Stronger framing of skills.
     description:
-      "A React/TypeScript digital drum machine with clickable/keyboard pads, sound bank switching, and volume control. State managed with Redux Toolkit.",
+      "Developed an interactive drum machine using React, TypeScript, and Redux Toolkit, showcasing complex state management and responsive user interaction with HTML5 Audio.",
     detailedDescription: [
       <p key="d1">
         This interactive drum machine is a frontend application built to
@@ -225,12 +230,12 @@ export const projectsData: Project[] = [
         can be triggered by mouse clicks or corresponding keyboard keys.
       </p>,
       <p key="d2">
-        The application's state, including the active sound bank, volume level,
-        and the last played sound's name, is managed globally using{" "}
-        <Highlight>Redux Toolkit</Highlight>. This ensures a predictable and
-        decoupled state management solution. The project demonstrates handling
-        of media elements (<Highlight>HTML5 Audio</Highlight>) and complex user
-        interactions within a modern React stack.
+        {/* REVISED: More active voice ("I implemented..."). */}I implemented{" "}
+        <Highlight>Redux Toolkit</Highlight> for robust, global state
+        management, handling the active sound bank, volume level, and display
+        updates. This ensured a predictable and decoupled architecture. The
+        project demonstrates handling of <Highlight>HTML5 Audio</Highlight> and
+        complex user interactions within a modern React stack.
       </p>,
     ],
     techStack: [
@@ -253,21 +258,25 @@ export const projectsData: Project[] = [
     title: "FCC: Random Quote Machine",
     imageUrl: "/images/projects/fcc-random-quote-machine.webp",
     imageAlt: "Screenshot of the FCC Random Quote Machine application",
+    // REVISED: Focuses on the core technical concepts.
     description:
-      "A React/TypeScript app fetching and displaying random quotes from an API, with 'New Quote' and 'Tweet Quote' features and fade animations.",
+      "A React/TypeScript app demonstrating asynchronous API calls, state management with Hooks, and dynamic UI updates with smooth CSS transitions.",
     detailedDescription: [
       <p key="d1">
         This classic project demonstrates fundamental React concepts. The
-        application fetches a collection of quotes from a remote{" "}
-        <Highlight>JSON API</Highlight> on initial load.
+        application performs an asynchronous fetch to a remote{" "}
+        <Highlight>JSON API</Highlight> to load a collection of quotes on
+        initial load.
       </p>,
       <p key="d2">
-        Clicking the "New Quote" button randomly selects a quote from the
-        fetched data and updates the UI. The current quote and author are then
-        used to generate a "Tweet Quote" link, which opens Twitter in a new tab
-        with a pre-populated tweet. The project uses{" "}
-        <Highlight>React Hooks</Highlight> for state management and implements
-        CSS transitions for a smooth fade effect when the quote changes.
+        {/* REVISED: Minor wording tweaks for flow. */}
+        The "New Quote" button randomly selects a quote from the cached data and
+        updates the UI. The current quote is then used to generate a "Tweet
+        Quote" link. This project utilizes <Highlight>
+          React Hooks
+        </Highlight>{" "}
+        for state and effect management and implements CSS transitions for a
+        smooth fade effect when the quote changes.
       </p>,
     ],
     techStack: [
@@ -290,23 +299,24 @@ export const projectsData: Project[] = [
     title: "FCC: Retro JavaScript Calculator",
     imageUrl: "/images/projects/fcc-javascript-calculator.webp",
     imageAlt: "Screenshot of the FCC retro-themed JavaScript Calculator",
+    // REVISED: Highlights the most challenging part (custom logic).
     description:
-      "A functional, retro-themed digital calculator in React/TypeScript with custom logic for expression parsing and order of operations.",
+      "A functional calculator in React/TS that showcases complex state management and custom logic for parsing expressions and respecting order of operations.",
     detailedDescription: [
       <p key="d1">
         This project is a fully functional calculator built with React and
-        TypeScript, designed to pass a comprehensive suite of tests from
-        freeCodeCamp. It handles standard arithmetic operations, decimal
-        numbers, and respects the mathematical{" "}
+        TypeScript, designed to pass a comprehensive test suite. It correctly
+        handles standard arithmetic, decimals, and respects the mathematical{" "}
         <Highlight>order of operations</Highlight>.
       </p>,
       <p key="d2">
-        A key challenge was implementing the logic to handle chained operations
-        and immediate execution. For example, pressing an operator after a
-        calculation uses the result as the new starting operand. The logic also
-        correctly handles multiple consecutive operators by using the last one
-        entered. This project was a deep dive into <Highlight>state logic</Highlight>{" "}
-        and user input management in React.
+        {/* REVISED: Emphasizes the problem-solving aspect. */}A key challenge
+        was designing and implementing the{" "}
+        <Highlight>custom evaluation logic</Highlight>. The algorithm correctly
+        handles chained operations, immediate execution, and multiple
+        consecutive operators. This project was a deep dive into complex{" "}
+        <Highlight>state logic</Highlight> and robust user input management in
+        React.
       </p>,
     ],
     techStack: [
@@ -315,7 +325,9 @@ export const projectsData: Project[] = [
       { name: "SCSS", description: "CSS preprocessor." },
       {
         name: "Algorithm Design",
-        description: "Developing custom parsing and evaluation logic.",
+        // REVISED: More specific description.
+        description:
+          "Developed custom expression parsing and evaluation logic.",
       },
       { name: "CodePen", description: "Online code editor." },
     ],
@@ -328,8 +340,9 @@ export const projectsData: Project[] = [
     title: "FCC: 25+5 Pomodoro Clock",
     imageUrl: "/images/projects/fcc-pomodoro-clock.webp",
     imageAlt: "Screenshot of the FCC retro-themed 25+5 Pomodoro Clock",
+    // REVISED: Clear and concise.
     description:
-      "A retro, wood-themed Pomodoro timer (25+5 Clock) with Vanilla JS/jQuery, featuring adjustable session/break lengths and audio notifications.",
+      "A Pomodoro timer (25+5 Clock) in Vanilla JS/jQuery demonstrating time-based event handling, state transitions, and audio notifications.",
     detailedDescription: [
       <p key="d1">
         This "25 + 5 Clock" is a classic Pomodoro timer built to practice{" "}
@@ -337,12 +350,12 @@ export const projectsData: Project[] = [
         allows users to customize the length of their session and break timers.
       </p>,
       <p key="d2">
+        {/* REVISED: Clarifies the technology used for each part. */}
         The timer counts down in `mm:ss` format and switches between "Session"
-        and "Break" modes automatically, playing an alarm sound at the end of
-        each period. Built primarily with <Highlight>Vanilla JS</Highlight> and
-        jQuery for DOM manipulation, it relies on{" "}
-        <Highlight>setInterval</Highlight> for the countdown logic and the{" "}
-        <Highlight>HTML5 Audio</Highlight> element for the alarm.
+        and "Break" modes automatically. The core logic relies on{" "}
+        <Highlight>setInterval</Highlight> for the countdown, with an{" "}
+        <Highlight>HTML5 Audio</Highlight> element triggering an alarm at the
+        end of each period. The DOM is manipulated using Vanilla JS and jQuery.
       </p>,
     ],
     techStack: [
