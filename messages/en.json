@@ -1,4 +1,8 @@
 {
+  "SEO": {
+    "title": "João Grilo | Full-Stack Developer",
+    "description": "The professional portfolio of João Grilo, a results-driven Full-Stack Developer crafting high-performance web solutions and seamless user experiences."
+  },
   "Footer": {
     "copyright": "© {currentYear} João Grilo. All Rights Reserved.",
     "version": "Version: {versionNumber}"
