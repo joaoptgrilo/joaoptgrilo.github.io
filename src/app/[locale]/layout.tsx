@@ -38,21 +38,26 @@ export async function generateMetadata({
   const tSEO = await getTranslations({ locale, namespace: "SEO" });
   const tHero = await getTranslations({ locale, namespace: "Hero" });
 
-  const siteUrl = "https://joaoptgrilo.github.io";
-  const ogImageUrlEN = `${siteUrl}/og-image-en.png`;
-  const ogImageUrlPT = `${siteUrl}/og-image-pt.png`;
-  const selectedOgImage = locale === "pt" ? ogImageUrlPT : ogImageUrlEN;
+  // CORRECTED: Dynamically determine the base URL.
+  // This uses Vercel's system environment variable for preview deployments,
+  // and falls back to the production URL.
+  const siteUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "https://joaoptgrilo.github.io";
+
+  const selectedOgImage =
+    locale === "pt" ? "/og-image-pt.png" : "/og-image-en.png";
 
   const seoTitle = tSEO("title");
   const seoDescription = tSEO("description");
 
   const ogTitle = `${tHero("name")} | ${tHero("title")}`;
-  // CORRECTED: Use the longer, more appropriate SEO description for Open Graph as well.
   const ogDescription = tSEO("description");
 
   return {
     title: seoTitle,
     description: seoDescription,
+    // CORRECTED: Use the dynamic siteUrl for the metadata base.
     metadataBase: new URL(siteUrl),
     openGraph: {
       title: ogTitle,
@@ -61,6 +66,7 @@ export async function generateMetadata({
       siteName: "João Grilo | Portfolio",
       images: [
         {
+          // Now using a relative path, which `metadataBase` will make absolute.
           url: selectedOgImage,
           width: 1200,
           height: 630,
@@ -74,6 +80,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: ogTitle,
       description: ogDescription,
+      // `metadataBase` will also correctly resolve this relative path.
       images: [selectedOgImage],
     },
   };
