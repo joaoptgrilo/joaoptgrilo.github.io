@@ -1,0 +1,64 @@
+# .github/workflows/deploy.yml
+
+# Workflow name
+name: Build and Deploy to GitHub Pages
+
+on:
+  # This workflow triggers on any push to the 'main' branch
+  push:
+    branches: ["main"]
+  # Allows manual triggering from the GitHub Actions tab
+  workflow_dispatch:
+
+# Set permissions for the GITHUB_TOKEN to allow deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, cancelling older runs
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # The single job in this workflow
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checks out the source code of your repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Sets up the Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # 3. Installs project dependencies using the lockfile for consistency
+      - name: Install Dependencies
+        run: npm ci
+
+      # 4. Runs the Next.js production build command (which now creates the 'out' folder)
+      # It securely uses the production GA_ID secret you created
+      - name: Build Website
+        run: npm run build
+        env:
+          NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
+
+      # 5. Uploads the build output ('out' directory) as an artifact for deployment
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+      # 6. Deploys the uploaded artifact to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
