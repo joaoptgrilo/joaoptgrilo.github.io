@@ -10,14 +10,15 @@ const Analytics = () => {
   const pathname = usePathname();
   const [canTrack, setCanTrack] = useState(false);
 
-  const ALLOWED_HOSTNAMES = [
-    "joaoptgrilo.github.io",
-    "joao-grilo-portfolio.vercel.app",
-  ];
+  const PRODUCTION_HOSTNAME = "joaoptgrilo.github.io";
 
   useEffect(() => {
     const currentHostname = window.location.hostname;
-    if (ALLOWED_HOSTNAMES.some((host) => currentHostname.includes(host))) {
+
+    if (
+      currentHostname === PRODUCTION_HOSTNAME ||
+      currentHostname.endsWith(".vercel.app")
+    ) {
       setCanTrack(true);
     }
   }, []);
