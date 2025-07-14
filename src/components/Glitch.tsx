@@ -49,13 +49,10 @@ const Glitch: React.FC<GlitchProps> = ({
       onMouseLeave={handleMouseLeave}
       className={clsx("relative inline-block align-middle", className)}
     >
-      {/* Visually glitched text, hidden from screen readers */}
       <span aria-hidden="true" className="absolute inset-0">
         {displayText}
       </span>
-      {/* The actual text, visible only to screen readers to provide an accessible name */}
       <span className="sr-only">{children}</span>
-      {/* A placeholder to maintain layout space, hidden from screen readers */}
       <span aria-hidden="true" className="opacity-0">
         {children}
       </span>

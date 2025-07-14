@@ -68,7 +68,8 @@ const SkillPanel: React.FC<{
       <Panel
         ref={panelRef}
         className={clsx("h-full", { "is-in-view": isInView })}
-        variant="default">
+        variant="default"
+      >
         <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
           {tSkills(category.id as any)}
         </p>
@@ -84,7 +85,8 @@ const SkillPanel: React.FC<{
                 <div
                   key={skill.key}
                   title={combinedTooltip}
-                  className="flex items-center justify-between px-3 py-2 rounded-md border border-border cursor-default interactive-glow group">
+                  className="flex items-center justify-between px-3 py-2 rounded-md border border-border cursor-default interactive-glow group"
+                >
                   <span className="text-sm text-secondary-text group-hover:text-primary-text transition-colors duration-300">
                     {skill.name}
                   </span>
@@ -106,7 +108,6 @@ const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
 
   return (
     <Section id="skills" title="skills">
-      {/* CORRECTED: The legend is now wrapped in the animation component */}
       <AnimateOnScroll>
         <div className="flex justify-center items-center flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 mb-10 text-sm text-secondary-text font_fira_code">
           <div className="flex items-center gap-2">

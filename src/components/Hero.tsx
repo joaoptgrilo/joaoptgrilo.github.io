@@ -5,7 +5,7 @@ import React from "react";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
 import { useTranslations, useLocale } from "next-intl";
 import Glitch from "./Glitch";
-import * as gtag from "@/lib/gtag"; // ===== IMPORT GTAG LIB =====
+import * as gtag from "@/lib/gtag";
 
 interface SocialLink {
   href: string;
@@ -17,13 +17,12 @@ const Hero: React.FC = () => {
   const t = useTranslations("Hero");
   const locale = useLocale();
 
-  // ===== NEW EVENT HANDLER FUNCTION =====
   const handleCVDownload = () => {
     gtag.event({
       action: "download_cv",
       category: "engagement",
       label: `CV Download - ${locale.toUpperCase()}`,
-      value: 1, // A simple value to signify one download event
+      value: 1,
     });
   };
 
@@ -91,7 +90,6 @@ const Hero: React.FC = () => {
               download
               target="_blank"
               rel="noopener noreferrer"
-              // ===== ADD ONCLICK HANDLER HERE =====
               onClick={handleCVDownload}
               className="inline-flex items-center justify-center bg-transparent text-accent font_fira_code font-semibold text-sm sm:text-base md:text-lg py-3 px-8 sm:py-3.5 sm:px-10 rounded-lg border-2 border-accent hover:bg-accent/10 hover:text-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto interactive-glow"
             >

@@ -7,7 +7,6 @@ interface HighlightProps {
   className?: string;
 }
 
-// Helper to extract text from React nodes, handling nested elements.
 const extractText = (node: React.ReactNode): string => {
   if (typeof node === "string") return node;
   if (typeof node === "number") return String(node);
@@ -19,7 +18,6 @@ const extractText = (node: React.ReactNode): string => {
 };
 
 const Highlight: React.FC<HighlightProps> = ({ children, className = "" }) => {
-  // CORRECTED: Properly extract the string content from the children prop.
   const text = extractText(children);
 
   return (

@@ -3,7 +3,6 @@
 
 import { useEffect } from 'react';
 
-// A lightweight throttle function to avoid performance issues.
 const throttle = (func: (...args: any[]) => void, limit: number) => {
     let inThrottle: boolean;
     return function (this: any, ...args: any[]): void {
@@ -29,16 +28,14 @@ export const useScrollVelocity = () => {
             const scrollDiff = Math.abs(currentScrollY - lastScrollY);
 
             if (timeDiff > 0) {
-                const velocity = (scrollDiff / timeDiff) * 1000; // pixels per second
+                const velocity = (scrollDiff / timeDiff) * 1000;
 
-                const minDuration = 150; // ms
-                const maxDuration = 500; // ms
-                const velocityThreshold = 3000; // px/s
+                const minDuration = 150;
+                const maxDuration = 500;
+                const velocityThreshold = 3000;
 
-                // Calculate duration: faster scroll = shorter duration
                 let duration = maxDuration - (velocity / velocityThreshold) * (maxDuration - minDuration);
 
-                // Clamp the duration between min and max values
                 duration = Math.max(minDuration, Math.min(maxDuration, duration));
 
                 document.documentElement.style.setProperty('--animation-duration', `${Math.round(duration)}ms`);
@@ -48,10 +45,8 @@ export const useScrollVelocity = () => {
             lastTimestamp = currentTimestamp;
         };
 
-        // Throttle the scroll handler to run at most every 100ms
         const throttledScrollHandler = throttle(handleScroll, 100);
 
-        // Set a default value on initial mount
         document.documentElement.style.setProperty('--animation-duration', '500ms');
 
         window.addEventListener('scroll', throttledScrollHandler, { passive: true });

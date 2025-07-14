@@ -48,7 +48,6 @@ const ScrollToTopButton = () => {
       type="button"
       onClick={scrollToTop}
       className={buttonClasses}
-      // ===== FIX CONFIRMED HERE =====
       aria-label="Scroll to top"
     >
       <FaChevronUp size={20} />

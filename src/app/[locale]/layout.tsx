@@ -17,7 +17,7 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import ThemeInitializer from "@/components/ThemeInitializer";
 import ScrollRestorer from "@/components/ScrollRestorer";
 import ClientInitializer from "@/components/ClientInitializer";
-import Analytics from "@/components/Analytics"; // ===== IMPORT ANALYTICS COMPONENT =====
+import Analytics from "@/components/Analytics";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -114,7 +114,6 @@ export default async function RootLayout({
       <body>
         <ThemeInitializer />
         <ThemeProvider>
-          {/* ===== ADD ANALYTICS COMPONENT HERE ===== */}
           <Analytics />
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ClientInitializer />

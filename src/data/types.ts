@@ -1,7 +1,6 @@
 // src/data/types.ts
 import React from "react";
 
-// For Skills
 export type ProficiencyLevel = 3 | 2 | 1;
 
 export interface SkillItem {
@@ -10,7 +9,6 @@ export interface SkillItem {
   proficiency: ProficiencyLevel;
 }
 
-// For Projects
 export interface ProjectTechItem {
   name: string;
   description?: string;
@@ -30,7 +28,6 @@ export interface Project {
   type: "public" | "private" | "description-focus";
 }
 
-// For Experience
 export interface ExperienceTechItem {
   name: string;
   description?: string;
@@ -48,8 +45,6 @@ export interface ExperienceItem {
   descriptionItems: React.ReactNode[];
   keyTech?: ExperienceTechItem[];
 }
-
-// For Certifications
 export interface CertificationItem {
   id: string;
   name: string;
@@ -61,7 +56,6 @@ export interface CertificationItem {
   isInProgress?: boolean;
 }
 
-// For About Metrics
 export interface StackItem {
   name: string;
 }

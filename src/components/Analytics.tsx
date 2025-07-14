@@ -10,11 +10,9 @@ const Analytics = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    // This handles page views on client-side navigation
     gtag.pageview(new URL(pathname, window.location.origin));
   }, [pathname]);
 
-  // Only render the script if we are in production and the GA_ID is set
   if (process.env.NODE_ENV !== "production" || !process.env.NEXT_PUBLIC_GA_ID) {
     return null;
   }

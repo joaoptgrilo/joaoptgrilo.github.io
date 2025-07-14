@@ -141,7 +141,6 @@ const Navigation: React.FC = () => {
           <div className="lg:hidden">
             <button
               onClick={toggleMobileMenu}
-              // ===== FIX ADDED HERE =====
               aria-label={
                 isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"
               }
