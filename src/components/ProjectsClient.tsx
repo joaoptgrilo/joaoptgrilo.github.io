@@ -111,7 +111,6 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  // ===== THIS IS THE CORRECTED LINE =====
   const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const isModalOpen = !!selectedProject;

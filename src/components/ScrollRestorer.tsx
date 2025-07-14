@@ -8,13 +8,11 @@ const ScrollRestorer = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    // This effect runs once on component mount for the current page.
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
 
     const handleBeforeUnload = () => {
-      // Save the scroll position just before the page is left (e.g., on refresh)
       sessionStorage.setItem(
         `scroll-position-${pathname}`,
         window.scrollY.toString()
@@ -33,7 +31,7 @@ const ScrollRestorer = () => {
     };
   }, [pathname]);
 
-  return null; // This component does not render anything
+  return null;
 };
 
 export default ScrollRestorer;

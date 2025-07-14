@@ -7,7 +7,7 @@ interface AnimatedValueProps {
   value: number;
   startAnimation: boolean;
   decimals?: number;
-  staggerDelay?: number; // New prop for cascading effect
+  staggerDelay?: number;
 }
 
 const AnimatedValue: React.FC<AnimatedValueProps> = ({
@@ -20,7 +20,6 @@ const AnimatedValue: React.FC<AnimatedValueProps> = ({
     return <span aria-hidden="true"> </span>;
   }
 
-  // The final delay is a base value (for the panel to appear) + a staggered value
   const finalDelay = 0.35 + staggerDelay;
 
   return (

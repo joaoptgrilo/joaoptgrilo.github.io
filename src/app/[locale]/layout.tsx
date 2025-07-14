@@ -17,6 +17,7 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import ThemeInitializer from "@/components/ThemeInitializer";
 import ScrollRestorer from "@/components/ScrollRestorer";
 import ClientInitializer from "@/components/ClientInitializer";
+import Analytics from "@/components/Analytics";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -52,13 +53,16 @@ export async function generateMetadata({
   const ogDescription = tSEO("description");
 
   return {
-    // Standard SEO Metadata (This is correct)
+    manifest: "/site.webmanifest",
+    themeColor: [
+      { media: "(prefers-color-scheme: light)", color: "#f7fafc" },
+      { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    ],
+
     title: seoTitle,
     description: seoDescription,
     authors: [{ name: "João Grilo", url: siteUrl }],
     creator: "João Grilo",
-
-    // Open Graph & Twitter Metadata
     metadataBase: new URL(siteUrl),
     openGraph: {
       title: ogTitle,
@@ -75,7 +79,6 @@ export async function generateMetadata({
       ],
       locale: locale === "pt" ? "pt_PT" : "en_US",
       type: "website",
-      // CORRECTED: The 'article' property has been removed as it is not valid here.
     },
     twitter: {
       card: "summary_large_image",
@@ -106,17 +109,11 @@ export default async function RootLayout({
       className={`${poppins.variable} ${firaCode.variable} antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <link
-          rel="preload"
-          href="/images/coding-symbols.svg"
-          as="image"
-          type="image/svg+xml"
-        />
-      </head>
+      <head></head>
       <body>
         <ThemeInitializer />
         <ThemeProvider>
+          <Analytics />
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ClientInitializer />
             <ScrollRestorer />

@@ -4,7 +4,6 @@
 @tailwind utilities;
 
 :root {
-  /* Dark mode remains unchanged */
   --color-primary-bg: #0a0a0a;
   --color-secondary-bg: #141414;
   --color-light-panel-bg: #1f1f1f;
@@ -87,7 +86,6 @@ html {
 }
 
 @layer utilities {
-  /* ===== NEW SR-ONLY CLASS ADDED ===== */
   .sr-only {
     position: absolute;
     width: 1px;

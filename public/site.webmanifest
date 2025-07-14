@@ -1,1 +1,37 @@
-{"name":"","short_name":"","icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
+{
+  "name": "João Grilo | Senior Full-Stack Developer",
+  "short_name": "João Grilo",
+  "description": "The professional portfolio of João Grilo, a Senior Full-Stack Developer specializing in high-performance web solutions and exceptional user experiences.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "2400x1350",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop Portfolio View"
+    },
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "531x919",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile Portfolio View"
+    }
+  ]
+}

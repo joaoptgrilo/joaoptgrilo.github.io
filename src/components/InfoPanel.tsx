@@ -76,7 +76,8 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
       ref={panelRef}
       variant="simple"
       title={t(id + ".tooltip")}
-      className="flex flex-col items-center justify-center text-center p-4 interactive-glow h-full min-h-[160px]">
+      className="flex flex-col items-center justify-center text-center p-4 interactive-glow h-full min-h-[160px]"
+    >
       <div className="w-10 h-10 text-info-accent mb-3">{icon}</div>
       <p className="flex-grow text-xs text-secondary-text mb-2">
         {t(id + ".title")}
@@ -86,5 +87,4 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
   );
 };
 
-// ADDED: The missing default export line
 export default InfoPanel;

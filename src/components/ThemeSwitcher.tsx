@@ -10,7 +10,6 @@ const ThemeSwitcher = () => {
   return (
     <button
       onClick={toggleTheme}
-      // ===== FIX ADDED HERE =====
       aria-label={
         theme === "light" ? "Switch to dark mode" : "Switch to light mode"
       }
