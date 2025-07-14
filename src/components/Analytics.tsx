@@ -3,17 +3,32 @@
 
 import Script from "next/script";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as gtag from "@/lib/gtag";
 
 const Analytics = () => {
   const pathname = usePathname();
+  const [canTrack, setCanTrack] = useState(false);
+
+  const ALLOWED_HOSTNAMES = [
+    "joaoptgrilo.github.io",
+    "joaoptgrilo-github-io.vercel.app",
+  ];
 
   useEffect(() => {
-    gtag.pageview(new URL(pathname, window.location.origin));
-  }, [pathname]);
+    const currentHostname = window.location.hostname;
+    if (ALLOWED_HOSTNAMES.some((host) => currentHostname.includes(host))) {
+      setCanTrack(true);
+    }
+  }, []);
 
-  if (process.env.NODE_ENV !== "production" || !process.env.NEXT_PUBLIC_GA_ID) {
+  useEffect(() => {
+    if (canTrack) {
+      gtag.pageview(new URL(pathname, window.location.origin));
+    }
+  }, [pathname, canTrack]);
+
+  if (!canTrack || !process.env.NEXT_PUBLIC_GA_ID) {
     return null;
   }
 

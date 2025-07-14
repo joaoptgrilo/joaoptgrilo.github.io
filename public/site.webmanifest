@@ -1,6 +1,11 @@
 {
   "name": "João Grilo | Senior Full-Stack Developer",
   "short_name": "João Grilo",
+  "description": "The professional portfolio of João Grilo, a Senior Full-Stack Developer specializing in high-performance web solutions and exceptional user experiences.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,8 +18,20 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#0a0a0a",
-  "background_color": "#0a0a0a",
-  "display": "standalone",
-  "start_url": "/"
+  "screenshots": [
+    {
+      "src": "/images/screenshot-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop Portfolio View"
+    },
+    {
+      "src": "/images/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile Portfolio View"
+    }
+  ]
 }
