@@ -14,7 +14,7 @@ const useGlitch = (text: string, options?: UseGlitchOptions) => {
 
   const GLITCH_CHARS = "<>*#{}[]/\\";
   const REVEAL_DURATION_MS = 800;
-  const SCRAMBLE_UPDATE_RATE_MS = 50;
+  const SCRAMBLE_UPDATE_RATE_MS = 1;
   let lastScrambleTime = 0;
 
   const reset = useCallback(() => {
