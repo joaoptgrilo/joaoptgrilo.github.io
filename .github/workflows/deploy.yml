@@ -40,7 +40,9 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
-          # The base path env variable has been removed
+
+      - name: Prepare Root Index File
+        run: cp ./out/en/index.html ./out/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
