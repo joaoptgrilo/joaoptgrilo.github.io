@@ -13,14 +13,24 @@ const Analytics = () => {
   const PRODUCTION_HOSTNAME = "joaoptgrilo.github.io";
 
   useEffect(() => {
+    console.log("--- Analytics Component Debug ---");
     const currentHostname = window.location.hostname;
+    console.log("1. Current Hostname:", currentHostname);
+    console.log("2. GA_ID from env:", process.env.NEXT_PUBLIC_GA_ID);
 
-    if (
-      currentHostname === PRODUCTION_HOSTNAME ||
-      currentHostname.endsWith(".vercel.app")
-    ) {
+    const isProductionDomain = currentHostname === PRODUCTION_HOSTNAME;
+    const isVercelDomain = currentHostname.endsWith(".vercel.app");
+
+    console.log("3. Is Production Domain?", isProductionDomain);
+    console.log("4. Is Vercel Domain?", isVercelDomain);
+
+    if (isProductionDomain || isVercelDomain) {
+      console.log("✅ RESULT: Tracking ENABLED for this domain.");
       setCanTrack(true);
+    } else {
+      console.log("❌ RESULT: Tracking DISABLED for this domain.");
     }
+    console.log("--- End Debug ---");
   }, []);
 
   useEffect(() => {
