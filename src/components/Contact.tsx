@@ -56,7 +56,7 @@ const ContactLink: React.FC<{
       >
         {icon}
       </span>
-      <GlitchText>{label}</GlitchText>
+      <GlitchText triggerOnHover={true}>{label}</GlitchText>
     </a>
   );
 };
