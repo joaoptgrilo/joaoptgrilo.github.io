@@ -12,7 +12,7 @@ const Analytics = () => {
 
   const ALLOWED_HOSTNAMES = [
     "joaoptgrilo.github.io",
-    "joaoptgrilo-github-io.vercel.app",
+    "joao-grilo-portfolio.vercel.app",
   ];
 
   useEffect(() => {
