@@ -41,7 +41,6 @@ const Navigation: React.FC = () => {
       targetElement.scrollIntoView({
         behavior: "smooth",
       });
-      // Update the URL hash without reloading the page, for better history management
       window.history.pushState(null, "", href);
     }
     closeMobileMenu();
@@ -142,7 +141,10 @@ const Navigation: React.FC = () => {
           <div className="lg:hidden">
             <button
               onClick={toggleMobileMenu}
-              aria-label="Toggle mobile menu"
+              // ===== FIX ADDED HERE =====
+              aria-label={
+                isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"
+              }
               className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10"
             >
               {isMobileMenuOpen ? <FaTimes /> : <FaBars />}

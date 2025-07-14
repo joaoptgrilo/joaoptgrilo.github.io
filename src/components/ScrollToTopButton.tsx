@@ -30,18 +30,13 @@ const ScrollToTopButton = () => {
   }, []);
 
   const buttonClasses = clsx(
-    // Base position and style
     "fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50",
     "w-11 h-11 flex items-center justify-center",
     "rounded-full text-accent bg-primary-bg/70 backdrop-blur-sm",
-
-    // Effects
     "panel-glow-anim",
     "border border-accent",
     "transition-all duration-300 ease-in-out",
     "hover:scale-110 hover:-translate-y-1 hover:shadow-accent-glow",
-
-    // Visibility
     {
       "opacity-100 translate-y-0": isVisible,
       "opacity-0 translate-y-4 pointer-events-none": !isVisible,
@@ -53,6 +48,7 @@ const ScrollToTopButton = () => {
       type="button"
       onClick={scrollToTop}
       className={buttonClasses}
+      // ===== FIX CONFIRMED HERE =====
       aria-label="Scroll to top"
     >
       <FaChevronUp size={20} />
