@@ -42,7 +42,7 @@ jobs:
           NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
 
       - name: Prepare Root Index File
-        run: cp ./out/en/index.html ./out/index.html
+        run: cp ./out/en.html ./out/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
