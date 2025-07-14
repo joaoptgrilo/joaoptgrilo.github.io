@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import Panel from "./Panel";
 import { clsx } from "clsx";
 import FocusTrap from "focus-trap-react";
+import * as gtag from "@/lib/gtag";
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -26,6 +27,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
   triggerRef,
 }) => {
   const t = useTranslations("Projects");
+
+  const handleProjectLinkClick = (action: string, linkUrl: string) => {
+    gtag.event({
+      action: action,
+      category: "project_engagement",
+      label: `${project?.title} - ${linkUrl}`,
+      value: 1,
+    });
+  };
 
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
@@ -130,6 +140,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.liveLink && (
                   <a
                     href={project.liveLink}
+                    onClick={() =>
+                      handleProjectLinkClick(
+                        "click_project_live",
+                        project.liveLink!
+                      )
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-secondary grow inline-flex items-center justify-center"
@@ -140,6 +156,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.codeLink && (
                   <a
                     href={project.codeLink}
+                    onClick={() =>
+                      handleProjectLinkClick(
+                        "click_project_code",
+                        project.codeLink!
+                      )
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-secondary grow inline-flex items-center justify-center"
@@ -156,6 +178,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                   !(project.liveLink || project.codeLink) && (
                     <a
                       href={project.learnMoreLink}
+                      onClick={() =>
+                        handleProjectLinkClick(
+                          "click_project_learn_more",
+                          project.learnMoreLink!
+                        )
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-secondary grow inline-flex items-center justify-center"
