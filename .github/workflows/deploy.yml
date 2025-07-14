@@ -40,9 +40,7 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
-
-      - name: Prepare Root Index File
-        run: cp ./out/en.html ./out/index.html
+          NEXT_PUBLIC_BASE_PATH: /joaoptgrilo.github.io
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
