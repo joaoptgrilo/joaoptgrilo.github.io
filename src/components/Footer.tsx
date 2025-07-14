@@ -9,7 +9,7 @@ import AnimateOnScroll from "./AnimateOnScroll";
 const Footer: React.FC = () => {
   const t = useTranslations("Footer");
   const currentYear = new Date().getFullYear();
-  const websiteVersion = "v1.8.1-proofreading"; // CHANGED
+  const websiteVersion = "v1.9.0-analytics"; // UPDATED
 
   return (
     <footer id="footer" className="w-full py-10 md:py-16">

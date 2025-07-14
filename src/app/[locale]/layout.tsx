@@ -17,6 +17,7 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import ThemeInitializer from "@/components/ThemeInitializer";
 import ScrollRestorer from "@/components/ScrollRestorer";
 import ClientInitializer from "@/components/ClientInitializer";
+import Analytics from "@/components/Analytics"; // ===== IMPORT ANALYTICS COMPONENT =====
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -52,13 +53,10 @@ export async function generateMetadata({
   const ogDescription = tSEO("description");
 
   return {
-    // Standard SEO Metadata (This is correct)
     title: seoTitle,
     description: seoDescription,
     authors: [{ name: "João Grilo", url: siteUrl }],
     creator: "João Grilo",
-
-    // Open Graph & Twitter Metadata
     metadataBase: new URL(siteUrl),
     openGraph: {
       title: ogTitle,
@@ -75,7 +73,6 @@ export async function generateMetadata({
       ],
       locale: locale === "pt" ? "pt_PT" : "en_US",
       type: "website",
-      // CORRECTED: The 'article' property has been removed as it is not valid here.
     },
     twitter: {
       card: "summary_large_image",
@@ -117,6 +114,8 @@ export default async function RootLayout({
       <body>
         <ThemeInitializer />
         <ThemeProvider>
+          {/* ===== ADD ANALYTICS COMPONENT HERE ===== */}
+          <Analytics />
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ClientInitializer />
             <ScrollRestorer />

@@ -5,6 +5,7 @@ import React from "react";
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
 import { useTranslations, useLocale } from "next-intl";
 import Glitch from "./Glitch";
+import * as gtag from "@/lib/gtag"; // ===== IMPORT GTAG LIB =====
 
 interface SocialLink {
   href: string;
@@ -15,6 +16,16 @@ interface SocialLink {
 const Hero: React.FC = () => {
   const t = useTranslations("Hero");
   const locale = useLocale();
+
+  // ===== NEW EVENT HANDLER FUNCTION =====
+  const handleCVDownload = () => {
+    gtag.event({
+      action: "download_cv",
+      category: "engagement",
+      label: `CV Download - ${locale.toUpperCase()}`,
+      value: 1, // A simple value to signify one download event
+    });
+  };
 
   const socialLinks: SocialLink[] = [
     {
@@ -43,7 +54,8 @@ const Hero: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative w-full h-screen flex flex-col items-center justify-center text-primary-text overflow-x-hidden">
+      className="relative w-full h-screen flex flex-col items-center justify-center text-primary-text overflow-x-hidden"
+    >
       <div className="absolute inset-0 z-0 bg-light-panel-bg/15 backdrop-blur-custom"></div>
 
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center p-6 sm:p-8 md:p-12 lg:p-16">
@@ -70,7 +82,8 @@ const Hero: React.FC = () => {
           <div className="pt-3 sm:pt-4 md:pt-5 flex flex-col sm:flex-row sm:justify-center items-center gap-4 sm:gap-6 animate-fade-in-up animation-delay-300">
             <a
               href="#projects"
-              className="inline-block bg-accent text-primary-bg font_fira_code font-semibold text-sm sm:text-base md:text-lg py-3 px-8 sm:py-3.5 sm:px-10 rounded-lg shadow-lg hover:bg-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-colors duration-300 w-full sm:w-auto no-text-stroke">
+              className="inline-block bg-accent text-primary-bg font_fira_code font-semibold text-sm sm:text-base md:text-lg py-3 px-8 sm:py-3.5 sm:px-10 rounded-lg shadow-lg hover:bg-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-colors duration-300 w-full sm:w-auto no-text-stroke"
+            >
               <Glitch triggerOnHover={true}>{t("projectsButton")}</Glitch>
             </a>
             <a
@@ -78,7 +91,10 @@ const Hero: React.FC = () => {
               download
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-transparent text-accent font_fira_code font-semibold text-sm sm:text-base md:text-lg py-3 px-8 sm:py-3.5 sm:px-10 rounded-lg border-2 border-accent hover:bg-accent/10 hover:text-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto interactive-glow">
+              // ===== ADD ONCLICK HANDLER HERE =====
+              onClick={handleCVDownload}
+              className="inline-flex items-center justify-center bg-transparent text-accent font_fira_code font-semibold text-sm sm:text-base md:text-lg py-3 px-8 sm:py-3.5 sm:px-10 rounded-lg border-2 border-accent hover:bg-accent/10 hover:text-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto interactive-glow"
+            >
               <FaDownload className="mr-2.5 h-4 w-4 sm:h-5 sm:w-5" />
               <Glitch triggerOnHover={true}>{t("cvButton")}</Glitch>
             </a>
@@ -91,7 +107,8 @@ const Hero: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.ariaLabel}
-                className="text-secondary-text hover:text-accent transition-all duration-300 text-2xl sm:text-3xl md:text-4xl transform hover:scale-110">
+                className="text-secondary-text hover:text-accent transition-all duration-300 text-2xl sm:text-3xl md:text-4xl transform hover:scale-110"
+              >
                 {link.icon}
               </a>
             ))}
