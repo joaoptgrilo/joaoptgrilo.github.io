@@ -21,14 +21,14 @@
   "screenshots": [
     {
       "src": "/screenshot-desktop.png",
-      "sizes": "1920x1080",
+      "sizes": "1920x11941",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Desktop Portfolio View"
     },
     {
       "src": "/screenshot-mobile.png",
-      "sizes": "390x844",
+      "sizes": "463x19393",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Mobile Portfolio View"
