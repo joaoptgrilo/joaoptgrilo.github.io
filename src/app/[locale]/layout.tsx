@@ -53,6 +53,12 @@ export async function generateMetadata({
   const ogDescription = tSEO("description");
 
   return {
+    manifest: "/site.webmanifest",
+    themeColor: [
+      { media: "(prefers-color-scheme: light)", color: "#f7fafc" },
+      { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    ],
+
     title: seoTitle,
     description: seoDescription,
     authors: [{ name: "João Grilo", url: siteUrl }],
@@ -103,14 +109,7 @@ export default async function RootLayout({
       className={`${poppins.variable} ${firaCode.variable} antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <link
-          rel="preload"
-          href="/images/coding-symbols.svg"
-          as="image"
-          type="image/svg+xml"
-        />
-      </head>
+      <head></head>
       <body>
         <ThemeInitializer />
         <ThemeProvider>
