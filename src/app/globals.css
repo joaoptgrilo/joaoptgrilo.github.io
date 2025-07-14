@@ -87,6 +87,19 @@ html {
 }
 
 @layer utilities {
+  /* ===== NEW SR-ONLY CLASS ADDED ===== */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   .panel-glow-anim {
     animation: panel-glow 4s ease-in-out infinite;
   }
