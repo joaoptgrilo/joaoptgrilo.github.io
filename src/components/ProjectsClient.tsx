@@ -1,6 +1,6 @@
 // src/components/ProjectsClient.tsx
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import Image from "next/image";
 import { Project, ProjectTechItem } from "@/data";
 import { FiEye } from "react-icons/fi";
@@ -14,7 +14,10 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 const ProjectCard: React.FC<{
   project: Project;
-  onCardClick: (project: Project) => void;
+  onCardClick: (
+    project: Project,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => void;
 }> = ({ project, onCardClick }) => {
   const t = useTranslations("Projects");
   const { theme } = useTheme();
@@ -25,7 +28,7 @@ const ProjectCard: React.FC<{
 
   return (
     <button
-      onClick={() => onCardClick(project)}
+      onClick={(e) => onCardClick(project, e)}
       className="flex flex-col h-full group w-full text-left"
       aria-label={`View details for ${project.title}`}
     >
@@ -107,10 +110,18 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
 
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  // ===== THIS IS THE CORRECTED LINE =====
+  const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
+
   const isModalOpen = !!selectedProject;
 
-  const handleOpenModal = (project: Project) => {
+  const handleOpenModal = (
+    project: Project,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     setSelectedProject(project);
+    triggerButtonRef.current = e.currentTarget;
   };
 
   const handleCloseModal = () => {
@@ -238,6 +249,7 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         project={selectedProject}
+        triggerRef={triggerButtonRef}
       />
     </>
   );

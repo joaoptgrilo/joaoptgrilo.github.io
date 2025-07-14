@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { clsx } from "clsx";
-// REMOVED: The Glitch component is no longer needed in this file.
 
 interface NavLinkItem {
   href: string;
@@ -29,6 +28,24 @@ const Navigation: React.FC = () => {
     { href: "#certifications", label: t("certifications") },
     { href: "#contact", label: t("contact") },
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href");
+    if (!href) return;
+
+    const targetId = href.replace(/.*#/, "");
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: "smooth",
+      });
+      // Update the URL hash without reloading the page, for better history management
+      window.history.pushState(null, "", href);
+    }
+    closeMobileMenu();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,7 +107,7 @@ const Navigation: React.FC = () => {
           <Link
             href="#hero"
             scroll={false}
-            onClick={closeMobileMenu}
+            onClick={handleNavClick}
             className={clsx(
               "transition-all duration-300 ease-in-out transform",
               isScrolled
@@ -98,7 +115,8 @@ const Navigation: React.FC = () => {
                 : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
             )}
             tabIndex={isScrolled ? 0 : -1}
-            aria-hidden={!isScrolled}>
+            aria-hidden={!isScrolled}
+          >
             <span className={pillClasses}>
               <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse"></span>
               {t("namePill")}
@@ -110,8 +128,9 @@ const Navigation: React.FC = () => {
                 key={link.label}
                 href={link.href}
                 scroll={false}
-                className={desktopNavLinkClasses}>
-                {/* CORRECTED: Removed the Glitch component wrapper */}
+                onClick={handleNavClick}
+                className={desktopNavLinkClasses}
+              >
                 {link.label}
               </Link>
             ))}
@@ -124,14 +143,16 @@ const Navigation: React.FC = () => {
             <button
               onClick={toggleMobileMenu}
               aria-label="Toggle mobile menu"
-              className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10">
+              className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10"
+            >
               {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
         </div>
         {isMobileMenuOpen && (
           <div
-            className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}>
+            className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}
+          >
             <div className="container mx-auto flex flex-col items-center space-y-3 px-4">
               {navLinks.map((link: NavLinkItem) => (
                 <Link
@@ -139,7 +160,8 @@ const Navigation: React.FC = () => {
                   href={link.href}
                   scroll={false}
                   className={mobileMenuLinkClasses}
-                  onClick={closeMobileMenu}>
+                  onClick={handleNavClick}
+                >
                   {link.label}
                 </Link>
               ))}

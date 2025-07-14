@@ -15,7 +15,6 @@ import { useTranslations } from "next-intl";
 import { clsx } from "clsx";
 import AnimateOnScroll from "./AnimateOnScroll";
 
-// Helper function to recursively get the text content from React nodes
 const getNodeText = (node: React.ReactNode): string => {
   if (typeof node === "string" || typeof node === "number") {
     return node.toString();
@@ -36,8 +35,7 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
   const techListRef = useRef<HTMLUListElement>(null);
 
   const handleTechClick = (techName: string) => {
-    // Make click authoritative: clear any hover state and toggle the click state.
-    setHoveredTech(null); // CORRECTED: Immediately clear hover on click.
+    setHoveredTech(null);
     setClickedTech((prev) => (prev === techName ? null : techName));
   };
 
@@ -130,17 +128,19 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
                     key={tech.name}
                     onMouseEnter={() => setHoveredTech(tech.name)}
                     onMouseLeave={() => setHoveredTech(null)}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleTechClick(tech.name);
-                    }}
                   >
-                    <span
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleTechClick(tech.name);
+                      }}
+                      onFocus={() => setHoveredTech(tech.name)}
+                      onBlur={() => setHoveredTech(null)}
                       title={tech.description}
-                      className="inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-pointer"
+                      className="inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-pointer w-full h-full text-left"
                     >
                       {tech.name}
-                    </span>
+                    </button>
                   </li>
                 ))}
               </ul>
