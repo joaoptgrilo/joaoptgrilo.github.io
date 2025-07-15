@@ -25,7 +25,7 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
 
     const variantClasses = {
       default: "p-6 md:p-8 panel-with-corners",
-      simple: "p-6 md:p-8",
+      simple: "p-6 md:p-8 backdrop-blur-custom glass-effect",
       modal:
         "!p-0 overflow-y-auto border dark:border-border light:border-neutral-200 backdrop-blur-none",
     };

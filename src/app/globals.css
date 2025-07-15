@@ -16,7 +16,7 @@
   --color-border: rgba(0, 191, 255, 0.15);
   --color-border-hover: rgba(0, 191, 255, 0.4);
   --color-shadow: rgba(0, 191, 255, 0.6);
-  --glass-bg: rgba(0, 0, 0, 0.8);
+  --glass-bg: rgba(0, 0, 0, 0.5);
   --glass-border: rgba(0, 191, 255, 0.2);
   --color-tag-bg: var(--glass-bg);
   --blur-intensity: 6px;

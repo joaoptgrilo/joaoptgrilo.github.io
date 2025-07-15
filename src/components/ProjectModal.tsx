@@ -104,7 +104,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
               aria-label="Close project details"
               className="modal-close-button absolute top-3 right-3 z-20 p-2 rounded-full text-white bg-black/40 hover:bg-black/60 transition-colors light:text-primary-text light:bg-neutral-200 hover:light:bg-neutral-300"
             >
-              <FiX className="h-6 w-6 backdrop-blur-custom" />
+              <FiX className="h-6 w-6" />
             </button>
             <div className="relative w-full aspect-video rounded-t-lg overflow-hidden border-b border-border">
               {project.imageUrl && (
