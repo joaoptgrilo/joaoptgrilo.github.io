@@ -117,7 +117,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 />
               )}
             </div>
-            <div className="p-6 md:p-8">
+            <div className="p-6 md:p-8 backdrop-blur-custom glass-effect">
               <h2
                 id="project-modal-title"
                 className="text-2xl md:text-3xl font-bold text-accent mb-4"
