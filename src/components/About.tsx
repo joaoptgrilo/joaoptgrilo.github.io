@@ -85,7 +85,7 @@ const About = async () => {
       </div>
 
       <AnimateOnScroll staggerDelay={300}>
-        <div className="p-6 md:p-8 rounded-lg glass-effect panel-with-corners">
+        <div className="p-6 md:p-8 rounded-lg glass-effect backdrop-blur-custom panel-with-corners">
           <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-8 text-center font-semibold">
             {t("metricsTitle")}
           </p>
@@ -94,7 +94,8 @@ const About = async () => {
               <AnimateOnScroll
                 as="li"
                 key={metric.id}
-                staggerDelay={index * 100}>
+                staggerDelay={index * 100}
+              >
                 <InfoPanel
                   metric={metric}
                   icon={

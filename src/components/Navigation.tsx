@@ -86,7 +86,7 @@ const Navigation: React.FC = () => {
   );
 
   const mobileMenuContainerClasses = clsx(
-    "lg:hidden absolute top-full left-0 right-0 pb-5 pt-2",
+    "lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 glass-effect",
     "dark:bg-secondary-bg/95 dark:backdrop-blur-sm",
     "light:bg-white light:border-t light:border-border"
   );
