@@ -21,11 +21,11 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
     ref
   ) => {
     const baseClasses =
-      "rounded-lg transition-all duration-300 backdrop-blur-custom";
+      "rounded-lg transition-all duration-300 backdrop-blur-custom glass-effect";
 
     const variantClasses = {
       default: "p-6 md:p-8 panel-with-corners",
-      simple: "p-6 md:p-8 backdrop-blur-custom glass-effect",
+      simple: "p-6 md:p-8",
       modal:
         "!p-0 overflow-y-auto border dark:border-border light:border-neutral-200 backdrop-blur-none",
     };
