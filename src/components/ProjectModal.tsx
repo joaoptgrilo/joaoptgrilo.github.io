@@ -12,6 +12,7 @@ import Panel from "./Panel";
 import { clsx } from "clsx";
 import FocusTrap from "focus-trap-react";
 import * as gtag from "@/lib/gtag";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
   triggerRef,
 }) => {
   const t = useTranslations("Projects");
+  const { theme } = useTheme();
 
   const handleProjectLinkClick = (action: string, linkUrl: string) => {
     gtag.event({
@@ -90,7 +92,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         aria-labelledby="project-modal-title"
       >
         <div className={modalClasses} onClick={(e) => e.stopPropagation()}>
-          <Panel variant="modal" className="flex-1">
+          <Panel
+            variant="modal"
+            className={clsx("flex-1", {
+              "light:bg-white": theme === "light",
+              "!glass-effect": theme === "dark",
+            })}
+          >
             <button
               onClick={onClose}
               aria-label="Close project details"
