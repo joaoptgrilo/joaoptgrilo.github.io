@@ -20,7 +20,8 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
     },
     ref
   ) => {
-    const baseClasses = "rounded-lg transition-all duration-300 glass-effect";
+    const baseClasses =
+      "rounded-lg transition-all duration-300 backdrop-blur-custom";
 
     const variantClasses = {
       default: "p-6 md:p-8 panel-with-corners",

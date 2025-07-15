@@ -77,7 +77,7 @@ const Navigation: React.FC = () => {
   const isActiveNavStyle = isScrolled || isMobileMenuOpen;
 
   const navClasses = clsx(
-    "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-all duration-300 ease-in-out",
+    "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-all duration-300 ease-in-out backdrop-blur-custom",
     {
       "dark:bg-secondary-bg/90 dark:backdrop-blur-sm nav-glow light:bg-white light:shadow-md":
         isActiveNavStyle,
