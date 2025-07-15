@@ -79,9 +79,16 @@ const Navigation: React.FC = () => {
   const navClasses = clsx(
     "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-all duration-300 ease-in-out",
     {
-      "bg-secondary-bg/90 backdrop-blur-sm nav-glow": isActiveNavStyle,
+      "dark:bg-secondary-bg/90 dark:backdrop-blur-sm nav-glow light:bg-white light:shadow-md":
+        isActiveNavStyle,
       "bg-transparent shadow-none": !isActiveNavStyle,
     }
+  );
+
+  const mobileMenuContainerClasses = clsx(
+    "lg:hidden absolute top-full left-0 right-0 pb-5 pt-2",
+    "dark:bg-secondary-bg/95 dark:backdrop-blur-sm",
+    "light:bg-white light:border-t light:border-border"
   );
 
   const pillClasses = clsx(
@@ -149,7 +156,7 @@ const Navigation: React.FC = () => {
           </div>
         </div>
         {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 dark:bg-secondary-bg/95 dark:backdrop-blur-sm light:bg-white light:border-t light:border-border">
+          <div className={mobileMenuContainerClasses}>
             <div className="container mx-auto flex flex-col items-center space-y-3 px-4">
               {navLinks.map((link: NavLinkItem) => (
                 <Link
