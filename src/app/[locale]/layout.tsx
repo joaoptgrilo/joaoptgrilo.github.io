@@ -23,12 +23,14 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-poppins",
+  display: "swap",
 });
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-fira-code",
+  display: "swap",
 });
 
 export async function generateMetadata({

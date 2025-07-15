@@ -84,8 +84,6 @@ const Navigation: React.FC = () => {
     }
   );
 
-  const mobileMenuContainerClasses = "bg-secondary-bg/95 backdrop-blur-sm";
-
   const pillClasses = clsx(
     "flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font_fira_code font-semibold text-accent bg-primary-bg/80",
     "border border-accent",
@@ -151,9 +149,7 @@ const Navigation: React.FC = () => {
           </div>
         </div>
         {isMobileMenuOpen && (
-          <div
-            className={`lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 ${mobileMenuContainerClasses}`}
-          >
+          <div className="lg:hidden absolute top-full left-0 right-0 pb-5 pt-2 dark:bg-secondary-bg/95 dark:backdrop-blur-sm light:bg-white light:border-t light:border-border">
             <div className="container mx-auto flex flex-col items-center space-y-3 px-4">
               {navLinks.map((link: NavLinkItem) => (
                 <Link

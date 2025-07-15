@@ -90,7 +90,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         aria-labelledby="project-modal-title"
       >
         <div className={modalClasses} onClick={(e) => e.stopPropagation()}>
-          <Panel variant="modal" className="flex-1">
+          <Panel variant="modal" className="flex-1 light:bg-white">
             <button
               onClick={onClose}
               aria-label="Close project details"
