@@ -57,7 +57,7 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-  # Job 3: Build for Vercel (Server-side)
+  # Job 3: Build for Vercel
   build_vercel:
     needs: test
     runs-on: ubuntu-latest
@@ -79,9 +79,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: vercel-build-artifact
-          path: .next
+          path: .
 
-  # Job 4: Build for GitHub Pages (Static Export)
+  # Job 4: Build for GitHub Pages
   build_gh_pages:
     needs: test
     runs-on: ubuntu-latest
@@ -121,7 +121,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  # Job 6: Deploy to Vercel
+  # Job 6: Deploy to Vercel (Controlled Deployment)
   deploy_vercel:
     needs: build_vercel
     runs-on: ubuntu-latest
@@ -130,11 +130,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: vercel-build-artifact
-          path: .next
+          path: .
       - name: Deploy to Vercel
-        uses: vercel/vercel-action@v34
+        uses: vercel/vercel-action@v34.3.0
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          prebuilt: true
