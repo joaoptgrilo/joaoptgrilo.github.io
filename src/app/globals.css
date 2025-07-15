@@ -189,7 +189,6 @@ html {
   opacity: 1;
 }
 
-/* --- OPTIMIZED GLOW EFFECT --- */
 .interactive-glow {
   position: relative;
   z-index: 1;

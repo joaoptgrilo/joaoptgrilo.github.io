@@ -27,7 +27,7 @@ const Panel = forwardRef<HTMLElement, PanelProps>(
       default: "p-6 md:p-8 panel-with-corners",
       simple: "p-6 md:p-8",
       modal:
-        "!p-0 overflow-y-auto border dark:border-border light:border-neutral-200 backdrop-blur-none",
+        "!p-0 overflow-y-auto dark:border-border light:border-neutral-200 backdrop-blur-none",
     };
 
     const combinedClasses = clsx(
