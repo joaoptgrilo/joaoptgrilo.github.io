@@ -1,3 +1,5 @@
+# .github/workflows/deploy.yml
+
 name: Build, Test, and Deploy
 
 on:
@@ -15,7 +17,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Job 1: Setup and install dependencies
+  # Job 1: Setup
   setup:
     runs-on: ubuntu-latest
     steps:
@@ -28,7 +30,7 @@ jobs:
           node-version: "20"
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
   # Job 2: Run E2E tests
@@ -45,7 +47,7 @@ jobs:
           node-version: "20"
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
       - name: Install Playwright Browsers
@@ -54,7 +56,7 @@ jobs:
       - name: Run E2E tests
         run: npm run test:e2e
 
-      - name: Upload Playwright report
+      - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -76,7 +78,7 @@ jobs:
           node-version: "20"
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
       - name: Build for Vercel
@@ -90,7 +92,7 @@ jobs:
           name: vercel-build-artifact
           path: .
 
-  # Job 4: Build and prepare for GitHub Pages
+  # Job 4: Build for GitHub Pages
   build_gh_pages:
     needs: test
     runs-on: ubuntu-latest
@@ -104,15 +106,15 @@ jobs:
           node-version: "20"
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
-      - name: Build and export for GitHub Pages
+      - name: Build and Export for GitHub Pages
         run: npm run export
         env:
           NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
 
-      - name: Prepare index.html for GH Pages
+      - name: Prepare Root Index File for GH Pages
         run: cp ./out/en.html ./out/index.html
 
       - name: Upload GitHub Pages artifact
@@ -140,17 +142,19 @@ jobs:
     needs: build_vercel
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download Vercel build artifact
         uses: actions/download-artifact@v4
         with:
           name: vercel-build-artifact
           path: .
 
-      - name: Deploy to Vercel
+      - name: Deploy to Vercel (production)
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          prod: true
-          # working-directory: ./out  # Se for export estático e quiseres mudar o diretório
+          vercel-args: "--prod"
