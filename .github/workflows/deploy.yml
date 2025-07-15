@@ -132,7 +132,7 @@ jobs:
           name: vercel-build-artifact
           path: .
       - name: Deploy to Vercel
-        uses: vercel/vercel-action@v34.3.0
+        uses: vercel/vercel-action@v3
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
