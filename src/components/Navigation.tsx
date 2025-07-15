@@ -179,7 +179,7 @@ const Navigation: React.FC = () => {
       </nav>
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm glass-effect lg:hidden"
           onClick={closeMobileMenu}
           aria-hidden="true"
         />
