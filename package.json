@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build -c next.config.mjs",
-    "export": "next build -c next.config.static.mjs",
+    "build": "next build",
+    "export": "BUILD_STATIC_EXPORT=true next build",
     "start": "next start",
     "lint": "eslint .",
     "test:e2e": "playwright test"
