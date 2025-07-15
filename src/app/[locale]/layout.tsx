@@ -1,130 +1,63 @@
-// src/app/[locale]/layout.tsx
-import type { Metadata } from "next";
-import { Poppins, Fira_Code } from "next/font/google";
-import "../globals.css";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import ScrollToTopButton from "@/components/ScrollToTopButton";
-import ScrollSpy from "@/components/ScrollSpy";
-import { NextIntlClientProvider } from "next-intl";
-import {
-  getMessages,
-  getTranslations,
-  unstable_setRequestLocale,
-} from "next-intl/server";
+// src/app/[locale]/page.tsx
+import React from "react";
+import dynamic from "next/dynamic";
+import { unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "../../../i18n";
-import { ThemeProvider } from "@/contexts/ThemeContext";
-import ThemeInitializer from "@/components/ThemeInitializer";
-import ScrollRestorer from "@/components/ScrollRestorer";
-import ClientInitializer from "@/components/ClientInitializer";
-import Analytics from "@/components/Analytics";
+import { getData } from "@/data";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-poppins",
+import Hero from "@/components/Hero";
+import SectionSkeleton from "@/components/SectionSkeleton";
+
+// Dynamically import sections that are below the fold
+const About = dynamic(() => import("@/components/About"), {
+  loading: () => <SectionSkeleton />,
 });
-
-const firaCode = Fira_Code({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-fira-code",
+const Skills = dynamic(() => import("@/components/Skills"), {
+  loading: () => <SectionSkeleton />,
 });
-
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: string };
-}): Promise<Metadata> {
-  const tSEO = await getTranslations({ locale, namespace: "SEO" });
-  const tHero = await getTranslations({ locale, namespace: "Hero" });
-
-  const siteUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "https://joaoptgrilo.github.io";
-
-  const selectedOgImage =
-    locale === "pt" ? "/og-image-pt.png" : "/og-image-en.png";
-
-  const seoTitle = tSEO("title");
-  const seoDescription = tSEO("description");
-
-  const ogTitle = `${tHero("name")} | ${tHero("title")}`;
-  const ogDescription = tSEO("description");
-
-  return {
-    manifest: "/site.webmanifest",
-    themeColor: [
-      { media: "(prefers-color-scheme: light)", color: "#f7fafc" },
-      { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
-    ],
-
-    title: seoTitle,
-    description: seoDescription,
-    authors: [{ name: "João Grilo", url: siteUrl }],
-    creator: "João Grilo",
-    metadataBase: new URL(siteUrl),
-    openGraph: {
-      title: ogTitle,
-      description: ogDescription,
-      url: siteUrl,
-      siteName: "João Grilo | Portfolio",
-      images: [
-        {
-          url: selectedOgImage,
-          width: 1200,
-          height: 630,
-          alt: `João Grilo - Full-Stack Developer Portfolio (${locale.toUpperCase()})`,
-        },
-      ],
-      locale: locale === "pt" ? "pt_PT" : "en_US",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: ogTitle,
-      description: ogDescription,
-      images: [selectedOgImage],
-    },
-  };
-}
+const Experience = dynamic(() => import("@/components/Experience"), {
+  loading: () => <SectionSkeleton />,
+});
+const Projects = dynamic(() => import("@/components/Projects"), {
+  loading: () => <SectionSkeleton />,
+});
+const Certifications = dynamic(() => import("@/components/Certifications"), {
+  loading: () => <SectionSkeleton />,
+});
+const Contact = dynamic(() => import("@/components/Contact"), {
+  loading: () => <SectionSkeleton />,
+});
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout({
-  children,
+export default async function Home({
   params: { locale },
 }: {
-  children: React.ReactNode;
   params: { locale: string };
 }) {
   unstable_setRequestLocale(locale);
-  const messages = await getMessages();
+
+  // Data fetching remains on the server
+  const dataLoaders = getData(locale as "en" | "pt");
+  const [skillsData, experienceData, projectsData, certificationsData] =
+    await Promise.all([
+      dataLoaders.getSkillCategories(),
+      dataLoaders.getExperience(),
+      dataLoaders.getProjects(),
+      dataLoaders.getCertifications(),
+    ]);
 
   return (
-    <html
-      lang={locale}
-      className={`${poppins.variable} ${firaCode.variable} antialiased`}
-      suppressHydrationWarning
-    >
-      <head></head>
-      <body>
-        <ThemeInitializer />
-        <ThemeProvider>
-          <Analytics />
-          <NextIntlClientProvider locale={locale} messages={messages}>
-            <ClientInitializer />
-            <ScrollRestorer />
-            <Navigation />
-            {children}
-            <ScrollToTopButton />
-            <ScrollSpy />
-            <Footer />
-          </NextIntlClientProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <main className="w-full">
+      <Hero />
+      <About />
+      <Skills skillsData={skillsData} />
+      <Experience experienceData={experienceData} />
+      <Projects projectsData={projectsData} />
+      <Certifications certificationsData={certificationsData} />
+      <Contact />
+    </main>
   );
 }
