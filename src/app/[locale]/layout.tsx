@@ -1,5 +1,5 @@
 // src/app/[locale]/layout.tsx
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins, Fira_Code } from "next/font/google";
 import "../globals.css";
 import Navigation from "@/components/Navigation";
@@ -33,6 +33,13 @@ const firaCode = Fira_Code({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
+
 export async function generateMetadata({
   params: { locale },
 }: {
@@ -56,11 +63,6 @@ export async function generateMetadata({
 
   return {
     manifest: "/site.webmanifest",
-    themeColor: [
-      { media: "(prefers-color-scheme: light)", color: "#f7fafc" },
-      { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
-    ],
-
     title: seoTitle,
     description: seoDescription,
     authors: [{ name: "João Grilo", url: siteUrl }],
