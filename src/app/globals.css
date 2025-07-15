@@ -100,7 +100,7 @@ html {
   }
   .glass-effect {
     background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    /*border: 1px solid var(--glass-border);*/
   }
 
   .border-spaced-dashed {
