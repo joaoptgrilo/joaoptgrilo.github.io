@@ -82,28 +82,24 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         },
         initialFocus: ".modal-close-button",
         fallbackFocus: ".modal-close-button",
-      }}
-    >
+      }}>
       <div
         className={overlayClasses}
         onClick={onClose}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="project-modal-title"
-      >
+        aria-labelledby="project-modal-title">
         <div className={modalClasses} onClick={(e) => e.stopPropagation()}>
           <Panel
             variant="modal"
             className={clsx("flex-1", {
               "light:bg-white": theme === "light",
               "!glass-effect": theme === "dark",
-            })}
-          >
+            })}>
             <button
               onClick={onClose}
               aria-label="Close project details"
-              className="modal-close-button absolute top-3 right-3 z-20 p-2 rounded-full text-white bg-black/40 hover:bg-black/60 transition-colors light:text-primary-text light:bg-neutral-200 hover:light:bg-neutral-300"
-            >
+              className="modal-close-button absolute top-3 right-3 z-20 p-2 rounded-full text-white bg-black/40 hover:bg-black/60 transition-colors light:text-primary-text light:bg-neutral-200 hover:light:bg-neutral-300">
               <FiX className="h-6 w-6" />
             </button>
             <div className="relative w-full aspect-video rounded-t-lg overflow-hidden border-b border-border">
@@ -120,8 +116,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
             <div className="p-6 md:p-8 backdrop-blur-custom glass-effect">
               <h2
                 id="project-modal-title"
-                className="text-2xl md:text-3xl font-bold text-accent mb-4"
-              >
+                className="text-2xl md:text-3xl font-bold text-accent mb-4">
                 {project.title}
               </h2>
               <div className="mb-6">
@@ -133,8 +128,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     <li key={tech.name}>
                       <span
                         title={tech.description || tech.name}
-                        className="inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-default"
-                      >
+                        className="tag interactive-glow !cursor-pointer hover:text-primary-text">
                         {tech.name}
                       </span>
                     </li>
@@ -156,8 +150,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     }
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-secondary grow inline-flex items-center justify-center"
-                  >
+                    className="btn-secondary grow !py-2.5 !px-6 !text-sm !md:text-base">
                     <FiExternalLink className="mr-2" /> {t("visitButton")}
                   </a>
                 )}
@@ -172,8 +165,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                     }
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-secondary grow inline-flex items-center justify-center"
-                  >
+                    className="btn-secondary grow !py-2.5 !px-6 !text-sm !md:text-base">
                     {isCodePenProject ? (
                       <FaCodepen className="mr-2" />
                     ) : (
@@ -194,8 +186,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                       }
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-secondary grow inline-flex items-center justify-center"
-                    >
+                      className="btn-secondary grow !py-2.5 !px-6 !text-sm !md:text-base">
                       <FiEye className="mr-2" /> {t("learnMoreButton")}
                     </a>
                   )}

@@ -15,7 +15,7 @@
   --color-prof-familiar: #4a5568;
   --color-border: rgba(0, 191, 255, 0.15);
   --color-border-hover: rgba(0, 191, 255, 0.4);
-  --color-shadow: rgba(0, 191, 255, 0.6);
+  --color-shadow: rgba(0, 191, 255, 0.2);
   --glass-bg: rgba(0, 0, 0, 0.5);
   --glass-border: rgba(0, 191, 255, 0.2);
   --color-tag-bg: var(--glass-bg);
@@ -35,7 +35,7 @@ html.light {
   --color-prof-familiar: #94a3b8;
   --color-border: rgba(49, 130, 206, 0.2);
   --color-border-hover: rgba(49, 130, 206, 0.4);
-  --color-shadow: rgba(49, 130, 206, 0.3);
+  --color-shadow: rgba(49, 130, 206, 0.2);
   --glass-bg: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(226, 232, 240, 0.7);
   --color-tag-bg: var(--glass-bg);
@@ -75,6 +75,29 @@ html {
   transform: scaleX(1);
 }
 
+@layer components {
+  .btn-primary {
+    @apply inline-block whitespace-nowrap bg-accent text-primary-bg font-fira_code font-semibold text-base py-3 px-8 rounded-lg shadow-lg hover:bg-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto transform hover:scale-105 hover:-translate-y-px;
+  }
+  .btn-secondary {
+    @apply inline-flex whitespace-nowrap items-center justify-center bg-transparent text-accent font-fira_code font-semibold text-base py-3 px-8 rounded-lg border-2 border-accent hover:text-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto interactive-glow;
+  }
+  .btn-filter {
+    @apply px-3 py-1.5 text-sm rounded-md transition-all duration-300 ease-in-out font-fira_code font-medium interactive-glow bg-light-panel-bg bg-opacity-20 text-secondary-text hover:bg-light-panel-bg hover:bg-opacity-50 hover:text-primary-text;
+  }
+  .btn-filter-active {
+    @apply bg-accent text-primary-bg scale-105;
+    box-shadow: 0 4px 6px -1px var(--color-shadow),
+      0 2px 4px -2px var(--color-shadow);
+  }
+  .btn-icon {
+    @apply p-2 rounded-full text-secondary-text hover:text-accent hover:bg-primary-bg hover:bg-opacity-50 transition-colors duration-200;
+  }
+  .tag {
+    @apply inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border font-fira_code cursor-default;
+  }
+}
+
 @layer utilities {
   .sr-only {
     position: absolute;
@@ -93,10 +116,6 @@ html {
       drop-shadow(-1px 1px 0 var(--color-border))
       drop-shadow(1px -1px 0 var(--color-border))
       drop-shadow(-1px -1px 0 var(--color-border));
-  }
-  .no-text-stroke {
-    -webkit-text-stroke-width: 0;
-    text-stroke-width: 0;
   }
   .glass-effect {
     background: var(--glass-bg);
@@ -162,7 +181,7 @@ html {
   border-top-style: solid;
   border-left-style: solid;
   border-top-left-radius: 0.5rem;
-  transition-delay: 0s, 0.3s, 0s;
+  transition-delay: 0s, 0.3s, 0s; /* width, height, opacity */
 }
 
 .panel-with-corners::after {
@@ -173,7 +192,7 @@ html {
   border-bottom-style: solid;
   border-right-style: solid;
   border-bottom-right-radius: 0.5rem;
-  transition-delay: 0s, 0.3s, 0s;
+  transition-delay: 0.3s, 0s, 0s; /* width, height, opacity */
 }
 
 .is-in-view .panel-with-corners::before,

@@ -77,7 +77,7 @@ const Navigation: React.FC = () => {
   const isActiveNavStyle = isScrolled || isMobileMenuOpen;
 
   const navClasses = clsx(
-    "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3 transition-all duration-300 ease-in-out",
+    "fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 py-3",
     {
       "dark:bg-secondary-bg/90 dark:backdrop-blur-sm nav-glow light:bg-white light:shadow-md  backdrop-blur-custom glass-effect":
         isActiveNavStyle,
@@ -92,10 +92,9 @@ const Navigation: React.FC = () => {
   );
 
   const pillClasses = clsx(
-    "flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font_fira_code font-semibold text-accent bg-primary-bg/80",
+    "flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font-fira_code font-semibold text-accent bg-primary-bg/80",
     "border border-accent",
     "panel-glow-anim",
-    "transition-all duration-300 ease-in-out",
     "hover:scale-105 hover:-translate-y-px hover:shadow-accent-glow"
   );
 
@@ -113,14 +112,10 @@ const Navigation: React.FC = () => {
             scroll={false}
             onClick={handleNavClick}
             className={clsx(
-              "transition-all duration-300 ease-in-out transform",
-              isScrolled
-                ? "opacity-100 scale-100 translate-y-0"
-                : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+              isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
             )}
             tabIndex={isScrolled ? 0 : -1}
-            aria-hidden={!isScrolled}
-          >
+            aria-hidden={!isScrolled}>
             <span className={pillClasses}>
               <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse"></span>
               {t("namePill")}
@@ -133,8 +128,7 @@ const Navigation: React.FC = () => {
                 href={link.href}
                 scroll={false}
                 onClick={handleNavClick}
-                className={desktopNavLinkClasses}
-              >
+                className={desktopNavLinkClasses}>
                 {link.label}
               </Link>
             ))}
@@ -149,8 +143,7 @@ const Navigation: React.FC = () => {
               aria-label={
                 isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"
               }
-              className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10"
-            >
+              className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10">
               {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
@@ -164,8 +157,7 @@ const Navigation: React.FC = () => {
                   href={link.href}
                   scroll={false}
                   className={mobileMenuLinkClasses}
-                  onClick={handleNavClick}
-                >
+                  onClick={handleNavClick}>
                   {link.label}
                 </Link>
               ))}

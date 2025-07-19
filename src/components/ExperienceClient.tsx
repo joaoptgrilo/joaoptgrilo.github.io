@@ -68,8 +68,7 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
             <div className="flex items-center">
               {item.companyLogoUrl ? (
                 <div
-                  className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border bg-black opacity-80`}
-                >
+                  className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border bg-black opacity-80`}>
                   <div className="relative w-full h-full">
                     <Image
                       src={item.companyLogoUrl}
@@ -90,8 +89,7 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
                       href={item.companyLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-accent transition-colors duration-300"
-                    >
+                      className="hover:text-accent transition-colors duration-300">
                       {item.company}
                     </a>
                   ) : (
@@ -121,14 +119,12 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
               </p>
               <ul
                 ref={techListRef}
-                className="flex flex-wrap gap-x-2 gap-y-1.5"
-              >
+                className="flex flex-wrap gap-x-2 gap-y-1.5">
                 {item.keyTech.map((tech) => (
                   <li
                     key={tech.name}
                     onMouseEnter={() => setHoveredTech(tech.name)}
-                    onMouseLeave={() => setHoveredTech(null)}
-                  >
+                    onMouseLeave={() => setHoveredTech(null)}>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -137,8 +133,7 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
                       onFocus={() => setHoveredTech(tech.name)}
                       onBlur={() => setHoveredTech(null)}
                       title={tech.description}
-                      className="inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border interactive-glow cursor-pointer w-full h-full text-left"
-                    >
+                      className="tag interactive-glow !cursor-pointer w-full h-full text-left">
                       {tech.name}
                     </button>
                   </li>
@@ -164,8 +159,7 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
                   className={clsx(
                     "flex transition-opacity duration-300 ease-in-out",
                     { "opacity-40": isDimmed }
-                  )}
-                >
+                  )}>
                   <span className="text-accent mr-2.5 mt-1.5 flex-shrink-0 text-xs">
                     ◆
                   </span>

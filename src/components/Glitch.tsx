@@ -11,6 +11,10 @@ interface GlitchProps {
   className?: string;
   triggerOnHover?: boolean;
   triggerOnVisible?: boolean;
+  autoGlitch?: {
+    interval: number;
+    startDelay?: number;
+  };
 }
 
 const Glitch: React.FC<GlitchProps> = ({
@@ -18,26 +22,23 @@ const Glitch: React.FC<GlitchProps> = ({
   className,
   triggerOnHover = false,
   triggerOnVisible = false,
+  autoGlitch,
 }) => {
-  const { displayText, startGlitch, reset } = useGlitch(children);
+  const { displayText, startGlitch, reset } = useGlitch(children, {
+    autoGlitch,
+  });
+
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.5,
     skip: !triggerOnVisible,
   });
 
-  const randomDelay = useMemo(() => {
-    return triggerOnVisible ? 3000 + Math.random() * 5000 : 0;
-  }, [triggerOnVisible]);
-
   useEffect(() => {
     if (inView && triggerOnVisible) {
-      const timer = setTimeout(() => {
-        startGlitch();
-      }, randomDelay);
-      return () => clearTimeout(timer);
+      startGlitch();
     }
-  }, [inView, triggerOnVisible, startGlitch, randomDelay]);
+  }, [inView, triggerOnVisible, startGlitch]);
 
   const handleMouseEnter = triggerOnHover ? startGlitch : undefined;
   const handleMouseLeave = triggerOnHover ? reset : undefined;
@@ -47,11 +48,7 @@ const Glitch: React.FC<GlitchProps> = ({
       ref={ref}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={clsx(
-        "relative inline-block align-baseline", // Changed from align-middle
-        className
-      )}
-    >
+      className={clsx("relative inline-block align-baseline", className)}>
       <span aria-hidden="true" className="absolute inset-0">
         {displayText}
       </span>

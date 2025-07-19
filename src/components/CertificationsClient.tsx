@@ -33,8 +33,7 @@ const CertificationsClient = ({
             <AnimateOnScroll as="li" key={cert.id} staggerDelay={index * 100}>
               <Panel
                 className="flex flex-col h-full group w-full interactive-glow"
-                variant="default"
-              >
+                variant="default">
                 <div className="flex-grow mb-4">
                   <div className="flex items-start mb-3">
                     {cert.isInProgress ? (
@@ -70,8 +69,7 @@ const CertificationsClient = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`View progress for ${cert.name}`}
-                      className="inline-flex items-center justify-center w-full text-sm text-info-accent hover:text-accent font-medium transition-colors duration-300 bg-primary-bg/70 hover:bg-primary-bg px-5 py-3 rounded-md border border-info-accent/50 hover:border-accent interactive-glow"
-                    >
+                      className="btn-secondary !py-2.5 !px-4 !text-sm !font-semibold w-full">
                       <FiActivity className="mr-2 h-3.5 w-3.5" />
                       <GlitchText triggerOnHover={true}>
                         {tCerts("progressButton")}
@@ -83,8 +81,7 @@ const CertificationsClient = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Verify ${cert.name} certificate`}
-                      className="inline-flex items-center justify-center w-full text-sm text-info-accent hover:text-accent font-medium transition-colors duration-300 bg-primary-bg/70 hover:bg-primary-bg px-4 py-2.5 rounded-md border border-info-accent/50 hover:border-accent interactive-glow"
-                    >
+                      className="btn-secondary !py-2.5 !px-4 !text-sm !font-semibold w-full">
                       <FaExternalLinkAlt className="mr-2 h-3.5 w-3.5" />
                       <GlitchText triggerOnHover={true}>
                         {tCerts("verifyButton")}
@@ -97,12 +94,10 @@ const CertificationsClient = ({
           ))}
           <AnimateOnScroll
             as="li"
-            staggerDelay={certificationsData.length * 100}
-          >
+            staggerDelay={certificationsData.length * 100}>
             <Panel
               variant="simple"
-              className="border-spaced-dashed hover:border-solid hover:!border-accent/60 flex flex-col items-center justify-center text-center group w-full h-full transition-all duration-300"
-            >
+              className="border-spaced-dashed hover:border-solid hover:!border-accent/60 flex flex-col items-center justify-center text-center group w-full h-full transition-all duration-300">
               <div className="p-6">
                 <div className="relative w-16 h-16 group-hover:opacity-80 transition-opacity duration-300 mb-4 mx-auto">
                   <Image

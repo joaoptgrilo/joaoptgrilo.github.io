@@ -7,30 +7,15 @@ import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
 import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import Section from "./Section";
-import { clsx } from "clsx";
 import AnimateOnScroll from "./AnimateOnScroll";
 import GlitchText from "./Glitch";
 import * as gtag from "@/lib/gtag";
 
-const ContactLink: React.FC<{
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-  eventName: string;
-  newTab?: boolean;
-  isPrimary?: boolean;
-}> = ({ href, icon, label, eventName, newTab = false, isPrimary = false }) => {
-  const baseClasses = `
-    inline-flex items-center justify-center text-center 
-    font_fira_code font-semibold rounded-lg transition-all duration-300 ease-in-out 
-    w-full sm:w-auto px-6 py-3 text-sm md:text-base
-    border-2 interactive-glow group
-  `;
-  const primaryClasses = isPrimary
-    ? "bg-accent text-primary-bg border-accent hover:bg-accent-hover shadow-lg hover:shadow-accent-glow"
-    : "bg-primary-bg/60 hover:bg-primary-bg text-primary-text border-neutral-700/50 hover:border-accent hover:text-accent";
+const Contact: React.FC = () => {
+  const t = useTranslations("Contact");
+  const GITHUB_PROFILE_URL = "https://github.com/joaoptgrilo";
 
-  const handleContactClick = () => {
+  const handleContactClick = (eventName: string, label: string) => {
     gtag.event({
       action: eventName,
       category: "contact",
@@ -40,37 +25,10 @@ const ContactLink: React.FC<{
   };
 
   return (
-    <a
-      href={href}
-      onClick={handleContactClick}
-      target={newTab ? "_blank" : undefined}
-      rel={newTab ? "noopener noreferrer" : undefined}
-      className={clsx(baseClasses, primaryClasses)}
-    >
-      <span
-        className={clsx("mr-2.5 text-xl", {
-          "text-primary-bg": isPrimary,
-          "text-info-accent group-hover:text-accent transition-colors duration-300":
-            !isPrimary,
-        })}
-      >
-        {icon}
-      </span>
-      <GlitchText triggerOnHover={true}>{label}</GlitchText>
-    </a>
-  );
-};
-
-const Contact: React.FC = () => {
-  const t = useTranslations("Contact");
-  const GITHUB_PROFILE_URL = "https://github.com/joaoptgrilo";
-
-  return (
     <Section
       id="contact"
       title="contact"
-      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center"
-    >
+      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center">
       <div className="container mx-auto px-4 flex flex-col items-center">
         <AnimateOnScroll className="w-full max-w-2xl">
           <Panel variant="default" className="text-center">
@@ -79,31 +37,56 @@ const Contact: React.FC = () => {
                 highlight: (chunks) => <Highlight>{chunks}</Highlight>,
               })}
             </p>
-            <p className="font_fira_code text-info-accent mb-6 text-sm">
-              {t("prompt")}
+            <p className="font_fira_code text-sm mb-6">
+              <Highlight>{t("prompt")}</Highlight>
             </p>
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
-              <ContactLink
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              {/* Primary Email Button */}
+              <a
                 href="mailto:joao.grilo.dev@gmail.com"
-                icon={<FaEnvelope />}
-                label={t("emailButton")}
-                eventName="click_email"
-                isPrimary={true}
-              />
-              <ContactLink
+                onClick={() =>
+                  handleContactClick("click_email", t("emailButton"))
+                }
+                className="btn-primary flex items-center justify-center !py-3 !px-6 !text-base">
+                <span className="text-xl mr-2.5 text-primary-bg">
+                  <FaEnvelope />
+                </span>
+                <GlitchText triggerOnHover={true}>
+                  {t("emailButton")}
+                </GlitchText>
+              </a>
+
+              {/* Secondary Buttons */}
+              <a
                 href="https://www.linkedin.com/in/joaoptgrilo/"
-                icon={<FaLinkedin />}
-                label={t("linkedinButton")}
-                eventName="click_linkedin"
-                newTab={true}
-              />
-              <ContactLink
+                onClick={() =>
+                  handleContactClick("click_linkedin", t("linkedinButton"))
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary !py-3 !px-6 !text-base !bg-primary-bg/50">
+                <span className="text-xl mr-2.5">
+                  <FaLinkedin />
+                </span>
+                <GlitchText triggerOnHover={true}>
+                  {t("linkedinButton")}
+                </GlitchText>
+              </a>
+              <a
                 href={GITHUB_PROFILE_URL}
-                icon={<FaGithub />}
-                label={t("githubButton")}
-                eventName="click_github"
-                newTab={true}
-              />
+                onClick={() =>
+                  handleContactClick("click_github", t("githubButton"))
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary !py-3 !px-6 !text-base !bg-primary-bg/50">
+                <span className="text-xl mr-2.5">
+                  <FaGithub />
+                </span>
+                <GlitchText triggerOnHover={true}>
+                  {t("githubButton")}
+                </GlitchText>
+              </a>
             </div>
           </Panel>
         </AnimateOnScroll>

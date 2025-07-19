@@ -30,9 +30,10 @@ const ScrollToTopButton = () => {
   }, []);
 
   const buttonClasses = clsx(
+    "btn-icon",
     "fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50",
     "w-11 h-11 flex items-center justify-center",
-    "rounded-full text-accent bg-primary-bg/70 backdrop-blur-sm",
+    "bg-primary-bg/70 backdrop-blur-sm",
     "panel-glow-anim",
     "border border-accent",
     "transition-all duration-300 ease-in-out",
@@ -48,8 +49,7 @@ const ScrollToTopButton = () => {
       type="button"
       onClick={scrollToTop}
       className={buttonClasses}
-      aria-label="Scroll to top"
-    >
+      aria-label="Scroll to top">
       <FaChevronUp size={20} />
     </button>
   );
