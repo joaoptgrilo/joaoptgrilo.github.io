@@ -99,8 +99,7 @@ html {
     text-stroke-width: 0;
   }
   .glass-effect {
-    background: var(--color-secondary-bg);
-    /*border: 1px solid var(--glass-border);*/
+    background: var(--glass-bg);
   }
 
   .border-spaced-dashed {
