@@ -3,53 +3,74 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 
-interface UseGlitchOptions {
-  onComplete?: () => void;
+interface AutoGlitchOptions {
+  interval: number;
+  startDelay?: number;
 }
 
-const useGlitch = (text: string, options?: UseGlitchOptions) => {
+interface UseGlitchOptions {
+  onComplete?: () => void;
+  duration?: number;
+  scrambleRate?: number;
+  autoGlitch?: AutoGlitchOptions;
+}
+
+const useGlitch = (
+  text: string,
+  {
+    onComplete,
+    duration = 500,
+    scrambleRate = 1,
+    autoGlitch,
+  }: UseGlitchOptions = {}
+) => {
   const [displayText, setDisplayText] = useState(text);
   const animationFrameRef = useRef<number>();
   const startTimeRef = useRef<number>();
+  const lastScrambleTimeRef = useRef<number>(0);
+  const displayTextRef = useRef<string>(text);
 
-  const GLITCH_CHARS = "<>*#{}[]/\\";
-  const REVEAL_DURATION_MS = 800;
-  const SCRAMBLE_UPDATE_RATE_MS = 50;
-  let lastScrambleTime = 0;
+  const GLITCH_CHARS = "_-/>[]{}*";
+
+  useEffect(() => {
+    displayTextRef.current = displayText;
+  }, [displayText]);
 
   const reset = useCallback(() => {
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = undefined;
     }
     setDisplayText(text);
     startTimeRef.current = undefined;
+    lastScrambleTimeRef.current = 0;
   }, [text]);
 
   const animate = useCallback(
     (timestamp: number) => {
       if (startTimeRef.current === undefined) {
         startTimeRef.current = timestamp;
-        lastScrambleTime = timestamp;
+        lastScrambleTimeRef.current = timestamp;
       }
 
       const elapsedTime = timestamp - startTimeRef.current;
-      const revealProgress = Math.min(elapsedTime / REVEAL_DURATION_MS, 1);
+      const revealProgress = Math.min(elapsedTime / duration, 1);
       const charsToReveal = Math.floor(text.length * revealProgress);
 
-      let shouldScramble =
-        timestamp - lastScrambleTime > SCRAMBLE_UPDATE_RATE_MS;
+      const shouldScramble =
+        timestamp - lastScrambleTimeRef.current > scrambleRate;
       if (shouldScramble) {
-        lastScrambleTime = timestamp;
+        lastScrambleTimeRef.current = timestamp;
       }
 
       const newDisplayText = text
         .split("")
         .map((char, index) => {
-          if (index < charsToReveal) return text[index];
+          if (index < charsToReveal) return char;
           if (char === " ") return " ";
           return shouldScramble
             ? GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]
-            : displayText[index];
+            : displayTextRef.current[index];
         })
         .join("");
 
@@ -59,16 +80,36 @@ const useGlitch = (text: string, options?: UseGlitchOptions) => {
         animationFrameRef.current = requestAnimationFrame(animate);
       } else {
         setDisplayText(text);
-        options?.onComplete?.();
+        onComplete?.();
       }
     },
-    [text, displayText, options]
+    [text, duration, scrambleRate, onComplete]
   );
 
   const startGlitch = useCallback(() => {
     reset();
-    requestAnimationFrame(animate);
+    animationFrameRef.current = requestAnimationFrame(animate);
   }, [animate, reset]);
+
+  useEffect(() => {
+    if (!autoGlitch) return;
+
+    let intervalId: NodeJS.Timeout | undefined;
+    const initialDelay =
+      autoGlitch.startDelay ?? Math.random() * autoGlitch.interval;
+
+    const startTimeoutId = setTimeout(() => {
+      startGlitch();
+      intervalId = setInterval(startGlitch, autoGlitch.interval);
+    }, initialDelay);
+
+    return () => {
+      clearTimeout(startTimeoutId);
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [autoGlitch, startGlitch]);
 
   useEffect(() => {
     return () => {

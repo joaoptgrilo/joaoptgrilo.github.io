@@ -50,14 +50,16 @@ export default async function Home({
     ]);
 
   return (
-    <main className="w-full bg-primary-bg/80 backdrop-blur-sm">
+    <>
       <Hero />
-      <About />
-      <Skills skillsData={skillsData} />
-      <Experience experienceData={experienceData} />
-      <Projects projectsData={projectsData} />
-      <Certifications certificationsData={certificationsData} />
-      <Contact />
-    </main>
+      <main className="w-full">
+        <About />
+        <Skills skillsData={skillsData} />
+        <Experience experienceData={experienceData} />
+        <Projects projectsData={projectsData} />
+        <Certifications certificationsData={certificationsData} />
+        <Contact />
+      </main>
+    </>
   );
 }

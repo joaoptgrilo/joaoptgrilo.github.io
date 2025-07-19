@@ -36,13 +36,13 @@ const Section = forwardRef<HTMLElement, SectionProps>(
         ref={ref}
         id={id}
         className={clsx("section-scroll-margin", className)}
-        {...props}
-      >
+        {...props}>
         <div className={clsx("container mx-auto px-4", containerClassName)}>
           <div className={clsx("flex justify-center", titleClassName)}>
-            {/* The border classes have been removed for a cleaner look */}
-            <h2 className="inline-block px-6 py-3 rounded-lg bg-[var(--glass-bg)] backdrop-blur-custom text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-              <Glitch triggerOnVisible={true}>{translatedTitle}</Glitch>
+            <h2 className="inline-block px-6 py-3 text-3xl sm:text-4xl md:text-5xl font-bold text-center">
+              <Glitch autoGlitch={{ interval: 8000 + Math.random() * 6000 }}>
+                {translatedTitle}
+              </Glitch>
             </h2>
           </div>
           {children}

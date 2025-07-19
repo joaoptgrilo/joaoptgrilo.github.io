@@ -111,8 +111,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       className={`${poppins.variable} ${firaCode.variable} antialiased`}
-      suppressHydrationWarning
-    >
+      suppressHydrationWarning>
       <head></head>
       <body>
         <ThemeInitializer />
@@ -122,10 +121,12 @@ export default async function RootLayout({
             <ClientInitializer />
             <ScrollRestorer />
             <Navigation />
-            {children}
+            <div className="bg-primary-bg/80 backdrop-blur-sm">
+              {children}
+              <Footer />
+            </div>
             <ScrollToTopButton />
             <ScrollSpy />
-            <Footer />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
