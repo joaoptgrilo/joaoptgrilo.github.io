@@ -13,8 +13,8 @@ const useGlitch = (text: string, options?: UseGlitchOptions) => {
   const startTimeRef = useRef<number>();
 
   const GLITCH_CHARS = "<>*#{}[]/\\";
-  const REVEAL_DURATION_MS = 800;
-  const SCRAMBLE_UPDATE_RATE_MS = 1;
+  const REVEAL_DURATION_MS = 400;
+  const SCRAMBLE_UPDATE_RATE_MS = 25;
   let lastScrambleTime = 0;
 
   const reset = useCallback(() => {
