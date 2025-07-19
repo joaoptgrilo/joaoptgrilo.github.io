@@ -99,7 +99,7 @@ html {
     text-stroke-width: 0;
   }
   .glass-effect {
-    background: var(--glass-bg);
+    background: var(--color-secondary-bg);
     /*border: 1px solid var(--glass-border);*/
   }
 
@@ -263,22 +263,27 @@ html {
   box-shadow: 0 0 0 3px var(--color-primary-bg),
     0 0 0 6px var(--color-info-accent) !important;
 }
+
+/* === Custom Scrollbar Start === */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: var(--color-secondary-bg);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 4px;
+  background: var(--color-accent);
+  border-radius: 3px;
+  border: 1px solid var(--color-border);
   transition: background 0.3s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-border-hover);
+  background: var(--color-accent-hover);
 }
+/* === Custom Scrollbar End === */
+
 ::selection {
   background: var(--color-accent);
   color: var(--color-primary-bg);
