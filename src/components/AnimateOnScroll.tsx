@@ -36,10 +36,10 @@ const AnimateOnScroll: React.FC<AnimateOnScrollProps> = ({
     <Component
       ref={ref}
       className={clsx(
-        "transition-all ease-out",
+        "transition-all ease-out opacity-100",
         {
-          "opacity-100 translate-y-0 is-in-view": hasBeenVisible,
-          "opacity-50 translate-y-4": !hasBeenVisible,
+          "translate-y-0 is-in-view": hasBeenVisible,
+          "translate-y-8": !hasBeenVisible,
         },
         className
       )}
