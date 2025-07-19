@@ -47,7 +47,10 @@ const Glitch: React.FC<GlitchProps> = ({
       ref={ref}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={clsx("relative inline-block align-middle", className)}
+      className={clsx(
+        "relative inline-block align-baseline", // Changed from align-middle
+        className
+      )}
     >
       <span aria-hidden="true" className="absolute inset-0">
         {displayText}
