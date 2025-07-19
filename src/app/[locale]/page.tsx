@@ -50,7 +50,7 @@ export default async function Home({
     ]);
 
   return (
-    <main className="w-full">
+    <main className="w-full bg-primary-bg/80 backdrop-blur-sm">
       <Hero />
       <About />
       <Skills skillsData={skillsData} />
