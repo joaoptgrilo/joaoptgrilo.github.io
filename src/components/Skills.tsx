@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 import { SkillItem, ProficiencyLevel } from "@/data/types";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import AnimateOnScroll from "./AnimateOnScroll";
-import Toast from "./Toast"; // Import Toast
+import { useToast } from "@/contexts/ToastContext";
 
 interface SkillsProps {
   skillsData: { id: string; skills: SkillItem[] }[];
@@ -112,50 +112,37 @@ const SkillPanel: React.FC<{
 
 const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
   const tProficiency = useTranslations("Proficiency");
-  const [toastMessage, setToastMessage] = useState("");
-  const [showToast, setShowToast] = useState(false);
-
-  const handleShowToast = (message: string) => {
-    setToastMessage(message);
-    setShowToast(true);
-  };
+  const { showToast } = useToast();
 
   return (
-    <>
-      <Section id="skills" title="skills">
-        <AnimateOnScroll>
-          <div className="flex justify-center items-center flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 mb-10 text-sm text-secondary-text font-fira-code">
-            <div className="flex items-center gap-2">
-              <ProficiencyIndicator level={3} />
-              <span>{tProficiency("expert")}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <ProficiencyIndicator level={2} />
-              <span>{tProficiency("proficient")}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <ProficiencyIndicator level={1} />
-              <span>{tProficiency("familiar")}</span>
-            </div>
+    <Section id="skills" title="skills">
+      <AnimateOnScroll>
+        <div className="flex justify-center items-center flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 mb-10 text-sm text-secondary-text font-fira-code">
+          <div className="flex items-center gap-2">
+            <ProficiencyIndicator level={3} />
+            <span>{tProficiency("expert")}</span>
           </div>
-        </AnimateOnScroll>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-          {skillsData.map((category, index) => (
-            <SkillPanel
-              key={category.id}
-              category={category}
-              index={index}
-              onSkillClick={handleShowToast}
-            />
-          ))}
-        </ul>
-      </Section>
-      <Toast
-        message={toastMessage}
-        show={showToast}
-        onClose={() => setShowToast(false)}
-      />
-    </>
+          <div className="flex items-center gap-2">
+            <ProficiencyIndicator level={2} />
+            <span>{tProficiency("proficient")}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <ProficiencyIndicator level={1} />
+            <span>{tProficiency("familiar")}</span>
+          </div>
+        </div>
+      </AnimateOnScroll>
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        {skillsData.map((category, index) => (
+          <SkillPanel
+            key={category.id}
+            category={category}
+            index={index}
+            onSkillClick={showToast}
+          />
+        ))}
+      </ul>
+    </Section>
   );
 };
 export default Skills;

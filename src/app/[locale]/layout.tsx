@@ -14,6 +14,7 @@ import {
 } from "next-intl/server";
 import { locales } from "../../../i18n";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ToastProvider } from "@/contexts/ToastContext";
 import ThemeInitializer from "@/components/ThemeInitializer";
 import ScrollRestorer from "@/components/ScrollRestorer";
 import ClientInitializer from "@/components/ClientInitializer";
@@ -118,15 +119,17 @@ export default async function RootLayout({
         <ThemeProvider>
           <Analytics />
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <ClientInitializer />
-            <ScrollRestorer />
-            <Navigation />
-            <div className="bg-primary-bg/80 backdrop-blur-sm">
-              {children}
-              <Footer />
-            </div>
-            <ScrollToTopButton />
-            <ScrollSpy />
+            <ToastProvider>
+              <ClientInitializer />
+              <ScrollRestorer />
+              <Navigation />
+              <div className="bg-primary-bg/80 backdrop-blur-sm">
+                {children}
+                <Footer />
+              </div>
+              <ScrollToTopButton />
+              <ScrollSpy />
+            </ToastProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

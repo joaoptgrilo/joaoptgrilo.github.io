@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { FaChevronUp } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
+import { useToast } from "@/contexts/ToastContext";
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { isToastVisible } = useToast();
   const pathname = usePathname();
 
   const toggleVisibility = () => {
@@ -39,8 +41,9 @@ const ScrollToTopButton = () => {
     "transition-all duration-300 ease-in-out",
     "hover:scale-110 hover:-translate-y-1 hover:shadow-accent-glow",
     {
-      "opacity-100 translate-y-0": isVisible,
-      "opacity-0 translate-y-4 pointer-events-none": !isVisible,
+      "opacity-100 translate-y-0": isVisible && !isToastVisible,
+      "opacity-0 translate-y-4 pointer-events-none":
+        !isVisible || isToastVisible,
     }
   );
 

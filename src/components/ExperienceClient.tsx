@@ -14,7 +14,7 @@ import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import { clsx } from "clsx";
 import AnimateOnScroll from "./AnimateOnScroll";
-import Toast from "./Toast"; // Import the new Toast component
+import { useToast } from "@/contexts/ToastContext";
 
 const getNodeText = (node: React.ReactNode): string => {
   if (typeof node === "string" || typeof node === "number") {
@@ -43,7 +43,6 @@ const ExperienceCard = ({
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
-    // This check runs only on the client
     setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
   }, []);
 
@@ -200,39 +199,26 @@ const ExperienceClient: React.FC<{
   experienceData: ExperienceItem[];
 }> = ({ experienceData }) => {
   const t = useTranslations("Experience");
-  const [toastMessage, setToastMessage] = useState("");
-  const [showToast, setShowToast] = useState(false);
-
-  const handleShowToast = (message: string) => {
-    setToastMessage(message);
-    setShowToast(true);
-  };
+  const { showToast } = useToast();
 
   return (
-    <>
-      <Section id="experience" title="experience">
-        {experienceData.length > 0 ? (
-          <div className="space-y-12 md:space-y-16">
-            {experienceData.map((item, index) => (
-              <AnimateOnScroll key={item.id} staggerDelay={index * 150}>
-                <ExperienceCard item={item} onTechClick={handleShowToast} />
-              </AnimateOnScroll>
-            ))}
-          </div>
-        ) : (
-          <AnimateOnScroll>
-            <Panel variant="default" className="text-center">
-              <p className="text-lg text-secondary-text">{t("noExperience")}</p>
-            </Panel>
-          </AnimateOnScroll>
-        )}
-      </Section>
-      <Toast
-        message={toastMessage}
-        show={showToast}
-        onClose={() => setShowToast(false)}
-      />
-    </>
+    <Section id="experience" title="experience">
+      {experienceData.length > 0 ? (
+        <div className="space-y-12 md:space-y-16">
+          {experienceData.map((item, index) => (
+            <AnimateOnScroll key={item.id} staggerDelay={index * 150}>
+              <ExperienceCard item={item} onTechClick={showToast} />
+            </AnimateOnScroll>
+          ))}
+        </div>
+      ) : (
+        <AnimateOnScroll>
+          <Panel variant="default" className="text-center">
+            <p className="text-lg text-secondary-text">{t("noExperience")}</p>
+          </Panel>
+        </AnimateOnScroll>
+      )}
+    </Section>
   );
 };
 export default ExperienceClient;

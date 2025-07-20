@@ -11,7 +11,7 @@ import { clsx } from "clsx";
 import ProjectModal from "./ProjectModal";
 import AnimateOnScroll from "./AnimateOnScroll";
 import { useTheme } from "@/contexts/ThemeContext";
-import Toast from "./Toast"; // Import the new Toast component
+import { useToast } from "@/contexts/ToastContext";
 
 const ProjectCard: React.FC<{
   project: Project;
@@ -113,6 +113,7 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
   const tMore = useTranslations("MoreComing");
   const tProjects = useTranslations("Projects");
   const { theme } = useTheme();
+  const { showToast } = useToast();
   const placeholderIconSrc =
     theme === "dark"
       ? "/images/animated-placeholder-dark.svg"
@@ -120,8 +121,6 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
 
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [toastMessage, setToastMessage] = useState("");
-  const [showToast, setShowToast] = useState(false);
 
   const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -137,11 +136,6 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
 
   const handleCloseModal = () => {
     setSelectedProject(null);
-  };
-
-  const handleShowToast = (message: string) => {
-    setToastMessage(message);
-    setShowToast(true);
   };
 
   const techList = useMemo(() => {
@@ -204,7 +198,7 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
                     <ProjectCard
                       project={project}
                       onCardClick={handleOpenModal}
-                      onTechClick={handleShowToast}
+                      onTechClick={showToast}
                     />
                   </AnimateOnScroll>
                 </li>
@@ -255,11 +249,6 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
         onClose={handleCloseModal}
         project={selectedProject}
         triggerRef={triggerButtonRef}
-      />
-      <Toast
-        message={toastMessage}
-        show={showToast}
-        onClose={() => setShowToast(false)}
       />
     </>
   );
