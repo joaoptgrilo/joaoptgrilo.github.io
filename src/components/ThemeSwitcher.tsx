@@ -20,7 +20,8 @@ const ThemeSwitcher = () => {
           "bg-gray-200": theme === "light",
           "bg-secondary-bg": theme === "dark",
         }
-      )}>
+      )}
+    >
       {/* Icons positioned inside the track */}
       <FaSun
         className={clsx(
@@ -46,8 +47,8 @@ const ThemeSwitcher = () => {
         className={clsx(
           "absolute top-1 left-1 flex h-6 w-6 items-center justify-center rounded-full shadow-md transition-transform duration-300 ease-in-out",
           {
-            "translate-x-0 bg-primary-text": theme === "light", // Dark thumb for light mode
-            "translate-x-6 bg-gray-200": theme === "dark", // Light thumb for dark mode
+            "translate-x-0 bg-primary-text": theme === "light",
+            "translate-x-6 bg-gray-200": theme === "dark",
           }
         )}
       />

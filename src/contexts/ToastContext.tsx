@@ -4,7 +4,6 @@
 import React, { createContext, useState, useContext, useCallback } from "react";
 import Toast from "@/components/Toast";
 
-// Context now provides the function AND the visibility state
 interface ToastContextType {
   showToast: (message: string) => void;
   isToastVisible: boolean;
@@ -21,7 +20,6 @@ export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
     setShow(true);
   }, []);
 
-  // The value now includes the visibility state
   const value = {
     showToast,
     isToastVisible: show,

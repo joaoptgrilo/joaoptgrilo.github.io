@@ -181,7 +181,7 @@ html {
   border-top-style: solid;
   border-left-style: solid;
   border-top-left-radius: 0.5rem;
-  transition-delay: 0s, 0.3s, 0s; /* width, height, opacity */
+  transition-delay: 0s, 0.3s, 0s;
 }
 
 .panel-with-corners::after {
@@ -192,7 +192,7 @@ html {
   border-bottom-style: solid;
   border-right-style: solid;
   border-bottom-right-radius: 0.5rem;
-  transition-delay: 0.3s, 0s, 0s; /* width, height, opacity */
+  transition-delay: 0.3s, 0s, 0s;
 }
 
 .is-in-view .panel-with-corners::before,
@@ -265,7 +265,7 @@ html {
 .typewriter-css {
   overflow: hidden;
   border-right: 0.15em solid var(--color-accent);
-  /* white-space: nowrap; <--- REMOVED */
+  white-space: nowrap;
   margin: 0 auto;
   animation: typing 4s steps(45, end), blink-caret 0.8s step-end infinite;
   animation-delay: 1.2s;
@@ -281,7 +281,6 @@ html {
     0 0 0 6px var(--color-info-accent) !important;
 }
 
-/* === Custom Scrollbar Start === */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -299,7 +298,6 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-hover);
 }
-/* === Custom Scrollbar End === */
 
 ::selection {
   background: var(--color-accent);

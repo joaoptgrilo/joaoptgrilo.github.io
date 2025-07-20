@@ -28,7 +28,8 @@ const Contact: React.FC = () => {
     <Section
       id="contact"
       title="contact"
-      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center">
+      className="w-full py-16 md:py-24 min-h-[70vh] flex flex-col items-center justify-center"
+    >
       <div className="container mx-auto px-4 flex flex-col items-center">
         <AnimateOnScroll className="w-full max-w-2xl">
           <Panel variant="default" className="text-center">
@@ -41,13 +42,13 @@ const Contact: React.FC = () => {
               <Highlight>{t("prompt")}</Highlight>
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-              {/* Primary Email Button */}
               <a
                 href="mailto:joao.grilo.dev@gmail.com"
                 onClick={() =>
                   handleContactClick("click_email", t("emailButton"))
                 }
-                className="btn-primary flex items-center justify-center !py-3 !px-6 !text-base">
+                className="btn-primary flex items-center justify-center !py-3 !px-6 !text-base"
+              >
                 <span className="text-xl mr-2.5 text-primary-bg">
                   <FaEnvelope />
                 </span>
@@ -55,8 +56,6 @@ const Contact: React.FC = () => {
                   {t("emailButton")}
                 </GlitchText>
               </a>
-
-              {/* Secondary Buttons */}
               <a
                 href="https://www.linkedin.com/in/joaoptgrilo/"
                 onClick={() =>
@@ -64,7 +63,8 @@ const Contact: React.FC = () => {
                 }
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary !py-3 !px-6 !text-base !bg-primary-bg/50">
+                className="btn-secondary !py-3 !px-6 !text-base !bg-primary-bg/50"
+              >
                 <span className="text-xl mr-2.5">
                   <FaLinkedin />
                 </span>
@@ -79,7 +79,8 @@ const Contact: React.FC = () => {
                 }
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary !py-3 !px-6 !text-base !bg-primary-bg/50">
+                className="btn-secondary !py-3 !px-6 !text-base !bg-primary-bg/50"
+              >
                 <span className="text-xl mr-2.5">
                   <FaGithub />
                 </span>

@@ -8,7 +8,6 @@ import { getData } from "@/data";
 import Hero from "@/components/Hero";
 import SectionSkeleton from "@/components/SectionSkeleton";
 
-// Dynamically import sections that are below the fold
 const About = dynamic(() => import("@/components/About"), {
   loading: () => <SectionSkeleton />,
 });
@@ -39,16 +38,15 @@ export default async function Home({
 }) {
   unstable_setRequestLocale(locale);
 
-  // Data fetching remains on the server
   const dataLoaders = getData(locale as "en" | "pt");
   const [
-    metricsData, // ADDED: Fetch metrics data here
+    metricsData,
     skillsData,
     experienceData,
     projectsData,
     certificationsData,
   ] = await Promise.all([
-    dataLoaders.getMetrics(), // ADDED: Call the loader
+    dataLoaders.getMetrics(),
     dataLoaders.getSkillCategories(),
     dataLoaders.getExperience(),
     dataLoaders.getProjects(),

@@ -12,20 +12,19 @@ interface InfoPanelProps {
   metric: MetricItem;
   icon: React.ReactNode;
   staggerDelay: number;
-  onPanelClick: (message: string) => void; // ADDED: Callback prop
+  onPanelClick: (message: string) => void;
 }
 
 const InfoPanel: React.FC<InfoPanelProps> = ({
   metric,
   icon,
   staggerDelay,
-  onPanelClick, // ADDED
+  onPanelClick,
 }) => {
   const t = useTranslations("About.metrics");
   const panelRef = useRef<HTMLDivElement>(null);
-  const [isTouchDevice, setIsTouchDevice] = useState(false); // ADDED: State for touch detection
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-  // ADDED: Effect to detect touch device on client-side
   useEffect(() => {
     setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
   }, []);
@@ -83,10 +82,10 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
   return (
     <Panel
       ref={panelRef}
-      // MODIFIED: Conditionally render title and add onClick for touch
       title={!isTouchDevice ? tooltipText : undefined}
       onClick={() => isTouchDevice && onPanelClick(tooltipText)}
-      className="flex flex-col items-center justify-center text-center p-4 interactive-glow h-full min-h-[160px] cursor-pointer">
+      className="flex flex-col items-center justify-center text-center p-4 interactive-glow h-full min-h-[160px] cursor-pointer"
+    >
       <div className="w-10 h-10 text-info-accent mb-3">{icon}</div>
       <p className="flex-grow text-xs text-secondary-text mb-2">
         {t(id + ".title")}
