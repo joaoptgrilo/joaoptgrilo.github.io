@@ -1,7 +1,6 @@
-// src/components/Toast.tsx
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { clsx } from "clsx";
 import { FiInfo } from "react-icons/fi";
 
@@ -30,7 +29,7 @@ const Toast: React.FC<ToastProps> = ({
   return (
     <div
       className={clsx(
-        "fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-md p-4 rounded-lg shadow-lg flex items-start transition-all duration-300 ease-in-out font-sans",
+        "sticky bottom-0 inset-x-0 z-50 mx-auto max-w-md p-4 rounded-lg shadow-lg flex items-start transition-all duration-300 ease-in-out font-sans",
         "bg-light-panel-bg border border-border text-primary-text",
         show
           ? "opacity-100 translate-y-0"
