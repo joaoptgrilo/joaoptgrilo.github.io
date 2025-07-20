@@ -1,5 +1,6 @@
 // src/components/IconMap.tsx
-import "server-only";
+// "server-only"; <-- REMOVED THIS LINE
+
 import {
   FiBriefcase,
   FiTarget,

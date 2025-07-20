@@ -9,17 +9,17 @@ import AnimateOnScroll from "./AnimateOnScroll";
 const Footer: React.FC = () => {
   const t = useTranslations("Footer");
   const currentYear = new Date().getFullYear();
-  const websiteVersion = "v1.2.5";
+  const websiteVersion = "v1.5.0";
 
   return (
     <footer id="footer" className="w-full py-10 md:py-16">
       <div className="container mx-auto px-4">
         <AnimateOnScroll>
           <Panel variant="default" className="text-center">
-            <p className="text-sm text-secondary-text font_fira_code">
+            <p className="text-sm text-secondary-text font-fira-code">
               {t("copyright", { currentYear })}
             </p>
-            <p className="text-xs mt-2 text-neutral-500 font_fira_code">
+            <p className="text-xs mt-2 text-neutral-500 font-fira-code">
               {t("version", { versionNumber: websiteVersion })}
             </p>
           </Panel>

@@ -45,14 +45,14 @@ const CertificationsClient = ({
                       {cert.name}
                     </p>
                   </div>
-                  <div className="flex items-center text-xs text-secondary-text mb-1 font_fira_code pl-9">
+                  <div className="flex items-center text-xs text-secondary-text mb-1 font-fira-code pl-9">
                     <FaUniversity className="w-3.5 h-3.5 mr-1.5 text-neutral-400 flex-shrink-0" />
                     <span>
                       {tCerts("issuerLabel")}: {cert.issuer}
                     </span>
                   </div>
                   {cert.issueDate && (
-                    <p className="text-xs text-neutral-400 mb-3 font_fira_code pl-9">
+                    <p className="text-xs text-neutral-400 mb-3 font-fira-code pl-9">
                       {tCerts("dateLabel")}: {cert.issueDate}
                     </p>
                   )}
@@ -107,7 +107,7 @@ const CertificationsClient = ({
                     sizes="64px"
                   />
                 </div>
-                <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
+                <p className="font-fira-code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
                   {tMore("title", { item: tMore("certifications") })}
                 </p>
                 <p className="text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">

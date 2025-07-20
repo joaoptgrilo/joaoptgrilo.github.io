@@ -25,7 +25,7 @@ const config: Config = {
       },
       fontFamily: {
         poppins: ["var(--font-poppins)", "sans-serif"],
-        fira_code: ["var(--font-fira-code)", "monospace"],
+        "fira-code": ["var(--font-fira-code)", "monospace"],
       },
       backdropBlur: {
         custom: "var(--blur-intensity)",

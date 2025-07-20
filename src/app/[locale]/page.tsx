@@ -41,19 +41,25 @@ export default async function Home({
 
   // Data fetching remains on the server
   const dataLoaders = getData(locale as "en" | "pt");
-  const [skillsData, experienceData, projectsData, certificationsData] =
-    await Promise.all([
-      dataLoaders.getSkillCategories(),
-      dataLoaders.getExperience(),
-      dataLoaders.getProjects(),
-      dataLoaders.getCertifications(),
-    ]);
+  const [
+    metricsData, // ADDED: Fetch metrics data here
+    skillsData,
+    experienceData,
+    projectsData,
+    certificationsData,
+  ] = await Promise.all([
+    dataLoaders.getMetrics(), // ADDED: Call the loader
+    dataLoaders.getSkillCategories(),
+    dataLoaders.getExperience(),
+    dataLoaders.getProjects(),
+    dataLoaders.getCertifications(),
+  ]);
 
   return (
     <>
       <Hero />
       <main className="w-full">
-        <About />
+        <About metricsData={metricsData} /> {/* MODIFIED: Pass data as prop */}
         <Skills skillsData={skillsData} />
         <Experience experienceData={experienceData} />
         <Projects projectsData={projectsData} />

@@ -1,7 +1,7 @@
 // src/components/Skills.tsx
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Section from "./Section";
 import Panel from "./Panel";
 import { clsx } from "clsx";
@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { SkillItem, ProficiencyLevel } from "@/data/types";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import AnimateOnScroll from "./AnimateOnScroll";
+import Toast from "./Toast"; // Import Toast
 
 interface SkillsProps {
   skillsData: { id: string; skills: SkillItem[] }[];
@@ -47,10 +48,16 @@ const ProficiencyIndicator: React.FC<{
 const SkillPanel: React.FC<{
   category: { id: string; skills: SkillItem[] };
   index: number;
-}> = ({ category, index }) => {
+  onSkillClick: (message: string) => void;
+}> = ({ category, index, onSkillClick }) => {
   const tSkills = useTranslations("Skills");
   const tSkillTags = useTranslations("skillTags");
   const tProficiency = useTranslations("Proficiency");
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   const panelRef = useRef<HTMLDivElement>(null);
   const isInView = useIntersectionObserver(panelRef, {
@@ -68,9 +75,8 @@ const SkillPanel: React.FC<{
       <Panel
         ref={panelRef}
         className={clsx("h-full", { "is-in-view": isInView })}
-        variant="default"
-      >
-        <p className="font_fira_code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
+        variant="default">
+        <p className="font-fira-code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
           {tSkills(category.id as any)}
         </p>
         <div className="flex flex-col space-y-2">
@@ -81,12 +87,13 @@ const SkillPanel: React.FC<{
               const proficiencyLabel = tProficiency(proficiencyKey);
               const skillDescription = tSkillTags(skill.key as any);
               const combinedTooltip = `${proficiencyLabel}: ${skillDescription}`;
+
               return (
                 <div
                   key={skill.key}
-                  title={combinedTooltip}
-                  className="flex items-center justify-between px-3 py-2 rounded-md border border-border cursor-default interactive-glow group"
-                >
+                  title={!isTouchDevice ? combinedTooltip : undefined}
+                  onClick={() => isTouchDevice && onSkillClick(combinedTooltip)}
+                  className="flex items-center justify-between px-3 py-2 rounded-md border border-border cursor-pointer interactive-glow group">
                   <span className="text-sm text-secondary-text group-hover:text-primary-text transition-colors duration-300">
                     {skill.name}
                   </span>
@@ -105,31 +112,50 @@ const SkillPanel: React.FC<{
 
 const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
   const tProficiency = useTranslations("Proficiency");
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
+
+  const handleShowToast = (message: string) => {
+    setToastMessage(message);
+    setShowToast(true);
+  };
 
   return (
-    <Section id="skills" title="skills">
-      <AnimateOnScroll>
-        <div className="flex justify-center items-center flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 mb-10 text-sm text-secondary-text font_fira_code">
-          <div className="flex items-center gap-2">
-            <ProficiencyIndicator level={3} />
-            <span>{tProficiency("expert")}</span>
+    <>
+      <Section id="skills" title="skills">
+        <AnimateOnScroll>
+          <div className="flex justify-center items-center flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 mb-10 text-sm text-secondary-text font-fira-code">
+            <div className="flex items-center gap-2">
+              <ProficiencyIndicator level={3} />
+              <span>{tProficiency("expert")}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ProficiencyIndicator level={2} />
+              <span>{tProficiency("proficient")}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ProficiencyIndicator level={1} />
+              <span>{tProficiency("familiar")}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <ProficiencyIndicator level={2} />
-            <span>{tProficiency("proficient")}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <ProficiencyIndicator level={1} />
-            <span>{tProficiency("familiar")}</span>
-          </div>
-        </div>
-      </AnimateOnScroll>
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-        {skillsData.map((category, index) => (
-          <SkillPanel key={category.id} category={category} index={index} />
-        ))}
-      </ul>
-    </Section>
+        </AnimateOnScroll>
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          {skillsData.map((category, index) => (
+            <SkillPanel
+              key={category.id}
+              category={category}
+              index={index}
+              onSkillClick={handleShowToast}
+            />
+          ))}
+        </ul>
+      </Section>
+      <Toast
+        message={toastMessage}
+        show={showToast}
+        onClose={() => setShowToast(false)}
+      />
+    </>
   );
 };
 export default Skills;

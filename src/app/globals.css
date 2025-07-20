@@ -45,7 +45,7 @@ html.light {
 
 body {
   color: var(--color-primary-text);
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins), sans-serif;
   background-color: var(--color-primary-bg);
   background-image: url("/images/coding-symbols-dark.svg");
   background-attachment: fixed;
@@ -77,13 +77,13 @@ html {
 
 @layer components {
   .btn-primary {
-    @apply inline-block whitespace-nowrap bg-accent text-primary-bg font-fira_code font-semibold text-base py-3 px-8 rounded-lg shadow-lg hover:bg-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto transform hover:scale-105 hover:-translate-y-px;
+    @apply inline-block whitespace-nowrap bg-accent text-primary-bg font-fira-code font-semibold text-base py-3 px-8 rounded-lg shadow-lg hover:bg-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto transform hover:scale-105 hover:-translate-y-px;
   }
   .btn-secondary {
-    @apply inline-flex whitespace-nowrap items-center justify-center bg-transparent text-accent font-fira_code font-semibold text-base py-3 px-8 rounded-lg border-2 border-accent hover:text-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto interactive-glow;
+    @apply inline-flex whitespace-nowrap items-center justify-center bg-transparent text-accent font-fira-code font-semibold text-base py-3 px-8 rounded-lg border-2 border-accent hover:text-accent-hover hover:shadow-accent-glow focus:outline-none focus:ring-4 focus:ring-accent focus:ring-opacity-50 transition-all duration-300 w-full sm:w-auto interactive-glow;
   }
   .btn-filter {
-    @apply px-3 py-1.5 text-sm rounded-md transition-all duration-300 ease-in-out font-fira_code font-medium interactive-glow bg-light-panel-bg bg-opacity-20 text-secondary-text hover:bg-light-panel-bg hover:bg-opacity-50 hover:text-primary-text;
+    @apply px-3 py-1.5 text-sm rounded-md transition-all duration-300 ease-in-out font-fira-code font-medium interactive-glow bg-light-panel-bg bg-opacity-20 text-secondary-text hover:bg-light-panel-bg hover:bg-opacity-50 hover:text-primary-text;
   }
   .btn-filter-active {
     @apply bg-accent text-primary-bg scale-105;
@@ -94,7 +94,7 @@ html {
     @apply p-2 rounded-full text-secondary-text hover:text-accent hover:bg-primary-bg hover:bg-opacity-50 transition-colors duration-200;
   }
   .tag {
-    @apply inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border font-fira_code cursor-default;
+    @apply inline-block text-secondary-text px-2.5 py-1 rounded text-xs border border-border font-fira-code cursor-default;
   }
 }
 
@@ -220,7 +220,6 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: inherit;
   box-shadow: 0 0 40px -10px var(--color-shadow);
   opacity: 0;
   transition: opacity 0.3s ease-out;
@@ -266,7 +265,7 @@ html {
 .typewriter-css {
   overflow: hidden;
   border-right: 0.15em solid var(--color-accent);
-  white-space: nowrap;
+  /* white-space: nowrap; <--- REMOVED */
   margin: 0 auto;
   animation: typing 4s steps(45, end), blink-caret 0.8s step-end infinite;
   animation-delay: 1.2s;

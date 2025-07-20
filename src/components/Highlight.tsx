@@ -21,7 +21,7 @@ const Highlight: React.FC<HighlightProps> = ({ children, className = "" }) => {
   const text = extractText(children);
 
   return (
-    <span className={`font-fira_code text-accent font-medium ${className}`}>
+    <span className={`font-fira-code text-accent font-medium ${className}`}>
       <Glitch autoGlitch={{ interval: 8000 + Math.random() * 6000 }}>
         {text}
       </Glitch>

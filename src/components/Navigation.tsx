@@ -92,16 +92,16 @@ const Navigation: React.FC = () => {
   );
 
   const pillClasses = clsx(
-    "flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font-fira_code font-semibold text-accent bg-primary-bg/80",
+    "flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm font-fira-code font-semibold text-accent bg-primary-bg/80",
     "border border-accent",
     "panel-glow-anim",
     "hover:scale-105 hover:-translate-y-px hover:shadow-accent-glow"
   );
 
   const desktopNavLinkClasses =
-    "font-poppins text-primary-text hover:text-accent transition-colors text-sm";
+    "font-sans text-primary-text hover:text-accent transition-colors text-base";
   const mobileMenuLinkClasses =
-    "font-poppins text-primary-text hover:text-accent transition-colors py-2 text-base w-full text-center";
+    "font-sans text-primary-text hover:text-accent transition-colors py-2 text-base w-full text-center";
 
   return (
     <>
@@ -134,6 +134,7 @@ const Navigation: React.FC = () => {
             ))}
             <div className="flex items-center space-x-2">
               <LanguageSwitcher />
+              <div className="h-6 w-px bg-border" aria-hidden="true"></div>
               <ThemeSwitcher />
             </div>
           </div>
@@ -163,6 +164,7 @@ const Navigation: React.FC = () => {
               ))}
               <div className="flex items-center space-x-4 mt-4">
                 <LanguageSwitcher />
+                <div className="h-6 w-px bg-border" aria-hidden="true"></div>
                 <ThemeSwitcher />
               </div>
             </div>

@@ -120,7 +120,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.title}
               </h2>
               <div className="mb-6">
-                <p className="font_fira_code text-sm text-secondary-text mb-2 uppercase tracking-wider">
+                <p className="font-fira-code text-sm text-secondary-text mb-2 uppercase tracking-wider">
                   {t("techStack")}
                 </p>
                 <ul className="flex flex-wrap gap-2">

@@ -60,24 +60,24 @@ const Hero: React.FC = () => {
         className="w-full h-full flex flex-col items-center justify-center rounded-none border-b border-border">
         <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center p-6 sm:p-8 md:p-12 lg:p-16">
           <div className="space-y-4 sm:space-y-5 md:space-y-6 max-w-3xl w-full pt-16 md:pt-0">
-            <h1 className="font_fira_code font-bold text-4xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-text leading-tight tracking-tight sm:tracking-normal">
+            <h1 className="font-fira-code font-bold text-4xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-text leading-tight tracking-tight sm:tracking-normal">
               <Glitch autoGlitch={{ interval: 8000 + Math.random() * 6000 }}>
                 {t("name")}
               </Glitch>
             </h1>
-            <p className="font_fira_code font-semibold text-xl xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary-text leading-snug tracking-tight sm:tracking-normal animate-fade-in-up animation-delay-100">
+            <p className="font-fira-code font-semibold text-xl xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-primary-text leading-snug tracking-tight sm:tracking-normal animate-fade-in-up animation-delay-100">
               <Glitch autoGlitch={{ interval: 8000 + Math.random() * 6000 }}>
                 {t("title")}
               </Glitch>
             </p>
             <div className="h-24 sm:h-20 md:h-16 lg:h-12 flex items-center justify-center animate-fade-in-up animation-delay-200">
               <div className="hidden lg:block">
-                <div className="font_fira_code font-medium text-xl text-accent tracking-wide typewriter-css">
+                <div className="font-fira-code font-medium text-xl text-accent tracking-wide typewriter-css">
                   {taglineText}
                 </div>
               </div>
               <p
-                className="block lg:hidden font_fira_code font-medium text-base sm:text-lg text-accent tracking-wide"
+                className="block lg:hidden font-fira-code font-medium text-base sm:text-lg text-accent tracking-wide"
                 dangerouslySetInnerHTML={{
                   __html: taglineText.replace(" & ", "<br />& "),
                 }}

@@ -12,15 +12,23 @@ interface InfoPanelProps {
   metric: MetricItem;
   icon: React.ReactNode;
   staggerDelay: number;
+  onPanelClick: (message: string) => void; // ADDED: Callback prop
 }
 
 const InfoPanel: React.FC<InfoPanelProps> = ({
   metric,
   icon,
   staggerDelay,
+  onPanelClick, // ADDED
 }) => {
   const t = useTranslations("About.metrics");
   const panelRef = useRef<HTMLDivElement>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false); // ADDED: State for touch detection
+
+  // ADDED: Effect to detect touch device on client-side
+  useEffect(() => {
+    setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   const isPanelInView = useIntersectionObserver(panelRef, { threshold: 0.5 });
   const [hasBeenVisible, setHasBeenVisible] = useState(false);
@@ -32,7 +40,8 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
   }, [isPanelInView, hasBeenVisible]);
 
   const { id, value, decimals, stacks } = metric;
-  const valueClasses = "text-primary-text text-lg font-bold font-fira_code";
+  const valueClasses = "text-primary-text text-lg font-bold font-fira-code";
+  const tooltipText = t(`${id}.tooltip`);
 
   let displayValueNode: React.ReactNode;
 
@@ -74,10 +83,10 @@ const InfoPanel: React.FC<InfoPanelProps> = ({
   return (
     <Panel
       ref={panelRef}
-      variant="simple"
-      title={t(id + ".tooltip")}
-      className="flex flex-col items-center justify-center text-center p-4 interactive-glow h-full min-h-[160px]"
-    >
+      // MODIFIED: Conditionally render title and add onClick for touch
+      title={!isTouchDevice ? tooltipText : undefined}
+      onClick={() => isTouchDevice && onPanelClick(tooltipText)}
+      className="flex flex-col items-center justify-center text-center p-4 interactive-glow h-full min-h-[160px] cursor-pointer">
       <div className="w-10 h-10 text-info-accent mb-3">{icon}</div>
       <p className="flex-grow text-xs text-secondary-text mb-2">
         {t(id + ".title")}

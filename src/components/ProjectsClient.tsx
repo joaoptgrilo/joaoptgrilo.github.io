@@ -1,6 +1,6 @@
 // src/components/ProjectsClient.tsx
 "use client";
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Project, ProjectTechItem } from "@/data";
 import { FiEye } from "react-icons/fi";
@@ -11,6 +11,7 @@ import { clsx } from "clsx";
 import ProjectModal from "./ProjectModal";
 import AnimateOnScroll from "./AnimateOnScroll";
 import { useTheme } from "@/contexts/ThemeContext";
+import Toast from "./Toast"; // Import the new Toast component
 
 const ProjectCard: React.FC<{
   project: Project;
@@ -18,13 +19,19 @@ const ProjectCard: React.FC<{
     project: Project,
     e: React.MouseEvent<HTMLButtonElement>
   ) => void;
-}> = ({ project, onCardClick }) => {
+  onTechClick: (description: string) => void;
+}> = ({ project, onCardClick, onTechClick }) => {
   const t = useTranslations("Projects");
   const { theme } = useTheme();
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const placeholderIconSrc =
     theme === "dark"
       ? "/images/animated-placeholder-dark.svg"
       : "/images/animated-placeholder-light.svg";
+
+  useEffect(() => {
+    setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   return (
     <button
@@ -59,24 +66,30 @@ const ProjectCard: React.FC<{
             )}
           </div>
           <div className="flex flex-col flex-grow">
-            <p className="font_fira_code text-xl text-info-accent mb-2 group-hover:text-accent transition-colors duration-300 font-semibold">
+            <p className="font-fira-code text-xl text-info-accent mb-2 group-hover:text-accent transition-colors duration-300 font-semibold">
               {project.title}
             </p>
             <p className="text-secondary-text text-sm leading-relaxed mb-4 flex-grow">
               {project.description}
             </p>
             <div className="mb-4">
-              <p className="font_fira_code text-xs text-neutral-400 mb-1.5 uppercase tracking-wider">
+              <p className="font-fira-code text-xs text-neutral-400 mb-1.5 uppercase tracking-wider">
                 {t("techStack")}
               </p>
               <ul className="flex flex-wrap gap-2">
                 {project.techStack.map((tech: ProjectTechItem) => (
                   <li key={tech.name}>
-                    <span
-                      title={tech.description || tech.name}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (isTouchDevice) {
+                          onTechClick(tech.description || tech.name);
+                        }
+                      }}
+                      title={!isTouchDevice ? tech.description : undefined}
                       className="tag interactive-glow !cursor-pointer hover:text-primary-text">
                       {tech.name}
-                    </span>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -84,7 +97,7 @@ const ProjectCard: React.FC<{
           </div>
           <div className="mt-auto pt-4 border-t border-border flex items-center justify-start space-x-3">
             <FiEye className="h-4 w-4 text-secondary-text" />
-            <span className="text-xs text-secondary-text font_fira_code">
+            <span className="text-xs text-secondary-text font-fira-code">
               {t("learnMoreButton")}
             </span>
           </div>
@@ -107,6 +120,8 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
 
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -122,6 +137,11 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
 
   const handleCloseModal = () => {
     setSelectedProject(null);
+  };
+
+  const handleShowToast = (message: string) => {
+    setToastMessage(message);
+    setShowToast(true);
   };
 
   const techList = useMemo(() => {
@@ -184,6 +204,7 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
                     <ProjectCard
                       project={project}
                       onCardClick={handleOpenModal}
+                      onTechClick={handleShowToast}
                     />
                   </AnimateOnScroll>
                 </li>
@@ -206,7 +227,7 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
                             sizes="64px"
                           />
                         </div>
-                        <p className="font_fira_code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
+                        <p className="font-fira-code text-lg text-secondary-text group-hover:text-primary-text transition-colors duration-300 font-semibold">
                           {tMore("title", { item: tMore("projects") })}
                         </p>
                         <p className="text-sm text-neutral-500 group-hover:text-secondary-text transition-colors duration-300">
@@ -234,6 +255,11 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
         onClose={handleCloseModal}
         project={selectedProject}
         triggerRef={triggerButtonRef}
+      />
+      <Toast
+        message={toastMessage}
+        show={showToast}
+        onClose={() => setShowToast(false)}
       />
     </>
   );

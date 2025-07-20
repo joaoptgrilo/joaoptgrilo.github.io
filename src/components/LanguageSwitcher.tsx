@@ -72,12 +72,12 @@ export default function LanguageSwitcher() {
       <button
         ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 p-2 rounded-md hover:bg-light-panel-bg/50 transition-colors font-fira_code font-semibold"
+        className="flex items-center space-x-2 p-2 rounded-md border border-border hover:bg-light-panel-bg/50 transition-colors font-fira-code font-semibold"
         aria-haspopup="true"
         aria-expanded={isOpen}
         aria-label="Change language">
         <FaGlobe className="w-5 h-5 text-secondary-text" />
-        <span className="text-sm uppercase">{currentLanguage.abbr}</span>
+        <span className="text-base uppercase">{currentLanguage.abbr}</span>
         <FaChevronDown
           className={clsx(
             "w-3 h-3 text-secondary-text transition-transform duration-200",
@@ -100,7 +100,7 @@ export default function LanguageSwitcher() {
                   }}
                   role="menuitem"
                   className={clsx(
-                    "w-full text-left flex items-center px-4 py-2 text-sm transition-colors font-fira_code",
+                    "w-full text-left flex items-center px-4 py-2 text-sm transition-colors font-fira-code",
                     {
                       "bg-accent text-primary-bg no-text-stroke cursor-default":
                         locale === lang.code,
