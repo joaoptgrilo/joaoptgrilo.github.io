@@ -3,9 +3,10 @@
 
 import { useEffect } from 'react';
 
-const throttle = (func: (...args: any[]) => void, limit: number) => {
+const throttle = (func: (...args: unknown[]) => void, limit: number) => {
     let inThrottle: boolean;
-    return function (this: any, ...args: any[]): void {
+    return function (this: unknown, ...args: unknown[]): void {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         const context = this;
         if (!inThrottle) {
             func.apply(context, args);

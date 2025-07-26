@@ -13,14 +13,18 @@ import AnimateOnScroll from "./AnimateOnScroll";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useToast } from "@/contexts/ToastContext";
 
-const ProjectCard: React.FC<{
+const ProjectCard = ({
+  project,
+  onCardClick,
+  onTechClick,
+}: {
   project: Project;
   onCardClick: (
     project: Project,
     e: React.MouseEvent<HTMLButtonElement>
   ) => void;
   onTechClick: (description: string) => void;
-}> = ({ project, onCardClick, onTechClick }) => {
+}) => {
   const t = useTranslations("Projects");
   const { theme } = useTheme();
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -37,10 +41,12 @@ const ProjectCard: React.FC<{
     <button
       onClick={(e) => onCardClick(project, e)}
       className="flex flex-col h-full group w-full text-left"
-      aria-label={`View details for ${project.title}`}>
+      aria-label={`View details for ${project.title}`}
+    >
       <Panel
         className="flex flex-col h-full interactive-glow"
-        variant="default">
+        variant="default"
+      >
         <article className="flex flex-col flex-grow h-full">
           <div className="relative w-full aspect-[16/9] rounded-md overflow-hidden mb-4 border border-border transition-transform duration-300 ease-out group-hover:scale-105">
             {project.imageUrl ? (
@@ -87,7 +93,8 @@ const ProjectCard: React.FC<{
                         }
                       }}
                       title={!isTouchDevice ? tech.description : undefined}
-                      className="tag interactive-glow !cursor-pointer hover:text-primary-text">
+                      className="tag interactive-glow !cursor-pointer hover:text-primary-text"
+                    >
                       {tech.name}
                     </button>
                   </li>
@@ -107,9 +114,7 @@ const ProjectCard: React.FC<{
   );
 };
 
-const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
-  projectsData,
-}) => {
+const ProjectsClient = ({ projectsData }: { projectsData: Project[] }) => {
   const tMore = useTranslations("MoreComing");
   const tProjects = useTranslations("Projects");
   const { theme } = useTheme();
@@ -163,7 +168,8 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
             <AnimateOnScroll>
               <Panel
                 variant="simple"
-                className="mb-10 max-w-4xl mx-auto p-4 md:p-6 interactive-glow">
+                className="mb-10 max-w-4xl mx-auto p-4 md:p-6 interactive-glow"
+              >
                 <p className="text-center font-semibold text-lg text-info-accent mb-4">
                   {tProjects("filterTitle")}
                 </p>
@@ -178,7 +184,8 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
                           "bg-accent text-primary-bg scale-105 border-accent":
                             activeFilter === tech,
                         }
-                      )}>
+                      )}
+                    >
                       {tech}
                     </button>
                   ))}
@@ -188,13 +195,15 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
 
             <ul
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-              key={activeFilter}>
+              key={activeFilter}
+            >
               {filteredProjects.map((project, index) => (
                 <li key={project.id} className="flex">
                   <AnimateOnScroll
                     as="div"
                     className="w-full h-full"
-                    staggerDelay={index * 100}>
+                    staggerDelay={index * 100}
+                  >
                     <ProjectCard
                       project={project}
                       onCardClick={handleOpenModal}
@@ -208,10 +217,12 @@ const ProjectsClient: React.FC<{ projectsData: Project[] }> = ({
                   <AnimateOnScroll
                     as="div"
                     className="w-full h-full"
-                    staggerDelay={filteredProjects.length * 100}>
+                    staggerDelay={filteredProjects.length * 100}
+                  >
                     <Panel
                       variant="simple"
-                      className="border-spaced-dashed hover:border-solid hover:!border-accent/60 flex flex-col items-center justify-center text-center group w-full h-full transition-all duration-300">
+                      className="border-spaced-dashed hover:border-solid hover:!border-accent/60 flex flex-col items-center justify-center text-center group w-full h-full transition-all duration-300"
+                    >
                       <div className="p-6">
                         <div className="relative w-16 h-16 group-hover:opacity-80 transition-opacity duration-300 mb-4 mx-auto">
                           <Image

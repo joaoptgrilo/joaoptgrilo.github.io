@@ -12,12 +12,12 @@ interface AnimateOnScrollProps {
   as?: React.ElementType;
 }
 
-const AnimateOnScroll: React.FC<AnimateOnScrollProps> = ({
+const AnimateOnScroll = ({
   children,
   className,
   staggerDelay = 0,
   as: Component = "div",
-}) => {
+}: AnimateOnScrollProps) => {
   const ref = useRef<HTMLElement>(null);
   const [hasBeenVisible, setHasBeenVisible] = useState(false);
 

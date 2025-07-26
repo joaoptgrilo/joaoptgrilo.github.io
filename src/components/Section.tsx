@@ -29,14 +29,15 @@ const Section = forwardRef<HTMLElement, SectionProps>(
     ref
   ) => {
     const t = useTranslations("SectionTitles");
-    const translatedTitle = t(title as any);
+    const translatedTitle = t(title);
 
     return (
       <section
         ref={ref}
         id={id}
         className={clsx("section-scroll-margin", className)}
-        {...props}>
+        {...props}
+      >
         <div className={clsx("container mx-auto px-4", containerClassName)}>
           <div className={clsx("flex justify-center", titleClassName)}>
             <h2 className="inline-block px-6 py-3 text-3xl sm:text-4xl md:text-5xl font-bold text-center">

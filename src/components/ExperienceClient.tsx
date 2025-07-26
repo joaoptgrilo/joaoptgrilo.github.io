@@ -84,7 +84,8 @@ const ExperienceCard = ({
             <div className="flex items-center">
               {item.companyLogoUrl ? (
                 <div
-                  className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border bg-black opacity-80`}>
+                  className={`mr-4 flex-shrink-0 w-20 h-20 relative p-3 overflow-hidden rounded-md border border-border bg-black opacity-80`}
+                >
                   <div className="relative w-full h-full">
                     <Image
                       src={item.companyLogoUrl}
@@ -105,7 +106,8 @@ const ExperienceCard = ({
                       href={item.companyLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-accent transition-colors duration-300">
+                      className="hover:text-accent transition-colors duration-300"
+                    >
                       {item.company}
                     </a>
                   ) : (
@@ -135,14 +137,16 @@ const ExperienceCard = ({
               </p>
               <ul
                 ref={techListRef}
-                className="flex flex-wrap gap-x-2 gap-y-1.5">
+                className="flex flex-wrap gap-x-2 gap-y-1.5"
+              >
                 {item.keyTech.map((tech) => (
                   <li
                     key={tech.name}
                     onMouseEnter={() =>
                       !isTouchDevice && setHoveredTech(tech.name)
                     }
-                    onMouseLeave={() => !isTouchDevice && setHoveredTech(null)}>
+                    onMouseLeave={() => !isTouchDevice && setHoveredTech(null)}
+                  >
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -153,7 +157,8 @@ const ExperienceCard = ({
                       }
                       onBlur={() => !isTouchDevice && setHoveredTech(null)}
                       title={!isTouchDevice ? tech.description : undefined}
-                      className="tag interactive-glow !cursor-pointer w-full h-full text-left">
+                      className="tag interactive-glow !cursor-pointer w-full h-full text-left"
+                    >
                       {tech.name}
                     </button>
                   </li>
@@ -180,7 +185,8 @@ const ExperienceCard = ({
                   className={clsx(
                     "flex transition-opacity duration-300 ease-in-out",
                     { "opacity-40": isDimmed }
-                  )}>
+                  )}
+                >
                   <span className="text-accent mr-2.5 mt-1.5 flex-shrink-0 text-xs">
                     ◆
                   </span>
@@ -195,9 +201,11 @@ const ExperienceCard = ({
   );
 };
 
-const ExperienceClient: React.FC<{
+const ExperienceClient = ({
+  experienceData,
+}: {
   experienceData: ExperienceItem[];
-}> = ({ experienceData }) => {
+}) => {
   const t = useTranslations("Experience");
   const { showToast } = useToast();
 

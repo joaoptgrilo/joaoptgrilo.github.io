@@ -14,7 +14,7 @@ interface NavLinkItem {
   label: string;
 }
 
-const Navigation: React.FC = () => {
+const Navigation = () => {
   const t = useTranslations("Navigation");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -115,7 +115,8 @@ const Navigation: React.FC = () => {
               isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
             )}
             tabIndex={isScrolled ? 0 : -1}
-            aria-hidden={!isScrolled}>
+            aria-hidden={!isScrolled}
+          >
             <span className={pillClasses}>
               <span className="mr-1.5 sm:mr-2 h-2 w-2 bg-accent rounded-full animate-pulse"></span>
               {t("namePill")}
@@ -128,7 +129,8 @@ const Navigation: React.FC = () => {
                 href={link.href}
                 scroll={false}
                 onClick={handleNavClick}
-                className={desktopNavLinkClasses}>
+                className={desktopNavLinkClasses}
+              >
                 {link.label}
               </Link>
             ))}
@@ -144,7 +146,8 @@ const Navigation: React.FC = () => {
               aria-label={
                 isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"
               }
-              className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10">
+              className="text-primary-text hover:text-accent focus:outline-none text-2xl p-1 -mr-1 relative z-10"
+            >
               {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
@@ -158,7 +161,8 @@ const Navigation: React.FC = () => {
                   href={link.href}
                   scroll={false}
                   className={mobileMenuLinkClasses}
-                  onClick={handleNavClick}>
+                  onClick={handleNavClick}
+                >
                   {link.label}
                 </Link>
               ))}

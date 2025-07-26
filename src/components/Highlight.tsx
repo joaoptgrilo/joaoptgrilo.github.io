@@ -17,7 +17,7 @@ const extractText = (node: React.ReactNode): string => {
   return "";
 };
 
-const Highlight: React.FC<HighlightProps> = ({ children, className = "" }) => {
+const Highlight = ({ children, className = "" }: HighlightProps) => {
   const text = extractText(children);
 
   return (

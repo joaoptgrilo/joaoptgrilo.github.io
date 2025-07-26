@@ -11,7 +11,7 @@ import AnimateOnScroll from "./AnimateOnScroll";
 import GlitchText from "./Glitch";
 import * as gtag from "@/lib/gtag";
 
-const Contact: React.FC = () => {
+const Contact = () => {
   const t = useTranslations("Contact");
   const GITHUB_PROFILE_URL = "https://github.com/joaoptgrilo";
 

@@ -3,7 +3,7 @@ interface WindowWithGtag extends Window {
     gtag?: (
         command: 'config' | 'event',
         targetIdOrEventName: string,
-        params?: { [key: string]: any }
+        params?: { [key: string]: unknown }
     ) => void;
 }
 
