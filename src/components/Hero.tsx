@@ -14,7 +14,7 @@ interface SocialLink {
   ariaLabel: string;
 }
 
-const Hero: React.FC = () => {
+const Hero = () => {
   const t = useTranslations("Hero");
   const locale = useLocale();
 
@@ -54,10 +54,12 @@ const Hero: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative w-full h-screen flex flex-col items-center justify-center text-primary-text overflow-hidden p-0">
+      className="relative w-full h-screen flex flex-col items-center justify-center text-primary-text overflow-hidden p-0"
+    >
       <Panel
         variant="default"
-        className="w-full h-full flex flex-col items-center justify-center rounded-none border-b border-border">
+        className="w-full h-full flex flex-col items-center justify-center rounded-none border-b border-border"
+      >
         <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center p-6 sm:p-8 md:p-12 lg:p-16">
           <div className="space-y-4 sm:space-y-5 md:space-y-6 max-w-3xl w-full pt-16 md:pt-0">
             <h1 className="font-fira-code font-bold text-4xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-primary-text leading-tight tracking-tight sm:tracking-normal">
@@ -93,7 +95,8 @@ const Hero: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleCVDownload}
-                className="btn-secondary">
+                className="btn-secondary"
+              >
                 <FaDownload className="mr-2.5 h-4 w-4 sm:h-5 sm:w-5" />
                 <Glitch triggerOnHover={true}>{t("cvButton")}</Glitch>
               </a>
@@ -106,7 +109,8 @@ const Hero: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.ariaLabel}
-                  className="text-secondary-text hover:text-accent transition-all duration-300 text-2xl sm:text-3xl md:text-4xl transform hover:scale-110">
+                  className="text-secondary-text hover:text-accent transition-all duration-300 text-2xl sm:text-3xl md:text-4xl transform hover:scale-110"
+                >
                   {link.icon}
                 </a>
               ))}

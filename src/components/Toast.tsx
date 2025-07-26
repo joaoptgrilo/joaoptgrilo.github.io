@@ -1,7 +1,7 @@
 // src/components/Toast.tsx
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { clsx } from "clsx";
 import { FiInfo } from "react-icons/fi";
 
@@ -12,12 +12,7 @@ interface ToastProps {
   duration?: number;
 }
 
-const Toast: React.FC<ToastProps> = ({
-  message,
-  show,
-  onClose,
-  duration = 4000,
-}) => {
+const Toast = ({ message, show, onClose, duration = 4000 }: ToastProps) => {
   useEffect(() => {
     if (show) {
       const timer = setTimeout(() => {

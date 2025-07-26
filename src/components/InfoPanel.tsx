@@ -15,12 +15,12 @@ interface InfoPanelProps {
   onPanelClick: (message: string) => void;
 }
 
-const InfoPanel: React.FC<InfoPanelProps> = ({
+const InfoPanel = ({
   metric,
   icon,
   staggerDelay,
   onPanelClick,
-}) => {
+}: InfoPanelProps) => {
   const t = useTranslations("About.metrics");
   const panelRef = useRef<HTMLDivElement>(null);
   const [isTouchDevice, setIsTouchDevice] = useState(false);

@@ -15,10 +15,13 @@ interface SkillsProps {
   skillsData: { id: string; skills: SkillItem[] }[];
 }
 
-const ProficiencyIndicator: React.FC<{
+const ProficiencyIndicator = ({
+  level,
+  delayIndex = 0,
+}: {
   level: ProficiencyLevel;
   delayIndex?: number;
-}> = ({ level, delayIndex = 0 }) => {
+}) => {
   const levels: Record<ProficiencyLevel, { bars: number; color: string }> = {
     3: { bars: 3, color: "bg-accent" },
     2: { bars: 2, color: "bg-info-accent" },
@@ -45,11 +48,15 @@ const ProficiencyIndicator: React.FC<{
   );
 };
 
-const SkillPanel: React.FC<{
+const SkillPanel = ({
+  category,
+  index,
+  onSkillClick,
+}: {
   category: { id: string; skills: SkillItem[] };
   index: number;
   onSkillClick: (message: string) => void;
-}> = ({ category, index, onSkillClick }) => {
+}) => {
   const tSkills = useTranslations("Skills");
   const tSkillTags = useTranslations("skillTags");
   const tProficiency = useTranslations("Proficiency");
@@ -75,9 +82,10 @@ const SkillPanel: React.FC<{
       <Panel
         ref={panelRef}
         className={clsx("h-full", { "is-in-view": isInView })}
-        variant="default">
+        variant="default"
+      >
         <p className="font-fira-code text-xl md:text-2xl text-info-accent mb-4 font-semibold">
-          {tSkills(category.id as any)}
+          {tSkills(category.id)}
         </p>
         <div className="flex flex-col space-y-2">
           {[...category.skills]
@@ -85,7 +93,7 @@ const SkillPanel: React.FC<{
             .map((skill, skillIndex) => {
               const proficiencyKey = proficiencyKeyMap[skill.proficiency];
               const proficiencyLabel = tProficiency(proficiencyKey);
-              const skillDescription = tSkillTags(skill.key as any);
+              const skillDescription = tSkillTags(skill.key);
               const combinedTooltip = `${proficiencyLabel}: ${skillDescription}`;
 
               return (
@@ -93,7 +101,8 @@ const SkillPanel: React.FC<{
                   key={skill.key}
                   title={!isTouchDevice ? combinedTooltip : undefined}
                   onClick={() => isTouchDevice && onSkillClick(combinedTooltip)}
-                  className="flex items-center justify-between px-3 py-2 rounded-md border border-border cursor-pointer interactive-glow group">
+                  className="flex items-center justify-between px-3 py-2 rounded-md border border-border cursor-pointer interactive-glow group"
+                >
                   <span className="text-sm text-secondary-text group-hover:text-primary-text transition-colors duration-300">
                     {skill.name}
                   </span>
@@ -110,7 +119,7 @@ const SkillPanel: React.FC<{
   );
 };
 
-const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
+const Skills = ({ skillsData }: SkillsProps) => {
   const tProficiency = useTranslations("Proficiency");
   const { showToast } = useToast();
 

@@ -6,6 +6,11 @@ const domainsToIgnore = [
     'tryhackme.com',
 ];
 
+const urlsToIgnore = [
+    // This URL will be valid once the first AWS badge is earned.
+    'https://www.credly.com/users/joao.grilo.dev/badges', // <-- CORRECTED
+];
+
 test.describe('Link Integrity Check', () => {
     test('should verify all links on the homepage return a successful status', async ({ page }) => {
         await page.goto('/');
@@ -24,6 +29,11 @@ test.describe('Link Integrity Check', () => {
 
         for (const link of uniqueLinks) {
             try {
+                if (urlsToIgnore.includes(link)) {
+                    console.log(`🟡 SKIPPING: ${link} (URL on ignore list)`);
+                    continue;
+                }
+
                 const url = new URL(link);
                 if (domainsToIgnore.some(domain => url.hostname.includes(domain))) {
                     console.log(`🟡 SKIPPING: ${link} (domain on ignore list)`);
@@ -34,7 +44,7 @@ test.describe('Link Integrity Check', () => {
                 expect(response.status(), `Link ${link} returned status ${response.status()}`).toBeLessThan(400);
                 console.log(`✅ OK: ${link} - ${response.status()}`);
             } catch (error) {
-                console.warn(`⚠️ WARN: Could not check ${link}. Reason: ${error.message}`);
+                console.warn(`⚠️ WARN: Could not check ${link}. Reason: ${(error as Error).message}`);
             }
         }
     });

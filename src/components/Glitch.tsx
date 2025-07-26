@@ -1,7 +1,7 @@
 // src/components/Glitch.tsx
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { clsx } from "clsx";
 import useGlitch from "@/hooks/useGlitch";
 import { useInView } from "react-intersection-observer";
@@ -17,13 +17,13 @@ interface GlitchProps {
   };
 }
 
-const Glitch: React.FC<GlitchProps> = ({
+const Glitch = ({
   children,
   className,
   triggerOnHover = false,
   triggerOnVisible = false,
   autoGlitch,
-}) => {
+}: GlitchProps) => {
   const { displayText, startGlitch, reset } = useGlitch(children, {
     autoGlitch,
   });
@@ -48,7 +48,8 @@ const Glitch: React.FC<GlitchProps> = ({
       ref={ref}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={clsx("relative inline-block align-baseline", className)}>
+      className={clsx("relative inline-block align-baseline", className)}
+    >
       <span aria-hidden="true" className="absolute inset-0">
         {displayText}
       </span>

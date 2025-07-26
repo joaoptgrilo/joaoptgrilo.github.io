@@ -7,7 +7,7 @@ import Highlight from "./Highlight";
 import Section from "./Section";
 import Panel from "./Panel";
 import InfoPanel from "./InfoPanel";
-import Icon from "./IconMap";
+import Icon, { iconMap } from "./IconMap";
 import { useTranslations } from "next-intl";
 import { FiCpu, FiGlobe } from "react-icons/fi";
 import AnimateOnScroll from "./AnimateOnScroll";
@@ -92,11 +92,15 @@ const About = ({ metricsData }: { metricsData: MetricItem[] }) => {
               <AnimateOnScroll
                 as="li"
                 key={metric.id}
-                staggerDelay={index * 100}>
+                staggerDelay={index * 100}
+              >
                 <InfoPanel
                   metric={metric}
                   icon={
-                    <Icon iconId={metric.iconId as any} className="w-12 h-12" />
+                    <Icon
+                      iconId={metric.iconId as keyof typeof iconMap}
+                      className="w-12 h-12"
+                    />
                   }
                   staggerDelay={index}
                   onPanelClick={showToast}

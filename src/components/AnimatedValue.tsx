@@ -10,14 +10,14 @@ interface AnimatedValueProps {
   staggerDelay?: number;
 }
 
-const AnimatedValue: React.FC<AnimatedValueProps> = ({
+const AnimatedValue = ({
   value,
   startAnimation,
   decimals = 0,
   staggerDelay = 0,
-}) => {
+}: AnimatedValueProps) => {
   if (!startAnimation) {
-    return <span aria-hidden="true"> </span>;
+    return <span aria-hidden="true"> </span>;
   }
 
   const finalDelay = 0.35 + staggerDelay;

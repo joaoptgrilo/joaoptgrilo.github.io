@@ -9,7 +9,8 @@ import {
   FiGlobe,
 } from "react-icons/fi";
 
-const iconMap = {
+// Use a named export for the map
+export const iconMap = {
   FiBriefcase,
   FiTarget,
   FiCpu,
@@ -19,10 +20,11 @@ const iconMap = {
 };
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
-  iconId: keyof typeof iconMap;
+  iconId: keyof typeof iconMap; // This type is now correctly derived
   className?: string;
 }
 
+// Use a default export for the component
 const Icon = ({ iconId, className, ...props }: IconProps) => {
   const IconComponent = iconMap[iconId];
   if (!IconComponent) {

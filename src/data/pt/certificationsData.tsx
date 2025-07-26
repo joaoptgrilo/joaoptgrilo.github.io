@@ -85,7 +85,7 @@ export const certificationsData: CertificationItem[] = [
     id: "aws-cloud-quest",
     name: "AWS Cloud Quest",
     issuer: "Amazon Web Services",
-    credentialUrl: "https://www.credly.com/users/joao-grilo-dev/badges",
+    credentialUrl: "https://www.credly.com/users/joao.grilo.dev/badges", // <-- CORRECTED
     description: (
       <>
         A desenvolver competências práticas e do mundo real em cloud através da

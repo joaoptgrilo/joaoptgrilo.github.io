@@ -6,7 +6,7 @@ import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import AnimateOnScroll from "./AnimateOnScroll";
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const t = useTranslations("Footer");
   const currentYear = new Date().getFullYear();
   const websiteVersion = "v1.5.0";
