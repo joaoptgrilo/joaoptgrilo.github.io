@@ -1,6 +1,4 @@
 // src/data/en/experienceData.ts
-import React from "react";
-import Highlight from "@/components/Highlight";
 import { ExperienceItem } from "../types";
 
 export const experienceData: ExperienceItem[] = [
@@ -14,38 +12,11 @@ export const experienceData: ExperienceItem[] = [
     location: "Portimão, Portugal",
     period: "Feb 2020 – Oct 2023",
     descriptionItems: [
-      <>
-        Architected, developed, and maintained mission-critical, high-traffic
-        web platforms using a primary stack of <Highlight>PHP</Highlight> and{" "}
-        <Highlight>MySQL</Highlight>, ensuring 99.9%+ uptime and robust
-        scalability.
-      </>,
-      <>
-        Engineered a library of dynamic, reusable, and performant frontend
-        components with <Highlight>React</Highlight> and modern{" "}
-        <Highlight>JavaScript</Highlight>, directly improving key user
-        engagement metrics including a ~10% reduction in bounce rates and a ~12%
-        increase in session duration.
-      </>,
-      <>
-        Orchestrated the full lifecycle of secure, versioned{" "}
-        <Highlight>REST APIs</Highlight> that powered new product features and{" "}
-        <Highlight>enabled critical partner integrations</Highlight>, expanding
-        business capabilities and eliminating data synchronization errors.
-      </>,
-      <>
-        Championed <Highlight>Agile</Highlight> methodologies and standardized
-        development environments with <Highlight>Docker</Highlight>, which{" "}
-        <Highlight>reduced "works on my machine" bugs by over 50%</Highlight>{" "}
-        and accelerated new developer onboarding, boosting overall team
-        velocity.
-      </>,
-      <>
-        Spearheaded a full-stack performance overhaul by optimizing database
-        queries, implementing advanced caching, and refining asset delivery,
-        boosting Google Lighthouse scores to 90+ and driving a ~15% increase in
-        organic traffic.
-      </>,
+      "Architected, developed, and maintained mission-critical, high-traffic web platforms using a primary stack of {PHP} and {MySQL}, ensuring 99.9%+ uptime and robust scalability.",
+      "Engineered a library of dynamic, reusable, and performant frontend components with {React} and modern {JavaScript}, directly improving key user engagement metrics including a ~10% reduction in bounce rates and a ~12% increase in session duration.",
+      "Orchestrated the full lifecycle of secure, versioned {REST APIs} that powered new product features and {enabled critical partner integrations}, expanding business capabilities and eliminating data synchronization errors.",
+      'Championed {Agile} methodologies and standardized development environments with {Docker}, which {reduced "works on my machine" bugs by over 50%} and accelerated new developer onboarding, boosting overall team velocity.',
+      "Spearheaded a full-stack performance overhaul by optimizing database queries, implementing advanced caching, and refining asset delivery, boosting Google Lighthouse scores to 90+ and driving a ~15% increase in organic traffic.",
     ],
     keyTech: [
       {
@@ -95,28 +66,10 @@ export const experienceData: ExperienceItem[] = [
     location: "Silves, Portugal",
     period: "Mar 2019 – Feb 2020",
     descriptionItems: [
-      <>
-        Engineered and scaled bespoke <Highlight>WordPress</Highlight> sites and
-        complex <Highlight>WooCommerce</Highlight> solutions by writing clean,
-        object-oriented <Highlight>PHP</Highlight> and optimizing{" "}
-        <Highlight>MySQL</Highlight> queries for high-traffic e-commerce.
-      </>,
-      <>
-        Developed custom themes and plugins using{" "}
-        <Highlight>JavaScript</Highlight>, <Highlight>HTML5</Highlight>, and{" "}
-        <Highlight>CSS3</Highlight> to deliver tailored functionality like
-        payment gateways and API integrations, increasing client revenue and
-        operational autonomy.
-      </>,
-      <>
-        Streamlined e-commerce client operations by automating order processing
-        and inventory synchronization, boosting efficiency by up to 30%.
-      </>,
-      <>
-        Executed comprehensive Web Performance Optimization (WPO) and security
-        hardening, achieving a ~40% average reduction in load times and
-        improving clients' user experience and search engine rankings.
-      </>,
+      "Engineered and scaled bespoke {WordPress} sites and complex {WooCommerce} solutions by writing clean, object-oriented {PHP} and optimizing {MySQL} queries for high-traffic e-commerce.",
+      "Developed custom themes and plugins using {JavaScript}, {HTML5}, and {CSS3} to deliver tailored functionality like payment gateways and API integrations, increasing client revenue and operational autonomy.",
+      "Streamlined e-commerce client operations by automating order processing and inventory synchronization, boosting efficiency by up to 30%.",
+      "Executed comprehensive Web Performance Optimization (WPO) and security hardening, achieving a ~40% average reduction in load times and improving clients' user experience and search engine rankings.",
     ],
     keyTech: [
       {
