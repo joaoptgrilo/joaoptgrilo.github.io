@@ -8,7 +8,8 @@
     "export": "BUILD_STATIC_EXPORT=true next build",
     "start": "next start",
     "lint": "eslint .",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:prod": "next build && playwright test"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
+    "@joaoptgrilo/dev-config": "^1.1.0",
     "@playwright/test": "^1.45.0",
     "@types/node": "^20",
     "@types/react": "^18",
