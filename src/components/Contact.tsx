@@ -11,9 +11,14 @@ import AnimateOnScroll from "./AnimateOnScroll";
 import GlitchText from "./Glitch";
 import * as gtag from "@/lib/gtag";
 
+import {
+  EMAIL_ADDRESS,
+  GITHUB_PROFILE_URL,
+  LINKEDIN_PROFILE_URL,
+} from "@/lib/constants";
+
 const Contact = () => {
   const t = useTranslations("Contact");
-  const GITHUB_PROFILE_URL = "https://github.com/joaoptgrilo";
 
   const handleContactClick = (eventName: string, label: string) => {
     gtag.event({
@@ -43,7 +48,7 @@ const Contact = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
               <a
-                href="mailto:joao.grilo.dev@gmail.com"
+                href={`mailto:${EMAIL_ADDRESS}`}
                 onClick={() =>
                   handleContactClick("click_email", t("emailButton"))
                 }
@@ -57,7 +62,7 @@ const Contact = () => {
                 </GlitchText>
               </a>
               <a
-                href="https://www.linkedin.com/in/joaoptgrilo/"
+                href={LINKEDIN_PROFILE_URL}
                 onClick={() =>
                   handleContactClick("click_linkedin", t("linkedinButton"))
                 }

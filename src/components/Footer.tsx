@@ -5,11 +5,11 @@ import React from "react";
 import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import AnimateOnScroll from "./AnimateOnScroll";
+import { WEBSITE_VERSION } from "@/lib/constants";
 
 const Footer = () => {
   const t = useTranslations("Footer");
   const currentYear = new Date().getFullYear();
-  const websiteVersion = "v1.5.0";
 
   return (
     <footer id="footer" className="w-full py-10 md:py-16">
@@ -20,7 +20,7 @@ const Footer = () => {
               {t("copyright", { currentYear })}
             </p>
             <p className="text-xs mt-2 text-neutral-500 font-fira-code">
-              {t("version", { versionNumber: websiteVersion })}
+              {t("version", { versionNumber: WEBSITE_VERSION })}
             </p>
           </Panel>
         </AnimateOnScroll>
