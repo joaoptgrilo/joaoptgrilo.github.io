@@ -97,7 +97,7 @@ jobs:
           name: vercel-build-artifact
           path: .
 
-  # Job 4: Build for GitHub Pages
+    # Job 4: Build for GitHub Pages
   build_gh_pages:
     needs: test
     runs-on: ubuntu-latest
@@ -115,8 +115,9 @@ jobs:
         run: npm ci
 
       - name: Build and Export for GitHub Pages
-        run: npm run export
+        run: npm run build
         env:
+          BUILD_STATIC_EXPORT: "true"
           NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
 
       - name: Prepare Root Index File for GH Pages
