@@ -13,6 +13,7 @@ import { clsx } from "clsx";
 import FocusTrap from "focus-trap-react";
 import * as gtag from "@/lib/gtag";
 import { useTheme } from "@/contexts/ThemeContext";
+import { parseWithHighlight } from "@/lib/utils"; // Import the utility
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -57,11 +58,13 @@ const ProjectModal = ({
   if (!isOpen || !project) return null;
 
   const isCodePenProject = project.codeLink?.includes("codepen.io");
+
+  // MODIFIED: Use the utility function on the new string array
   const descriptionContent = project.detailedDescription
     ? project.detailedDescription.map((content, index) => (
-        <div key={index}>{content}</div>
+        <p key={index}>{parseWithHighlight(content)}</p>
       ))
-    : project.description;
+    : parseWithHighlight(project.description);
 
   const overlayClasses = clsx(
     "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300",

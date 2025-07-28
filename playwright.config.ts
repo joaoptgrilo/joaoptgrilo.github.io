@@ -1,3 +1,4 @@
+// playwright.config.ts
 import { defineConfig } from "@playwright/test";
 import baseConfig from "@joaoptgrilo/dev-config/playwright/base.config";
 

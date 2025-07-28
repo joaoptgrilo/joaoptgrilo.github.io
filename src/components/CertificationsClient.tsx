@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import AnimateOnScroll from "./AnimateOnScroll";
 import { useTheme } from "@/contexts/ThemeContext";
 import GlitchText from "./Glitch";
+import { parseWithHighlight } from "@/lib/utils";
 
 const CertificationsClient = ({
   certificationsData,
@@ -33,7 +34,8 @@ const CertificationsClient = ({
             <AnimateOnScroll as="li" key={cert.id} staggerDelay={index * 100}>
               <Panel
                 className="flex flex-col h-full group w-full interactive-glow"
-                variant="default">
+                variant="default"
+              >
                 <div className="flex-grow mb-4">
                   <div className="flex items-start mb-3">
                     {cert.isInProgress ? (
@@ -58,7 +60,7 @@ const CertificationsClient = ({
                   )}
                   {cert.description && (
                     <p className="text-xs md:text-sm text-secondary-text leading-relaxed mt-2 pl-9">
-                      {cert.description}
+                      {parseWithHighlight(cert.description)}
                     </p>
                   )}
                 </div>
@@ -69,7 +71,8 @@ const CertificationsClient = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`View progress for ${cert.name}`}
-                      className="btn-secondary !py-2.5 !px-4 !text-sm !font-semibold w-full">
+                      className="btn-secondary !py-2.5 !px-4 !text-sm !font-semibold w-full"
+                    >
                       <FiActivity className="mr-2 h-3.5 w-3.5" />
                       <GlitchText triggerOnHover={true}>
                         {tCerts("progressButton")}
@@ -81,7 +84,8 @@ const CertificationsClient = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Verify ${cert.name} certificate`}
-                      className="btn-secondary !py-2.5 !px-4 !text-sm !font-semibold w-full">
+                      className="btn-secondary !py-2.5 !px-4 !text-sm !font-semibold w-full"
+                    >
                       <FaExternalLinkAlt className="mr-2 h-3.5 w-3.5" />
                       <GlitchText triggerOnHover={true}>
                         {tCerts("verifyButton")}
@@ -94,10 +98,12 @@ const CertificationsClient = ({
           ))}
           <AnimateOnScroll
             as="li"
-            staggerDelay={certificationsData.length * 100}>
+            staggerDelay={certificationsData.length * 100}
+          >
             <Panel
               variant="simple"
-              className="border-spaced-dashed hover:border-solid hover:!border-accent/60 flex flex-col items-center justify-center text-center group w-full h-full transition-all duration-300">
+              className="border-spaced-dashed hover:border-solid hover:!border-accent/60 flex flex-col items-center justify-center text-center group w-full h-full transition-all duration-300"
+            >
               <div className="p-6">
                 <div className="relative w-16 h-16 group-hover:opacity-80 transition-opacity duration-300 mb-4 mx-auto">
                   <Image

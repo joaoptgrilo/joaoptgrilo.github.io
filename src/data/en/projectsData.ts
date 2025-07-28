@@ -1,7 +1,5 @@
-// src/data/en/projectsData.tsx
+// src/data/en/projectsData.ts
 import { Project } from "../types";
-import React from "react";
-import Highlight from "@/components/Highlight";
 
 export const projectsData: Project[] = [
   {
@@ -13,28 +11,9 @@ export const projectsData: Project[] = [
     description:
       "Engineered and maintained high-traffic media platforms, enhancing performance and stability to support millions of users and drive substantial advertising revenue.",
     detailedDescription: [
-      <p key="d1">
-        As a Full-Stack Developer at Fedrax, I played a key role in the
-        development and maintenance of several high-traffic, media-rich content
-        platforms, including <Highlight>Gameblog.fr</Highlight> and{" "}
-        <Highlight>CineSeries.com</Highlight>. These platforms serve millions of
-        pageviews and rely on <Highlight>99.9%+ uptime</Highlight> to maximize
-        advertising revenue.
-      </p>,
-      <p key="d2">
-        My role involved full-stack responsibilities, from{" "}
-        <Highlight>database query optimization</Highlight> in MySQL to building
-        and consuming internal <Highlight>REST APIs</Highlight>. On the
-        frontend, I engineered dynamic, reusable components with React and
-        legacy jQuery, focusing on <Highlight>performance tuning</Highlight> to
-        achieve Google Lighthouse scores consistently above 90.
-      </p>,
-      <p key="d3">
-        To ensure business continuity, I adhered to a strict{" "}
-        <Highlight>Gitflow</Highlight> branching model within a{" "}
-        <Highlight>GitLab</Highlight> CI/CD environment, guaranteeing stable and
-        predictable releases essential for revenue and user trust.
-      </p>,
+      "As a Full-Stack Developer at Fedrax, I played a key role in the development and maintenance of several high-traffic, media-rich content platforms, including {Gameblog.fr} and {CineSeries.com}. These platforms serve millions of pageviews and rely on {99.9%+ uptime} to maximize advertising revenue.",
+      "My role involved full-stack responsibilities, from {database query optimization} in MySQL to building and consuming internal {REST APIs}. On the frontend, I engineered dynamic, reusable components with React and legacy jQuery, focusing on {performance tuning} to achieve Google Lighthouse scores consistently above 90.",
+      "To ensure business continuity, I adhered to a strict {Gitflow} branching model within a {GitLab} CI/CD environment, guaranteeing stable and predictable releases essential for revenue and user trust.",
     ],
     techStack: [
       { name: "PHP", description: "Server-side scripting language." },
@@ -71,23 +50,9 @@ export const projectsData: Project[] = [
     description:
       "Architected a robust C#/.NET backend server from the ground up, mastering API design, secure authentication, and cross-platform deployment.",
     detailedDescription: [
-      <p key="d1">
-        To master modern <Highlight>backend architecture</Highlight>, I designed
-        and built this scalable server from scratch using C# and .NET Core,
-        focusing on clean code and enterprise design patterns.
-      </p>,
-      <p key="d2">
-        I implemented a full <Highlight>RESTful API</Highlight> with secure{" "}
-        <Highlight>authentication/authorization</Highlight> mechanisms and a
-        logical data model. A key achievement was ensuring the server could be
-        deployed cross-platform on both Windows and Linux environments,
-        showcasing its flexibility.
-      </p>,
-      <p key="d3">
-        This self-directed project was crucial for honing my skills in{" "}
-        <Highlight>API design</Highlight>, dependency injection, and creating
-        maintainable, production-ready backend services.
-      </p>,
+      "To master modern {backend architecture}, I designed and built this scalable server from scratch using C# and .NET Core, focusing on clean code and enterprise design patterns.",
+      "I implemented a full {RESTful API} with secure {authentication/authorization} mechanisms and a logical data model. A key achievement was ensuring the server could be deployed cross-platform on both Windows and Linux environments, showcasing its flexibility.",
+      "This self-directed project was crucial for honing my skills in {API design}, dependency injection, and creating maintainable, production-ready backend services.",
     ],
     techStack: [
       {
@@ -118,27 +83,9 @@ export const projectsData: Project[] = [
     description:
       "Engineered a lightweight, zero-dependency frontend framework in Vanilla JS to deconstruct and master core concepts like client-side routing and component-based architecture.",
     detailedDescription: [
-      <p key="d1">
-        To look "under the hood" of modern libraries like React, I built my own
-        <Highlight>dependency-free framework</Highlight> using only{" "}
-        <Highlight>Vanilla JavaScript (ES6+)</Highlight>. The goal was to
-        replicate core features to gain a fundamental understanding of how they
-        work.
-      </p>,
-      <p key="d2">
-        The framework features a{" "}
-        <Highlight>JSON-driven component system</Highlight> that renders the UI
-        from a structured data object. I also implemented a{" "}
-        <Highlight>client-side router</Highlight> using the History API,
-        enabling SPA-like navigation without page reloads.
-      </p>,
-      <p key="d3">
-        This project provided invaluable insights into the inner workings of{" "}
-        <Highlight>state management</Highlight>, the{" "}
-        <Highlight>virtual DOM concept</Highlight> (which I emulated simply),
-        and the architectural challenges of building a scalable frontend from
-        first principles.
-      </p>,
+      'To look "under the hood" of modern libraries like React, I built my own {dependency-free framework} using only {Vanilla JavaScript (ES6+)}. The goal was to replicate core features to gain a fundamental understanding of how they work.',
+      "The framework features a {JSON-driven component system} that renders the UI from a structured data object. I also implemented a {client-side router} using the History API, enabling SPA-like navigation without page reloads.",
+      "This project provided invaluable insights into the inner workings of {state management}, the {virtual DOM concept} (which I emulated simply), and the architectural challenges of building a scalable frontend from first principles.",
     ],
     techStack: [
       {
@@ -169,22 +116,9 @@ export const projectsData: Project[] = [
     description:
       "Built a secure, real-time Markdown previewer with React & TypeScript, demonstrating expertise in third-party library integration (marked.js) and XSS prevention (DOMPurify).",
     detailedDescription: [
-      <p key="d1">
-        This project, part of the freeCodeCamp curriculum, demonstrates building
-        a secure and interactive <Highlight>Single Page Application</Highlight>{" "}
-        with React and TypeScript. It allows users to write GitHub-flavored
-        Markdown and see it rendered as HTML in real-time.
-      </p>,
-      <p key="d2">
-        A key focus was security: the <Highlight>marked.js</Highlight> library
-        parses the Markdown, but to prevent XSS vulnerabilities, all HTML output
-        is sanitized using <Highlight>DOMPurify</Highlight> before rendering.
-      </p>,
-      <p key="d3">
-        This was an excellent exercise in handling user input, integrating
-        third-party libraries securely, and managing component state in a{" "}
-        <Highlight>React/TypeScript</Highlight> environment.
-      </p>,
+      "This project, part of the freeCodeCamp curriculum, demonstrates building a secure and interactive {Single Page Application} with React and TypeScript. It allows users to write GitHub-flavored Markdown and see it rendered as HTML in real-time.",
+      "A key focus was security: the {marked.js} library parses the Markdown, but to prevent XSS vulnerabilities, all HTML output is sanitized using {DOMPurify} before rendering.",
+      "This was an excellent exercise in handling user input, integrating third-party libraries securely, and managing component state in a {React/TypeScript} environment.",
     ],
     techStack: [
       { name: "React", description: "JavaScript library for building UIs." },
@@ -213,19 +147,8 @@ export const projectsData: Project[] = [
     description:
       "Developed an interactive drum machine using React, TypeScript, and Redux Toolkit, showcasing complex state management and responsive user interaction with HTML5 Audio.",
     detailedDescription: [
-      <p key="d1">
-        This interactive drum machine is a frontend application built to
-        freeCodeCamp specifications using <Highlight>React</Highlight> and{" "}
-        <Highlight>TypeScript</Highlight>. It features a grid of drum pads that
-        can be triggered by mouse clicks or corresponding keyboard keys.
-      </p>,
-      <p key="d2">
-        I implemented <Highlight>Redux Toolkit</Highlight> for robust, global
-        state management, handling the active sound bank, volume level, and
-        display updates. This ensured a predictable and decoupled architecture.
-        The project demonstrates handling of <Highlight>HTML5 Audio</Highlight>{" "}
-        and complex user interactions within a modern React stack.
-      </p>,
+      "This interactive drum machine is a frontend application built to freeCodeCamp specifications using {React} and {TypeScript}. It features a grid of drum pads that can be triggered by mouse clicks or corresponding keyboard keys.",
+      "I implemented {Redux Toolkit} for robust, global state management, handling the active sound bank, volume level, and display updates. This ensured a predictable and decoupled architecture. The project demonstrates handling of {HTML5 Audio} and complex user interactions within a modern React stack.",
     ],
     techStack: [
       { name: "React", description: "JavaScript library for UIs." },
@@ -250,19 +173,8 @@ export const projectsData: Project[] = [
     description:
       "A React/TypeScript app demonstrating asynchronous API calls, state management with Hooks, and dynamic UI updates with smooth CSS transitions.",
     detailedDescription: [
-      <p key="d1">
-        This classic project demonstrates fundamental React concepts. The
-        application performs an asynchronous fetch to a remote{" "}
-        <Highlight>JSON API</Highlight> to load a collection of quotes on
-        initial load.
-      </p>,
-      <p key="d2">
-        The "New Quote" button randomly selects a quote from the cached data and
-        updates the UI. The current quote is then used to generate a "Tweet
-        Quote" link. This project utilizes <Highlight>React Hooks</Highlight>{" "}
-        for state and effect management and implements CSS transitions for a
-        smooth fade effect when the quote changes.
-      </p>,
+      "This classic project demonstrates fundamental React concepts. The application performs an asynchronous fetch to a remote {JSON API} to load a collection of quotes on initial load.",
+      'The "New Quote" button randomly selects a quote from the cached data and updates the UI. The current quote is then used to generate a "Tweet Quote" link. This project utilizes {React Hooks} for state and effect management and implements CSS transitions for a smooth fade effect when the quote changes.',
     ],
     techStack: [
       { name: "React", description: "JavaScript library for UIs." },
@@ -287,20 +199,8 @@ export const projectsData: Project[] = [
     description:
       "A functional calculator in React/TS that showcases complex state management and custom logic for parsing expressions and respecting order of operations.",
     detailedDescription: [
-      <p key="d1">
-        This project is a fully functional calculator built with React and
-        TypeScript, designed to pass a comprehensive test suite. It correctly
-        handles standard arithmetic, decimals, and respects the mathematical{" "}
-        <Highlight>order of operations</Highlight>.
-      </p>,
-      <p key="d2">
-        A key challenge was designing and implementing the{" "}
-        <Highlight>custom evaluation logic</Highlight>. The algorithm correctly
-        handles chained operations, immediate execution, and multiple
-        consecutive operators. This project was a deep dive into complex{" "}
-        <Highlight>state logic</Highlight> and robust user input management in
-        React.
-      </p>,
+      "This project is a fully functional calculator built with React and TypeScript, designed to pass a comprehensive test suite. It correctly handles standard arithmetic, decimals, and respects the mathematical {order of operations}.",
+      "A key challenge was designing and implementing the {custom evaluation logic}. The algorithm correctly handles chained operations, immediate execution, and multiple consecutive operators. This project was a deep dive into complex {state logic} and robust user input management in React.",
     ],
     techStack: [
       { name: "React", description: "JavaScript library for UIs." },
@@ -325,18 +225,8 @@ export const projectsData: Project[] = [
     description:
       "A Pomodoro timer (25+5 Clock) in Vanilla JS/jQuery demonstrating time-based event handling, state transitions, and audio notifications.",
     detailedDescription: [
-      <p key="d1">
-        This "25 + 5 Clock" is a classic Pomodoro timer built to practice{" "}
-        <Highlight>time-based event handling</Highlight> in JavaScript. It
-        allows users to customize the length of their session and break timers.
-      </p>,
-      <p key="d2">
-        The timer counts down in `mm:ss` format and switches between "Session"
-        and "Break" modes automatically. The core logic relies on{" "}
-        <Highlight>setInterval</Highlight> for the countdown, with an{" "}
-        <Highlight>HTML5 Audio</Highlight> element triggering an alarm at the
-        end of each period. The DOM is manipulated using Vanilla JS and jQuery.
-      </p>,
+      'This "25 + 5 Clock" is a classic Pomodoro timer built to practice {time-based event handling} in JavaScript. It allows users to customize the length of their session and break timers.',
+      'The timer counts down in `mm:ss` format and switches between "Session" and "Break" modes automatically. The core logic relies on {setInterval} for the countdown, with an {HTML5 Audio} element triggering an alarm at the end of each period. The DOM is manipulated using Vanilla JS and jQuery.',
     ],
     techStack: [
       { name: "Vanilla JS", description: "Standard JavaScript." },
