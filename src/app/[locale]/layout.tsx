@@ -19,6 +19,7 @@ import ThemeInitializer from "@/components/ThemeInitializer";
 import ScrollRestorer from "@/components/ScrollRestorer";
 import ClientInitializer from "@/components/ClientInitializer";
 import Analytics from "@/components/Analytics";
+import { SITE_URL } from "@/lib/constants";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -49,9 +50,7 @@ export async function generateMetadata({
   const tSEO = await getTranslations({ locale, namespace: "SEO" });
   const tHero = await getTranslations({ locale, namespace: "Hero" });
 
-  const siteUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "https://joaoptgrilo.github.io";
+  const siteUrl = SITE_URL;
 
   const selectedOgImage =
     locale === "pt" ? "/og-image-pt.png" : "/og-image-en.png";
@@ -112,7 +111,8 @@ export default async function RootLayout({
     <html
       lang={locale}
       className={`${poppins.variable} ${firaCode.variable} antialiased`}
-      suppressHydrationWarning>
+      suppressHydrationWarning
+    >
       <head></head>
       <body>
         <ThemeInitializer />

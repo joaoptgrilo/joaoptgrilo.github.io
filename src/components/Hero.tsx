@@ -7,6 +7,11 @@ import { useTranslations, useLocale } from "next-intl";
 import Glitch from "./Glitch";
 import * as gtag from "@/lib/gtag";
 import Panel from "./Panel";
+import {
+  EMAIL_ADDRESS,
+  GITHUB_PROFILE_URL,
+  LINKEDIN_PROFILE_URL,
+} from "@/lib/constants";
 
 interface SocialLink {
   href: string;
@@ -29,17 +34,17 @@ const Hero = () => {
 
   const socialLinks: SocialLink[] = [
     {
-      href: "https://github.com/joaoptgrilo",
+      href: GITHUB_PROFILE_URL,
       icon: <FaGithub />,
       ariaLabel: t("githubAria"),
     },
     {
-      href: "https://www.linkedin.com/in/joaoptgrilo/",
+      href: LINKEDIN_PROFILE_URL,
       icon: <FaLinkedin />,
       ariaLabel: t("linkedinAria"),
     },
     {
-      href: "mailto:joao.grilo.dev@gmail.com",
+      href: `mailto:${EMAIL_ADDRESS}`,
       icon: <FaEnvelope />,
       ariaLabel: t("emailAria"),
     },
