@@ -15,18 +15,17 @@ import { useTranslations } from "next-intl";
 import { clsx } from "clsx";
 import AnimateOnScroll from "./AnimateOnScroll";
 import { useToast } from "@/contexts/ToastContext";
+import Highlight from "./Highlight";
 
-const getNodeText = (node: React.ReactNode): string => {
-  if (typeof node === "string" || typeof node === "number") {
-    return node.toString();
-  }
-  if (Array.isArray(node)) {
-    return node.map(getNodeText).join("");
-  }
-  if (React.isValidElement(node) && node.props.children) {
-    return getNodeText(node.props.children);
-  }
-  return "";
+const parseWithHighlight = (text: string) => {
+  const parts = text.split(/(\{[^}]+\})/g);
+  return parts.map((part, index) => {
+    if (part.startsWith("{") && part.endsWith("}")) {
+      const content = part.substring(1, part.length - 1);
+      return <Highlight key={index}>{content}</Highlight>;
+    }
+    return part;
+  });
 };
 
 const ExperienceCard = ({
@@ -173,11 +172,10 @@ const ExperienceCard = ({
           </p>
           <ul className="space-y-2.5 text-secondary-text leading-relaxed text-[0.95rem]">
             {item.descriptionItems.map((descItem, i) => {
-              const textContent = getNodeText(descItem);
               const isDimmed =
                 !isTouchDevice &&
                 activeTech &&
-                !textContent.toLowerCase().includes(activeTech.toLowerCase());
+                !descItem.toLowerCase().includes(activeTech.toLowerCase());
 
               return (
                 <li
@@ -190,7 +188,7 @@ const ExperienceCard = ({
                   <span className="text-accent mr-2.5 mt-1.5 flex-shrink-0 text-xs">
                     ◆
                   </span>
-                  <span>{descItem}</span>
+                  <span>{parseWithHighlight(descItem)}</span>
                 </li>
               );
             })}

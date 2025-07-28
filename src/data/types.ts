@@ -20,7 +20,7 @@ export interface Project {
   imageUrl?: string;
   imageAlt?: string;
   description: string;
-  detailedDescription?: React.ReactNode[];
+  detailedDescription?: string[];
   techStack: ProjectTechItem[];
   liveLink?: string;
   codeLink?: string;
@@ -42,7 +42,7 @@ export interface ExperienceItem {
   companyLogoAlt?: string;
   location: string;
   period: string;
-  descriptionItems: React.ReactNode[];
+  descriptionItems: string[];
   keyTech?: ExperienceTechItem[];
 }
 export interface CertificationItem {
@@ -52,7 +52,7 @@ export interface CertificationItem {
   issueDate?: string;
   credentialUrl: string;
   icon?: React.ElementType;
-  description?: React.ReactNode;
+  description?: string;
   isInProgress?: boolean;
 }
 

@@ -13,8 +13,9 @@ export default [
       "playwright-report/",
       "test-results/",
       ".prettierrc.js",
+      "caddy.exe",
     ],
   },
-
+  
   ...jgConfig.next,
 ];
