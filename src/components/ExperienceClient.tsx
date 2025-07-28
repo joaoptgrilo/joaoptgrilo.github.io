@@ -1,8 +1,8 @@
 // src/components/ExperienceClient.tsx
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import { ExperienceItem, ExperienceTechItem } from "@/data";
+import { ExperienceItem } from "@/data";
 import {
   FaBriefcase,
   FaCalendarAlt,
@@ -14,63 +14,20 @@ import Panel from "./Panel";
 import { useTranslations } from "next-intl";
 import { clsx } from "clsx";
 import AnimateOnScroll from "./AnimateOnScroll";
-import { useToast } from "@/contexts/ToastContext";
-import Highlight from "./Highlight";
+import { parseWithHighlight } from "@/lib/utils";
+import { useTechTooltip } from "@/hooks/useTechTooltip"; // MODIFIED: Import the new hook
 
-const parseWithHighlight = (text: string) => {
-  const parts = text.split(/(\{[^}]+\})/g);
-  return parts.map((part, index) => {
-    if (part.startsWith("{") && part.endsWith("}")) {
-      const content = part.substring(1, part.length - 1);
-      return <Highlight key={index}>{content}</Highlight>;
-    }
-    return part;
-  });
-};
-
-const ExperienceCard = ({
-  item,
-  onTechClick,
-}: {
-  item: ExperienceItem;
-  onTechClick: (description: string) => void;
-}) => {
+const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
   const t = useTranslations("Experience");
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
-  const [clickedTech, setClickedTech] = useState<string | null>(null);
   const techListRef = useRef<HTMLUListElement>(null);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-  useEffect(() => {
-    setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
-  }, []);
-
-  const handleTechClick = (tech: ExperienceTechItem) => {
-    if (isTouchDevice) {
-      onTechClick(tech.description || tech.name);
-    } else {
-      setHoveredTech(null);
-      setClickedTech((prev) => (prev === tech.name ? null : tech.name));
-    }
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        techListRef.current &&
-        !techListRef.current.contains(event.target as Node)
-      ) {
-        setClickedTech(null);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const activeTech = hoveredTech || clickedTech;
+  // MODIFIED: All state logic is now cleanly encapsulated in the hook
+  const {
+    activeTech,
+    handleTechMouseEnter,
+    handleTechMouseLeave,
+    handleTechClick,
+  } = useTechTooltip(techListRef);
 
   return (
     <Panel variant="default">
@@ -141,21 +98,19 @@ const ExperienceCard = ({
                 {item.keyTech.map((tech) => (
                   <li
                     key={tech.name}
-                    onMouseEnter={() =>
-                      !isTouchDevice && setHoveredTech(tech.name)
-                    }
-                    onMouseLeave={() => !isTouchDevice && setHoveredTech(null)}
+                    // MODIFIED: Use handlers from the hook
+                    onMouseEnter={() => handleTechMouseEnter(tech.name)}
+                    onMouseLeave={handleTechMouseLeave}
                   >
                     <button
+                      // MODIFIED: Use handler from the hook
                       onClick={(e) => {
                         e.stopPropagation();
                         handleTechClick(tech);
                       }}
-                      onFocus={() =>
-                        !isTouchDevice && setHoveredTech(tech.name)
-                      }
-                      onBlur={() => !isTouchDevice && setHoveredTech(null)}
-                      title={!isTouchDevice ? tech.description : undefined}
+                      onFocus={() => handleTechMouseEnter(tech.name)}
+                      onBlur={handleTechMouseLeave}
+                      title={tech.description}
                       className="tag interactive-glow !cursor-pointer w-full h-full text-left"
                     >
                       {tech.name}
@@ -173,7 +128,6 @@ const ExperienceCard = ({
           <ul className="space-y-2.5 text-secondary-text leading-relaxed text-[0.95rem]">
             {item.descriptionItems.map((descItem, i) => {
               const isDimmed =
-                !isTouchDevice &&
                 activeTech &&
                 !descItem.toLowerCase().includes(activeTech.toLowerCase());
 
@@ -204,23 +158,22 @@ const ExperienceClient = ({
 }: {
   experienceData: ExperienceItem[];
 }) => {
-  const t = useTranslations("Experience");
-  const { showToast } = useToast();
-
   return (
     <Section id="experience" title="experience">
       {experienceData.length > 0 ? (
         <div className="space-y-12 md:space-y-16">
           {experienceData.map((item, index) => (
             <AnimateOnScroll key={item.id} staggerDelay={index * 150}>
-              <ExperienceCard item={item} onTechClick={showToast} />
+              <ExperienceCard item={item} />
             </AnimateOnScroll>
           ))}
         </div>
       ) : (
         <AnimateOnScroll>
           <Panel variant="default" className="text-center">
-            <p className="text-lg text-secondary-text">{t("noExperience")}</p>
+            <p className="text-lg text-secondary-text">
+              {useTranslations("Experience")("noExperience")}
+            </p>
           </Panel>
         </AnimateOnScroll>
       )}
